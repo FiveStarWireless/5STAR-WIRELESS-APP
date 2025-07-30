@@ -1,0 +1,21 @@
+workflows:
+  five-star-full-build:
+    name: 5Star Wireless - APK, AAB, and iOS Build
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      vars:
+        JAVA_TOOL_OPTIONS: "-Xmx4096m"
+    scripts:
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build Android APK (Release)
+        script: flutter build apk --release
+      - name: Build Android AAB (Play Store)
+        script: flutter build appbundle --release
+      - name: Build iOS Runner.app (IPA-ready)
+        script: flutter build ios --release --no-codesign
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/bundle/release/app-release.aab
+      - build/ios/iphoneos/Runner.app
