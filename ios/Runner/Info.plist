@@ -45,8 +45,6 @@
 
 	<key>PermissionGroupNotification</key>
     <string>This app uses push notifications for updates and promotions.</string>
-	<key>NSCameraUsageDescription</key>
-    <string>This app needs camera access to allow image uploads.</string>
 
 
 
