@@ -36,10 +36,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       errorBuilder: (context, state) => appStateNotifier.showSplashImage
           ? Builder(
               builder: (context) => Container(
-                color: Colors.black,
+                color: Colors.transparent,
                 child: Image.asset(
-                  'assets/images/5star_wireless_black.png',
-                  fit: BoxFit.contain,
+                  'assets/images/icin.png',
+                  fit: BoxFit.cover,
                 ),
               ),
             )
@@ -51,10 +51,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, _) => appStateNotifier.showSplashImage
               ? Builder(
                   builder: (context) => Container(
-                    color: Colors.black,
+                    color: Colors.transparent,
                     child: Image.asset(
-                      'assets/images/5star_wireless_black.png',
-                      fit: BoxFit.contain,
+                      'assets/images/icin.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
                 )
