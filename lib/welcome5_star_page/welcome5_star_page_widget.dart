@@ -2,28 +2,28 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'welcome_page_model.dart';
-export 'welcome_page_model.dart';
+import 'welcome5_star_page_model.dart';
+export 'welcome5_star_page_model.dart';
 
-class WelcomePageWidget extends StatefulWidget {
-  const WelcomePageWidget({super.key});
+class Welcome5StarPageWidget extends StatefulWidget {
+  const Welcome5StarPageWidget({super.key});
 
-  static String routeName = 'WelcomePage';
-  static String routePath = '/welcomePage';
+  static String routeName = 'Welcome5StarPage';
+  static String routePath = '/welcome5StarPage';
 
   @override
-  State<WelcomePageWidget> createState() => _WelcomePageWidgetState();
+  State<Welcome5StarPageWidget> createState() => _Welcome5StarPageWidgetState();
 }
 
-class _WelcomePageWidgetState extends State<WelcomePageWidget> {
-  late WelcomePageModel _model;
+class _Welcome5StarPageWidgetState extends State<Welcome5StarPageWidget> {
+  late Welcome5StarPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => WelcomePageModel());
+    _model = createModel(context, () => Welcome5StarPageModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }

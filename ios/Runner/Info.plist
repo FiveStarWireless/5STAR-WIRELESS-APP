@@ -56,6 +56,10 @@
 
 	<key>PermissionGroupNotification</key>
     <string>This app uses push notifications for updates and promotions.</string>
+	<key>NSCameraUsageDescription</key>
+    <string>We use your camera to let you take profile or product photos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>We access your photo library so you can select images to upload.</string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>
