@@ -1,4 +1,4 @@
-package com.fivestar.app
+package com.fivestarwireless.app
 
 import io.flutter.embedding.android.FlutterActivity
 

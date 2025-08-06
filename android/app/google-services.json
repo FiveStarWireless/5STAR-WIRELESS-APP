@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "198032920836",
+    "project_id": "fivestar-push",
+    "storage_bucket": "fivestar-push.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198032920836:android:abf9dda631eb6b50964051",
+        "android_client_info": {
+          "package_name": "com.fivestarwireless.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCimpMFmqCcUWCw1g7mExhJ9JtRnjkx18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
