@@ -77,13 +77,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : HomePageWidget(),
+          appStateNotifier.loggedIn ? HomePageWidget() : WelcomepageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomePageWidget() : HomePageWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? HomePageWidget()
+              : WelcomepageWidget(),
         ),
         FFRoute(
           name: HomePageWidget.routeName,
@@ -94,11 +95,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: WelcomepageWidget.routeName,
           path: WelcomepageWidget.routePath,
           builder: (context, params) => WelcomepageWidget(),
-        ),
-        FFRoute(
-          name: Welcome5StarPageWidget.routeName,
-          path: Welcome5StarPageWidget.routePath,
-          builder: (context, params) => Welcome5StarPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -269,7 +265,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/homePage';
+            return '/welcomepage';
           }
           return null;
         },
