@@ -3,81 +3,68 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<string>en</string>
+
 	<key>CFBundleDisplayName</key>
 	<string>Five Star Wireless</string>
+
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+
 	<key>CFBundleName</key>
 	<string>Five Star Wireless</string>
+
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 
+	<!-- 🔢 These must increase with each App Store build -->
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-        <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <!--FF_REVERSED_CLIENT_ID-->
-                
-            </array>
-        </dict>
-
-        <dict>
-        <key>CFBundleTypeRole</key>
-        <string>Editor</string>
-        <key>CFBundleURLName</key>
-        <string>fivestarwireless.com</string>
-        <key>CFBundleURLSchemes</key>
-        <array>
-        <string>fivestarwireless</string>
-        </array>
-        </dict>
-    </array>
-    <key>FlutterDeepLinkingEnabled</key>
-    <true/>
-
+	<string>1.0.2</string>
 
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>4</string>
+
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+
+	<!-- 🔐 App Permissions -->
+	<key>NSCameraUsageDescription</key>
+	<string>We use your camera so you can take photos for your profile or products.</string>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We access your photo library so you can upload images.</string>
+
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This identifier will be used to deliver personalized ads to you.</string>
 
 	<key>PermissionGroupNotification</key>
-    <string>This app uses push notifications for updates and promotions.</string>
-	<key>NSCameraUsageDescription</key>
-    <string>We use your camera to let you take profile or product photos.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-    <string>We access your photo library so you can select images to upload.</string>
-    <key>UIBackgroundModes</key>
-    <array>
-        <string>fetch</string>
-        <string>remote-notification</string>
-    </array>
-
-
+	<string>This app uses push notifications for updates and promotions.</string>
 
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -85,8 +72,27 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 
+	<!-- 🔗 Deep linking -->
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
+
+	<!-- 🌐 URL Schemes -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>fivestarwireless.com</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fivestarwireless</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
