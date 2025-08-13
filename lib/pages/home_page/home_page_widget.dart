@@ -50,12 +50,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              FlutterFlowWebView(
-                content: 'https://5star-wireless.com/',
-                bypass: true,
-                height: MediaQuery.sizeOf(context).height * 1.0,
-                verticalScroll: true,
-                horizontalScroll: true,
+              Expanded(
+                child: Align(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: FlutterFlowWebView(
+                    content: 'https://5star-wireless.com/',
+                    bypass: true,
+                    height: MediaQuery.sizeOf(context).height * 5.0,
+                    verticalScroll: true,
+                    horizontalScroll: true,
+                  ),
+                ),
               ),
             ],
           ),
