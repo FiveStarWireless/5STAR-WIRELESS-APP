@@ -1,11 +1,12 @@
-import '/auth/firebase_auth/auth_util.dart';
+import '/auth/base_auth_user_provider.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_auth/local_auth.dart';
 import 'start_gate_model.dart';
 export 'start_gate_model.dart';
 
@@ -32,18 +33,27 @@ class _StartGateWidgetState extends State<StartGateWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (loggedIn == true) {
-        _model.bioOk = await actions.biometricAuth();
-        if (_model.bioOk == true) {
-          context.goNamedAuth(HomePageWidget.routeName, context.mounted);
-        } else {
-          GoRouter.of(context).prepareAuthEvent();
-          await authManager.signOut();
-          GoRouter.of(context).clearRedirectLocation();
+        final _localAuth = LocalAuthentication();
+        bool _isBiometricSupported = await _localAuth.isDeviceSupported();
 
-          context.goNamedAuth(WelcomepageWidget.routeName, context.mounted);
+        if (_isBiometricSupported) {
+          try {
+            _model.bioOk = await _localAuth.authenticate(
+                localizedReason:
+                    'Confirm it’s you to unlock your 5Star Wireless account.');
+          } on PlatformException {
+            _model.bioOk = false;
+          }
+          safeSetState(() {});
+        }
+
+        if (_model.bioOk == true) {
+          context.goNamed(HomePageWidget.routeName);
+        } else {
+          context.pushNamed(WelcomepageWidget.routeName);
         }
       } else {
-        context.goNamedAuth(WelcomepageWidget.routeName, context.mounted);
+        context.goNamed(WelcomepageWidget.routeName);
       }
     });
 
