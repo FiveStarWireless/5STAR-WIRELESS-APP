@@ -1,114 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-  <!-- App basics -->
-  <key>CFBundleDevelopmentRegion</key>
-  <string>$(DEVELOPMENT_LANGUAGE)</string>
-  <key>CFBundleDisplayName</key>
-  <string>5Star Wireless</string>
-  <key>CFBundleExecutable</key>
-  <string>$(EXECUTABLE_NAME)</string>
-  <key>CFBundleIdentifier</key>
-  <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-  <key>CFBundleInfoDictionaryVersion</key>
-  <string>6.0</string>
-  <key>CFBundleName</key>
-  <string>5Star Wireless</string>
-  <key>CFBundlePackageType</key>
-  <string>APPL</string>
-  <key>CFBundleShortVersionString</key>
-  <string>$(FLUTTER_BUILD_NAME)</string>
-  <key>CFBundleSignature</key>
-  <string>????</string>
-  <key>CFBundleVersion</key>
-  <string>$(FLUTTER_BUILD_NUMBER)</string>
-
-  <!-- URL Schemes -->
-  <!-- 1) Google Sign-In requires your REVERSED_CLIENT_ID here -->
-  <!-- 2) Keep your custom deep link scheme below as well -->
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-      <key>CFBundleTypeRole</key>
-      <string>Editor</string>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <!-- REVERSED_CLIENT_ID (Google iOS) -->
-        <string>com.googleusercontent.apps.198032920836-fennetbo4bs4sm2btu2c41cq71jeo68l</string>
-      </array>
-    </dict>
-
-    <dict>
-      <key>CFBundleTypeRole</key>
-      <string>Editor</string>
-      <key>CFBundleURLName</key>
-      <string>fivestarwireless.com</string>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fivestarwireless</string>
-      </array>
-    </dict>
-  </array>
-
-  <!-- Optional: help iOS know it can open the Google app if installed -->
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>google</string>
-  </array>
-
-  <!-- Make these IDs available at runtime (handy in Flutter/Dart) -->
-  <key>CLIENT_ID</key>
-  <string>198032920836-fennetbo4bs4sm2btu2c41cq71jeo68l.apps.googleusercontent.com</string>
-  <key>ANDROID_CLIENT_ID</key>
-  <string>198032920836-0vqkc867r85eadhk9kge1jtc6rf6sgf0.apps.googleusercontent.com</string>
-
-  <!-- Deep linking for Flutter -->
-  <key>FlutterDeepLinkingEnabled</key>
-  <true/>
-
-  <!-- iOS device requirements -->
-  <key>LSRequiresIPhoneOS</key>
-  <true/>
-
-  <!-- Permissions (customize text as needed) -->
-  <key>PermissionGroupNotification</key>
-  <string>This app uses push notifications for updates and promotions.</string>
-  <key>NSCameraUsageDescription</key>
-  <string>We use your camera to let you take profile or product photos.</string>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>We access your photo library so you can select images to upload.</string>
-
-  <!-- Background modes (if you use them) -->
-  <key>UIBackgroundModes</key>
-  <array>
-    <string>fetch</string>
-    <string>remote-notification</string>
-  </array>
-
-  <!-- Launch / storyboard -->
-  <key>UILaunchStoryboardName</key>
-  <string>LaunchScreen</string>
-  <key>UIMainStoryboardFile</key>
-  <string>Main</string>
-
-  <!-- Orientation -->
-  <key>UISupportedInterfaceOrientations</key>
-  <array>
-    <string>UIInterfaceOrientationPortrait</string>
-    <string>UIInterfaceOrientationLandscapeLeft</string>
-    <string>UIInterfaceOrientationLandscapeRight</string>
-  </array>
-  <key>UISupportedInterfaceOrientations~ipad</key>
-  <array>
-    <string>UIInterfaceOrientationPortrait</string>
-    <string>UIInterfaceOrientationPortraitUpsideDown</string>
-    <string>UIInterfaceOrientationLandscapeLeft</string>
-    <string>UIInterfaceOrientationLandscapeRight</string>
-  </array>
-
-  <!-- Status bar control -->
-  <key>UIViewControllerBasedStatusBarAppearance</key>
-  <false/>
-</dict>
+  <dict>
+    <!-- App basics -->
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>CFBundleDisplayName</key>
+    <string>5Star Wireless</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>5Star Wireless</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(FLUTTER_BUILD_NAME)</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleVersion</key>
+    <string>$(FLUTTER_BUILD_NUMBER)</string>
+    <!-- URL Schemes -->
+    <!-- 1) Google Sign-In requires your REVERSED_CLIENT_ID here -->
+    <!-- 2) Keep your custom deep link scheme as well -->
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <!-- REVERSED_CLIENT_ID (Google iOS) -->
+          <string>com.googleusercontent.apps.198032920836-fennetbo4bs4sm2btu2c41cq71jeo68l</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>fivestarwireless.com</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>fivestarwireless</string>
+        </array>
+      </dict>
+    </array>
+    <!-- Help iOS know we can open Google Sign-In -->
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>google</string>
+      <string>com.googleusercontent.apps.198032920836-fennetbo4bs4sm2btu2c41cq71jeo68l</string>
+    </array>
+    <!-- Make these IDs available at runtime (optional but handy) -->
+    <key>CLIENT_ID</key>
+    <string>198032920836-fennetbo4bs4sm2btu2c41cq71jeo68l.apps.googleusercontent.com</string>
+    <key>ANDROID_CLIENT_ID</key>
+    <string>198032920836-0vqkc867r85eadhk9kge1jtc6rf6sgf0.apps.googleusercontent.com</string>
+    <!-- Deep linking for Flutter -->
+    <key>FlutterDeepLinkingEnabled</key>
+    <true/>
+    <!-- iOS device requirement -->
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <!-- Permissions -->
+    <key>PermissionGroupNotification</key>
+    <string>This app uses push notifications for updates and promotions.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>We use your camera to let you take profile or product photos.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>We access your photo library so you can select images to upload.</string>
+    <!-- Needed for Face ID (Touch ID doesn’t need a string, Face ID does) -->
+    <key>NSFaceIDUsageDescription</key>
+    <string>Use Face ID to quickly and securely unlock your 5Star Wireless account. We never store your biometric data.</string>
+    <!-- Background modes (if used) -->
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>fetch</string>
+      <string>remote-notification</string>
+    </array>
+    <!-- Launch / storyboard -->
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+    <key>UIMainStoryboardFile</key>
+    <string>Main</string>
+    <!-- Orientation -->
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <!-- Status bar control -->
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+  </dict>
 </plist>

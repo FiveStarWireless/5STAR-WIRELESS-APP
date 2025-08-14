@@ -1,3 +1,4 @@
 // Export pages
 export '/pages/home_page/home_page_widget.dart' show HomePageWidget;
 export '/pages/welcomepage/welcomepage_widget.dart' show WelcomepageWidget;
+export '/pages/start_gate/start_gate_widget.dart' show StartGateWidget;
