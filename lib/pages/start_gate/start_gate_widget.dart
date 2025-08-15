@@ -1,4 +1,4 @@
-import '/auth/base_auth_user_provider.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
@@ -48,12 +48,20 @@ class _StartGateWidgetState extends State<StartGateWidget> {
         }
 
         if (_model.bioOk == true) {
-          context.goNamed(HomePageWidget.routeName);
+          context.goNamedAuth(HomePageWidget.routeName, context.mounted);
         } else {
-          context.pushNamed(WelcomepageWidget.routeName);
+          GoRouter.of(context).prepareAuthEvent();
+          await authManager.signOut();
+          GoRouter.of(context).clearRedirectLocation();
+
+          context.goNamedAuth(WelcomepageWidget.routeName, context.mounted);
         }
       } else {
-        context.goNamed(WelcomepageWidget.routeName);
+        GoRouter.of(context).prepareAuthEvent();
+        await authManager.signOut();
+        GoRouter.of(context).clearRedirectLocation();
+
+        context.goNamedAuth(WelcomepageWidget.routeName, context.mounted);
       }
     });
 
