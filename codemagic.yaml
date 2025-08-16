@@ -1,0 +1,26 @@
+workflows:
+  android-release:
+    name: Android Release
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      vars:
+        BUILD_NUMBER: 300          # bump this higher every time you upload
+        BUILD_NAME: 1.0.0          # version name shown in Play Store
+    scripts:
+      - name: Pre-build (copy google-services.json if present)
+        script: |
+          mkdir -p android/app
+          cp $CM_SECURE_FILES_DIR/google-services.json android/app/google-services.json || true
+      - name: Build AAB
+        script: |
+          flutter clean
+          flutter pub get
+          flutter build appbundle --release --build-number=$BUILD_NUMBER --build-name=$BUILD_NAME
+    artifacts:
+      - build/app/outputs/bundle/release/*.aab
+    android_signing:
+      keystore: $CM_KEYSTORE
+      keystore_password: $CM_KEYSTORE_PASSWORD
+      key_alias: $CM_KEY_ALIAS
+      key_password: $CM_KEY_PASSWORD
