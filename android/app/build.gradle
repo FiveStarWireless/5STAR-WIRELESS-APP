@@ -47,34 +47,41 @@ android {
         versionName flutterVersionName
     }
 
-    signingConfigs {
-        release {
-            def haveCm = cmStoreFilePath && cmStorePassword && cmKeyAlias && cmKeyPassword
-            if (haveCm) {
-                // Use Codemagic-provided keystore on CI
-                storeFile file(cmStoreFilePath)
-                storePassword cmStorePassword
-                keyAlias cmKeyAlias
-                keyPassword cmKeyPassword
+  signingConfigs {
+    release {
+        // Codemagic can expose either CM_KEYSTORE or CM_KEYSTORE_PATH
+        def cmPath = System.getenv("CM_KEYSTORE")
+        if (!cmPath) { cmPath = System.getenv("CM_KEYSTORE_PATH") }
+
+        def cmStorePassword = System.getenv("CM_KEYSTORE_PASSWORD")
+        def cmKeyAlias      = System.getenv("CM_KEY_ALIAS")
+        def cmKeyPassword   = System.getenv("CM_KEY_PASSWORD")
+
+        if (cmPath && cmStorePassword && cmKeyAlias && cmKeyPassword) {
+            // Use Codemagic UI-provided keystore (Publishing → Android code signing)
+            storeFile file(cmPath)
+            storePassword cmStorePassword
+            keyAlias cmKeyAlias
+            keyPassword cmKeyPassword
+        } else {
+            // Local fallback for dev machines (optional)
+            def propsFile = rootProject.file("key.properties")
+            if (propsFile.exists()) {
+                def props = new Properties()
+                props.load(new FileInputStream(propsFile))
+                storeFile file(props["storeFile"])
+                storePassword props["storePassword"]
+                keyAlias props["keyAlias"]
+                keyPassword props["keyPassword"]
             } else {
-                // Fallback for local builds: key.properties in project root
-                def propsFile = rootProject.file("key.properties")
-                if (propsFile.exists()) {
-                    def props = new Properties()
-                    props.load(new FileInputStream(propsFile))
-                    storeFile file(props["storeFile"])
-                    storePassword props["storePassword"]
-                    keyAlias props["keyAlias"]
-                    keyPassword props["keyPassword"]
-                } else {
-                    throw new GradleException(
-                        "No signing config found. On CI upload keystore in Codemagic (Publishing > Android code signing), " +
-                        "or create key.properties locally."
-                    )
-                }
+                throw new GradleException(
+                    "No signing config: Codemagic env vars missing and key.properties not found."
+                )
             }
         }
     }
+}
+
 
     buildTypes {
         release {
