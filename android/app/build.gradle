@@ -2,32 +2,23 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id "com.google.gms.google-services"  // Google Services plugin
+    id "com.google.gms.google-services" // Firebase/Google Services
 }
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') { reader ->
-        localProperties.load(reader)
-    }
+    localPropertiesFile.withReader('UTF-8') { reader -> localProperties.load(reader) }
 }
 
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
-}
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode') ?: '1'
+def flutterVersionName = localProperties.getProperty('flutter.versionName') ?: '1.0'
 
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
-
-// --- Use Codemagic env vars for signing (no key.properties needed) ---
-def cmStoreFilePath   = System.getenv("CM_KEYSTORE_PATH")
-def cmStorePassword   = System.getenv("CM_KEYSTORE_PASSWORD")
-def cmKeyAlias        = System.getenv("CM_KEY_ALIAS")
-def cmKeyPassword     = System.getenv("CM_KEY_PASSWORD")
+// --- Codemagic env vars (present on CI after you upload the .jks in Publishing > Android code signing)
+def cmStoreFilePath = System.getenv("CM_KEYSTORE_PATH")
+def cmStorePassword = System.getenv("CM_KEYSTORE_PASSWORD")
+def cmKeyAlias      = System.getenv("CM_KEY_ALIAS")
+def cmKeyPassword   = System.getenv("CM_KEY_PASSWORD")
 
 android {
     namespace "com.fivestarwireless.app"
@@ -38,15 +29,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions { jvmTarget = "1.8" }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
-    }
+    sourceSets { main.java.srcDirs += 'src/main/kotlin' }
 
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-
+    // (lintOptions is deprecated on newer AGP; safe to keep off by default)
     lintOptions {
         disable 'InvalidPackage'
         checkReleaseBuilds false
@@ -62,11 +49,29 @@ android {
 
     signingConfigs {
         release {
-            if (cmStoreFilePath) {
+            def haveCm = cmStoreFilePath && cmStorePassword && cmKeyAlias && cmKeyPassword
+            if (haveCm) {
+                // Use Codemagic-provided keystore on CI
                 storeFile file(cmStoreFilePath)
                 storePassword cmStorePassword
                 keyAlias cmKeyAlias
                 keyPassword cmKeyPassword
+            } else {
+                // Fallback for local builds: key.properties in project root
+                def propsFile = rootProject.file("key.properties")
+                if (propsFile.exists()) {
+                    def props = new Properties()
+                    props.load(new FileInputStream(propsFile))
+                    storeFile file(props["storeFile"])
+                    storePassword props["storePassword"]
+                    keyAlias props["keyAlias"]
+                    keyPassword props["keyPassword"]
+                } else {
+                    throw new GradleException(
+                        "No signing config found. On CI upload keystore in Codemagic (Publishing > Android code signing), " +
+                        "or create key.properties locally."
+                    )
+                }
             }
         }
     }
@@ -79,7 +84,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            signingConfig signingConfigs.debug
+            // default debug signing is fine
         }
     }
 }
@@ -90,5 +95,6 @@ flutter {
 
 dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.0"
+    // ❌ Remove explicit kotlin-stdlib line; AGP pulls the right version automatically.
+    // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.0"
 }
