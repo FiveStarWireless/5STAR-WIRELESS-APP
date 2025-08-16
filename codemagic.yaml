@@ -10,38 +10,31 @@ workflows:
     scripts:
       - name: Pre-build (firebase json + signing via key.properties)
         script: |
-          # 1) Firebase config (skip quietly if you don't use Firebase)
+          set -e
           mkdir -p android/app
+
+          # 1) Firebase config (skip quietly if not present)
           cp "$CM_SECURE_FILES_DIR/google-services.json" android/app/google-services.json 2>/dev/null || true
 
-          # 2) Find Codemagic keystore path (some accounts expose CM_KEYSTORE, others CM_KEYSTORE_PATH)
-          if [ -n "$CM_KEYSTORE" ]; then
-            KS="$CM_KEYSTORE"
-          elif [ -n "$CM_KEYSTORE_PATH" ]; then
-            KS="$CM_KEYSTORE_PATH"
-          else
-            echo "❌ No Codemagic keystore env var (CM_KEYSTORE or CM_KEYSTORE_PATH). Check Publishing → Android code signing."
-            exit 1
-          fi
+          # 2) Decode keystore from Base64 env var into a .jks file
+          #    (You must set JKS_B64, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD in Environment variables)
+          echo $JKS_B64 | base64 --decode > android/app/5star-release.jks
 
-          # 3) Copy the keystore where Gradle will look
-          cp "$KS" android/app/5star-release.jks
+          # 3) Generate key.properties for Gradle (single source of truth)
+          printf "%s\n" \
+            "storeFile=app/5star-release.jks" \
+            "storePassword=${KEYSTORE_PASSWORD}" \
+            "keyAlias=${KEY_ALIAS}" \
+            "keyPassword=${KEY_PASSWORD}" \
+            > android/key.properties
 
-          # 4) Generate key.properties from Codemagic-injected secrets
-          cat > android/key.properties <<EOF
-          storeFile=app/5star-release.jks
-          storePassword=${CM_KEYSTORE_PASSWORD}
-          keyAlias=${CM_KEY_ALIAS}
-          keyPassword=${CM_KEY_PASSWORD}
-          EOF
-
-          echo "✅ Prepared android/key.properties and keystore."
+          echo "✅ Keystore + key.properties ready"
 
       - name: Build AAB (release)
         script: |
           flutter clean
           flutter pub get
-          flutter build appbundle --release --build-number=$BUILD_NUMBER --build-name=$BUILD_NAME
+          flutter build appbundle --release --build-number="$BUILD_NUMBER" --build-name="$BUILD_NAME"
 
     artifacts:
       - build/app/outputs/bundle/release/*.aab
