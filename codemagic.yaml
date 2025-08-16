@@ -9,26 +9,26 @@ workflows:
         BUILD_NAME: 1.0.0          # version name shown in Play Store
     scripts:
       - name: Pre-build (firebase json + signing via key.properties)
-        script: |
-          set -e
-          mkdir -p android/app
+  script: |
+    set -e
+    mkdir -p android/app
 
-          # 1) Firebase config (skip quietly if not present)
-          cp "$CM_SECURE_FILES_DIR/google-services.json" android/app/google-services.json 2>/dev/null || true
+    # 1) Firebase config (skip quietly if not present)
+    cp "$CM_SECURE_FILES_DIR/google-services.json" android/app/google-services.json 2>/dev/null || true
 
-          # 2) Decode keystore from Base64 env var into a .jks file
-          #    (You must set JKS_B64, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD in Environment variables)
-          echo $JKS_B64 | base64 --decode > android/app/5star-release.jks
+    # 2) Decode keystore safely (no extra newline)
+    printf "%s" "$JKS_B64" | base64 --decode > android/app/5star-release.jks
 
-          # 3) Generate key.properties for Gradle (single source of truth)
-          printf "%s\n" \
-            "storeFile=5star-release.jks" \
-            "storePassword=${KEYSTORE_PASSWORD}" \
-            "keyAlias=${KEY_ALIAS}" \
-            "keyPassword=${KEY_PASSWORD}" \
-            > android/key.properties
+    # 3) Generate key.properties for Gradle (include storeType)
+    printf "%s\n" \
+      "storeFile=5star-release.jks" \
+      "storePassword=${KEYSTORE_PASSWORD}" \
+      "keyAlias=${KEY_ALIAS}" \
+      "keyPassword=${KEY_PASSWORD}" \
+      "storeType=pkcs12" \
+      > android/key.properties
 
-          echo "✅ Keystore + key.properties ready"
+    echo "✅ Keystore + key.properties ready"
 
       - name: Build AAB (release)
         script: |
