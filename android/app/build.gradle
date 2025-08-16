@@ -11,14 +11,15 @@ if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader('UTF-8') { reader -> localProperties.load(reader) }
 }
 
+// Load key.properties that Pre-build creates on CI
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode') ?: '1'
 def flutterVersionName = localProperties.getProperty('flutter.versionName') ?: '1.0'
-
-// ---- Codemagic env vars (declare ONCE, outside android { } ) ----
-def cmKeystorePath = System.getenv("CM_KEYSTORE") ?: System.getenv("CM_KEYSTORE_PATH")
-def cmStorePassword = System.getenv("CM_KEYSTORE_PASSWORD")
-def cmKeyAlias      = System.getenv("CM_KEY_ALIAS")
-def cmKeyPassword   = System.getenv("CM_KEY_PASSWORD")
 
 android {
     namespace "com.fivestarwireless.app"
@@ -48,28 +49,11 @@ android {
 
     signingConfigs {
         release {
-            if (cmKeystorePath && cmStorePassword && cmKeyAlias && cmKeyPassword) {
-                // Use Codemagic signing (Publishing → Android code signing)
-                storeFile file(cmKeystorePath)
-                storePassword cmStorePassword
-                keyAlias cmKeyAlias
-                keyPassword cmKeyPassword
-            } else {
-                // Local fallback: key.properties (for local dev)
-                def propsFile = rootProject.file("key.properties")
-                if (propsFile.exists()) {
-                    def props = new Properties()
-                    props.load(new FileInputStream(propsFile))
-                    storeFile file(props["storeFile"])
-                    storePassword props["storePassword"]
-                    keyAlias props["keyAlias"]
-                    keyPassword props["keyPassword"]
-                } else {
-                    throw new GradleException(
-                        "No signing config: Codemagic env vars missing and key.properties not found."
-                    )
-                }
-            }
+            // values come from android/key.properties written in Pre-build
+            storeFile file(keystoreProperties["storeFile"])
+            storePassword keystoreProperties["storePassword"]
+            keyAlias keystoreProperties["keyAlias"]
+            keyPassword keystoreProperties["keyPassword"]
         }
     }
 
@@ -80,7 +64,7 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug { /* default debug signing is fine */ }
+        debug { }
     }
 }
 
@@ -88,6 +72,6 @@ flutter { source '../..' }
 
 dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
-    // Don’t force kotlin-stdlib here; AGP/Gradle pulls the right one automatically
+    // Don't force kotlin-stdlib here; AGP/Gradle pulls the right one automatically.
     // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.0"
 }
