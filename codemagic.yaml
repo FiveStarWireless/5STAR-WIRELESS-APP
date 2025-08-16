@@ -22,7 +22,7 @@ workflows:
 
           # 3) Generate key.properties for Gradle (single source of truth)
           printf "%s\n" \
-            "storeFile=app/5star-release.jks" \
+            "storeFile=5star-release.jks" \
             "storePassword=${KEYSTORE_PASSWORD}" \
             "keyAlias=${KEY_ALIAS}" \
             "keyPassword=${KEY_PASSWORD}" \
