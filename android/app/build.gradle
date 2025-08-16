@@ -47,13 +47,20 @@ android {
         versionName flutterVersionName
     }
 
-    signingConfigs {
+       signingConfigs {
         release {
             // values come from android/key.properties written in Pre-build
-            storeFile file(keystoreProperties["storeFile"])
-            storePassword keystoreProperties["storePassword"]
-            keyAlias keystoreProperties["keyAlias"]
-            keyPassword keystoreProperties["keyPassword"]
+            if (keystoreProperties.containsKey("storeFile")) {
+                storeFile file(keystoreProperties["storeFile"])
+                storePassword keystoreProperties["storePassword"]
+                keyAlias keystoreProperties["keyAlias"]
+                keyPassword keystoreProperties["keyPassword"]
+
+                // 👇 add this line so Gradle respects storeType (pkcs12 or jks)
+                if (keystoreProperties["storeType"]) {
+                    storeType keystoreProperties["storeType"]
+                }
+            }
         }
     }
 
