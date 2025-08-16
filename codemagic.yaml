@@ -5,17 +5,43 @@ workflows:
     environment:
       flutter: stable
       vars:
-        BUILD_NUMBER: 300          # bump this higher every time you upload
+        BUILD_NUMBER: 300          # bump this higher every Play upload (301, 302…)
         BUILD_NAME: 1.0.0          # version name shown in Play Store
     scripts:
-      - name: Pre-build (copy google-services.json if present)
+      - name: Pre-build (firebase json + signing via key.properties)
         script: |
+          # 1) Firebase config (skip quietly if you don't use Firebase)
           mkdir -p android/app
-          cp $CM_SECURE_FILES_DIR/google-services.json android/app/google-services.json || true
-      - name: Build AAB
+          cp "$CM_SECURE_FILES_DIR/google-services.json" android/app/google-services.json 2>/dev/null || true
+
+          # 2) Find Codemagic keystore path (some accounts expose CM_KEYSTORE, others CM_KEYSTORE_PATH)
+          if [ -n "$CM_KEYSTORE" ]; then
+            KS="$CM_KEYSTORE"
+          elif [ -n "$CM_KEYSTORE_PATH" ]; then
+            KS="$CM_KEYSTORE_PATH"
+          else
+            echo "❌ No Codemagic keystore env var (CM_KEYSTORE or CM_KEYSTORE_PATH). Check Publishing → Android code signing."
+            exit 1
+          fi
+
+          # 3) Copy the keystore where Gradle will look
+          cp "$KS" android/app/5star-release.jks
+
+          # 4) Generate key.properties from Codemagic-injected secrets
+          cat > android/key.properties <<EOF
+          storeFile=app/5star-release.jks
+          storePassword=${CM_KEYSTORE_PASSWORD}
+          keyAlias=${CM_KEY_ALIAS}
+          keyPassword=${CM_KEY_PASSWORD}
+          EOF
+
+          echo "✅ Prepared android/key.properties and keystore."
+
+      - name: Build AAB (release)
         script: |
           flutter clean
           flutter pub get
           flutter build appbundle --release --build-number=$BUILD_NUMBER --build-name=$BUILD_NAME
+
     artifacts:
       - build/app/outputs/bundle/release/*.aab
