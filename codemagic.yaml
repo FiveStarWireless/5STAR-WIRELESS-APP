@@ -5,7 +5,7 @@ workflows:
     environment:
       flutter: stable
       vars:
-        BUILD_NUMBER: 300          # bump this higher every Play upload (301, 302…)
+        BUILD_NUMBER: 300          # bump this each Play upload (301, 302…)
         BUILD_NAME: 1.0.0          # version name shown in Play Store
     scripts:
       - name: Pre-build (firebase json + signing via key.properties)
@@ -13,22 +13,25 @@ workflows:
           set -e
           mkdir -p android/app
 
-          # 1) Firebase config (skip quietly if not present)
+          # 1) Firebase config (quietly skip if missing)
           cp "$CM_SECURE_FILES_DIR/google-services.json" android/app/google-services.json 2>/dev/null || true
 
           # 2) Decode keystore safely (no newline issues)
           printf "%s" "$JKS_B64" | base64 --decode > android/app/5star-release.jks
 
-          # 3) Generate key.properties for Gradle (include storeType)
+          # 3) Keystore type (we know yours is PKCS12 from keytool output)
+          KS_TYPE="${KEYSTORE_TYPE:-pkcs12}"
+
+          # 4) Generate key.properties for Gradle
           printf "%s\n" \
             "storeFile=5star-release.jks" \
             "storePassword=${KEYSTORE_PASSWORD}" \
             "keyAlias=${KEY_ALIAS}" \
             "keyPassword=${KEY_PASSWORD}" \
-            "storeType=pkcs12" \
+            "storeType=${KS_TYPE}" \
             > android/key.properties
 
-          echo "✅ Keystore + key.properties ready"
+          echo "✅ Keystore + key.properties ready (type=${KS_TYPE}, alias=${KEY_ALIAS})"
 
       - name: Build AAB (release)
         script: |
