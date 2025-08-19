@@ -11,12 +11,7 @@ if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader('UTF-8') { reader -> localProperties.load(reader) }
 }
 
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file("key.properties")  // ✅ correct
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
-
+// ❌ removed key.properties loader – we now read secrets straight from env vars
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode') ?: '1'
 def flutterVersionName = localProperties.getProperty('flutter.versionName') ?: '1.0'
@@ -47,19 +42,22 @@ android {
         versionName flutterVersionName
     }
 
-       signingConfigs {
+    signingConfigs {
         release {
-            // values come from android/key.properties written in Pre-build
-            if (keystoreProperties.containsKey("storeFile")) {
-                storeFile file(keystoreProperties["storeFile"])
-                storePassword keystoreProperties["storePassword"]
-                keyAlias keystoreProperties["keyAlias"]
-                keyPassword keystoreProperties["keyPassword"]
+            // ✅ Keystore file created by Pre-build (relative to app module)
+            storeFile file("5star-release.jks")
 
-                // 👇 add this line so Gradle respects storeType (pkcs12 or jks)
-                if (keystoreProperties["storeType"]) {
-                    storeType keystoreProperties["storeType"]
-                }
+            // ✅ Read secrets straight from Codemagic env vars
+            storePassword System.getenv("KEYSTORE_PASSWORD")
+            keyAlias      System.getenv("KEY_ALIAS")
+            keyPassword   System.getenv("KEY_PASSWORD")
+
+            // ✅ Your keytool showed PKCS12; default to that unless overridden
+            def ksType = System.getenv("KEYSTORE_TYPE")
+            if (ksType != null && ksType.trim()) {
+                storeType ksType
+            } else {
+                storeType "pkcs12"
             }
         }
     }
