@@ -856,7 +856,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                     ),
                     FFButtonWidget(
                       onPressed: () async {
-                        if (_model.chkAgreeValue == true) {
+                        if (FFAppState().termsAcceptedv1 == true) {
                           FFAppState().termsAcceptedv1 = true;
                           safeSetState(() {});
 
