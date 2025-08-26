@@ -77,13 +77,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : StartGateWidget(),
+          appStateNotifier.loggedIn ? HomePageWidget() : WelcomeTermsWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomePageWidget() : StartGateWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? HomePageWidget()
+              : WelcomeTermsWidget(),
         ),
         FFRoute(
           name: HomePageWidget.routeName,
@@ -97,9 +98,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => WelcomepageWidget(),
         ),
         FFRoute(
-          name: StartGateWidget.routeName,
-          path: StartGateWidget.routePath,
-          builder: (context, params) => StartGateWidget(),
+          name: WelcomeTermsWidget.routeName,
+          path: WelcomeTermsWidget.routePath,
+          builder: (context, params) => WelcomeTermsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -270,7 +271,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/startGate';
+            return '/welcomeTerms';
           }
           return null;
         },
