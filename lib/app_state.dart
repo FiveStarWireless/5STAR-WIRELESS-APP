@@ -47,6 +47,12 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_termsAcceptedv2', value);
   }
 
+  bool _bottomSeen = false;
+  bool get bottomSeen => _bottomSeen;
+  set bottomSeen(bool value) {
+    _bottomSeen = value;
+  }
+
   bool _visitedTerms = false;
   bool get visitedTerms => _visitedTerms;
   set visitedTerms(bool value) {

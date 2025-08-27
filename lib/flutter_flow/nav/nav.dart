@@ -101,6 +101,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: WelcomeTermsWidget.routeName,
           path: WelcomeTermsWidget.routePath,
           builder: (context, params) => WelcomeTermsWidget(),
+        ),
+        FFRoute(
+          name: PolicyRefundWidget.routeName,
+          path: PolicyRefundWidget.routePath,
+          builder: (context, params) => PolicyRefundWidget(),
+        ),
+        FFRoute(
+          name: PolicyTermsWidget.routeName,
+          path: PolicyTermsWidget.routePath,
+          builder: (context, params) => PolicyTermsWidget(),
+        ),
+        FFRoute(
+          name: PolicyStoreWidget.routeName,
+          path: PolicyStoreWidget.routePath,
+          builder: (context, params) => PolicyStoreWidget(),
+        ),
+        FFRoute(
+          name: PolicyShippingWidget.routeName,
+          path: PolicyShippingWidget.routePath,
+          builder: (context, params) => PolicyShippingWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
