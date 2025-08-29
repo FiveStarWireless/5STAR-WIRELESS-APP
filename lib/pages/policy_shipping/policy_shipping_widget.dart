@@ -177,7 +177,7 @@ class _PolicyShippingWidgetState extends State<PolicyShippingWidget> {
                     thickness: 2.0,
                     color: Color(0xFF3A3939),
                   ),
-                  if (FFAppState().bottomSeen)
+                  if (!FFAppState().bottomSeen)
                     InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
