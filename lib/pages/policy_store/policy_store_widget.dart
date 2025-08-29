@@ -51,7 +51,7 @@ class _PolicyStoreWidgetState extends State<PolicyStoreWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Color(0xFF4766FB),
+          backgroundColor: Color(0xFF00BDFE),
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
