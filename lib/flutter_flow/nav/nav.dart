@@ -89,7 +89,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: HomePageWidget.routeName,
           path: HomePageWidget.routePath,
-          requireAuth: true,
           builder: (context, params) => HomePageWidget(),
         ),
         FFRoute(
