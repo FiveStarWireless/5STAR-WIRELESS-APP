@@ -32,7 +32,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().termsAcceptedv1) {
+      if (FFAppState().termsAcceptedv2) {
         context.goNamed(HomePageWidget.routeName);
       }
     });
@@ -1170,7 +1170,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                               FFAppState().visitedRefund &&
                               FFAppState().visitedStore &&
                               FFAppState().visitedShipping) {
-                            FFAppState().termsAcceptedv1 = true;
+                            FFAppState().termsAcceptedv2 = true;
                             safeSetState(() {});
 
                             context.goNamed(HomePageWidget.routeName);
@@ -1198,7 +1198,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                               16.0, 0.0, 16.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: FlutterFlowTheme.of(context).secondary,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     font: GoogleFonts.interTight(
