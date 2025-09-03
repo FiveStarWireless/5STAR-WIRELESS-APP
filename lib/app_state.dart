@@ -24,6 +24,10 @@ class FFAppState extends ChangeNotifier {
       _termsAcceptedv2 =
           prefs.getBool('ff_termsAcceptedv2') ?? _termsAcceptedv2;
     });
+    _safeInit(() {
+      _termsAcceptedv3 =
+          prefs.getBool('ff_termsAcceptedv3') ?? _termsAcceptedv3;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -75,6 +79,13 @@ class FFAppState extends ChangeNotifier {
   bool get visitedShipping => _visitedShipping;
   set visitedShipping(bool value) {
     _visitedShipping = value;
+  }
+
+  bool _termsAcceptedv3 = false;
+  bool get termsAcceptedv3 => _termsAcceptedv3;
+  set termsAcceptedv3(bool value) {
+    _termsAcceptedv3 = value;
+    prefs.setBool('ff_termsAcceptedv3', value);
   }
 }
 

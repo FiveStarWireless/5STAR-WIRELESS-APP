@@ -32,7 +32,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().termsAcceptedv2) {
+      if (FFAppState().termsAcceptedv3) {
         context.goNamed(HomePageWidget.routeName);
       }
     });
@@ -1170,7 +1170,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                               FFAppState().visitedRefund &&
                               FFAppState().visitedStore &&
                               FFAppState().visitedShipping) {
-                            FFAppState().termsAcceptedv2 = true;
+                            FFAppState().termsAcceptedv3 = true;
                             safeSetState(() {});
 
                             context.goNamed(HomePageWidget.routeName);
