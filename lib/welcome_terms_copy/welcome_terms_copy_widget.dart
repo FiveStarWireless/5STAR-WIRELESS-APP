@@ -7,28 +7,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'welcome_terms_model.dart';
-export 'welcome_terms_model.dart';
+import 'welcome_terms_copy_model.dart';
+export 'welcome_terms_copy_model.dart';
 
-class WelcomeTermsWidget extends StatefulWidget {
-  const WelcomeTermsWidget({super.key});
+class WelcomeTermsCopyWidget extends StatefulWidget {
+  const WelcomeTermsCopyWidget({super.key});
 
-  static String routeName = 'WelcomeTerms';
-  static String routePath = '/welcomeTerms';
+  static String routeName = 'WelcomeTermsCopy';
+  static String routePath = '/welcomeTermsCopy';
 
   @override
-  State<WelcomeTermsWidget> createState() => _WelcomeTermsWidgetState();
+  State<WelcomeTermsCopyWidget> createState() => _WelcomeTermsCopyWidgetState();
 }
 
-class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
-  late WelcomeTermsModel _model;
+class _WelcomeTermsCopyWidgetState extends State<WelcomeTermsCopyWidget> {
+  late WelcomeTermsCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => WelcomeTermsModel());
+    _model = createModel(context, () => WelcomeTermsCopyModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -429,146 +429,502 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                                       ),
                                     ),
                                   ),
-                                  Expanded(
-                                    child: RichText(
-                                      textScaler:
-                                          MediaQuery.of(context).textScaler,
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text:
-                                                '📜 5Star Wireless – Unified Policy (Terms, Store, Refund & Shipping)\nAcceptance & Scope\n• By using the 5Star Wireless app/website or purchasing in-store, you agree to this policy and all posted terms.\n\n🛒 Products, Pricing & Payments\n\n• Listings may change; limited quantities; errors may be corrected.\n• Prices in USD; accepted: major cards, PayPal, Klarna, Affirm, Afterpay, Sezzle.\n• Lease-to-own: 5Star Leasing, Progressive, Acima, Payvantage.\n\n🎁 Gift Cards & Store Credit\n\n• In-store only; not cash-redeemable (unless required by law); not valid for prepaid airtime/plan renewals.\n• Store credit is non-refundable and has no cash value.\n\n💸 Refund & Exchange Rules\n\nIn-Store\nBuyer’s Remorse (≤ 48 hrs): 25% restocking fee; device must be in the same condition with all accessories/packaging.\nMalfunctioning (≤ 14 days): Store credit or exchange only.\n\nOnline\nMalfunctioning (≤ 14 days of delivery): Store credit or exchange only.\nBuyer’s Remorse (≤ 48 hrs of delivery): 25% restocking fee; item must be complete and in original condition.\n\nRefund Method & Timing\n• Refunded to original payment method (cash refunds by company check; CashApp/Zelle if approved).\n• Standard: 9–15 business days • Expedited: 5–7 business days (if eligible/fee paid upfront).\n\nNon-Returnable Items\n• Prepaid airtime/activations • Carrier-locked devices • AS-IS/clearance/damaged/modified items • Missing parts/packaging • Devices showing damage, misuse, or tampering.\n\nExchanges\n• Same windows/conditions as returns (email contact@5star-wireless.com\n with order details).\n\nSales Tax\n• Refunded where applicable per local regulations.\n\nRequired Documentation\n• Receipt/order # • Device IMEI • Brief reason for return.\n\nReturn Shipping\n• Approved returns get a prepaid label; label cost deducted from refund/credit.\n• If you use your own carrier, we are not responsible for loss/delay/damage.\n\nReturn Denials\n• Outside return window • Tampered fraud tag • Missing accessories/packaging • Damage/misuse • Carrier-locked/altered devices.\n\nLate/Missing Refunds\n• Check your statement → contact your payment provider → if unresolved, email contact@5star-wireless.com\n\n🚚 Shipping & Pickup\n\nMethods\n• Standard: \$19.95 • 3–5 business days\n• Express: \$49.95 • 1–2 business days • Insurance + signature\n• Free Shipping: 2+ items and subtotal >\$399.99\n\nProcessing & Handling\n• Orders before 2:00 PM EST typically process same business day; after 2 PM/weekends/holidays → next business day.\n• Most orders ship within 1–2 business days.\n\nTracking\n• Emailed at shipment; no tracking within 2 biz days? Email contact@5star-wireless.com\n.\n\nLost/Damaged/Delayed\n• Damaged on arrival: report within 48 hrs with clear photos.\n• Marked “delivered” but missing: file a carrier claim (USPS/UPS/FedEx).\n• Not liable for delays due to weather, carrier outages, incorrect address, or holidays.\n\nSignature & Address\n• Signature may be required for high-value/express shipments.\n• Address changes not guaranteed after order is placed; no reroutes after shipment.\n\nUndeliverable\n• Returned packages: customer pays reship; otherwise refund minus original shipping.\n\nBusiness Days\n• Timelines use Mon–Fri (federal holidays excluded).\n\nCarriers & Split Shipments\n• We may ship via USPS/UPS/FedEx at our discretion; orders may ship in multiple packages.\n\nInternational & P.O. Boxes\n• No international shipping; P.O. Boxes not supported (physical address required).\n\nIn-Store Pickup\n• Pickup at 3539 Apalachee Pkwy, Suite 7, Tallahassee, FL during store hours; wait for confirmation before arriving.\n\n🛠️ Warranty, Repairs & Quality\n\nCertified Pre-Owned Warranty (30 days)\n• Internal defects: repair/replace/store credit. Not covered: drops, liquid, misuse.\n\nRepair Warranty (30 days parts & labor)\n• Void if new damage occurs or issue is unrelated.\n• iPhones may lose Face ID/Touch ID/True Tone after screen replacement.\n• Pick up within 30 days of notification (or device may be considered abandoned).\n\nQuality Assurance\n• All devices (including new) are professionally unboxed, IMEI-verified, cleaned, and fully tested (often sold open-box for evaluation quality).\n\n🔐 Temporary Fraud Prevention Tag\n\n• Included with all phones to deter fraud/unauthorized resale; normal use allowed.\n• Restricts: factory reset (and iPhone Wi-Fi toggle while active).\n• iPhone may show “This device is managed by an organization” while the tag is active.\nExpiry: Card payments: ~120 days • Cash: 24–48 hrs (auto-removal; no action needed).\nEarly Removal: email security@5star-wireless.com\n with name, order/receipt, IMEI, reason (review in 1–3 biz days).\nDo not tamper — may void warranty or lock device.\n\n📶 Compatibility & Network\n\n• Customer must verify carrier compatibility.\n• Not responsible for carrier blocks, SIM locks, throttling, or coverage.\n\n💬 Reviews & Communications\n\n• Reviews may be used for marketing (first name/city unless you request anonymity).\n• Calls may be recorded for quality, training, and fraud prevention.\n\n🚫 Prohibited Uses\n\n• No unlawful use, device tampering, tag bypass, or chargeback abuse.\n\n™️ Trademarks & Affiliations\n\n• Third-party brands are trademarks of their owners; no affiliation implied.\n\n📦 Lost/Stolen Packages (Post-Delivery)\n\n• If a carrier marks “delivered,” claims must be filed with the carrier.\n\n🔏 Privacy & Data\n\n• See Privacy Policy for what we collect, how we use it, and your rights.\n• We retain records as required by law.\n\n⚖️ Governing Law & Disputes\n\n• Florida law; binding arbitration or small claims in Leon County, FL; no class actions or jury trials.\n\n🔄 Changes to This Policy\n\n• We may update this policy; continued use means acceptance.\n\n🕒 Hours & Contact\n\nStore Hours: Mon–Fri 11 AM – 7 PM • Sat/Sun Closed • Major US holidays closed.\nAddress: 3539 Apalachee Pkwy, Suite 7, Tallahassee, FL 32311\nPhone: (850) 317-6633\nEmail: contact@5star-wireless.com\n • Unlock Support: security@5star-wireless.com\n\nBy purchasing from 5Star Wireless, you agree to this Unified Policy and our Terms of Service.',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.inter(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                          )
-                                        ],
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              font: GoogleFonts.inter(
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 8.0, 10.0),
+                                        child: Icon(
+                                          Icons.description_sharp,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          size: 20.0,
+                                        ),
                                       ),
-                                      textAlign: TextAlign.start,
-                                    ),
+                                      if (!FFAppState().visitedTerms)
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 10.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                    PolicyTermsWidget
+                                                        .routeName);
+                                              },
+                                              child: Text(
+                                                '5Star Wireless Terms of Services',
+                                                textAlign: TextAlign.start,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      fontSize: 18.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                      decoration: TextDecoration
+                                                          .underline,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      if (FFAppState().visitedTerms)
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 10.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                    PolicyTermsWidget
+                                                        .routeName);
+                                              },
+                                              child: Text(
+                                                '5Star Wireless Terms of Services',
+                                                textAlign: TextAlign.start,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      fontSize: 18.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                      decoration: TextDecoration
+                                                          .lineThrough,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 8.0, 10.0),
+                                        child: Icon(
+                                          Icons.receipt_long,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          size: 20.0,
+                                        ),
+                                      ),
+                                      if (!FFAppState().visitedRefund)
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 10.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                    PolicyRefundWidget
+                                                        .routeName);
+                                              },
+                                              child: Text(
+                                                '5Star Wireless Refund Policy',
+                                                textAlign: TextAlign.start,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      fontSize: 18.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                      decoration: TextDecoration
+                                                          .underline,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      if (FFAppState().visitedRefund)
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 10.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                    PolicyRefundWidget
+                                                        .routeName);
+                                              },
+                                              child: Text(
+                                                '5Star Wireless Refund Policy',
+                                                textAlign: TextAlign.start,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      fontSize: 18.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                      decoration: TextDecoration
+                                                          .lineThrough,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 8.0, 10.0),
+                                        child: Icon(
+                                          Icons.store,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          size: 20.0,
+                                        ),
+                                      ),
+                                      if (!FFAppState().visitedStore)
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 10.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                    PolicyStoreWidget
+                                                        .routeName);
+                                              },
+                                              child: Text(
+                                                '5Star Wireless Store Policy',
+                                                textAlign: TextAlign.start,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      fontSize: 18.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                      decoration: TextDecoration
+                                                          .underline,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      if (FFAppState().visitedStore)
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 10.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                    PolicyStoreWidget
+                                                        .routeName);
+                                              },
+                                              child: Text(
+                                                '5Star Wireless Store Policy',
+                                                textAlign: TextAlign.start,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      fontSize: 18.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                      decoration: TextDecoration
+                                                          .lineThrough,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 8.0, 10.0),
+                                        child: Icon(
+                                          Icons.local_shipping,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          size: 20.0,
+                                        ),
+                                      ),
+                                      if (!FFAppState().visitedShipping)
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 20.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                    PolicyShippingWidget
+                                                        .routeName);
+                                              },
+                                              child: Text(
+                                                '5Star Wireless Shipping Policy',
+                                                textAlign: TextAlign.start,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      fontSize: 18.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                      decoration: TextDecoration
+                                                          .underline,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      if (FFAppState().visitedShipping)
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 20.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                    PolicyShippingWidget
+                                                        .routeName);
+                                              },
+                                              child: Text(
+                                                '5Star Wireless Shipping Policy',
+                                                textAlign: TextAlign.start,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      fontSize: 18.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                      decoration: TextDecoration
+                                                          .lineThrough,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                    ],
                                   ),
                                   Divider(
                                     height: 16.0,
                                     thickness: 1.5,
                                     color: Color(0xFFD1D5DB),
                                   ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      FFAppState().bottomSeen = true;
-                                      safeSetState(() {});
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'Reached bottom ✅',
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16.0,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          duration:
-                                              Duration(milliseconds: 4000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondary,
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      width: 100.0,
-                                      height: 30.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                      ),
-                                      child: Align(
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        child: Text(
-                                          'Tap to confirm',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                font: GoogleFonts.inter(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                                fontSize: 20.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      if (FFAppState().bottomSeen)
+                                      if (FFAppState().visitedTerms &&
+                                          FFAppState().visitedRefund &&
+                                          FFAppState().visitedStore &&
+                                          FFAppState().visitedShipping)
                                         Align(
                                           alignment:
                                               AlignmentDirectional(0.0, 0.0),
@@ -642,7 +998,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                                                       .fromSTEB(29.0, 20.0, 0.0,
                                                           10.0),
                                                   child: Text(
-                                                    'To proceed, please read and fully understand all policies above.',
+                                                    'Open the polic above to enable the checkbox.',
                                                     textAlign: TextAlign.center,
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -662,7 +1018,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                                                                     .fontStyle,
                                                           ),
                                                           color: Colors.black,
-                                                          fontSize: 17.0,
+                                                          fontSize: 20.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FlutterFlowTheme.of(
@@ -681,33 +1037,27 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                                               collapsed: Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
-                                                  Expanded(
-                                                    child: Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0.0, 0.0),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    1.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          'Please review the policy summary above. When you’re done, expand this section to confirm your understanding and continue.',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 30.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      'Press the arrow down beside the text above.',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
                                                               .bodyMedium
                                                               .override(
                                                                 font:
                                                                     GoogleFonts
                                                                         .inter(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
                                                                   fontStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium
@@ -718,16 +1068,15 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                                                                 fontSize: 15.0,
                                                                 letterSpacing:
                                                                     0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
                                                                 fontStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium
                                                                     .fontStyle,
                                                               ),
-                                                        ),
-                                                      ),
                                                     ),
                                                   ),
                                                 ],
@@ -745,11 +1094,11 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
-                                                                    10.0,
+                                                                    30.0,
                                                                     0.0,
                                                                     0.0),
                                                         child: Text(
-                                                          'I have read, understand, and agree to the 5Star Wireless Unified Policy (Terms, Store, Refund & Shipping).',
+                                                          'I’ve read and accept the Terms, Privacy, Shipping, and Store Policy.',
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: FlutterFlowTheme
@@ -816,37 +1165,24 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                     if (_model.chkAgreeValue ?? true)
                       FFButtonWidget(
                         onPressed: () async {
-                          if (_model.chkAgreeValue!) {
+                          if (_model.chkAgreeValue! &&
+                              FFAppState().visitedTerms &&
+                              FFAppState().visitedRefund &&
+                              FFAppState().visitedStore &&
+                              FFAppState().visitedShipping) {
                             FFAppState().termsAcceptedv3 = true;
                             safeSetState(() {});
-                            await Future.delayed(
-                              Duration(
-                                milliseconds: 100,
-                              ),
-                            );
 
-                            context.goNamed(
-                              HomePageWidget.routeName,
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.scale,
-                                  alignment: Alignment.bottomCenter,
-                                ),
-                              },
-                            );
+                            context.goNamed(HomePageWidget.routeName);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Please check the box to continue.',
+                                  'Please accept the terms to continue.',
                                   style: TextStyle(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16.0,
                                   ),
-                                  textAlign: TextAlign.center,
                                 ),
                                 duration: Duration(milliseconds: 4000),
                                 backgroundColor:

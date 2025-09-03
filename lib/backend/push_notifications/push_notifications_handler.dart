@@ -116,6 +116,7 @@ final parametersBuilderMap =
   'Policy_Terms': ParameterData.none(),
   'Policy_Store': ParameterData.none(),
   'Policy_Shipping': ParameterData.none(),
+  'WelcomeTermsCopy': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {
