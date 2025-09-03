@@ -51,6 +51,13 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_termsAcceptedv2', value);
   }
 
+  bool _termsAcceptedv3 = false;
+  bool get termsAcceptedv3 => _termsAcceptedv3;
+  set termsAcceptedv3(bool value) {
+    _termsAcceptedv3 = value;
+    prefs.setBool('ff_termsAcceptedv3', value);
+  }
+
   bool _bottomSeen = false;
   bool get bottomSeen => _bottomSeen;
   set bottomSeen(bool value) {
@@ -79,13 +86,6 @@ class FFAppState extends ChangeNotifier {
   bool get visitedShipping => _visitedShipping;
   set visitedShipping(bool value) {
     _visitedShipping = value;
-  }
-
-  bool _termsAcceptedv3 = false;
-  bool get termsAcceptedv3 => _termsAcceptedv3;
-  set termsAcceptedv3(bool value) {
-    _termsAcceptedv3 = value;
-    prefs.setBool('ff_termsAcceptedv3', value);
   }
 }
 

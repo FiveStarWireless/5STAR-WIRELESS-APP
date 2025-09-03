@@ -239,8 +239,3 @@ function getCharForIndex(charIdx) {
     return String.fromCharCode("a".charCodeAt(0) + charIdx - 36);
   }
 }
-exports.onUserDeleted = functions.auth.user().onDelete(async (user) => {
-  let firestore = admin.firestore();
-  let userRef = firestore.doc("users/" + user.uid);
-  await firestore.collection("users").doc(user.uid).delete();
-});
