@@ -825,7 +825,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                               ),
                             );
 
-                            context.goNamed(
+                            context.pushNamed(
                               HomePageWidget.routeName,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: TransitionInfo(

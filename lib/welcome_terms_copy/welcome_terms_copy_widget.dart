@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'welcome_terms_copy_model.dart';
@@ -29,13 +28,6 @@ class _WelcomeTermsCopyWidgetState extends State<WelcomeTermsCopyWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => WelcomeTermsCopyModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().termsAcceptedv3) {
-        context.goNamed(HomePageWidget.routeName);
-      }
-    });
 
     _model.expandableExpandableController =
         ExpandableController(initialExpanded: false);
@@ -1164,33 +1156,7 @@ class _WelcomeTermsCopyWidgetState extends State<WelcomeTermsCopyWidget> {
                     ),
                     if (_model.chkAgreeValue ?? true)
                       FFButtonWidget(
-                        onPressed: () async {
-                          if (_model.chkAgreeValue! &&
-                              FFAppState().visitedTerms &&
-                              FFAppState().visitedRefund &&
-                              FFAppState().visitedStore &&
-                              FFAppState().visitedShipping) {
-                            FFAppState().termsAcceptedv3 = true;
-                            safeSetState(() {});
-
-                            context.goNamed(HomePageWidget.routeName);
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Please accept the terms to continue.',
-                                  style: TextStyle(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                  ),
-                                ),
-                                duration: Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).secondary,
-                              ),
-                            );
-                          }
-                        },
+                        onPressed: () async {},
                         text: 'I Agree & Continue',
                         options: FFButtonOptions(
                           height: 40.0,

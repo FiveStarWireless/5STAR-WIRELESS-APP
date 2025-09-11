@@ -4,28 +4,28 @@ import '/flutter_flow/flutter_flow_web_view.dart';
 import '/pages/main_nav/main_nav_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'home_page_model.dart';
-export 'home_page_model.dart';
+import 'home_page_copy_model.dart';
+export 'home_page_copy_model.dart';
 
-class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+class HomePageCopyWidget extends StatefulWidget {
+  const HomePageCopyWidget({super.key});
 
-  static String routeName = 'HomePage';
-  static String routePath = '/homePage';
+  static String routeName = 'HomePageCopy';
+  static String routePath = '/homePageCopy';
 
   @override
-  State<HomePageWidget> createState() => _HomePageWidgetState();
+  State<HomePageCopyWidget> createState() => _HomePageCopyWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
-  late HomePageModel _model;
+class _HomePageCopyWidgetState extends State<HomePageCopyWidget> {
+  late HomePageCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePageModel());
+    _model = createModel(context, () => HomePageCopyModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -75,36 +75,40 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           ),
           actions: [],
           centerTitle: false,
-          elevation: 2.0,
+          elevation: 0.0,
         ),
         body: SafeArea(
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
-                width: MediaQuery.sizeOf(context).width * 1.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: wrapWithModel(
-                  model: _model.mainNavModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: MainNavWidget(),
+              Flexible(
+                child: Container(
+                  width: MediaQuery.sizeOf(context).width * 1.0,
+                  decoration: BoxDecoration(),
+                  child: wrapWithModel(
+                    model: _model.mainNavModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: MainNavWidget(),
+                  ),
                 ),
               ),
-              Container(
-                width: 394.8,
-                height: 793.2,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: FlutterFlowWebView(
-                  content: 'https://5star-wireless.com/collections/all',
-                  bypass: true,
-                  height: 2332.86,
-                  verticalScroll: true,
-                  horizontalScroll: true,
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: 394.8,
+                  height: 793.2,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child: FlutterFlowWebView(
+                    content: 'https://5star-wireless.com/',
+                    bypass: true,
+                    height: 2984.15,
+                    verticalScroll: true,
+                    horizontalScroll: true,
+                  ),
                 ),
               ),
             ],

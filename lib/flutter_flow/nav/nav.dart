@@ -87,11 +87,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : WelcomeTermsWidget(),
         ),
         FFRoute(
-          name: HomePageWidget.routeName,
-          path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
-        ),
-        FFRoute(
           name: WelcomepageWidget.routeName,
           path: WelcomepageWidget.routePath,
           builder: (context, params) => WelcomepageWidget(),
@@ -125,6 +120,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: WelcomeTermsCopyWidget.routeName,
           path: WelcomeTermsCopyWidget.routePath,
           builder: (context, params) => WelcomeTermsCopyWidget(),
+        ),
+        FFRoute(
+          name: CollectionPageWidget.routeName,
+          path: CollectionPageWidget.routePath,
+          builder: (context, params) => CollectionPageWidget(),
+        ),
+        FFRoute(
+          name: ServicesPageWidget.routeName,
+          path: ServicesPageWidget.routePath,
+          builder: (context, params) => ServicesPageWidget(),
+        ),
+        FFRoute(
+          name: CartPageWidget.routeName,
+          path: CartPageWidget.routePath,
+          builder: (context, params) => CartPageWidget(),
+        ),
+        FFRoute(
+          name: HomePageCopyWidget.routeName,
+          path: HomePageCopyWidget.routePath,
+          builder: (context, params) => HomePageCopyWidget(),
+        ),
+        FFRoute(
+          name: HomePageWidget.routeName,
+          path: HomePageWidget.routePath,
+          builder: (context, params) => HomePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/main_nav/main_nav_widget.dart';
-import 'home_page_widget.dart' show HomePageWidget;
+import 'home_page_copy_widget.dart' show HomePageCopyWidget;
 import 'package:flutter/material.dart';
 
-class HomePageModel extends FlutterFlowModel<HomePageWidget> {
+class HomePageCopyModel extends FlutterFlowModel<HomePageCopyWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Model for MainNav component.

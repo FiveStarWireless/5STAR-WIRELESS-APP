@@ -4,28 +4,28 @@ import '/flutter_flow/flutter_flow_web_view.dart';
 import '/pages/main_nav/main_nav_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'home_page_model.dart';
-export 'home_page_model.dart';
+import 'services_page_model.dart';
+export 'services_page_model.dart';
 
-class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+class ServicesPageWidget extends StatefulWidget {
+  const ServicesPageWidget({super.key});
 
-  static String routeName = 'HomePage';
-  static String routePath = '/homePage';
+  static String routeName = 'ServicesPage';
+  static String routePath = '/servicesPage';
 
   @override
-  State<HomePageWidget> createState() => _HomePageWidgetState();
+  State<ServicesPageWidget> createState() => _ServicesPageWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
-  late HomePageModel _model;
+class _ServicesPageWidgetState extends State<ServicesPageWidget> {
+  late ServicesPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePageModel());
+    _model = createModel(context, () => ServicesPageModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -53,7 +53,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           title: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Text(
-              '5Star Wireless',
+              '5Star Services',
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     font: GoogleFonts.interTight(
@@ -100,7 +100,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
                 child: FlutterFlowWebView(
-                  content: 'https://5star-wireless.com/collections/all',
+                  content: 'https://5star-wireless.com/pages/akko-protection',
                   bypass: true,
                   height: 2332.86,
                   verticalScroll: true,

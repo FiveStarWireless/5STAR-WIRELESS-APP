@@ -4,28 +4,28 @@ import '/flutter_flow/flutter_flow_web_view.dart';
 import '/pages/main_nav/main_nav_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'home_page_model.dart';
-export 'home_page_model.dart';
+import 'collection_page_model.dart';
+export 'collection_page_model.dart';
 
-class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+class CollectionPageWidget extends StatefulWidget {
+  const CollectionPageWidget({super.key});
 
-  static String routeName = 'HomePage';
-  static String routePath = '/homePage';
+  static String routeName = 'CollectionPage';
+  static String routePath = '/collectionPage';
 
   @override
-  State<HomePageWidget> createState() => _HomePageWidgetState();
+  State<CollectionPageWidget> createState() => _CollectionPageWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
-  late HomePageModel _model;
+class _CollectionPageWidgetState extends State<CollectionPageWidget> {
+  late CollectionPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePageModel());
+    _model = createModel(context, () => CollectionPageModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -53,7 +53,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           title: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Text(
-              '5Star Wireless',
+              'Products',
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     font: GoogleFonts.interTight(
