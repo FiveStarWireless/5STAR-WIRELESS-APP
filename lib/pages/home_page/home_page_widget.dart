@@ -100,7 +100,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
                 child: FlutterFlowWebView(
-                  content: 'https://5star-wireless.com/collections/all',
+                  content: 'https://5star-wireless.com/',
                   bypass: true,
                   height: 2332.86,
                   verticalScroll: true,

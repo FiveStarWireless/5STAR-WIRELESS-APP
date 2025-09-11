@@ -60,13 +60,6 @@ class _MainNavWidgetState extends State<MainNavWidget> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (Theme.of(context).brightness == Brightness.dark)
-              Image.asset(
-                'assets/images/ff_Experts_Logo_onDark@2x.png',
-                width: 180.0,
-                height: 40.0,
-                fit: BoxFit.fitWidth,
-              ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
               child: Row(
