@@ -13,3 +13,4 @@ export '/pages/services_page/services_page_widget.dart' show ServicesPageWidget;
 export '/pages/cart_page/cart_page_widget.dart' show CartPageWidget;
 export '/home_page_copy/home_page_copy_widget.dart' show HomePageCopyWidget;
 export '/pages/home_page/home_page_widget.dart' show HomePageWidget;
+export '/pages/user_page/user_page_widget.dart' show UserPageWidget;
