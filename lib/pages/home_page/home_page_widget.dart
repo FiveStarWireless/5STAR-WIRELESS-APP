@@ -83,28 +83,27 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Container(
-                width: MediaQuery.sizeOf(context).width * 1.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: wrapWithModel(
-                  model: _model.mainNavModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: MainNavWidget(),
-                ),
-              ),
-              Container(
                 width: 394.8,
-                height: 793.2,
+                height: MediaQuery.sizeOf(context).height * 0.82,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
                 child: FlutterFlowWebView(
                   content: 'https://5star-wireless.com/',
                   bypass: true,
-                  height: 2332.86,
+                  height: 2332.9,
                   verticalScroll: true,
                   horizontalScroll: true,
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(),
+                child: wrapWithModel(
+                  model: _model.mainNavModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: MainNavWidget(
+                    activeIndex: 0,
+                  ),
                 ),
               ),
             ],

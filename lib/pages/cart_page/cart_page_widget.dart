@@ -83,19 +83,8 @@ class _CartPageWidgetState extends State<CartPageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Container(
-                width: MediaQuery.sizeOf(context).width * 1.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: wrapWithModel(
-                  model: _model.mainNavModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: MainNavWidget(),
-                ),
-              ),
-              Container(
                 width: 394.8,
-                height: 793.2,
+                height: MediaQuery.sizeOf(context).height * 0.82,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
@@ -105,6 +94,16 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                   height: 2332.86,
                   verticalScroll: true,
                   horizontalScroll: true,
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(),
+                child: wrapWithModel(
+                  model: _model.mainNavModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: MainNavWidget(
+                    activeIndex: 3,
+                  ),
                 ),
               ),
             ],
