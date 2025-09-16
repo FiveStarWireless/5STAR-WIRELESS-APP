@@ -84,7 +84,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
             children: [
               Container(
                 width: 394.8,
-                height: MediaQuery.sizeOf(context).height * 0.82,
+                height: MediaQuery.sizeOf(context).height * 0.75,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
