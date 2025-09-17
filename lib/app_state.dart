@@ -37,6 +37,12 @@ class FFAppState extends ChangeNotifier {
 
   late SharedPreferences prefs;
 
+  int _activeTabIndex = 0;
+  int get activeTabIndex => _activeTabIndex;
+  set activeTabIndex(int value) {
+    _activeTabIndex = value;
+  }
+
   bool _termsAcceptedv1 = false;
   bool get termsAcceptedv1 => _termsAcceptedv1;
   set termsAcceptedv1(bool value) {

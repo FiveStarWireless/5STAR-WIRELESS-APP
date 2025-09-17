@@ -815,7 +815,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
                                                     }
 
                                                     context.goNamedAuth(
-                                                        HomePageWidget
+                                                        TabsHostWidget
                                                             .routeName,
                                                         context.mounted);
                                                   },
@@ -971,7 +971,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
                                                               }
 
                                                               context.goNamedAuth(
-                                                                  HomePageWidget
+                                                                  TabsHostWidget
                                                                       .routeName,
                                                                   context
                                                                       .mounted);
@@ -1070,7 +1070,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
                                                                     }
 
                                                                     context.goNamedAuth(
-                                                                        HomePageWidget
+                                                                        TabsHostWidget
                                                                             .routeName,
                                                                         context
                                                                             .mounted);
@@ -1607,7 +1607,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
                                                     }
 
                                                     context.goNamedAuth(
-                                                        HomePageWidget
+                                                        TabsHostWidget
                                                             .routeName,
                                                         context.mounted);
                                                   },
@@ -1741,7 +1741,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
                                                         }
 
                                                         context.goNamedAuth(
-                                                            HomePageWidget
+                                                            TabsHostWidget
                                                                 .routeName,
                                                             context.mounted);
                                                       },
@@ -1840,7 +1840,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
                                                               }
 
                                                               context.goNamedAuth(
-                                                                  HomePageWidget
+                                                                  TabsHostWidget
                                                                       .routeName,
                                                                   context
                                                                       .mounted);
@@ -1936,7 +1936,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
                                                     }
 
                                                     context.goNamedAuth(
-                                                        HomePageWidget
+                                                        TabsHostWidget
                                                             .routeName,
                                                         context.mounted);
                                                   },

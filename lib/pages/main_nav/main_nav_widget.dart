@@ -1,5 +1,4 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/index.dart';
 import 'package:flutter/material.dart';
 import 'main_nav_model.dart';
 export 'main_nav_model.dart';
@@ -8,9 +7,19 @@ class MainNavWidget extends StatefulWidget {
   const MainNavWidget({
     super.key,
     int? activeIndex,
+    required this.onHomeTap,
+    required this.onStoreTap,
+    required this.onServicesTap,
+    required this.onCartTap,
+    required this.onUserTap,
   }) : this.activeIndex = activeIndex ?? 0;
 
   final int activeIndex;
+  final Future Function()? onHomeTap;
+  final Future Function()? onStoreTap;
+  final Future Function()? onServicesTap;
+  final Future Function()? onCartTap;
+  final Future Function()? onUserTap;
 
   @override
   State<MainNavWidget> createState() => _MainNavWidgetState();
@@ -89,23 +98,7 @@ class _MainNavWidgetState extends State<MainNavWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    if (widget.activeIndex > 0) {
-                                      if (Navigator.of(context).canPop()) {
-                                        context.pop();
-                                      }
-                                      context.pushNamed(
-                                        HomePageWidget.routeName,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.rightToLeft,
-                                            duration:
-                                                Duration(milliseconds: 180),
-                                          ),
-                                        },
-                                      );
-                                    }
+                                    await widget.onHomeTap?.call();
                                   },
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -165,43 +158,7 @@ class _MainNavWidgetState extends State<MainNavWidget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
-                                        if (widget.activeIndex < 1) {
-                                          if (Navigator.of(context).canPop()) {
-                                            context.pop();
-                                          }
-                                          context.pushNamed(
-                                            CollectionPageWidget.routeName,
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType
-                                                        .leftToRight,
-                                                duration:
-                                                    Duration(milliseconds: 180),
-                                              ),
-                                            },
-                                          );
-                                        } else if (widget.activeIndex > 1) {
-                                          if (Navigator.of(context).canPop()) {
-                                            context.pop();
-                                          }
-                                          context.pushNamed(
-                                            CollectionPageWidget.routeName,
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType
-                                                        .rightToLeft,
-                                                duration:
-                                                    Duration(milliseconds: 180),
-                                              ),
-                                            },
-                                          );
-                                        }
+                                        await widget.onStoreTap?.call();
                                       },
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -261,39 +218,7 @@ class _MainNavWidgetState extends State<MainNavWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    if (widget.activeIndex < 2) {
-                                      if (Navigator.of(context).canPop()) {
-                                        context.pop();
-                                      }
-                                      context.pushNamed(
-                                        ServicesPageWidget.routeName,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.leftToRight,
-                                            duration:
-                                                Duration(milliseconds: 180),
-                                          ),
-                                        },
-                                      );
-                                    } else if (widget.activeIndex > 2) {
-                                      if (Navigator.of(context).canPop()) {
-                                        context.pop();
-                                      }
-                                      context.pushNamed(
-                                        ServicesPageWidget.routeName,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.rightToLeft,
-                                            duration:
-                                                Duration(milliseconds: 180),
-                                          ),
-                                        },
-                                      );
-                                    }
+                                    await widget.onServicesTap?.call();
                                   },
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -350,39 +275,7 @@ class _MainNavWidgetState extends State<MainNavWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    if (widget.activeIndex < 3) {
-                                      if (Navigator.of(context).canPop()) {
-                                        context.pop();
-                                      }
-                                      context.pushNamed(
-                                        CartPageWidget.routeName,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.leftToRight,
-                                            duration:
-                                                Duration(milliseconds: 180),
-                                          ),
-                                        },
-                                      );
-                                    } else if (widget.activeIndex > 3) {
-                                      if (Navigator.of(context).canPop()) {
-                                        context.pop();
-                                      }
-                                      context.pushNamed(
-                                        CartPageWidget.routeName,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.rightToLeft,
-                                            duration:
-                                                Duration(milliseconds: 180),
-                                          ),
-                                        },
-                                      );
-                                    }
+                                    await widget.onCartTap?.call();
                                   },
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -436,22 +329,7 @@ class _MainNavWidgetState extends State<MainNavWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  if (widget.activeIndex < 4) {
-                                    if (Navigator.of(context).canPop()) {
-                                      context.pop();
-                                    }
-                                    context.pushNamed(
-                                      UserPageWidget.routeName,
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.leftToRight,
-                                          duration: Duration(milliseconds: 180),
-                                        ),
-                                      },
-                                    );
-                                  }
+                                  await widget.onUserTap?.call();
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,

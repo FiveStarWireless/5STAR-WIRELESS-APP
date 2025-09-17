@@ -38,7 +38,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
     });
 
     _model.expandableExpandableController =
-        ExpandableController(initialExpanded: false);
+        ExpandableController(initialExpanded: true);
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -499,132 +499,71 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                                     thickness: 1.5,
                                     color: Color(0xFFD1D5DB),
                                   ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      FFAppState().bottomSeen = true;
-                                      safeSetState(() {});
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'Reached bottom ✅',
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16.0,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          duration:
-                                              Duration(milliseconds: 4000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondary,
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      width: 100.0,
-                                      height: 30.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                      ),
-                                      child: Align(
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        child: Text(
-                                          'Tap to confirm',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                font: GoogleFonts.inter(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                                fontSize: 20.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      if (FFAppState().bottomSeen)
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 50.0, 0.0, 0.0),
-                                            child: Theme(
-                                              data: ThemeData(
-                                                checkboxTheme:
-                                                    CheckboxThemeData(
-                                                  visualDensity:
-                                                      VisualDensity.compact,
-                                                  materialTapTargetSize:
-                                                      MaterialTapTargetSize
-                                                          .shrinkWrap,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4.0),
-                                                  ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 50.0, 0.0, 0.0),
+                                          child: Theme(
+                                            data: ThemeData(
+                                              checkboxTheme: CheckboxThemeData(
+                                                visualDensity:
+                                                    VisualDensity.compact,
+                                                materialTapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0),
                                                 ),
-                                                unselectedWidgetColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
                                               ),
-                                              child: Checkbox(
-                                                value: _model.chkAgreeValue ??=
-                                                    true,
-                                                onChanged: (newValue) async {
-                                                  safeSetState(() =>
-                                                      _model.chkAgreeValue =
-                                                          newValue!);
-                                                },
-                                                side: (FlutterFlowTheme.of(
-                                                                context)
-                                                            .alternate !=
-                                                        null)
-                                                    ? BorderSide(
-                                                        width: 2,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
-                                                      )
-                                                    : null,
-                                                activeColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                checkColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .info,
-                                              ),
+                                              unselectedWidgetColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                            ),
+                                            child: Checkbox(
+                                              value: _model.chkAgreeValue ??=
+                                                  false,
+                                              onChanged: (newValue) async {
+                                                safeSetState(() => _model
+                                                    .chkAgreeValue = newValue!);
+                                                if (newValue!) {
+                                                  FFAppState().termsAcceptedv1 =
+                                                      true;
+                                                  safeSetState(() {});
+                                                } else {
+                                                  FFAppState().termsAcceptedv1 =
+                                                      false;
+                                                  safeSetState(() {});
+                                                }
+                                              },
+                                              side:
+                                                  (FlutterFlowTheme.of(context)
+                                                              .alternate !=
+                                                          null)
+                                                      ? BorderSide(
+                                                          width: 2,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
+                                                        )
+                                                      : null,
+                                              activeColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              checkColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
                                             ),
                                           ),
                                         ),
+                                      ),
                                       Expanded(
                                         child: Container(
                                           width: double.infinity,
@@ -815,46 +754,24 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                     ),
                     if (_model.chkAgreeValue ?? true)
                       FFButtonWidget(
-                        onPressed: () async {
-                          if (_model.chkAgreeValue!) {
-                            FFAppState().termsAcceptedv3 = true;
-                            safeSetState(() {});
-                            await Future.delayed(
-                              Duration(
-                                milliseconds: 100,
-                              ),
-                            );
+                        onPressed: !_model.chkAgreeValue!
+                            ? null
+                            : () async {
+                                FFAppState().termsAcceptedv1 = true;
+                                safeSetState(() {});
 
-                            context.pushNamed(
-                              HomePageWidget.routeName,
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.scale,
-                                  alignment: Alignment.bottomCenter,
-                                ),
+                                context.goNamed(
+                                  TabsHostWidget.routeName,
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.scale,
+                                      alignment: Alignment.bottomCenter,
+                                      duration: Duration(milliseconds: 180),
+                                    ),
+                                  },
+                                );
                               },
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Please check the box to continue.',
-                                  style: TextStyle(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16.0,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                duration: Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).secondary,
-                              ),
-                            );
-                          }
-                        },
                         text: 'I Agree & Continue',
                         options: FFButtonOptions(
                           height: 40.0,
@@ -862,7 +779,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                               16.0, 0.0, 16.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).secondary,
+                          color: Color(0xFF39D27F),
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     font: GoogleFonts.interTight(
@@ -884,6 +801,8 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                                   ),
                           elevation: 0.0,
                           borderRadius: BorderRadius.circular(8.0),
+                          disabledColor: Color(0xFFD6D6D6),
+                          disabledTextColor: Colors.white,
                         ),
                       ),
                   ],

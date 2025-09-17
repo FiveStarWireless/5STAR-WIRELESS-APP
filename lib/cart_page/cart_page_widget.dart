@@ -103,6 +103,11 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                   updateCallback: () => safeSetState(() {}),
                   child: MainNavWidget(
                     activeIndex: 3,
+                    onHomeTap: () async {},
+                    onStoreTap: () async {},
+                    onServicesTap: () async {},
+                    onCartTap: () async {},
+                    onUserTap: () async {},
                   ),
                 ),
               ),

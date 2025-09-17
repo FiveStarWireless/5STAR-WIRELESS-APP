@@ -4,28 +4,28 @@ import '/flutter_flow/flutter_flow_web_view.dart';
 import '/pages/main_nav/main_nav_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'services_page_model.dart';
-export 'services_page_model.dart';
+import 'home_page_model.dart';
+export 'home_page_model.dart';
 
-class ServicesPageWidget extends StatefulWidget {
-  const ServicesPageWidget({super.key});
+class HomePageWidget extends StatefulWidget {
+  const HomePageWidget({super.key});
 
-  static String routeName = 'ServicesPage';
-  static String routePath = '/servicesPage';
+  static String routeName = 'HomePage';
+  static String routePath = '/homePage';
 
   @override
-  State<ServicesPageWidget> createState() => _ServicesPageWidgetState();
+  State<HomePageWidget> createState() => _HomePageWidgetState();
 }
 
-class _ServicesPageWidgetState extends State<ServicesPageWidget> {
-  late ServicesPageModel _model;
+class _HomePageWidgetState extends State<HomePageWidget> {
+  late HomePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ServicesPageModel());
+    _model = createModel(context, () => HomePageModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -53,7 +53,7 @@ class _ServicesPageWidgetState extends State<ServicesPageWidget> {
           title: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Text(
-              '5Star Services',
+              '5Star Wireless',
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     font: GoogleFonts.interTight(
@@ -89,9 +89,9 @@ class _ServicesPageWidgetState extends State<ServicesPageWidget> {
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
                 child: FlutterFlowWebView(
-                  content: 'https://5star-wireless.com/pages/akko-protection',
+                  content: 'https://5star-wireless.com/',
                   bypass: true,
-                  height: 2332.86,
+                  height: 2332.9,
                   verticalScroll: true,
                   horizontalScroll: true,
                 ),
@@ -102,7 +102,12 @@ class _ServicesPageWidgetState extends State<ServicesPageWidget> {
                   model: _model.mainNavModel,
                   updateCallback: () => safeSetState(() {}),
                   child: MainNavWidget(
-                    activeIndex: 2,
+                    activeIndex: 0,
+                    onHomeTap: () async {},
+                    onStoreTap: () async {},
+                    onServicesTap: () async {},
+                    onCartTap: () async {},
+                    onUserTap: () async {},
                   ),
                 ),
               ),

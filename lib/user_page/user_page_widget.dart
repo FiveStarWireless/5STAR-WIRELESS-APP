@@ -4,28 +4,28 @@ import '/flutter_flow/flutter_flow_web_view.dart';
 import '/pages/main_nav/main_nav_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'home_page_model.dart';
-export 'home_page_model.dart';
+import 'user_page_model.dart';
+export 'user_page_model.dart';
 
-class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+class UserPageWidget extends StatefulWidget {
+  const UserPageWidget({super.key});
 
-  static String routeName = 'HomePage';
-  static String routePath = '/homePage';
+  static String routeName = 'UserPage';
+  static String routePath = '/userPage';
 
   @override
-  State<HomePageWidget> createState() => _HomePageWidgetState();
+  State<UserPageWidget> createState() => _UserPageWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
-  late HomePageModel _model;
+class _UserPageWidgetState extends State<UserPageWidget> {
+  late UserPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePageModel());
+    _model = createModel(context, () => UserPageModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -53,7 +53,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           title: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Text(
-              '5Star Wireless',
+              'Account',
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     font: GoogleFonts.interTight(
@@ -89,9 +89,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
                 child: FlutterFlowWebView(
-                  content: 'https://5star-wireless.com/',
+                  content:
+                      'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=https%3A%2F%2Fshopify.com%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3Dd70e3e38-7545-4755-8823-d599e5cb9fbe%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3D01K4ZVESFTTZFDY46ZXCGY31G7&region_country=US',
                   bypass: true,
-                  height: 2332.9,
+                  height: 2332.86,
                   verticalScroll: true,
                   horizontalScroll: true,
                 ),
@@ -102,7 +103,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   model: _model.mainNavModel,
                   updateCallback: () => safeSetState(() {}),
                   child: MainNavWidget(
-                    activeIndex: 0,
+                    activeIndex: 4,
+                    onHomeTap: () async {},
+                    onStoreTap: () async {},
+                    onServicesTap: () async {},
+                    onCartTap: () async {},
+                    onUserTap: () async {},
                   ),
                 ),
               ),

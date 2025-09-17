@@ -103,6 +103,11 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                   updateCallback: () => safeSetState(() {}),
                   child: MainNavWidget(
                     activeIndex: 1,
+                    onHomeTap: () async {},
+                    onStoreTap: () async {},
+                    onServicesTap: () async {},
+                    onCartTap: () async {},
+                    onUserTap: () async {},
                   ),
                 ),
               ),

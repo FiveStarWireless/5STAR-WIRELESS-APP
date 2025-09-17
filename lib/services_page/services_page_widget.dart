@@ -4,28 +4,28 @@ import '/flutter_flow/flutter_flow_web_view.dart';
 import '/pages/main_nav/main_nav_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'user_page_model.dart';
-export 'user_page_model.dart';
+import 'services_page_model.dart';
+export 'services_page_model.dart';
 
-class UserPageWidget extends StatefulWidget {
-  const UserPageWidget({super.key});
+class ServicesPageWidget extends StatefulWidget {
+  const ServicesPageWidget({super.key});
 
-  static String routeName = 'UserPage';
-  static String routePath = '/userPage';
+  static String routeName = 'ServicesPage';
+  static String routePath = '/servicesPage';
 
   @override
-  State<UserPageWidget> createState() => _UserPageWidgetState();
+  State<ServicesPageWidget> createState() => _ServicesPageWidgetState();
 }
 
-class _UserPageWidgetState extends State<UserPageWidget> {
-  late UserPageModel _model;
+class _ServicesPageWidgetState extends State<ServicesPageWidget> {
+  late ServicesPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => UserPageModel());
+    _model = createModel(context, () => ServicesPageModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -53,7 +53,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
           title: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Text(
-              'Account',
+              '5Star Services',
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     font: GoogleFonts.interTight(
@@ -89,8 +89,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
                 child: FlutterFlowWebView(
-                  content:
-                      'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=https%3A%2F%2Fshopify.com%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3Dd70e3e38-7545-4755-8823-d599e5cb9fbe%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3D01K4ZVESFTTZFDY46ZXCGY31G7&region_country=US',
+                  content: 'https://5star-wireless.com/pages/akko-protection',
                   bypass: true,
                   height: 2332.86,
                   verticalScroll: true,
@@ -103,7 +102,12 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                   model: _model.mainNavModel,
                   updateCallback: () => safeSetState(() {}),
                   child: MainNavWidget(
-                    activeIndex: 4,
+                    activeIndex: 2,
+                    onHomeTap: () async {},
+                    onStoreTap: () async {},
+                    onServicesTap: () async {},
+                    onCartTap: () async {},
+                    onUserTap: () async {},
                   ),
                 ),
               ),

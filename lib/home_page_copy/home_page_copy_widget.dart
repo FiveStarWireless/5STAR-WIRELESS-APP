@@ -90,7 +90,13 @@ class _HomePageCopyWidgetState extends State<HomePageCopyWidget> {
                   child: wrapWithModel(
                     model: _model.mainNavModel,
                     updateCallback: () => safeSetState(() {}),
-                    child: MainNavWidget(),
+                    child: MainNavWidget(
+                      onHomeTap: () async {},
+                      onStoreTap: () async {},
+                      onServicesTap: () async {},
+                      onCartTap: () async {},
+                      onUserTap: () async {},
+                    ),
                   ),
                 ),
               ),
