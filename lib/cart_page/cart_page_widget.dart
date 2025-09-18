@@ -108,6 +108,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                     onServicesTap: () async {},
                     onCartTap: () async {},
                     onUserTap: () async {},
+                    onThemeTap: () async {},
                   ),
                 ),
               ),

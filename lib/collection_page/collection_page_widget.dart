@@ -108,6 +108,7 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                     onServicesTap: () async {},
                     onCartTap: () async {},
                     onUserTap: () async {},
+                    onThemeTap: () async {},
                   ),
                 ),
               ),

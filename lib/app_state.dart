@@ -17,6 +17,9 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _safeInit(() {
+      _isDarkMode = prefs.getBool('ff_isDarkMode') ?? _isDarkMode;
+    });
+    _safeInit(() {
       _termsAcceptedv1 =
           prefs.getBool('ff_termsAcceptedv1') ?? _termsAcceptedv1;
     });
@@ -41,6 +44,13 @@ class FFAppState extends ChangeNotifier {
   int get activeTabIndex => _activeTabIndex;
   set activeTabIndex(int value) {
     _activeTabIndex = value;
+  }
+
+  bool _isDarkMode = false;
+  bool get isDarkMode => _isDarkMode;
+  set isDarkMode(bool value) {
+    _isDarkMode = value;
+    prefs.setBool('ff_isDarkMode', value);
   }
 
   bool _termsAcceptedv1 = false;

@@ -52,22 +52,23 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Color(0xFF07BCFD),
+          backgroundColor:
+              FFAppState().isDarkMode ? Colors.black : Color(0xFF07BCFD),
           automaticallyImplyLeading: false,
           title: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Text(
               () {
                 if (FFAppState().activeTabIndex == 0) {
-                  return '\"Home\"';
+                  return 'Home';
                 } else if (FFAppState().activeTabIndex == 1) {
-                  return '\"Collection\"';
+                  return 'Collection';
                 } else if (FFAppState().activeTabIndex == 2) {
-                  return '\"Services\"';
+                  return 'Services';
                 } else if (FFAppState().activeTabIndex == 3) {
-                  return '\"Cart\"';
+                  return 'Cart';
                 } else if (FFAppState().activeTabIndex == 4) {
-                  return '\"User\"';
+                  return 'User';
                 } else {
                   return '5Star Wireless';
                 }
@@ -101,103 +102,106 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
-                width: double.infinity,
-                height: MediaQuery.sizeOf(context).height * 0.75,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
+              Expanded(
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
-                  child: PageView(
-                    controller: _model.tabsPagerController ??=
-                        PageController(initialPage: 0),
-                    onPageChanged: (_) async {
-                      FFAppState().activeTabIndex =
-                          _model.tabsPagerCurrentIndex;
-                      safeSetState(() {});
-                    },
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: PageView(
+                      controller: _model.tabsPagerController ??=
+                          PageController(initialPage: 0),
+                      onPageChanged: (_) async {
+                        FFAppState().activeTabIndex =
+                            _model.tabsPagerCurrentIndex;
+                        safeSetState(() {});
+                      },
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: FlutterFlowWebView(
+                            content: 'https://5star-wireless.com/',
+                            bypass: true,
+                            height: 2000.0,
+                            verticalScroll: true,
+                            horizontalScroll: true,
+                          ),
                         ),
-                        child: FlutterFlowWebView(
-                          content: 'https://5star-wireless.com/',
-                          bypass: true,
-                          height: 2000.0,
-                          verticalScroll: true,
-                          horizontalScroll: true,
+                        Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: FlutterFlowWebView(
+                            content:
+                                'https://5star-wireless.com/collections/all',
+                            bypass: true,
+                            height: 2000.0,
+                            verticalScroll: true,
+                            horizontalScroll: true,
+                          ),
                         ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                        Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: FlutterFlowWebView(
+                            content:
+                                'https://5star-wireless.com/pages/akko-protection',
+                            bypass: true,
+                            height: 2000.0,
+                            verticalScroll: true,
+                            horizontalScroll: true,
+                          ),
                         ),
-                        child: FlutterFlowWebView(
-                          content: 'https://5star-wireless.com/collections/all',
-                          bypass: true,
-                          height: 2000.0,
-                          verticalScroll: true,
-                          horizontalScroll: true,
+                        Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: FlutterFlowWebView(
+                            content: 'https://5star-wireless.com/cart',
+                            bypass: true,
+                            height: 2000.0,
+                            verticalScroll: true,
+                            horizontalScroll: true,
+                          ),
                         ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                        Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: FlutterFlowWebView(
+                            content:
+                                'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=https%3A%2F%2Fshopify.com%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3Dd70e3e38-7545-4755-8823-d599e5cb9fbe%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3D01K4ZVESFTTZFDY46ZXCGY31G7&region_country=US',
+                            bypass: true,
+                            height: 2000.0,
+                            verticalScroll: true,
+                            horizontalScroll: true,
+                          ),
                         ),
-                        child: FlutterFlowWebView(
-                          content:
-                              'https://5star-wireless.com/pages/akko-protection',
-                          bypass: true,
-                          height: 2000.0,
-                          verticalScroll: true,
-                          horizontalScroll: true,
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: FlutterFlowWebView(
-                          content: 'https://5star-wireless.com/cart',
-                          bypass: true,
-                          height: 2000.0,
-                          verticalScroll: true,
-                          horizontalScroll: true,
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: FlutterFlowWebView(
-                          content:
-                              'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=https%3A%2F%2Fshopify.com%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3Dd70e3e38-7545-4755-8823-d599e5cb9fbe%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3D01K4ZVESFTTZFDY46ZXCGY31G7&region_country=US',
-                          bypass: true,
-                          height: 2000.0,
-                          verticalScroll: true,
-                          horizontalScroll: true,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -257,6 +261,11 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                         duration: Duration(milliseconds: 500),
                         curve: Curves.ease,
                       );
+                    },
+                    onThemeTap: () async {
+                      FFAppState().isDarkMode = !FFAppState().isDarkMode;
+                      safeSetState(() {});
+                      HapticFeedback.lightImpact();
                     },
                   ),
                 ),

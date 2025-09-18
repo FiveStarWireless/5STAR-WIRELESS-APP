@@ -109,6 +109,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                     onServicesTap: () async {},
                     onCartTap: () async {},
                     onUserTap: () async {},
+                    onThemeTap: () async {},
                   ),
                 ),
               ),
