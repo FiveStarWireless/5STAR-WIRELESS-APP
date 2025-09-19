@@ -1,8 +1,13 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
 import '/pages/main_nav/main_nav_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +33,39 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TabsHostModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (isAndroid) {
+        await requestPermission(notificationsPermission);
+        _model.tokenOut = await actions.getFcmToken();
+        if ((_model.tokenOut == 'Is Not Empty') &&
+            !(currentUserDocument?.fcmTokens.toList() ?? [])
+                .contains(_model.tokenOut)) {
+          await currentUserReference!.update({
+            ...mapToFirestore(
+              {
+                'fcm_tokens': FieldValue.arrayUnion(['tokenOut']),
+              },
+            ),
+          });
+        }
+      } else if (isiOS) {
+        await requestPermission(notificationsPermission);
+        await actions.getFcmToken();
+        if ((_model.tokenOut == 'Is Not Empty') &&
+            !(currentUserDocument?.fcmTokens.toList() ?? [])
+                .contains(_model.tokenOut)) {
+          await currentUserReference!.update({
+            ...mapToFirestore(
+              {
+                'fcm_tokens': FieldValue.arrayUnion(['tokenOut']),
+              },
+            ),
+          });
+        }
+      }
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -267,6 +305,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                       safeSetState(() {});
                       HapticFeedback.lightImpact();
                     },
+                    onSettingsTap: () async {},
                   ),
                 ),
               ),

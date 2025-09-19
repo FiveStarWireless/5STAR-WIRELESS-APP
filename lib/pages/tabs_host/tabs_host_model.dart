@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class TabsHostModel extends FlutterFlowModel<TabsHostWidget> {
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Custom Action - getFcmToken] action in TabsHost widget.
+  String? tokenOut;
   // State field(s) for tabsPager widget.
   PageController? tabsPagerController;
 

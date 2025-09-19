@@ -154,6 +154,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: TabsHostWidget.routeName,
           path: TabsHostWidget.routePath,
+          requireAuth: true,
           builder: (context, params) => TabsHostWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

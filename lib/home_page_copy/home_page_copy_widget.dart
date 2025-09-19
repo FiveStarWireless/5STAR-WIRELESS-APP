@@ -97,6 +97,7 @@ class _HomePageCopyWidgetState extends State<HomePageCopyWidget> {
                       onCartTap: () async {},
                       onUserTap: () async {},
                       onThemeTap: () async {},
+                      onSettingsTap: () async {},
                     ),
                   ),
                 ),

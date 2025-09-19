@@ -109,6 +109,7 @@ class _ServicesPageWidgetState extends State<ServicesPageWidget> {
                     onCartTap: () async {},
                     onUserTap: () async {},
                     onThemeTap: () async {},
+                    onSettingsTap: () async {},
                   ),
                 ),
               ),

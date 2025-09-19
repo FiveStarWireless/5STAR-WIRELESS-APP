@@ -109,6 +109,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     onCartTap: () async {},
                     onUserTap: () async {},
                     onThemeTap: () async {},
+                    onSettingsTap: () async {},
                   ),
                 ),
               ),
