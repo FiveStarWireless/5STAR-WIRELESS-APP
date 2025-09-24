@@ -12,7 +12,20 @@
           "package_name": "com.fivestarwireless.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "198032920836-0vqkc867r85eadhk9kge1jtc6rf6sgf0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fivestarwireless.app",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "198032920836-lkrvjpj25lsdue7iuehla4fa5aroqfm1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCCimpMFmqCcUWCw1g7mExhJ9JtRnjkx18"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198032920836-lkrvjpj25lsdue7iuehla4fa5aroqfm1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "198032920836-fennetbo4bs4sm2btu2c41cq71jeo68l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fivestarwireless.app"
+              }
+            }
+          ]
         }
       }
     }

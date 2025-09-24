@@ -1,7 +1,7 @@
+import '/components/main_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
-import '/pages/main_nav/main_nav_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home_page_copy_model.dart';
@@ -90,15 +90,7 @@ class _HomePageCopyWidgetState extends State<HomePageCopyWidget> {
                   child: wrapWithModel(
                     model: _model.mainNavModel,
                     updateCallback: () => safeSetState(() {}),
-                    child: MainNavWidget(
-                      onHomeTap: () async {},
-                      onStoreTap: () async {},
-                      onServicesTap: () async {},
-                      onCartTap: () async {},
-                      onUserTap: () async {},
-                      onThemeTap: () async {},
-                      onSettingsTap: () async {},
-                    ),
+                    child: MainNavWidget(),
                   ),
                 ),
               ),

@@ -1156,7 +1156,9 @@ class _WelcomeTermsCopyWidgetState extends State<WelcomeTermsCopyWidget> {
                     ),
                     if (_model.chkAgreeValue ?? true)
                       FFButtonWidget(
-                        onPressed: () async {},
+                        onPressed: () {
+                          print('Button pressed ...');
+                        },
                         text: 'I Agree & Continue',
                         options: FFButtonOptions(
                           height: 40.0,

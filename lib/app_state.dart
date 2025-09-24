@@ -53,6 +53,12 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_isDarkMode', value);
   }
 
+  bool _showSettingsTray = false;
+  bool get showSettingsTray => _showSettingsTray;
+  set showSettingsTray(bool value) {
+    _showSettingsTray = value;
+  }
+
   bool _termsAcceptedv1 = false;
   bool get termsAcceptedv1 => _termsAcceptedv1;
   set termsAcceptedv1(bool value) {

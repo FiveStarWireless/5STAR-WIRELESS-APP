@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'main_nav_copy_widget.dart' show MainNavCopyWidget;
+import 'bottom_nav_widget.dart' show BottomNavWidget;
 import 'package:flutter/material.dart';
 
-class MainNavCopyModel extends FlutterFlowModel<MainNavCopyWidget> {
+class BottomNavModel extends FlutterFlowModel<BottomNavWidget> {
   @override
   void initState(BuildContext context) {}
 
