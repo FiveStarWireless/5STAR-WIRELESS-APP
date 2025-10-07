@@ -151,7 +151,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                               ),
                               child: FlutterFlowWebView(
                                 content:
-                                    'https://5star-wireless.com/collections/all',
+                                    'https://5star-wireless.com/collections/all-products',
                                 bypass: true,
                                 height: 2000.0,
                                 verticalScroll: true,
@@ -167,7 +167,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                               ),
                               child: FlutterFlowWebView(
                                 content:
-                                    'https://5star-wireless.com/pages/akko-protection',
+                                    'https://5star-wireless.com/pages/our-services',
                                 bypass: true,
                                 height: 2000.0,
                                 verticalScroll: true,
@@ -196,10 +196,13 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [],
+                              child: FlutterFlowWebView(
+                                content:
+                                    'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3Db703a413-c074-452e-a839-94850d5f805d%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3D01K6X7R4KWZDS9RPRECE49M75S&region_country=US',
+                                bypass: true,
+                                height: 500.0,
+                                verticalScroll: true,
+                                horizontalScroll: true,
                               ),
                             ),
                           ],
@@ -217,41 +220,36 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                         activeIndex: FFAppState().activeTabIndex,
                         onStoreTap: () async {
                           HapticFeedback.lightImpact();
-                          FFAppState().showSettingsTray = false;
-                          safeSetState(() {});
-                          FFAppState().activeTabIndex = 1;
-                          safeSetState(() {});
                           await _model.tabsPagerController?.animateToPage(
                             1,
                             duration: Duration(milliseconds: 500),
                             curve: Curves.ease,
                           );
+                          FFAppState().activeTabIndex = 1;
+                          safeSetState(() {});
                         },
                         onServicesTap: () async {
                           HapticFeedback.lightImpact();
-                          FFAppState().showSettingsTray = false;
-                          safeSetState(() {});
-                          FFAppState().activeTabIndex = 2;
-                          safeSetState(() {});
                           await _model.tabsPagerController?.animateToPage(
                             2,
                             duration: Duration(milliseconds: 500),
                             curve: Curves.ease,
                           );
+                          FFAppState().activeTabIndex = 2;
+                          safeSetState(() {});
                         },
                         onCartTap: () async {
                           HapticFeedback.lightImpact();
-                          FFAppState().showSettingsTray = false;
-                          safeSetState(() {});
-                          FFAppState().activeTabIndex = 3;
-                          safeSetState(() {});
                           await _model.tabsPagerController?.animateToPage(
                             3,
                             duration: Duration(milliseconds: 500),
                             curve: Curves.ease,
                           );
+                          FFAppState().activeTabIndex = 3;
+                          safeSetState(() {});
                         },
                         onUserTap: () async {
+                          HapticFeedback.lightImpact();
                           await _model.tabsPagerController?.animateToPage(
                             4,
                             duration: Duration(milliseconds: 500),
@@ -259,254 +257,21 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                           );
                           FFAppState().activeTabIndex = 4;
                           safeSetState(() {});
-                          FFAppState().showSettingsTray = false;
-                          safeSetState(() {});
-                        },
-                        onThemeTap: () async {
-                          if (FFAppState().isDarkMode) {
-                            FFAppState().isDarkMode = false;
-                            safeSetState(() {});
-                            FFAppState().showSettingsTray = false;
-                            safeSetState(() {});
-                          } else {
-                            FFAppState().isDarkMode = true;
-                            safeSetState(() {});
-                            FFAppState().showSettingsTray = false;
-                            safeSetState(() {});
-                          }
-                        },
-                        onSettingsTap: () async {
-                          HapticFeedback.lightImpact();
-                          if (FFAppState().showSettingsTray) {
-                            FFAppState().showSettingsTray = false;
-                            safeSetState(() {});
-                          } else {
-                            FFAppState().showSettingsTray = true;
-                            safeSetState(() {});
-                          }
                         },
                         onHomeTap: () async {
                           HapticFeedback.lightImpact();
-                          FFAppState().showSettingsTray = false;
-                          safeSetState(() {});
-                          FFAppState().activeTabIndex = 0;
-                          safeSetState(() {});
                           await _model.tabsPagerController?.animateToPage(
                             0,
                             duration: Duration(milliseconds: 500),
                             curve: Curves.ease,
                           );
+                          FFAppState().activeTabIndex = 0;
+                          safeSetState(() {});
                         },
-                        onFavoritesTap: () async {},
                       ),
                     ),
                   ),
                 ],
-              ),
-              if (FFAppState().showSettingsTray)
-                InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    FFAppState().showSettingsTray = false;
-                    safeSetState(() {});
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                ),
-              Align(
-                alignment: AlignmentDirectional(1.0, 1.0),
-                child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 106.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                    ),
-                    child: Visibility(
-                      visible: FFAppState().showSettingsTray,
-                      child: Container(
-                        width: 220.0,
-                        decoration: BoxDecoration(
-                          color: FFAppState().showSettingsTray
-                              ? Color(0xFF0F1115)
-                              : Colors.white,
-                        ),
-                        child: Align(
-                          alignment: AlignmentDirectional(1.0, 0.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 21.0, 0.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  decoration: BoxDecoration(
-                                    color: FFAppState().isDarkMode
-                                        ? Color(0xFF0F1115)
-                                        : Colors.white,
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.star_rounded,
-                                        color: Color(0xFF07BCFD),
-                                        size: 30.0,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 8.0, 0.0, 0.0),
-                                        child: Container(
-                                          width: 50.0,
-                                          height: 3.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF07BCFD),
-                                            border: Border.all(
-                                              color: Color(0xFF07BCFD),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  decoration: BoxDecoration(
-                                    color: FFAppState().isDarkMode
-                                        ? Color(0xFF0F1115)
-                                        : Colors.white,
-                                  ),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      if (FFAppState().isDarkMode) {
-                                        FFAppState().isDarkMode = false;
-                                        safeSetState(() {});
-                                        FFAppState().showSettingsTray = false;
-                                        safeSetState(() {});
-                                      } else {
-                                        FFAppState().isDarkMode = true;
-                                        safeSetState(() {});
-                                        FFAppState().showSettingsTray = false;
-                                        safeSetState(() {});
-                                      }
-                                    },
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        if (!FFAppState().isDarkMode)
-                                          Icon(
-                                            Icons.light_mode_rounded,
-                                            color: Color(0xFF07BCFD),
-                                            size: 30.0,
-                                          ),
-                                        if (FFAppState().isDarkMode)
-                                          Icon(
-                                            Icons.dark_mode_rounded,
-                                            color: Color(0xFF07BCFD),
-                                            size: 30.0,
-                                          ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 8.0, 0.0, 0.0),
-                                          child: Container(
-                                            width: 50.0,
-                                            height: 3.0,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFF07BCFD),
-                                              border: Border.all(
-                                                color: Color(0xFF07BCFD),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  decoration: BoxDecoration(
-                                    color: FFAppState().isDarkMode
-                                        ? Color(0xFF0F1115)
-                                        : Colors.white,
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          await _model.tabsPagerController
-                                              ?.animateToPage(
-                                            4,
-                                            duration:
-                                                Duration(milliseconds: 500),
-                                            curve: Curves.ease,
-                                          );
-                                          FFAppState().activeTabIndex = 4;
-                                          safeSetState(() {});
-                                          FFAppState().showSettingsTray = false;
-                                          safeSetState(() {});
-                                        },
-                                        child: Icon(
-                                          Icons.person,
-                                          color: Color(0xFF07BCFD),
-                                          size: 30.0,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 8.0, 0.0, 0.0),
-                                        child: Container(
-                                          width: 50.0,
-                                          height: 3.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF07BCFD),
-                                            border: Border.all(
-                                              color: Color(0xFF07BCFD),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ),
             ],
           ),

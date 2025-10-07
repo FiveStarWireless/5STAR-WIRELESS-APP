@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/settings_overlay_sheet/settings_overlay_sheet_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'bottom_nav_model.dart';
 export 'bottom_nav_model.dart';
 
@@ -12,10 +14,7 @@ class BottomNavWidget extends StatefulWidget {
     required this.onServicesTap,
     required this.onCartTap,
     required this.onUserTap,
-    required this.onThemeTap,
-    required this.onSettingsTap,
     required this.onHomeTap,
-    required this.onFavoritesTap,
   }) : this.activeIndex = activeIndex ?? 0;
 
   final int activeIndex;
@@ -23,10 +22,7 @@ class BottomNavWidget extends StatefulWidget {
   final Future Function()? onServicesTap;
   final Future Function()? onCartTap;
   final Future Function()? onUserTap;
-  final Future Function()? onThemeTap;
-  final Future Function()? onSettingsTap;
   final Future Function()? onHomeTap;
-  final Future Function()? onFavoritesTap;
 
   @override
   State<BottomNavWidget> createState() => _BottomNavWidgetState();
@@ -64,7 +60,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
       alignment: AlignmentDirectional(1.0, 1.0),
       child: Container(
         width: double.infinity,
-        height: 230.0,
+        height: 60.0,
         child: Stack(
           children: [
             Align(
@@ -314,7 +310,27 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      await widget.onSettingsTap?.call();
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        barrierColor: Colors.transparent,
+                                        enableDrag: false,
+                                        useSafeArea: true,
+                                        context: context,
+                                        builder: (context) {
+                                          return WebViewAware(
+                                            child: Padding(
+                                              padding: MediaQuery.viewInsetsOf(
+                                                  context),
+                                              child: SettingsOverlaySheetWidget(
+                                                onThemeTap: () async {},
+                                                onUserTap: () async {},
+                                                onFavoriteTap: () async {},
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
                                     },
                                     child: Icon(
                                       Icons.settings_rounded,
@@ -352,6 +368,15 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                     ),
                   ],
                 ),
+              ),
+            ),
+            wrapWithModel(
+              model: _model.settingsOverlaySheetModel,
+              updateCallback: () => safeSetState(() {}),
+              child: SettingsOverlaySheetWidget(
+                onThemeTap: () async {},
+                onUserTap: () async {},
+                onFavoriteTap: () async {},
               ),
             ),
           ],
