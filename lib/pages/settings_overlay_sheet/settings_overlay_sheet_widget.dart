@@ -9,7 +9,7 @@ class SettingsOverlaySheetWidget extends StatefulWidget {
   const SettingsOverlaySheetWidget({
     super.key,
     this.onThemeTap,
-    this.onUserTap,
+    required this.onUserTap,
     this.onFavoriteTap,
   });
 
@@ -201,7 +201,8 @@ class _SettingsOverlaySheetWidgetState
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                await widget.onUserTap?.call();
+                                FFAppState().activeTabIndex = 4;
+                                safeSetState(() {});
                                 Navigator.pop(context);
                               },
                               child: Icon(

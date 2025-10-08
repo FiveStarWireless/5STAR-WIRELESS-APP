@@ -122,8 +122,6 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                             FFAppState().activeTabIndex =
                                 _model.tabsPagerCurrentIndex;
                             safeSetState(() {});
-                            FFAppState().showSettingsTray = false;
-                            safeSetState(() {});
                           },
                           scrollDirection: Axis.horizontal,
                           children: [
@@ -137,7 +135,8 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                               child: FlutterFlowWebView(
                                 content: 'https://5star-wireless.com/',
                                 bypass: true,
-                                height: 2000.0,
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
                                 verticalScroll: true,
                                 horizontalScroll: true,
                               ),
@@ -151,9 +150,10 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                               ),
                               child: FlutterFlowWebView(
                                 content:
-                                    'https://5star-wireless.com/collections/all-products',
+                                    'https://5star-wireless.com/collections',
                                 bypass: true,
-                                height: 2000.0,
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
                                 verticalScroll: true,
                                 horizontalScroll: true,
                               ),
@@ -169,7 +169,8 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                                 content:
                                     'https://5star-wireless.com/pages/our-services',
                                 bypass: true,
-                                height: 2000.0,
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
                                 verticalScroll: true,
                                 horizontalScroll: true,
                               ),
@@ -184,7 +185,8 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                               child: FlutterFlowWebView(
                                 content: 'https://5star-wireless.com/cart',
                                 bypass: true,
-                                height: 2000.0,
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
                                 verticalScroll: true,
                                 horizontalScroll: true,
                               ),
@@ -200,7 +202,8 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                                 content:
                                     'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3Db703a413-c074-452e-a839-94850d5f805d%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3D01K6X7R4KWZDS9RPRECE49M75S&region_country=US',
                                 bypass: true,
-                                height: 500.0,
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
                                 verticalScroll: true,
                                 horizontalScroll: true,
                               ),

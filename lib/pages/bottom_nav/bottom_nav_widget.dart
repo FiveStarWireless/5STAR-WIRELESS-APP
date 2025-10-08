@@ -324,7 +324,9 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                                   context),
                                               child: SettingsOverlaySheetWidget(
                                                 onThemeTap: () async {},
-                                                onUserTap: () async {},
+                                                onUserTap: () async {
+                                                  Navigator.pop(context);
+                                                },
                                                 onFavoriteTap: () async {},
                                               ),
                                             ),
@@ -368,15 +370,6 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                     ),
                   ],
                 ),
-              ),
-            ),
-            wrapWithModel(
-              model: _model.settingsOverlaySheetModel,
-              updateCallback: () => safeSetState(() {}),
-              child: SettingsOverlaySheetWidget(
-                onThemeTap: () async {},
-                onUserTap: () async {},
-                onFavoriteTap: () async {},
               ),
             ),
           ],
