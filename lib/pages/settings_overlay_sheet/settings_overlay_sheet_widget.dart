@@ -9,7 +9,7 @@ class SettingsOverlaySheetWidget extends StatefulWidget {
   const SettingsOverlaySheetWidget({
     super.key,
     this.onThemeTap,
-    required this.onUserTap,
+    this.onUserTap,
     this.onFavoriteTap,
   });
 
