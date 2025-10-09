@@ -250,11 +250,6 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                       },
                       onUserTap: () async {
                         HapticFeedback.lightImpact();
-                        await _model.tabsPagerController?.animateToPage(
-                          4,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.ease,
-                        );
                         FFAppState().activeTabIndex = 4;
                         safeSetState(() {});
                         Navigator.pop(context);
