@@ -137,11 +137,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CartPageWidget(),
         ),
         FFRoute(
-          name: HomePageCopyWidget.routeName,
-          path: HomePageCopyWidget.routePath,
-          builder: (context, params) => HomePageCopyWidget(),
-        ),
-        FFRoute(
           name: HomePageWidget.routeName,
           path: HomePageWidget.routePath,
           builder: (context, params) => HomePageWidget(),

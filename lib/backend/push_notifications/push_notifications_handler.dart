@@ -119,7 +119,6 @@ final parametersBuilderMap =
   'CollectionPage': ParameterData.none(),
   'ServicesPage': ParameterData.none(),
   'CartPage': ParameterData.none(),
-  'HomePageCopy': ParameterData.none(),
   'HomePage': ParameterData.none(),
   'UserPage': ParameterData.none(),
   'TabsHost': ParameterData.none(),

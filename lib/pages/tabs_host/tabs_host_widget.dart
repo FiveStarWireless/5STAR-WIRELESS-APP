@@ -213,65 +213,62 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
-                    child: wrapWithModel(
-                      model: _model.bottomNavModel,
-                      updateCallback: () => safeSetState(() {}),
-                      child: BottomNavWidget(
-                        activeIndex: FFAppState().activeTabIndex,
-                        onStoreTap: () async {
-                          HapticFeedback.lightImpact();
-                          await _model.tabsPagerController?.animateToPage(
-                            1,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.ease,
-                          );
-                          FFAppState().activeTabIndex = 1;
-                          safeSetState(() {});
-                        },
-                        onServicesTap: () async {
-                          HapticFeedback.lightImpact();
-                          await _model.tabsPagerController?.animateToPage(
-                            2,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.ease,
-                          );
-                          FFAppState().activeTabIndex = 2;
-                          safeSetState(() {});
-                        },
-                        onCartTap: () async {
-                          HapticFeedback.lightImpact();
-                          await _model.tabsPagerController?.animateToPage(
-                            3,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.ease,
-                          );
-                          FFAppState().activeTabIndex = 3;
-                          safeSetState(() {});
-                        },
-                        onUserTap: () async {
-                          HapticFeedback.lightImpact();
-                          await _model.tabsPagerController?.animateToPage(
-                            4,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.ease,
-                          );
-                          FFAppState().activeTabIndex = 4;
-                          safeSetState(() {});
-                        },
-                        onHomeTap: () async {
-                          HapticFeedback.lightImpact();
-                          await _model.tabsPagerController?.animateToPage(
-                            0,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.ease,
-                          );
-                          FFAppState().activeTabIndex = 0;
-                          safeSetState(() {});
-                        },
-                      ),
+                  wrapWithModel(
+                    model: _model.bottomNavModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: BottomNavWidget(
+                      activeIndex: FFAppState().activeTabIndex,
+                      onStoreTap: () async {
+                        HapticFeedback.lightImpact();
+                        await _model.tabsPagerController?.animateToPage(
+                          1,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.ease,
+                        );
+                        FFAppState().activeTabIndex = 1;
+                        safeSetState(() {});
+                      },
+                      onServicesTap: () async {
+                        HapticFeedback.lightImpact();
+                        await _model.tabsPagerController?.animateToPage(
+                          2,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.ease,
+                        );
+                        FFAppState().activeTabIndex = 2;
+                        safeSetState(() {});
+                      },
+                      onCartTap: () async {
+                        HapticFeedback.lightImpact();
+                        await _model.tabsPagerController?.animateToPage(
+                          3,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.ease,
+                        );
+                        FFAppState().activeTabIndex = 3;
+                        safeSetState(() {});
+                      },
+                      onUserTap: () async {
+                        FFAppState().activeTabIndex = 4;
+                        safeSetState(() {});
+                        HapticFeedback.lightImpact();
+                        Navigator.pop(context);
+                      },
+                      onHomeTap: () async {
+                        HapticFeedback.lightImpact();
+                        await _model.tabsPagerController?.animateToPage(
+                          0,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.ease,
+                        );
+                        FFAppState().activeTabIndex = 0;
+                        safeSetState(() {});
+                      },
+                      onSettingsTap: () async {
+                        HapticFeedback.lightImpact();
+                        FFAppState().activeTabIndex = 4;
+                        safeSetState(() {});
+                      },
                     ),
                   ),
                 ],
