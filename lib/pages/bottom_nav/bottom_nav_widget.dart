@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/settings_overlay_sheet/settings_overlay_sheet_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'bottom_nav_model.dart';
@@ -334,22 +333,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                                 child:
                                                     SettingsOverlaySheetWidget(
                                                   onThemeTap: () async {
-                                                    if (FFAppState()
-                                                        .isDarkMode) {
-                                                      HapticFeedback
-                                                          .lightImpact();
-                                                      FFAppState().isDarkMode =
-                                                          false;
-                                                      safeSetState(() {});
-                                                      Navigator.pop(context);
-                                                    } else {
-                                                      HapticFeedback
-                                                          .lightImpact();
-                                                      FFAppState().isDarkMode =
-                                                          true;
-                                                      safeSetState(() {});
-                                                      Navigator.pop(context);
-                                                    }
+                                                    Navigator.pop(context);
                                                   },
                                                   onUserTap: () async {
                                                     Navigator.pop(context);
