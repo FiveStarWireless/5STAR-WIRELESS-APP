@@ -72,7 +72,7 @@ class _SettingsOverlaySheetWidgetState
         Align(
           alignment: AlignmentDirectional(1.0, 1.0),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 100.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 95.0),
             child: Container(
               width: 50.0,
               height: 150.0,
