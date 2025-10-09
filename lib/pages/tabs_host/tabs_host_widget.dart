@@ -269,11 +269,6 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                         FFAppState().activeTabIndex = 0;
                         safeSetState(() {});
                       },
-                      onSettingsTap: () async {
-                        HapticFeedback.lightImpact();
-                        FFAppState().activeTabIndex = 4;
-                        safeSetState(() {});
-                      },
                     ),
                   ),
                 ],

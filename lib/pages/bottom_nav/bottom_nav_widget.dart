@@ -16,7 +16,6 @@ class BottomNavWidget extends StatefulWidget {
     required this.onCartTap,
     required this.onUserTap,
     required this.onHomeTap,
-    required this.onSettingsTap,
   }) : this.activeIndex = activeIndex ?? 0;
 
   final int activeIndex;
@@ -25,7 +24,6 @@ class BottomNavWidget extends StatefulWidget {
   final Future Function()? onCartTap;
   final Future Function()? onUserTap;
   final Future Function()? onHomeTap;
-  final Future Function()? onSettingsTap;
 
   @override
   State<BottomNavWidget> createState() => _BottomNavWidgetState();
@@ -354,6 +352,8 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                                     }
                                                   },
                                                   onUserTap: () async {
+                                                    HapticFeedback
+                                                        .lightImpact();
                                                     FFAppState()
                                                         .activeTabIndex = 4;
                                                     safeSetState(() {});
