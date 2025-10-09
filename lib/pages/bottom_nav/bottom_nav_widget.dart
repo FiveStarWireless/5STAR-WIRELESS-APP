@@ -352,11 +352,6 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                                     }
                                                   },
                                                   onUserTap: () async {
-                                                    HapticFeedback
-                                                        .lightImpact();
-                                                    FFAppState()
-                                                        .activeTabIndex = 4;
-                                                    safeSetState(() {});
                                                     Navigator.pop(context);
                                                   },
                                                   onFavoriteTap: () async {
