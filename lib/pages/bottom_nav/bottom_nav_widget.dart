@@ -13,7 +13,6 @@ class BottomNavWidget extends StatefulWidget {
     required this.onStoreTap,
     required this.onServicesTap,
     required this.onCartTap,
-    required this.onUserTap,
     required this.onHomeTap,
   }) : this.activeIndex = activeIndex ?? 0;
 
@@ -21,7 +20,6 @@ class BottomNavWidget extends StatefulWidget {
   final Future Function()? onStoreTap;
   final Future Function()? onServicesTap;
   final Future Function()? onCartTap;
-  final Future Function()? onUserTap;
   final Future Function()? onHomeTap;
 
   @override
@@ -336,7 +334,9 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                                     Navigator.pop(context);
                                                   },
                                                   onUserTap: () async {
-                                                    Navigator.pop(context);
+                                                    FFAppState()
+                                                        .activeTabIndex = 4;
+                                                    safeSetState(() {});
                                                   },
                                                   onFavoriteTap: () async {
                                                     Navigator.pop(context);

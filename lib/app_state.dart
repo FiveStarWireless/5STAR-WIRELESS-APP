@@ -53,6 +53,12 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_isDarkMode', value);
   }
 
+  int _reloadTick = 0;
+  int get reloadTick => _reloadTick;
+  set reloadTick(int value) {
+    _reloadTick = value;
+  }
+
   bool _showSettingsTray = false;
   bool get showSettingsTray => _showSettingsTray;
   set showSettingsTray(bool value) {

@@ -132,13 +132,32 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: FlutterFlowWebView(
-                                content: 'https://5star-wireless.com/',
-                                bypass: true,
-                                width: MediaQuery.sizeOf(context).width * 1.0,
-                                height: MediaQuery.sizeOf(context).height * 1.0,
-                                verticalScroll: true,
-                                horizontalScroll: true,
+                              child: RefreshIndicator(
+                                onRefresh: () async {
+                                  HapticFeedback.lightImpact();
+                                  FFAppState().reloadTick =
+                                      FFAppState().reloadTick + 1;
+                                  safeSetState(() {});
+                                },
+                                child: ListView(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  children: [
+                                    FlutterFlowWebView(
+                                      content:
+                                          'https://5star-wireless.com/?t=\" + FFAppState().reloadTick.toString()',
+                                      bypass: true,
+                                      width: MediaQuery.sizeOf(context).width *
+                                          1.0,
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              1.0,
+                                      verticalScroll: true,
+                                      horizontalScroll: true,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             Container(
@@ -200,7 +219,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                               ),
                               child: FlutterFlowWebView(
                                 content:
-                                    'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3D0f3e4454-a15e-4107-9666-df2547de7397%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3DhWN3vbbDT7b9o48Mswq3zGd8&region_country=US',
+                                    'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3D04303ac9-6b51-4e6c-be0d-71883e4ebdb4%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3DhWN3vsVGFZFkI5LEcVl5MkiY&region_country=US',
                                 bypass: true,
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
@@ -247,17 +266,6 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                         );
                         FFAppState().activeTabIndex = 3;
                         safeSetState(() {});
-                      },
-                      onUserTap: () async {
-                        HapticFeedback.lightImpact();
-                        await _model.tabsPagerController?.animateToPage(
-                          4,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.ease,
-                        );
-                        FFAppState().activeTabIndex = 4;
-                        safeSetState(() {});
-                        Navigator.pop(context);
                       },
                       onHomeTap: () async {
                         HapticFeedback.lightImpact();
