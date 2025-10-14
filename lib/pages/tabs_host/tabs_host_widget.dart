@@ -132,38 +132,69 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: SingleChildScrollView(
-                                primary: false,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
+                              child: RefreshIndicator(
+                                onRefresh: () async {
+                                  HapticFeedback.lightImpact();
+                                  FFAppState().isRefreshing = true;
+                                  safeSetState(() {});
+                                  FFAppState().reloadTick = 1;
+                                  safeSetState(() {});
+                                  await Future.delayed(
+                                    Duration(
+                                      milliseconds: 500,
+                                    ),
+                                  );
+                                  FFAppState().isRefreshing = false;
+                                  safeSetState(() {});
+                                },
+                                child: ListView(
+                                  padding: EdgeInsets.zero,
+                                  scrollDirection: Axis.vertical,
                                   children: [
-                                    RefreshIndicator(
-                                      onRefresh: () async {
-                                        HapticFeedback.lightImpact();
-                                        FFAppState().reloadTick =
-                                            FFAppState().reloadTick + 1;
-                                        safeSetState(() {});
-                                      },
-                                      child: ListView(
-                                        padding: EdgeInsets.zero,
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.vertical,
-                                        children: [
-                                          FlutterFlowWebView(
-                                            content:
-                                                'https://5star-wireless.com/?t=\" + FFAppState().reloadTick.toString()',
-                                            bypass: true,
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                1.0,
-                                            height: MediaQuery.sizeOf(context)
-                                                    .height *
-                                                1.0,
-                                            verticalScroll: true,
-                                            horizontalScroll: true,
-                                          ),
-                                        ],
+                                    Container(
+                                      width: MediaQuery.sizeOf(context).width *
+                                          1.0,
+                                      height: 12.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.transparent,
                                       ),
+                                    ),
+                                    Stack(
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      children: [
+                                        FlutterFlowWebView(
+                                          content:
+                                              'https://5star-wireless.com/?t=\" + FFAppState().reloadTick.toString()',
+                                          bypass: true,
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height *
+                                              1.0,
+                                          verticalScroll: true,
+                                          horizontalScroll: true,
+                                        ),
+                                        if (FFAppState().isRefreshing)
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
+                                            child: Container(
+                                              width: 100.0,
+                                              height: 100.0,
+                                              decoration: BoxDecoration(
+                                                color: Color(0x28000040),
+                                              ),
+                                              alignment: AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: Icon(
+                                                Icons.restore,
+                                                color: Color(0xFF07BCFD),
+                                                size: 100.0,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -285,6 +316,19 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                         );
                         FFAppState().activeTabIndex = 0;
                         safeSetState(() {});
+                      },
+                      onUserTap: () async {
+                        HapticFeedback.lightImpact();
+                        await _model.tabsPagerController?.animateToPage(
+                          4,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.ease,
+                        );
+                        FFAppState().activeTabIndex = 4;
+                        safeSetState(() {});
+                      },
+                      onFaveTap: () async {
+                        HapticFeedback.lightImpact();
                       },
                     ),
                   ),

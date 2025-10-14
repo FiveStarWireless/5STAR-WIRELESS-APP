@@ -59,6 +59,12 @@ class FFAppState extends ChangeNotifier {
     _reloadTick = value;
   }
 
+  bool _isRefreshing = false;
+  bool get isRefreshing => _isRefreshing;
+  set isRefreshing(bool value) {
+    _isRefreshing = value;
+  }
+
   bool _showSettingsTray = false;
   bool get showSettingsTray => _showSettingsTray;
   set showSettingsTray(bool value) {

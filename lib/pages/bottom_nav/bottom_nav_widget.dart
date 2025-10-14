@@ -1,8 +1,7 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/settings_overlay_sheet/settings_overlay_sheet_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'bottom_nav_model.dart';
 export 'bottom_nav_model.dart';
 
@@ -14,6 +13,8 @@ class BottomNavWidget extends StatefulWidget {
     required this.onServicesTap,
     required this.onCartTap,
     required this.onHomeTap,
+    required this.onUserTap,
+    required this.onFaveTap,
   }) : this.activeIndex = activeIndex ?? 0;
 
   final int activeIndex;
@@ -21,6 +22,8 @@ class BottomNavWidget extends StatefulWidget {
   final Future Function()? onServicesTap;
   final Future Function()? onCartTap;
   final Future Function()? onHomeTap;
+  final Future Function()? onUserTap;
+  final Future Function()? onFaveTap;
 
   @override
   State<BottomNavWidget> createState() => _BottomNavWidgetState();
@@ -65,7 +68,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
               alignment: AlignmentDirectional(0.0, 1.0),
               child: Container(
                 width: double.infinity,
-                height: 61.01,
+                height: 61.0,
                 decoration: BoxDecoration(
                   color: FFAppState().isDarkMode
                       ? Color(0xFF0F1115)
@@ -92,7 +95,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                           children: [
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 0.0, 0.0, 0.0),
+                                  10.0, 0.0, 0.0, 0.0),
                               child: Container(
                                 width: 50.0,
                                 height: 50.0,
@@ -294,9 +297,99 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                 ],
                               ),
                             ),
+                            Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                color: FFAppState().isDarkMode
+                                    ? Color(0xFF0F1115)
+                                    : Colors.white,
+                              ),
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await widget.onUserTap?.call();
+                                    },
+                                    child: Icon(
+                                      Icons.person,
+                                      color: Color(0xFF07BCFD),
+                                      size: 30.0,
+                                    ),
+                                  ),
+                                  if (widget.activeIndex == 4)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 8.0, 0.0, 0.0),
+                                      child: Container(
+                                        width: 50.0,
+                                        height: 3.0,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF07BCFD),
+                                          border: Border.all(
+                                            color: Color(0xFF07BCFD),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                color: FFAppState().isDarkMode
+                                    ? Color(0xFF0F1115)
+                                    : Colors.white,
+                              ),
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await widget.onFaveTap?.call();
+                                    },
+                                    child: Icon(
+                                      Icons.star_rounded,
+                                      color: Color(0xFF07BCFD),
+                                      size: 30.0,
+                                    ),
+                                  ),
+                                  if (widget.activeIndex == 5)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 8.0, 0.0, 0.0),
+                                      child: Container(
+                                        width: 50.0,
+                                        height: 3.0,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF07BCFD),
+                                          border: Border.all(
+                                            color: Color(0xFF07BCFD),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 20.0, 0.0),
+                                  0.0, 0.0, 10.0, 0.0),
                               child: Container(
                                 width: 50.0,
                                 height: 50.0,
@@ -306,54 +399,40 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                       : Colors.white,
                                 ),
                                 alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.transparent,
-                                          barrierColor: Colors.transparent,
-                                          enableDrag: false,
-                                          useSafeArea: true,
-                                          context: context,
-                                          builder: (context) {
-                                            return WebViewAware(
-                                              child: Padding(
-                                                padding:
-                                                    MediaQuery.viewInsetsOf(
-                                                        context),
-                                                child:
-                                                    SettingsOverlaySheetWidget(
-                                                  onThemeTap: () async {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  onUserTap: () async {
-                                                    FFAppState()
-                                                        .activeTabIndex = 4;
-                                                    safeSetState(() {});
-                                                  },
-                                                  onFavoriteTap: () async {
-                                                    Navigator.pop(context);
-                                                  },
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ).then((value) => safeSetState(() {}));
-                                      },
-                                      child: Icon(
-                                        Icons.settings_rounded,
-                                        color: Color(0xFF07BCFD),
-                                        size: 30.0,
-                                      ),
-                                    ),
-                                    if (widget.activeIndex == 4)
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    if (FFAppState().isDarkMode) {
+                                      HapticFeedback.lightImpact();
+                                      FFAppState().isDarkMode = false;
+                                      safeSetState(() {});
+                                      Navigator.pop(context);
+                                    } else {
+                                      HapticFeedback.lightImpact();
+                                      FFAppState().isDarkMode = true;
+                                      safeSetState(() {});
+                                      Navigator.pop(context);
+                                    }
+                                  },
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      if (!FFAppState().isDarkMode)
+                                        Icon(
+                                          Icons.light_mode_rounded,
+                                          color: Color(0xFF07BCFD),
+                                          size: 30.0,
+                                        ),
+                                      if (FFAppState().isDarkMode)
+                                        Icon(
+                                          Icons.dark_mode_rounded,
+                                          color: Color(0xFF07BCFD),
+                                          size: 30.0,
+                                        ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 8.0, 0.0, 0.0),
@@ -362,19 +441,14 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                           height: 3.0,
                                           decoration: BoxDecoration(
                                             color: Color(0xFF07BCFD),
-                                            borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.circular(0.0),
-                                              bottomRight: Radius.circular(0.0),
-                                              topLeft: Radius.circular(2.0),
-                                              topRight: Radius.circular(0.0),
-                                            ),
                                             border: Border.all(
                                               color: Color(0xFF07BCFD),
                                             ),
                                           ),
                                         ),
                                       ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
