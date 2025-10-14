@@ -132,29 +132,38 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: RefreshIndicator(
-                                onRefresh: () async {
-                                  HapticFeedback.lightImpact();
-                                  FFAppState().reloadTick =
-                                      FFAppState().reloadTick + 1;
-                                  safeSetState(() {});
-                                },
-                                child: ListView(
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
+                              child: SingleChildScrollView(
+                                primary: false,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    FlutterFlowWebView(
-                                      content:
-                                          'https://5star-wireless.com/?t=\" + FFAppState().reloadTick.toString()',
-                                      bypass: true,
-                                      width: MediaQuery.sizeOf(context).width *
-                                          1.0,
-                                      height:
-                                          MediaQuery.sizeOf(context).height *
-                                              1.0,
-                                      verticalScroll: true,
-                                      horizontalScroll: true,
+                                    RefreshIndicator(
+                                      onRefresh: () async {
+                                        HapticFeedback.lightImpact();
+                                        FFAppState().reloadTick =
+                                            FFAppState().reloadTick + 1;
+                                        safeSetState(() {});
+                                      },
+                                      child: ListView(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        children: [
+                                          FlutterFlowWebView(
+                                            content:
+                                                'https://5star-wireless.com/?t=\" + FFAppState().reloadTick.toString()',
+                                            bypass: true,
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: MediaQuery.sizeOf(context)
+                                                    .height *
+                                                1.0,
+                                            verticalScroll: true,
+                                            horizontalScroll: true,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
