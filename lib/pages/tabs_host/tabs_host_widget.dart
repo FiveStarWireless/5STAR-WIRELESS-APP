@@ -125,79 +125,71 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                           },
                           scrollDirection: Axis.horizontal,
                           children: [
-                            Container(
-                              width: double.infinity,
-                              height: double.infinity,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                              ),
-                              child: RefreshIndicator(
-                                onRefresh: () async {
-                                  HapticFeedback.lightImpact();
-                                  FFAppState().isRefreshing = true;
-                                  safeSetState(() {});
-                                  FFAppState().reloadTick = 1;
-                                  safeSetState(() {});
-                                  await Future.delayed(
-                                    Duration(
-                                      milliseconds: 500,
-                                    ),
-                                  );
-                                  FFAppState().isRefreshing = false;
-                                  safeSetState(() {});
-                                },
-                                child: ListView(
-                                  padding: EdgeInsets.zero,
-                                  scrollDirection: Axis.vertical,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          1.0,
-                                      height: 12.0,
-                                      decoration: BoxDecoration(
-                                        color: Colors.transparent,
+                            RefreshIndicator(
+                              onRefresh: () async {
+                                HapticFeedback.lightImpact();
+                                FFAppState().reloadTick =
+                                    FFAppState().reloadTick + 1;
+                                safeSetState(() {});
+                                await Future.delayed(
+                                  Duration(
+                                    milliseconds: 500,
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Refreshed!',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                       ),
                                     ),
-                                    Stack(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                      children: [
-                                        FlutterFlowWebView(
-                                          content:
-                                              'https://5star-wireless.com/?t=\" + FFAppState().reloadTick.toString()',
-                                          bypass: true,
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  1.0,
-                                          height: MediaQuery.sizeOf(context)
-                                                  .height *
-                                              1.0,
-                                          verticalScroll: true,
-                                          horizontalScroll: true,
-                                        ),
-                                        if (FFAppState().isRefreshing)
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
-                                            child: Container(
-                                              width: 100.0,
-                                              height: 100.0,
-                                              decoration: BoxDecoration(
-                                                color: Color(0x28000040),
-                                              ),
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: Icon(
-                                                Icons.restore,
-                                                color: Color(0xFF07BCFD),
-                                                size: 100.0,
-                                              ),
-                                            ),
-                                          ),
-                                      ],
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                  ),
+                                );
+                              },
+                              child: ListView(
+                                padding: EdgeInsets.zero,
+                                scrollDirection: Axis.vertical,
+                                children: [
+                                  Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height:
+                                        MediaQuery.sizeOf(context).height * 1.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
                                     ),
-                                  ],
-                                ),
+                                    child: Container(
+                                      width: MediaQuery.sizeOf(context).width *
+                                          1.0,
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              1.0,
+                                      child: Stack(
+                                        children: [
+                                          FlutterFlowWebView(
+                                            content:
+                                                'https://5star-wireless.com/?t=\${FFAppState().reloadTick.toString()}',
+                                            bypass: true,
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: MediaQuery.sizeOf(context)
+                                                    .height *
+                                                1.0,
+                                            verticalScroll: true,
+                                            horizontalScroll: true,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             Container(

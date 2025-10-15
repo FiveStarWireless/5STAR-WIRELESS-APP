@@ -308,7 +308,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   InkWell(
                                     splashColor: Colors.transparent,
@@ -333,6 +333,12 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                         height: 3.0,
                                         decoration: BoxDecoration(
                                           color: Color(0xFF07BCFD),
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(0.0),
+                                            bottomRight: Radius.circular(0.0),
+                                            topLeft: Radius.circular(2.0),
+                                            topRight: Radius.circular(0.0),
+                                          ),
                                           border: Border.all(
                                             color: Color(0xFF07BCFD),
                                           ),
@@ -353,7 +359,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   InkWell(
                                     splashColor: Colors.transparent,
@@ -378,6 +384,12 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                         height: 3.0,
                                         decoration: BoxDecoration(
                                           color: Color(0xFF07BCFD),
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(0.0),
+                                            bottomRight: Radius.circular(0.0),
+                                            topLeft: Radius.circular(2.0),
+                                            topRight: Radius.circular(0.0),
+                                          ),
                                           border: Border.all(
                                             color: Color(0xFF07BCFD),
                                           ),
@@ -409,17 +421,15 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                       HapticFeedback.lightImpact();
                                       FFAppState().isDarkMode = false;
                                       safeSetState(() {});
-                                      Navigator.pop(context);
                                     } else {
                                       HapticFeedback.lightImpact();
                                       FFAppState().isDarkMode = true;
                                       safeSetState(() {});
-                                      Navigator.pop(context);
                                     }
                                   },
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       if (!FFAppState().isDarkMode)
                                         Icon(
@@ -441,6 +451,12 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                           height: 3.0,
                                           decoration: BoxDecoration(
                                             color: Color(0xFF07BCFD),
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(0.0),
+                                              bottomRight: Radius.circular(0.0),
+                                              topLeft: Radius.circular(2.0),
+                                              topRight: Radius.circular(0.0),
+                                            ),
                                             border: Border.all(
                                               color: Color(0xFF07BCFD),
                                             ),
