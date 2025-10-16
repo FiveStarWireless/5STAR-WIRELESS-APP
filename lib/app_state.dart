@@ -53,6 +53,12 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_isDarkMode', value);
   }
 
+  bool _toastAfterReload = false;
+  bool get toastAfterReload => _toastAfterReload;
+  set toastAfterReload(bool value) {
+    _toastAfterReload = value;
+  }
+
   bool _showToast = false;
   bool get showToast => _showToast;
   set showToast(bool value) {
@@ -132,6 +138,36 @@ class FFAppState extends ChangeNotifier {
   bool get visitedShipping => _visitedShipping;
   set visitedShipping(bool value) {
     _visitedShipping = value;
+  }
+
+  int _homeNonce = 0;
+  int get homeNonce => _homeNonce;
+  set homeNonce(int value) {
+    _homeNonce = value;
+  }
+
+  int _storeNonce = 0;
+  int get storeNonce => _storeNonce;
+  set storeNonce(int value) {
+    _storeNonce = value;
+  }
+
+  int _servicesNonce = 0;
+  int get servicesNonce => _servicesNonce;
+  set servicesNonce(int value) {
+    _servicesNonce = value;
+  }
+
+  int _cartNonce = 0;
+  int get cartNonce => _cartNonce;
+  set cartNonce(int value) {
+    _cartNonce = value;
+  }
+
+  int _usersNonce = 0;
+  int get usersNonce => _usersNonce;
+  set usersNonce(int value) {
+    _usersNonce = value;
   }
 }
 

@@ -118,7 +118,15 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                         child: PageView(
                           physics: const NeverScrollableScrollPhysics(),
                           controller: _model.tabsPagerController ??=
-                              PageController(initialPage: 0),
+                              PageController(
+                                  initialPage: max(
+                                      0,
+                                      min(
+                                          valueOrDefault<int>(
+                                            FFAppState().activeTabIndex,
+                                            0,
+                                          ),
+                                          4))),
                           onPageChanged: (_) => safeSetState(() {}),
                           scrollDirection: Axis.horizontal,
                           children: [
@@ -131,7 +139,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                               ),
                               child: FlutterFlowWebView(
                                 content:
-                                    'https://5star-wireless.com/?t=\${FFAppState().reloadTick.toString()}',
+                                    '\"https://5star-wireless.com/?t=\" + FFAppState().reloadTick.toString()',
                                 bypass: true,
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
@@ -291,25 +299,22 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                       highlightColor: Colors.transparent,
                       onTap: () async {
                         HapticFeedback.lightImpact();
-                        if (Navigator.of(context).canPop()) {
-                          context.pop();
+                        if (FFAppState().activeTabIndex == 0) {
+                          FFAppState().reloadTick = FFAppState().reloadTick + 1;
+                          safeSetState(() {});
+                        } else if (FFAppState().activeTabIndex == 1) {
+                          FFAppState().reloadTick = FFAppState().reloadTick + 1;
+                          safeSetState(() {});
+                        } else if (FFAppState().activeTabIndex == 2) {
+                          FFAppState().reloadTick = FFAppState().reloadTick + 1;
+                          safeSetState(() {});
+                        } else if (FFAppState().activeTabIndex == 3) {
+                          FFAppState().reloadTick = FFAppState().reloadTick + 1;
+                          safeSetState(() {});
+                        } else if (FFAppState().activeTabIndex == 4) {
+                          FFAppState().reloadTick = FFAppState().reloadTick + 1;
+                          safeSetState(() {});
                         }
-                        context.pushNamed(TabsHostWidget.routeName);
-
-                        await Future.delayed(
-                          Duration(
-                            milliseconds: 500,
-                          ),
-                        );
-                        FFAppState().showToast = true;
-                        safeSetState(() {});
-                        await Future.delayed(
-                          Duration(
-                            milliseconds: 1000,
-                          ),
-                        );
-                        FFAppState().showToast = false;
-                        safeSetState(() {});
                       },
                       child: Icon(
                         Icons.replay_circle_filled_rounded,
