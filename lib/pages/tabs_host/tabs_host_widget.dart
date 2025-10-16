@@ -117,13 +117,17 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                         width: double.infinity,
                         height: double.infinity,
                         child: PageView(
+                          physics: const NeverScrollableScrollPhysics(),
                           controller: _model.tabsPagerController ??=
-                              PageController(initialPage: 0),
-                          onPageChanged: (_) async {
-                            FFAppState().activeTabIndex =
-                                _model.tabsPagerCurrentIndex;
-                            safeSetState(() {});
-                          },
+                              PageController(
+                                  initialPage: max(
+                                      0,
+                                      min(
+                                          valueOrDefault<int>(
+                                            FFAppState().activeTabIndex,
+                                            0,
+                                          ),
+                                          4))),
                           scrollDirection: Axis.horizontal,
                           children: [
                             Container(
@@ -278,7 +282,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(1.0, 0.86),
+                alignment: AlignmentDirectional(1.0, 0.8),
                 child: Flex(
                   direction: Axis.horizontal,
                   mainAxisSize: MainAxisSize.min,
@@ -286,7 +290,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 13.0, 0.0),
                       child: Container(
                         width: 50.0,
                         height: 50.0,
@@ -301,7 +305,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                           icon: Icon(
                             Icons.refresh_rounded,
                             color: Color(0xFF07BCFD),
-                            size: 30.0,
+                            size: 40.0,
                           ),
                           onPressed: () async {
                             HapticFeedback.lightImpact();
@@ -322,6 +326,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
                                 duration: Duration(milliseconds: 4000),
                                 backgroundColor: Color(0xFF07BCFD),
