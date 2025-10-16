@@ -278,52 +278,60 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(1.0, -1.0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
-                  child: Container(
-                    width: 50.0,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      shape: BoxShape.circle,
-                    ),
-                    child: FlutterFlowIconButton(
-                      borderRadius: 8.0,
-                      buttonSize: 40.0,
-                      fillColor: FFAppState().isDarkMode
-                          ? Color(0xFF0F1115)
-                          : Colors.white,
-                      icon: Icon(
-                        Icons.refresh_rounded,
-                        color: Color(0xFF07BCFD),
-                        size: 24.0,
-                      ),
-                      onPressed: () async {
-                        HapticFeedback.lightImpact();
-                        FFAppState().reloadTick = FFAppState().reloadTick + 1;
-                        safeSetState(() {});
-                        await Future.delayed(
-                          Duration(
-                            milliseconds: 500,
+                alignment: AlignmentDirectional(1.0, 0.86),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
+                      child: Container(
+                        width: 50.0,
+                        height: 50.0,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          shape: BoxShape.circle,
+                        ),
+                        child: FlutterFlowIconButton(
+                          borderRadius: 8.0,
+                          buttonSize: 40.0,
+                          fillColor: Colors.transparent,
+                          icon: Icon(
+                            Icons.refresh_rounded,
+                            color: Color(0xFF07BCFD),
+                            size: 30.0,
                           ),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Refreshed!',
-                              style: TextStyle(
-                                color: Colors.white,
+                          onPressed: () async {
+                            HapticFeedback.lightImpact();
+                            if (Navigator.of(context).canPop()) {
+                              context.pop();
+                            }
+                            context.pushNamed(TabsHostWidget.routeName);
+
+                            await Future.delayed(
+                              Duration(
+                                milliseconds: 500,
                               ),
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
-                        );
-                      },
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Refreshed!',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor: Color(0xFF07BCFD),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ],

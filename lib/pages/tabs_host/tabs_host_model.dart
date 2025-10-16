@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/bottom_nav/bottom_nav_widget.dart';
+import '/index.dart';
 import 'tabs_host_widget.dart' show TabsHostWidget;
 import 'package:flutter/material.dart';
 
