@@ -300,7 +300,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                       onTap: () async {
                         HapticFeedback.lightImpact();
                         if (FFAppState().activeTabIndex == 0) {
-                          FFAppState().reloadTick = FFAppState().reloadTick + 1;
+                          FFAppState().homeNonce = FFAppState().homeNonce + 1;
                         } else if (FFAppState().activeTabIndex == 1) {
                           FFAppState().reloadTick = FFAppState().reloadTick + 1;
                         } else if (FFAppState().activeTabIndex == 2) {
@@ -315,7 +315,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                         safeSetState(() {});
                         await Future.delayed(
                           Duration(
-                            milliseconds: 800,
+                            milliseconds: 1200,
                           ),
                         );
                         FFAppState().showToast = false;
