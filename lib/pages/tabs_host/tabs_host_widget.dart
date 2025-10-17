@@ -156,7 +156,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                               ),
                               child: FlutterFlowWebView(
                                 content:
-                                    'https://5star-wireless.com/collections',
+                                    'https://5star-wireless.com/collections?t=${FFAppState().storeNonce.toString()}',
                                 bypass: true,
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
@@ -173,23 +173,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                               ),
                               child: FlutterFlowWebView(
                                 content:
-                                    'https://5star-wireless.com/pages/our-services',
-                                bypass: true,
-                                width: MediaQuery.sizeOf(context).width * 1.0,
-                                height: MediaQuery.sizeOf(context).height * 1.0,
-                                verticalScroll: true,
-                                horizontalScroll: true,
-                              ),
-                            ),
-                            Container(
-                              width: double.infinity,
-                              height: double.infinity,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                              ),
-                              child: FlutterFlowWebView(
-                                content: 'https://5star-wireless.com/cart',
+                                    'https://5star-wireless.com/pages/our-services?t=${FFAppState().servicesNonce.toString()}',
                                 bypass: true,
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
@@ -206,7 +190,24 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                               ),
                               child: FlutterFlowWebView(
                                 content:
-                                    'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3D04303ac9-6b51-4e6c-be0d-71883e4ebdb4%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3DhWN3vsVGFZFkI5LEcVl5MkiY&region_country=US',
+                                    'https://5star-wireless.com/cart?t=${FFAppState().cartNonce.toString()}',
+                                bypass: true,
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
+                                verticalScroll: true,
+                                horizontalScroll: true,
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: FlutterFlowWebView(
+                                content:
+                                    'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3D04303ac9-6b51-4e6c-be0d-71883e4ebdb4%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3DhWN3vsVGFZFkI5LEcVl5MkiY&region_country=US?t=${FFAppState().usersNonce.toString()}',
                                 bypass: true,
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
@@ -302,15 +303,21 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                         if (FFAppState().activeTabIndex == 0) {
                           FFAppState().homeNonce = FFAppState().homeNonce + 1;
                         } else if (FFAppState().activeTabIndex == 1) {
-                          FFAppState().reloadTick = FFAppState().reloadTick + 1;
+                          FFAppState().storeNonce = FFAppState().storeNonce + 1;
                         } else if (FFAppState().activeTabIndex == 2) {
-                          FFAppState().reloadTick = FFAppState().reloadTick + 1;
+                          FFAppState().servicesNonce =
+                              FFAppState().servicesNonce + 1;
                         } else if (FFAppState().activeTabIndex == 3) {
-                          FFAppState().reloadTick = FFAppState().reloadTick + 1;
+                          FFAppState().cartNonce = FFAppState().cartNonce + 1;
                         } else if (FFAppState().activeTabIndex == 4) {
-                          FFAppState().reloadTick = FFAppState().reloadTick + 1;
+                          FFAppState().usersNonce = FFAppState().usersNonce + 1;
                         }
 
+                        await Future.delayed(
+                          Duration(
+                            milliseconds: 800,
+                          ),
+                        );
                         FFAppState().showToast = true;
                         safeSetState(() {});
                         await Future.delayed(
