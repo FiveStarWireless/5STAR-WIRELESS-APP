@@ -139,7 +139,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                               ),
                               child: FlutterFlowWebView(
                                 content:
-                                    '\"https://5star-wireless.com/?t=\" + FFAppState().reloadTick.toString()',
+                                    'https://5star-wireless.com/?t=${FFAppState().homeNonce.toString()}',
                                 bypass: true,
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
@@ -301,20 +301,25 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                         HapticFeedback.lightImpact();
                         if (FFAppState().activeTabIndex == 0) {
                           FFAppState().reloadTick = FFAppState().reloadTick + 1;
-                          safeSetState(() {});
                         } else if (FFAppState().activeTabIndex == 1) {
                           FFAppState().reloadTick = FFAppState().reloadTick + 1;
-                          safeSetState(() {});
                         } else if (FFAppState().activeTabIndex == 2) {
                           FFAppState().reloadTick = FFAppState().reloadTick + 1;
-                          safeSetState(() {});
                         } else if (FFAppState().activeTabIndex == 3) {
                           FFAppState().reloadTick = FFAppState().reloadTick + 1;
-                          safeSetState(() {});
                         } else if (FFAppState().activeTabIndex == 4) {
                           FFAppState().reloadTick = FFAppState().reloadTick + 1;
-                          safeSetState(() {});
                         }
+
+                        FFAppState().showToast = true;
+                        safeSetState(() {});
+                        await Future.delayed(
+                          Duration(
+                            milliseconds: 800,
+                          ),
+                        );
+                        FFAppState().showToast = false;
+                        safeSetState(() {});
                       },
                       child: Icon(
                         Icons.replay_circle_filled_rounded,
