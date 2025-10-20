@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -150,6 +152,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: TabsHostWidget.routeName,
           path: TabsHostWidget.routePath,
           builder: (context, params) => TabsHostWidget(),
+        ),
+        FFRoute(
+          name: FavoritesPageWidget.routeName,
+          path: FavoritesPageWidget.routePath,
+          builder: (context, params) => FavoritesPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -269,6 +276,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -287,6 +295,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }

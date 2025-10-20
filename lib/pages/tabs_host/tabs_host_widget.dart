@@ -1,9 +1,11 @@
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
 import '/pages/bottom_nav/bottom_nav_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'tabs_host_model.dart';
@@ -19,15 +21,40 @@ class TabsHostWidget extends StatefulWidget {
   State<TabsHostWidget> createState() => _TabsHostWidgetState();
 }
 
-class _TabsHostWidgetState extends State<TabsHostWidget> {
+class _TabsHostWidgetState extends State<TabsHostWidget>
+    with TickerProviderStateMixin {
   late TabsHostModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => TabsHostModel());
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeIn,
+            delay: 0.0.ms,
+            duration: 200.0.ms,
+            begin: Offset(0.0, -100.0),
+            end: Offset(0.0, 0.0),
+          ),
+          MoveEffect(
+            curve: Curves.easeIn,
+            delay: 2000.0.ms,
+            duration: 200.0.ms,
+            begin: Offset(0.0, 0.0),
+            end: Offset(0.0, -100.0),
+          ),
+        ],
+      ),
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -69,6 +96,8 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                   return 'Cart';
                 } else if (FFAppState().activeTabIndex == 4) {
                   return 'User';
+                } else if (FFAppState().activeTabIndex == 5) {
+                  return 'Favorites';
                 } else {
                   return '5Star Wireless';
                 }
@@ -381,7 +410,8 @@ class _TabsHostWidgetState extends State<TabsHostWidget> {
                           ),
                         ),
                       ),
-                    ),
+                    ).animateOnPageLoad(
+                        animationsMap['containerOnPageLoadAnimation']!),
                   ),
                 ),
             ],

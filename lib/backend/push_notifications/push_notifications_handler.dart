@@ -122,6 +122,7 @@ final parametersBuilderMap =
   'HomePage': ParameterData.none(),
   'UserPage': ParameterData.none(),
   'TabsHost': ParameterData.none(),
+  'FavoritesPage': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {
