@@ -3,7 +3,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
 import '/pages/bottom_nav/bottom_nav_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,13 +36,23 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
     super.initState();
     _model = createModel(context, () => TabsHostModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (FFAppState().clientId == '') {
+        _model.newId = await actions.makeClientId(
+          context,
+        );
+        FFAppState().clientId = _model.newId!;
+      }
+    });
+
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           MoveEffect(
             curve: Curves.easeIn,
-            delay: 0.0.ms,
+            delay: 400.0.ms,
             duration: 200.0.ms,
             begin: Offset(0.0, -100.0),
             end: Offset(0.0, 0.0),
@@ -155,7 +167,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                             FFAppState().activeTabIndex,
                                             0,
                                           ),
-                                          4))),
+                                          5))),
                           onPageChanged: (_) => safeSetState(() {}),
                           scrollDirection: Axis.horizontal,
                           children: [
@@ -244,6 +256,23 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                 horizontalScroll: true,
                               ),
                             ),
+                            Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: FlutterFlowWebView(
+                                content:
+                                    'https://5star-wireless.com/pages/wishlist?t=${FFAppState().faveNonce.toString()}',
+                                bypass: true,
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
+                                verticalScroll: true,
+                                horizontalScroll: true,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -306,6 +335,13 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                       },
                       onFaveTap: () async {
                         HapticFeedback.lightImpact();
+                        await _model.tabsPagerController?.animateToPage(
+                          5,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.ease,
+                        );
+                        FFAppState().activeTabIndex = 5;
+                        safeSetState(() {});
                       },
                     ),
                   ),

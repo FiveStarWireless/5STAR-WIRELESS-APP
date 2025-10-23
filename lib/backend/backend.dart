@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/util/firestore_util.dart';
 
 import 'schema/users_record.dart';
+import 'schema/favorites_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -15,6 +16,7 @@ export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
 
 export 'schema/users_record.dart';
+export 'schema/favorites_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -48,6 +50,43 @@ Future<List<UsersRecord>> queryUsersRecordOnce({
     queryCollectionOnce(
       UsersRecord.collection,
       UsersRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query FavoritesRecords (as a Stream and as a Future).
+Future<int> queryFavoritesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      FavoritesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<FavoritesRecord>> queryFavoritesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      FavoritesRecord.collection,
+      FavoritesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<FavoritesRecord>> queryFavoritesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      FavoritesRecord.collection,
+      FavoritesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

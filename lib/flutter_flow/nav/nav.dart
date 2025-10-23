@@ -152,11 +152,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: TabsHostWidget.routeName,
           path: TabsHostWidget.routePath,
           builder: (context, params) => TabsHostWidget(),
-        ),
-        FFRoute(
-          name: FavoritesPageWidget.routeName,
-          path: FavoritesPageWidget.routePath,
-          builder: (context, params) => FavoritesPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

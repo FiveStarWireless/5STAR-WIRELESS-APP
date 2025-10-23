@@ -20,6 +20,9 @@ class FFAppState extends ChangeNotifier {
       _isDarkMode = prefs.getBool('ff_isDarkMode') ?? _isDarkMode;
     });
     _safeInit(() {
+      _clientId = prefs.getString('ff_clientId') ?? _clientId;
+    });
+    _safeInit(() {
       _termsAcceptedv1 =
           prefs.getBool('ff_termsAcceptedv1') ?? _termsAcceptedv1;
     });
@@ -63,6 +66,13 @@ class FFAppState extends ChangeNotifier {
   bool get showToast => _showToast;
   set showToast(bool value) {
     _showToast = value;
+  }
+
+  String _clientId = '';
+  String get clientId => _clientId;
+  set clientId(String value) {
+    _clientId = value;
+    prefs.setString('ff_clientId', value);
   }
 
   String _toastMessage = '';
@@ -168,6 +178,12 @@ class FFAppState extends ChangeNotifier {
   int get usersNonce => _usersNonce;
   set usersNonce(int value) {
     _usersNonce = value;
+  }
+
+  int _faveNonce = 0;
+  int get faveNonce => _faveNonce;
+  set faveNonce(int value) {
+    _faveNonce = value;
   }
 }
 
