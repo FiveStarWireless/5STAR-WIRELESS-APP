@@ -106,9 +106,9 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                 } else if (FFAppState().activeTabIndex == 3) {
                   return 'Cart';
                 } else if (FFAppState().activeTabIndex == 4) {
-                  return 'User';
-                } else if (FFAppState().activeTabIndex == 5) {
                   return 'Favorites';
+                } else if (FFAppState().activeTabIndex == 5) {
+                  return 'User';
                 } else {
                   return '5Star Wireless';
                 }
