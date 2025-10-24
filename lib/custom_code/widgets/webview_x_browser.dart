@@ -17,15 +17,15 @@ class WebviewXBrowser extends StatefulWidget {
   const WebviewXBrowser({
     Key? key,
     required this.initialUrl,
-    this.showToolbar = true,
-    // FF auto-passes these; declare them
+    this.showBackButton = true,
+    // FF auto-passes these; must be declared
     this.width,
     this.height,
   }) : super(key: key);
 
-  // FF Parameters
+  // FF parameters
   final String? initialUrl;
-  final bool? showToolbar;
+  final bool? showBackButton;
 
   // Auto-passed by FF
   final double? width;
@@ -38,19 +38,14 @@ class WebviewXBrowser extends StatefulWidget {
 class _WebviewXBrowserState extends State<WebviewXBrowser> {
   WebViewXController? _controller;
   bool _canGoBack = false;
-  bool _canGoForward = false;
 
   bool get _ready => _controller != null;
 
   Future<void> _refreshNav() async {
     if (!_ready) return;
     final back = await _controller!.canGoBack();
-    final fwd = await _controller!.canGoForward();
     if (!mounted) return;
-    setState(() {
-      _canGoBack = back;
-      _canGoForward = fwd;
-    });
+    setState(() => _canGoBack = back);
   }
 
   // Optional: emulate FF's "Force Allow Scrolling"
@@ -83,7 +78,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
 
   @override
   Widget build(BuildContext context) {
-    final bool showTb = widget.showToolbar ?? true;
+    final bool showBack = widget.showBackButton ?? true;
     final String startUrl =
         (widget.initialUrl == null || widget.initialUrl!.isEmpty)
             ? 'https://5star-wireless.com'
@@ -109,63 +104,34 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                 return NavigationDecision.navigate;
               },
               onPageFinished: (url) async {
-                // optional "force scroll" behavior
+                // optional: re-enable scrolling if the site disables it
                 await _controller!.evalRawJavascript(_enableScrollJS);
                 await _refreshNav();
               },
               webSpecificParams: const WebSpecificParams(
                 webAllowFullscreenContent: true,
               ),
-              // 🔴 removed iosAllowsInlineMediaPlayback (not supported on FF fork)
+              // note: no iosAllowsInlineMediaPlayback (not on FF fork)
               mobileSpecificParams: const MobileSpecificParams(
                 androidEnableHybridComposition: true,
               ),
               height: widget.height ?? MediaQuery.of(context).size.height,
               width: widget.width ?? MediaQuery.of(context).size.width,
             ),
-            if (showTb)
+            if (showBack)
               Positioned(
-                right: 12,
-                bottom: 12,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.55),
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        tooltip: 'Back',
-                        onPressed: _canGoBack
-                            ? () async {
-                                await _controller!.goBack();
-                                await _refreshNav();
-                              }
-                            : null,
-                        icon: const Icon(Icons.arrow_back, color: Colors.white),
-                      ),
-                      IconButton(
-                        tooltip: 'Forward',
-                        onPressed: _canGoForward
-                            ? () async {
-                                await _controller!.goForward();
-                                await _refreshNav();
-                              }
-                            : null,
-                        icon: const Icon(Icons.arrow_forward,
-                            color: Colors.white),
-                      ),
-                      IconButton(
-                        tooltip: 'Reload',
-                        onPressed: () async {
-                          await _controller!.reload();
+                left: 12,
+                top: 12,
+                child: FloatingActionButton.small(
+                  heroTag: 'wv_back',
+                  backgroundColor: Colors.black.withOpacity(0.55),
+                  onPressed: _canGoBack
+                      ? () async {
+                          await _controller!.goBack();
                           await _refreshNav();
-                        },
-                        icon: const Icon(Icons.refresh, color: Colors.white),
-                      ),
-                    ],
-                  ),
+                        }
+                      : null,
+                  child: const Icon(Icons.arrow_back, color: Colors.white),
                 ),
               ),
           ],
