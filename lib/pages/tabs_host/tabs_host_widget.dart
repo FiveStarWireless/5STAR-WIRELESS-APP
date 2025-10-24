@@ -187,7 +187,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       MediaQuery.sizeOf(context).height * 1.0,
                                   initialUrl:
                                       'https://5star-wireless.com/?t=${FFAppState().homeNonce.toString()}',
-                                  showToolbar: true,
+                                  showBackButton: true,
                                 ),
                               ),
                             ),
