@@ -188,6 +188,14 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       'https://5star-wireless.com/?t=${FFAppState().homeNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().homeNonce,
+                                  onAutoSwitchTab: () async {
+                                    await _model.tabsPagerController
+                                        ?.animateToPage(
+                                      FFAppState().activeTabIndex,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.ease,
+                                    );
+                                  },
                                 ),
                               ),
                             ),
@@ -209,6 +217,14 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       'https://5star-wireless.com/collections/all-products?t=${FFAppState().storeNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().storeNonce,
+                                  onAutoSwitchTab: () async {
+                                    await _model.tabsPagerController
+                                        ?.animateToPage(
+                                      FFAppState().activeTabIndex,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.ease,
+                                    );
+                                  },
                                 ),
                               ),
                             ),
@@ -230,6 +246,14 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       'https://5star-wireless.com/pages/our-services?t=${FFAppState().servicesNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().servicesNonce,
+                                  onAutoSwitchTab: () async {
+                                    await _model.tabsPagerController
+                                        ?.animateToPage(
+                                      FFAppState().activeTabIndex,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.ease,
+                                    );
+                                  },
                                 ),
                               ),
                             ),
@@ -251,6 +275,14 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       'https://5star-wireless.com/cart?t=${FFAppState().cartNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().cartNonce,
+                                  onAutoSwitchTab: () async {
+                                    await _model.tabsPagerController
+                                        ?.animateToPage(
+                                      FFAppState().activeTabIndex,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.ease,
+                                    );
+                                  },
                                 ),
                               ),
                             ),
@@ -272,6 +304,14 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       'https://5star-wireless.com/pages/wishlist?t=${FFAppState().faveNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().faveNonce,
+                                  onAutoSwitchTab: () async {
+                                    await _model.tabsPagerController
+                                        ?.animateToPage(
+                                      FFAppState().activeTabIndex,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.ease,
+                                    );
+                                  },
                                 ),
                               ),
                             ),
@@ -293,6 +333,14 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3D04303ac9-6b51-4e6c-be0d-71883e4ebdb4%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3DhWN3vsVGFZFkI5LEcVl5MkiY&region_country=US?t=${FFAppState().usersNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().usersNonce,
+                                  onAutoSwitchTab: () async {
+                                    await _model.tabsPagerController
+                                        ?.animateToPage(
+                                      FFAppState().activeTabIndex,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.ease,
+                                    );
+                                  },
                                 ),
                               ),
                             ),
