@@ -316,15 +316,15 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      await widget.onUserTap?.call();
+                                      await widget.onFaveTap?.call();
                                     },
                                     child: Icon(
-                                      Icons.person,
+                                      Icons.star_rounded,
                                       color: Color(0xFF07BCFD),
                                       size: 30.0,
                                     ),
                                   ),
-                                  if (widget.activeIndex == 4)
+                                  if (widget.activeIndex == 5)
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 8.0, 0.0, 0.0),
@@ -367,15 +367,15 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      await widget.onFaveTap?.call();
+                                      await widget.onUserTap?.call();
                                     },
                                     child: Icon(
-                                      Icons.star_rounded,
+                                      Icons.person,
                                       color: Color(0xFF07BCFD),
                                       size: 30.0,
                                     ),
                                   ),
-                                  if (widget.activeIndex == 5)
+                                  if (widget.activeIndex == 4)
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 8.0, 0.0, 0.0),

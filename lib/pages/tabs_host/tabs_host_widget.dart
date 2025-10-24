@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
 import '/pages/bottom_nav/bottom_nav_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -91,8 +92,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor:
-              FFAppState().isDarkMode ? Colors.black : Color(0xFF07BCFD),
+          backgroundColor: Color(0xFF07BCFD),
           automaticallyImplyLeading: false,
           title: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
@@ -178,14 +178,17 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: FlutterFlowWebView(
-                                content:
-                                    'https://5star-wireless.com/?t=${FFAppState().homeNonce.toString()}',
-                                bypass: true,
+                              child: Container(
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
-                                verticalScroll: true,
-                                horizontalScroll: true,
+                                child: custom_widgets.WebviewXBrowser(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 1.0,
+                                  initialUrl:
+                                      'https://5star-wireless.com/?t=${FFAppState().homeNonce.toString()}',
+                                  showToolbar: true,
+                                ),
                               ),
                             ),
                             Container(
@@ -376,6 +379,9 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                           FFAppState().cartNonce = FFAppState().cartNonce + 1;
                         } else if (FFAppState().activeTabIndex == 4) {
                           FFAppState().usersNonce = FFAppState().usersNonce + 1;
+                        } else if (FFAppState().activeTabIndex == 5) {
+                          FFAppState().faveNonce = FFAppState().faveNonce + 1;
+                          safeSetState(() {});
                         }
 
                         await Future.delayed(

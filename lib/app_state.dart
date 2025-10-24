@@ -185,6 +185,12 @@ class FFAppState extends ChangeNotifier {
   set faveNonce(int value) {
     _faveNonce = value;
   }
+
+  String _longPressJson = '';
+  String get longPressJson => _longPressJson;
+  set longPressJson(String value) {
+    _longPressJson = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {
