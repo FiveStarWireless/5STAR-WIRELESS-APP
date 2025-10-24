@@ -77,6 +77,46 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
 })();
 """;
 
+  // Injected JS watcher: fires a callback whenever the URL changes (SPA or normal nav)
+  static const String _urlWatcherJS = r"""
+(function(){
+  try {
+    if (window.__ffUrlWatcherInstalled) return;
+    window.__ffUrlWatcherInstalled = true;
+
+    function notify(){
+      try {
+        var href = window.location.href;
+        if (typeof FF_onUrlChange === 'function') { FF_onUrlChange(href); }
+      } catch(e){}
+    }
+
+    // Patch pushState and replaceState to catch SPA transitions
+    (function(history){
+      var pushState = history.pushState;
+      history.pushState = function(){
+        var r = pushState.apply(this, arguments);
+        try { notify(); } catch(e){}
+        return r;
+      };
+      var replaceState = history.replaceState;
+      history.replaceState = function(){
+        var r = replaceState.apply(this, arguments);
+        try { notify(); } catch(e){}
+        return r;
+      };
+    })(window.history);
+
+    // Back/forward/hash changes
+    window.addEventListener('popstate', notify, {passive:true});
+    window.addEventListener('hashchange', notify, {passive:true});
+
+    // Initial kick
+    setTimeout(notify, 0);
+  } catch(e){}
+})();
+""";
+
   Future<bool> _onWillPop() async {
     if (_ready && await _controller!.canGoBack()) {
       await _controller!.goBack();
@@ -164,7 +204,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
-      // FF fork: loadContent expects (String) only
+      // On this FF fork: loadContent(String) only
       _controller!.loadContent(newUrl);
     }
   }
@@ -188,37 +228,50 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
               key: const ValueKey('webviewx_plus'),
               initialContent: startUrl,
               initialSourceType: SourceType.url,
-
               onWebViewCreated: (ctrl) async {
                 _controller = ctrl;
+
+                // Receive URL changes from the injected JS (SPA-safe)
+                _controller!.addJavaScriptHandler(
+                  'FF_onUrlChange',
+                  (args) async {
+                    // args is List<dynamic> in some versions; handle both
+                    final dynamic first =
+                        (args is List && args.isNotEmpty) ? args.first : args;
+                    final String url = first?.toString() ?? '';
+                    await _maybeSwitchTabByUrl(url);
+                    return null;
+                  },
+                );
+
                 await _refreshNav();
                 try {
                   await _maybeSwitchTabByUrl(startUrl);
                 } catch (_) {}
               },
-
-              // We ONLY switch tabs when a page actually finishes loading.
-              // (Avoids type issues with getContent() on this fork)
+              onPageStarted: (url) async {
+                await _refreshNav();
+              },
               onPageFinished: (url) async {
+                // Install URL watcher every time a page completes (covers SPA)
                 await _controller!.evalRawJavascript(_enableScrollJS);
+                await _controller!.evalRawJavascript(_urlWatcherJS);
                 await _refreshNav();
                 try {
                   await _maybeSwitchTabByUrl(url);
                 } catch (_) {}
               },
-
               webSpecificParams: const WebSpecificParams(
                 webAllowFullscreenContent: true,
               ),
               mobileSpecificParams: const MobileSpecificParams(
                 androidEnableHybridComposition: true,
               ),
-
               height: widget.height ?? MediaQuery.of(context).size.height,
               width: widget.width ?? MediaQuery.of(context).size.width,
             ),
 
-            // Back button (5Star blue #07BCFD)
+            // Back button (5Star blue #07BCFD) — always enabled; verify canGoBack inside
             if (showBack)
               Positioned(
                 left: 12,
@@ -227,12 +280,14 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                   heroTag: 'wv_back',
                   backgroundColor: const Color(0xFF07BCFD),
                   elevation: 3,
-                  onPressed: _canGoBack
-                      ? () async {
-                          await _controller!.goBack();
-                          await _refreshNav();
-                        }
-                      : null,
+                  onPressed: () async {
+                    if (_ready && await _controller!.canGoBack()) {
+                      await _controller!.goBack();
+                      await _refreshNav();
+                    } else {
+                      // Optional: do nothing / show a toast / switch to Home tab.
+                    }
+                  },
                   child: const Icon(Icons.arrow_back, color: Colors.white),
                 ),
               ),
