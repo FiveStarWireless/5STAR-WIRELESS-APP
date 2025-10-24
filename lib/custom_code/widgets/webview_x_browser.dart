@@ -164,8 +164,8 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
-      // FF fork: loadContent expects (String, SourceType)
-      _controller!.loadContent(newUrl, SourceType.url);
+      // FF fork: loadContent expects (String) only
+      _controller!.loadContent(newUrl);
     }
   }
 
@@ -197,27 +197,8 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                 } catch (_) {}
               },
 
-              // Intercept navigations
-              navigationDelegate: (nav) async {
-                await _refreshNav();
-                try {
-                  // For FF fork, getContent() returns WebViewContent OR String depending on version.
-                  // Safely handle both.
-                  final currentAny = await _controller!.getContent();
-                  String currentUrl;
-                  if (currentAny is String) {
-                    currentUrl = currentAny;
-                  } else {
-                    // dynamic with `.source` field
-                    // ignore: avoid_dynamic_calls
-                    currentUrl =
-                        (currentAny as dynamic).source?.toString() ?? '';
-                  }
-                  await _maybeSwitchTabByUrl(currentUrl);
-                } catch (_) {}
-                return NavigationDecision.navigate;
-              },
-
+              // We ONLY switch tabs when a page actually finishes loading.
+              // (Avoids type issues with getContent() on this fork)
               onPageFinished: (url) async {
                 await _controller!.evalRawJavascript(_enableScrollJS);
                 await _refreshNav();
