@@ -18,16 +18,19 @@ class WebviewXBrowser extends StatefulWidget {
     Key? key,
     required this.initialUrl,
     this.showBackButton = true,
-    // FF auto-passes these; must be declared
+    this.refreshTick, // When this int changes, we reload()
+    // FlutterFlow auto-passes these; must be declared
     this.width,
     this.height,
   }) : super(key: key);
 
-  // FF parameters
+  // === FlutterFlow Parameters ===
   final String? initialUrl;
   final bool? showBackButton;
+  final int?
+      refreshTick; // Bind per tab (home/store/services/cart/favorites/user)
 
-  // Auto-passed by FF
+  // Auto-passed by FlutterFlow
   final double? width;
   final double? height;
 
@@ -52,15 +55,15 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
   static const String _enableScrollJS = r"""
 (function(){
   try {
-    document.documentElement.style.overflowX = 'auto';
-    document.documentElement.style.overflowY = 'auto';
-    document.body.style.overflowX = 'auto';
-    document.body.style.overflowY = 'auto';
-    var meta = document.querySelector('meta[name=viewport]');
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'viewport';
-      meta.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+    document.documentElement.style.overflowX='auto';
+    document.documentElement.style.overflowY='auto';
+    document.body.style.overflowX='auto';
+    document.body.style.overflowY='auto';
+    var meta=document.querySelector('meta[name=viewport]');
+    if(!meta){
+      meta=document.createElement('meta');
+      meta.name='viewport';
+      meta.content='width=device-width, initial-scale=1, maximum-scale=1';
       document.head.appendChild(meta);
     }
   } catch(e){}
@@ -74,6 +77,24 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
       return false; // consume system back
     }
     return true; // pop Flutter page
+  }
+
+  // React to parameter changes coming from FlutterFlow
+  @override
+  void didUpdateWidget(covariant WebviewXBrowser oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // 1) Hard refresh when the tick changes
+    if (widget.refreshTick != oldWidget.refreshTick && _ready) {
+      _controller!.reload();
+    }
+
+    // 2) If initialUrl changes, load the new URL
+    final newUrl = widget.initialUrl ?? '';
+    final oldUrl = oldWidget.initialUrl ?? '';
+    if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
+      _controller!.loadContent(newUrl, SourceType.url);
+    }
   }
 
   @override
@@ -104,27 +125,30 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                 return NavigationDecision.navigate;
               },
               onPageFinished: (url) async {
-                // optional: re-enable scrolling if the site disables it
+                // Optional: re-enable scrolling if the site disables it
                 await _controller!.evalRawJavascript(_enableScrollJS);
                 await _refreshNav();
               },
               webSpecificParams: const WebSpecificParams(
                 webAllowFullscreenContent: true,
               ),
-              // note: no iosAllowsInlineMediaPlayback (not on FF fork)
+              // Do not include iosAllowsInlineMediaPlayback (not exposed on FF fork)
               mobileSpecificParams: const MobileSpecificParams(
                 androidEnableHybridComposition: true,
               ),
               height: widget.height ?? MediaQuery.of(context).size.height,
               width: widget.width ?? MediaQuery.of(context).size.width,
             ),
+
+            // Back button (5Star blue #07BCFD)
             if (showBack)
               Positioned(
                 left: 12,
                 top: 12,
                 child: FloatingActionButton.small(
                   heroTag: 'wv_back',
-                  backgroundColor: Colors.black.withOpacity(0.55),
+                  backgroundColor: const Color(0xFF07BCFD), // ← #07BCFD
+                  elevation: 3,
                   onPressed: _canGoBack
                       ? () async {
                           await _controller!.goBack();

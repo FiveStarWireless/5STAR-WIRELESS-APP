@@ -324,7 +324,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                       size: 30.0,
                                     ),
                                   ),
-                                  if (widget.activeIndex == 5)
+                                  if (widget.activeIndex == 4)
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 8.0, 0.0, 0.0),
@@ -375,7 +375,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
                                       size: 30.0,
                                     ),
                                   ),
-                                  if (widget.activeIndex == 4)
+                                  if (widget.activeIndex == 5)
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 8.0, 0.0, 0.0),

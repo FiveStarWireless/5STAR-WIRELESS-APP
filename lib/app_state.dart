@@ -174,16 +174,16 @@ class FFAppState extends ChangeNotifier {
     _cartNonce = value;
   }
 
-  int _usersNonce = 0;
-  int get usersNonce => _usersNonce;
-  set usersNonce(int value) {
-    _usersNonce = value;
-  }
-
   int _faveNonce = 0;
   int get faveNonce => _faveNonce;
   set faveNonce(int value) {
     _faveNonce = value;
+  }
+
+  int _usersNonce = 0;
+  int get usersNonce => _usersNonce;
+  set usersNonce(int value) {
+    _usersNonce = value;
   }
 
   String _longPressJson = '';

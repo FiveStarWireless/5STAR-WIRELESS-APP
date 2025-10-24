@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_web_view.dart';
 import '/pages/bottom_nav/bottom_nav_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
@@ -188,6 +187,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                   initialUrl:
                                       'https://5star-wireless.com/?t=${FFAppState().homeNonce.toString()}',
                                   showBackButton: true,
+                                  refreshTick: FFAppState().homeNonce,
                                 ),
                               ),
                             ),
@@ -198,14 +198,18 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: FlutterFlowWebView(
-                                content:
-                                    'https://5star-wireless.com/collections?t=${FFAppState().storeNonce.toString()}',
-                                bypass: true,
+                              child: Container(
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
-                                verticalScroll: true,
-                                horizontalScroll: true,
+                                child: custom_widgets.WebviewXBrowser(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 1.0,
+                                  initialUrl:
+                                      'https://5star-wireless.com/collections/all-products?t=${FFAppState().storeNonce.toString()}',
+                                  showBackButton: true,
+                                  refreshTick: FFAppState().storeNonce,
+                                ),
                               ),
                             ),
                             Container(
@@ -215,14 +219,18 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: FlutterFlowWebView(
-                                content:
-                                    'https://5star-wireless.com/pages/our-services?t=${FFAppState().servicesNonce.toString()}',
-                                bypass: true,
+                              child: Container(
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
-                                verticalScroll: true,
-                                horizontalScroll: true,
+                                child: custom_widgets.WebviewXBrowser(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 1.0,
+                                  initialUrl:
+                                      'https://5star-wireless.com/pages/our-services?t=${FFAppState().servicesNonce.toString()}',
+                                  showBackButton: true,
+                                  refreshTick: FFAppState().servicesNonce,
+                                ),
                               ),
                             ),
                             Container(
@@ -232,14 +240,18 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: FlutterFlowWebView(
-                                content:
-                                    'https://5star-wireless.com/cart?t=${FFAppState().cartNonce.toString()}',
-                                bypass: true,
+                              child: Container(
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
-                                verticalScroll: true,
-                                horizontalScroll: true,
+                                child: custom_widgets.WebviewXBrowser(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 1.0,
+                                  initialUrl:
+                                      'https://5star-wireless.com/cart?t=${FFAppState().cartNonce.toString()}',
+                                  showBackButton: true,
+                                  refreshTick: FFAppState().cartNonce,
+                                ),
                               ),
                             ),
                             Container(
@@ -249,14 +261,18 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: FlutterFlowWebView(
-                                content:
-                                    'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3D04303ac9-6b51-4e6c-be0d-71883e4ebdb4%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3DhWN3vsVGFZFkI5LEcVl5MkiY&region_country=US?t=${FFAppState().usersNonce.toString()}',
-                                bypass: true,
+                              child: Container(
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
-                                verticalScroll: true,
-                                horizontalScroll: true,
+                                child: custom_widgets.WebviewXBrowser(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 1.0,
+                                  initialUrl:
+                                      'https://5star-wireless.com/pages/wishlist?t=${FFAppState().faveNonce.toString()}',
+                                  showBackButton: true,
+                                  refreshTick: FFAppState().faveNonce,
+                                ),
                               ),
                             ),
                             Container(
@@ -266,14 +282,18 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: FlutterFlowWebView(
-                                content:
-                                    'https://5star-wireless.com/pages/wishlist?t=${FFAppState().faveNonce.toString()}',
-                                bypass: true,
+                              child: Container(
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
-                                verticalScroll: true,
-                                horizontalScroll: true,
+                                child: custom_widgets.WebviewXBrowser(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 1.0,
+                                  initialUrl:
+                                      'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3D04303ac9-6b51-4e6c-be0d-71883e4ebdb4%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3DhWN3vsVGFZFkI5LEcVl5MkiY&region_country=US?t=${FFAppState().usersNonce.toString()}',
+                                  showBackButton: true,
+                                  refreshTick: FFAppState().usersNonce,
+                                ),
                               ),
                             ),
                           ],
@@ -329,21 +349,21 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                       onUserTap: () async {
                         HapticFeedback.lightImpact();
                         await _model.tabsPagerController?.animateToPage(
-                          4,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.ease,
-                        );
-                        FFAppState().activeTabIndex = 4;
-                        safeSetState(() {});
-                      },
-                      onFaveTap: () async {
-                        HapticFeedback.lightImpact();
-                        await _model.tabsPagerController?.animateToPage(
                           5,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
                         FFAppState().activeTabIndex = 5;
+                        safeSetState(() {});
+                      },
+                      onFaveTap: () async {
+                        HapticFeedback.lightImpact();
+                        await _model.tabsPagerController?.animateToPage(
+                          4,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.ease,
+                        );
+                        FFAppState().activeTabIndex = 4;
                         safeSetState(() {});
                       },
                     ),
@@ -378,10 +398,9 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                         } else if (FFAppState().activeTabIndex == 3) {
                           FFAppState().cartNonce = FFAppState().cartNonce + 1;
                         } else if (FFAppState().activeTabIndex == 4) {
-                          FFAppState().usersNonce = FFAppState().usersNonce + 1;
-                        } else if (FFAppState().activeTabIndex == 5) {
                           FFAppState().faveNonce = FFAppState().faveNonce + 1;
-                          safeSetState(() {});
+                        } else if (FFAppState().activeTabIndex == 5) {
+                          FFAppState().usersNonce = FFAppState().usersNonce + 1;
                         }
 
                         await Future.delayed(
