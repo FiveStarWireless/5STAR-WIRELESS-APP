@@ -18,16 +18,16 @@ class WebviewXBrowser extends StatefulWidget {
     Key? key,
     required this.initialUrl,
     this.showToolbar = true,
-    // IMPORTANT: FlutterFlow auto-passes these; declare them here
+    // FF auto-passes these; declare them
     this.width,
     this.height,
   }) : super(key: key);
 
-  // === Parameters from FF ===
+  // FF Parameters
   final String? initialUrl;
   final bool? showToolbar;
 
-  // === Auto-passed by FlutterFlow (must be declared) ===
+  // Auto-passed by FF
   final double? width;
   final double? height;
 
@@ -40,10 +40,10 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
   bool _canGoBack = false;
   bool _canGoForward = false;
 
-  bool get _isReady => _controller != null;
+  bool get _ready => _controller != null;
 
-  Future<void> _refreshNavState() async {
-    if (!_isReady) return;
+  Future<void> _refreshNav() async {
+    if (!_ready) return;
     final back = await _controller!.canGoBack();
     final fwd = await _controller!.canGoForward();
     if (!mounted) return;
@@ -53,10 +53,29 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     });
   }
 
+  // Optional: emulate FF's "Force Allow Scrolling"
+  static const String _enableScrollJS = r"""
+(function(){
+  try {
+    document.documentElement.style.overflowX = 'auto';
+    document.documentElement.style.overflowY = 'auto';
+    document.body.style.overflowX = 'auto';
+    document.body.style.overflowY = 'auto';
+    var meta = document.querySelector('meta[name=viewport]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'viewport';
+      meta.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+      document.head.appendChild(meta);
+    }
+  } catch(e){}
+})();
+""";
+
   Future<bool> _onWillPop() async {
-    if (_isReady && await _controller!.canGoBack()) {
+    if (_ready && await _controller!.canGoBack()) {
       await _controller!.goBack();
-      await _refreshNavState();
+      await _refreshNav();
       return false; // consume system back
     }
     return true; // pop Flutter page
@@ -64,7 +83,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
 
   @override
   Widget build(BuildContext context) {
-    final bool showToolbar = widget.showToolbar ?? true;
+    final bool showTb = widget.showToolbar ?? true;
     final String startUrl =
         (widget.initialUrl == null || widget.initialUrl!.isEmpty)
             ? 'https://5star-wireless.com'
@@ -83,26 +102,28 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
               initialSourceType: SourceType.url,
               onWebViewCreated: (ctrl) async {
                 _controller = ctrl;
-                await _refreshNavState();
+                await _refreshNav();
               },
               navigationDelegate: (nav) async {
-                await _refreshNavState();
+                await _refreshNav();
                 return NavigationDecision.navigate;
               },
               onPageFinished: (url) async {
-                await _refreshNavState();
+                // optional "force scroll" behavior
+                await _controller!.evalRawJavascript(_enableScrollJS);
+                await _refreshNav();
               },
               webSpecificParams: const WebSpecificParams(
                 webAllowFullscreenContent: true,
               ),
+              // 🔴 removed iosAllowsInlineMediaPlayback (not supported on FF fork)
               mobileSpecificParams: const MobileSpecificParams(
                 androidEnableHybridComposition: true,
-                iosAllowsInlineMediaPlayback: true,
               ),
               height: widget.height ?? MediaQuery.of(context).size.height,
               width: widget.width ?? MediaQuery.of(context).size.width,
             ),
-            if (showToolbar)
+            if (showTb)
               Positioned(
                 right: 12,
                 bottom: 12,
@@ -119,7 +140,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                         onPressed: _canGoBack
                             ? () async {
                                 await _controller!.goBack();
-                                await _refreshNavState();
+                                await _refreshNav();
                               }
                             : null,
                         icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -129,7 +150,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                         onPressed: _canGoForward
                             ? () async {
                                 await _controller!.goForward();
-                                await _refreshNavState();
+                                await _refreshNav();
                               }
                             : null,
                         icon: const Icon(Icons.arrow_forward,
@@ -139,7 +160,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                         tooltip: 'Reload',
                         onPressed: () async {
                           await _controller!.reload();
-                          await _refreshNavState();
+                          await _refreshNav();
                         },
                         icon: const Icon(Icons.refresh, color: Colors.white),
                       ),
