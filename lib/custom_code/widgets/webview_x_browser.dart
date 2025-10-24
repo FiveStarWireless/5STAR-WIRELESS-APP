@@ -160,11 +160,13 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
       _controller!.reload();
     }
 
-    // 2) If initialUrl changes, load the new URL
+    // 2) If initialUrl changes, load the new URL (FF fork expects WebViewContent)
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
-      _controller!.loadContent(newUrl, SourceType.url);
+      _controller!.loadContent(
+        WebViewContent(content: newUrl, sourceType: SourceType.url),
+      );
     }
   }
 
@@ -191,7 +193,6 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
               onWebViewCreated: (ctrl) async {
                 _controller = ctrl;
                 await _refreshNav();
-                // Try to classify the starting URL
                 try {
                   await _maybeSwitchTabByUrl(startUrl);
                 } catch (_) {}
@@ -200,10 +201,11 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
               // Intercept navigations
               navigationDelegate: (nav) async {
                 await _refreshNav();
-                // nav.content.source is not always reliable; ask controller after a tick
                 try {
-                  final current = await _controller!.getContent();
-                  await _maybeSwitchTabByUrl(current);
+                  final currentContent =
+                      await _controller!.getContent(); // WebViewContent
+                  final currentUrl = currentContent.content; // String URL
+                  await _maybeSwitchTabByUrl(currentUrl);
                 } catch (_) {}
                 return NavigationDecision.navigate;
               },
