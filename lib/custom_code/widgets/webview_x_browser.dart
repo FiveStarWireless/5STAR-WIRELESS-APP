@@ -208,8 +208,10 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
-      // Your FF-managed fork expects positional args
-      _controller!.loadContent(newUrl, SourceType.url);
+      // Your FF-managed fork expects a single argument: WebViewContent
+      _controller!.loadContent(
+        WebViewContent(source: newUrl, sourceType: SourceType.url),
+      );
     }
   }
 
@@ -277,7 +279,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
               width: widget.width ?? MediaQuery.of(context).size.width,
             ),
 
-            // Back button (5Star blue #07BCFD) — always enabled; verify canGoBack inside
+            // Back button (5Star blue #07BCFD) — checks canGoBack at tap-time
             if (showBack)
               Positioned(
                 left: 12,
@@ -291,7 +293,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                       await _controller!.goBack();
                       await _refreshNav();
                     } else {
-                      // Optional: no-op or snackbar.
+                      // Optional: no-op or snackbar
                     }
                   },
                   child: const Icon(Icons.arrow_back, color: Colors.white),
