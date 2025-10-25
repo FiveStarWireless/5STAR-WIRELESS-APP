@@ -204,7 +204,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
-      // On this FF fork: loadContent(String) only
+      // FF fork: loadContent(String) only
       _controller!.loadContent(newUrl);
     }
   }
@@ -228,30 +228,20 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
               key: const ValueKey('webviewx_plus'),
               initialContent: startUrl,
               initialSourceType: SourceType.url,
+
               onWebViewCreated: (ctrl) async {
                 _controller = ctrl;
-
-                // Receive URL changes from the injected JS (SPA-safe)
-                _controller!.addJavaScriptHandler(
-                  'FF_onUrlChange',
-                  (args) async {
-                    // args is List<dynamic> in some versions; handle both
-                    final dynamic first =
-                        (args is List && args.isNotEmpty) ? args.first : args;
-                    final String url = first?.toString() ?? '';
-                    await _maybeSwitchTabByUrl(url);
-                    return null;
-                  },
-                );
-
                 await _refreshNav();
                 try {
                   await _maybeSwitchTabByUrl(startUrl);
                 } catch (_) {}
               },
+
+              // Keep the state fresh at both lifecycle hooks
               onPageStarted: (url) async {
                 await _refreshNav();
               },
+
               onPageFinished: (url) async {
                 // Install URL watcher every time a page completes (covers SPA)
                 await _controller!.evalRawJavascript(_enableScrollJS);
@@ -261,12 +251,25 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                   await _maybeSwitchTabByUrl(url);
                 } catch (_) {}
               },
+
+              // 🔔 JS → Dart callback for SPA URL changes
+              dartCallBacks: {
+                DartCallback(
+                  name: 'FF_onUrlChange',
+                  callBack: (dynamic href) async {
+                    final url = href?.toString() ?? '';
+                    await _maybeSwitchTabByUrl(url);
+                  },
+                ),
+              },
+
               webSpecificParams: const WebSpecificParams(
                 webAllowFullscreenContent: true,
               ),
               mobileSpecificParams: const MobileSpecificParams(
                 androidEnableHybridComposition: true,
               ),
+
               height: widget.height ?? MediaQuery.of(context).size.height,
               width: widget.width ?? MediaQuery.of(context).size.width,
             ),
