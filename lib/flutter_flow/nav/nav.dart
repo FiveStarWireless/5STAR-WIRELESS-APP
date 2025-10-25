@@ -119,11 +119,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => PolicyShippingWidget(),
         ),
         FFRoute(
-          name: WelcomeTermsCopyWidget.routeName,
-          path: WelcomeTermsCopyWidget.routePath,
-          builder: (context, params) => WelcomeTermsCopyWidget(),
-        ),
-        FFRoute(
           name: CollectionPageWidget.routeName,
           path: CollectionPageWidget.routePath,
           builder: (context, params) => CollectionPageWidget(),

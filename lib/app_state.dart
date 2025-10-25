@@ -23,21 +23,6 @@ class FFAppState extends ChangeNotifier {
       _clientId = prefs.getString('ff_clientId') ?? _clientId;
     });
     _safeInit(() {
-      _termsAccepted = prefs.getBool('ff_termsAccepted') ?? _termsAccepted;
-    });
-    _safeInit(() {
-      _termsAcceptedv1 =
-          prefs.getBool('ff_termsAcceptedv1') ?? _termsAcceptedv1;
-    });
-    _safeInit(() {
-      _termsAcceptedv2 =
-          prefs.getBool('ff_termsAcceptedv2') ?? _termsAcceptedv2;
-    });
-    _safeInit(() {
-      _termsAcceptedv3 =
-          prefs.getBool('ff_termsAcceptedv3') ?? _termsAcceptedv3;
-    });
-    _safeInit(() {
       _termsAcceptedv4 =
           prefs.getBool('ff_termsAcceptedv4') ?? _termsAcceptedv4;
     });
@@ -104,34 +89,6 @@ class FFAppState extends ChangeNotifier {
   bool get showSettingsTray => _showSettingsTray;
   set showSettingsTray(bool value) {
     _showSettingsTray = value;
-  }
-
-  bool _termsAccepted = false;
-  bool get termsAccepted => _termsAccepted;
-  set termsAccepted(bool value) {
-    _termsAccepted = value;
-    prefs.setBool('ff_termsAccepted', value);
-  }
-
-  bool _termsAcceptedv1 = false;
-  bool get termsAcceptedv1 => _termsAcceptedv1;
-  set termsAcceptedv1(bool value) {
-    _termsAcceptedv1 = value;
-    prefs.setBool('ff_termsAcceptedv1', value);
-  }
-
-  bool _termsAcceptedv2 = false;
-  bool get termsAcceptedv2 => _termsAcceptedv2;
-  set termsAcceptedv2(bool value) {
-    _termsAcceptedv2 = value;
-    prefs.setBool('ff_termsAcceptedv2', value);
-  }
-
-  bool _termsAcceptedv3 = false;
-  bool get termsAcceptedv3 => _termsAcceptedv3;
-  set termsAcceptedv3(bool value) {
-    _termsAcceptedv3 = value;
-    prefs.setBool('ff_termsAcceptedv3', value);
   }
 
   bool _termsAcceptedv4 = false;

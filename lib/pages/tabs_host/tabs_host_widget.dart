@@ -290,7 +290,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                   height:
                                       MediaQuery.sizeOf(context).height * 1.0,
                                   initialUrl:
-                                      'https://shopify.com/authentication/74726867197/login?client_id=19876919-bc0a-4288-819d-9873d41cac6e&locale=en&redirect_uri=%2Fauthentication%2F74726867197%2Foauth%2Fauthorize%3Fclient_id%3D19876919-bc0a-4288-819d-9873d41cac6e%26locale%3Den%26nonce%3D04303ac9-6b51-4e6c-be0d-71883e4ebdb4%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F74726867197%252Faccount%252Fcallback%253Fsource%253Dcore%26region_country%3DUS%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3DhWN3vsVGFZFkI5LEcVl5MkiY&region_country=US?t=${FFAppState().usersNonce.toString()}',
+                                      'https://5star-wireless.com/account/login?t=${FFAppState().usersNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().usersNonce,
                                 ),

@@ -42,6 +42,17 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
             ),
           },
         );
+      } else {
+        context.goNamed(
+          WelcomeTermsWidget.routeName,
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.fade,
+              duration: Duration(milliseconds: 0),
+            ),
+          },
+        );
       }
     });
 

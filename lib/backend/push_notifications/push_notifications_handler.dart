@@ -115,7 +115,6 @@ final parametersBuilderMap =
   'Policy_Terms': ParameterData.none(),
   'Policy_Store': ParameterData.none(),
   'Policy_Shipping': ParameterData.none(),
-  'WelcomeTermsCopy': ParameterData.none(),
   'CollectionPage': ParameterData.none(),
   'ServicesPage': ParameterData.none(),
   'CartPage': ParameterData.none(),

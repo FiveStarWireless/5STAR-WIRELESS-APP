@@ -38,7 +38,6 @@ dependencies:
   cloud_functions_platform_interface: 5.7.2
   cloud_functions_web: 4.11.2
   collection: 1.19.1
-  expandable: 5.0.1
   file_picker: 10.1.9
   firebase_auth: 5.6.0
   firebase_auth_platform_interface: 7.7.0
