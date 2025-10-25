@@ -177,10 +177,14 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     if (url.isEmpty) return;
     final idx = _classifyTab(url);
     if (idx < 0) return;
-    if (_lastNotifiedIndex == idx) return; // debounce
+
+    // Already on this tab? do nothing
+    if (FFAppState().activeTabIndex == idx) return;
+
+    // Debounce duplicate requests
+    if (_lastNotifiedIndex == idx) return;
     _lastNotifiedIndex = idx;
 
-    // Update FF app state so your action can animate using it
     FFAppState().update(() {
       FFAppState().activeTabIndex = idx;
     });
@@ -237,7 +241,6 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                 } catch (_) {}
               },
 
-              // Keep the state fresh at both lifecycle hooks
               onPageStarted: (url) async {
                 await _refreshNav();
               },
@@ -252,7 +255,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                 } catch (_) {}
               },
 
-              // 🔔 JS → Dart callback for SPA URL changes
+              // JS → Dart callback for SPA URL changes
               dartCallBacks: {
                 DartCallback(
                   name: 'FF_onUrlChange',
@@ -288,7 +291,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                       await _controller!.goBack();
                       await _refreshNav();
                     } else {
-                      // Optional: do nothing / show a toast / switch to Home tab.
+                      // Optional: no-op/snackbar.
                     }
                   },
                   child: const Icon(Icons.arrow_back, color: Colors.white),

@@ -106,7 +106,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                 } else if (FFAppState().activeTabIndex == 3) {
                   return 'Cart';
                 } else if (FFAppState().activeTabIndex == 4) {
-                  return 'Favorites';
+                  return 'Wishlist';
                 } else if (FFAppState().activeTabIndex == 5) {
                   return 'User';
                 } else {
@@ -356,63 +356,57 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                       activeIndex: FFAppState().activeTabIndex,
                       onStoreTap: () async {
                         HapticFeedback.lightImpact();
+                        FFAppState().activeTabIndex = 1;
                         await _model.tabsPagerController?.animateToPage(
-                          1,
+                          FFAppState().activeTabIndex,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
-                        FFAppState().activeTabIndex = 1;
-                        safeSetState(() {});
                       },
                       onServicesTap: () async {
                         HapticFeedback.lightImpact();
+                        FFAppState().activeTabIndex = 2;
                         await _model.tabsPagerController?.animateToPage(
-                          2,
+                          FFAppState().activeTabIndex,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
-                        FFAppState().activeTabIndex = 2;
-                        safeSetState(() {});
                       },
                       onCartTap: () async {
                         HapticFeedback.lightImpact();
+                        FFAppState().activeTabIndex = 3;
                         await _model.tabsPagerController?.animateToPage(
-                          3,
+                          FFAppState().activeTabIndex,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
-                        FFAppState().activeTabIndex = 3;
-                        safeSetState(() {});
                       },
                       onHomeTap: () async {
                         HapticFeedback.lightImpact();
+                        FFAppState().activeTabIndex = 0;
                         await _model.tabsPagerController?.animateToPage(
-                          0,
+                          FFAppState().activeTabIndex,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
-                        FFAppState().activeTabIndex = 0;
-                        safeSetState(() {});
                       },
                       onUserTap: () async {
                         HapticFeedback.lightImpact();
+                        FFAppState().activeTabIndex = 5;
                         await _model.tabsPagerController?.animateToPage(
-                          5,
+                          FFAppState().activeTabIndex,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
-                        FFAppState().activeTabIndex = 5;
-                        safeSetState(() {});
                       },
                       onFaveTap: () async {
                         HapticFeedback.lightImpact();
+                        FFAppState().activeTabIndex = 4;
                         await _model.tabsPagerController?.animateToPage(
-                          4,
+                          FFAppState().activeTabIndex,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
-                        FFAppState().activeTabIndex = 4;
-                        safeSetState(() {});
                       },
                     ),
                   ),
