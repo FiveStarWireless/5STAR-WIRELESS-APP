@@ -19,7 +19,6 @@ class WebviewXBrowser extends StatefulWidget {
     required this.initialUrl,
     this.showBackButton = true,
     this.refreshTick, // when this int changes, reload()
-    this.onAutoSwitchTab, // Action (no args): animate to FFAppState().activeTabIndex
     // FlutterFlow auto-passes these; must be declared
     this.width,
     this.height,
@@ -29,10 +28,6 @@ class WebviewXBrowser extends StatefulWidget {
   final String? initialUrl;
   final bool? showBackButton;
   final int? refreshTick;
-
-  /// FlutterFlow Action parameter (no args).
-  /// In FF: create an Action param named `onAutoSwitchTab`.
-  final Future<dynamic> Function()? onAutoSwitchTab;
 
   // Auto-passed by FlutterFlow
   final double? width;
@@ -45,9 +40,6 @@ class WebviewXBrowser extends StatefulWidget {
 class _WebviewXBrowserState extends State<WebviewXBrowser> {
   WebViewXController? _controller;
   bool _canGoBack = false;
-
-  // Debounce so we don't spam tab switches
-  int _lastNotifiedIndex = -1;
 
   bool get _ready => _controller != null;
 
@@ -77,46 +69,6 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
 })();
 """;
 
-  // Injected JS watcher: fires a callback whenever the URL changes (SPA or normal nav)
-  static const String _urlWatcherJS = r"""
-(function(){
-  try {
-    if (window.__ffUrlWatcherInstalled) return;
-    window.__ffUrlWatcherInstalled = true;
-
-    function notify(){
-      try {
-        var href = window.location.href;
-        if (typeof FF_onUrlChange === 'function') { FF_onUrlChange(href); }
-      } catch(e){}
-    }
-
-    // Patch pushState and replaceState to catch SPA transitions
-    (function(history){
-      var pushState = history.pushState;
-      history.pushState = function(){
-        var r = pushState.apply(this, arguments);
-        try { notify(); } catch(e){}
-        return r;
-      };
-      var replaceState = history.replaceState;
-      history.replaceState = function(){
-        var r = replaceState.apply(this, arguments);
-        try { notify(); } catch(e){}
-        return r;
-      };
-    })(window.history);
-
-    // Back/forward/hash changes
-    window.addEventListener('popstate', notify, {passive:true});
-    window.addEventListener('hashchange', notify, {passive:true});
-
-    // Initial kick
-    setTimeout(notify, 0);
-  } catch(e){}
-})();
-""";
-
   Future<bool> _onWillPop() async {
     if (_ready && await _controller!.canGoBack()) {
       await _controller!.goBack();
@@ -126,64 +78,20 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     return true; // pop Flutter page
   }
 
-  // ---- Tab classification based on your URLs ----
-  int _classifyTab(String url) {
-    final u = url.toLowerCase();
-
-    bool _host(String host) =>
-        u.contains('://$host') || u.contains('://www.$host');
-
-    if (_host('5star-wireless.com') &&
-        (u == 'https://5star-wireless.com/' ||
-            u.startsWith('https://5star-wireless.com/?'))) return 0;
-
-    if (_host('5star-wireless.com') &&
-        (u.startsWith('https://5star-wireless.com/collections/') ||
-            u.contains('/collections/all-products') ||
-            u.contains('/products/'))) return 1;
-
-    if (_host('5star-wireless.com') && u.contains('/pages/our-services'))
-      return 2;
-
-    if (_host('5star-wireless.com') && u.contains('/cart')) return 3;
-
-    if (_host('5star-wireless.com') && u.contains('/pages/wishlist')) return 4;
-
-    if (_host('shopify.com') &&
-        (u.contains('/authentication/') || u.contains('/account'))) return 5;
-
-    return -1;
-  }
-
-  Future<void> _maybeSwitchTabByUrl(String url) async {
-    if (url.isEmpty) return;
-    final idx = _classifyTab(url);
-    if (idx < 0) return;
-    if (FFAppState().activeTabIndex == idx) return;
-    if (_lastNotifiedIndex == idx) return;
-    _lastNotifiedIndex = idx;
-
-    FFAppState().update(() {
-      FFAppState().activeTabIndex = idx;
-    });
-
-    if (widget.onAutoSwitchTab != null) {
-      await widget.onAutoSwitchTab!.call();
-    }
-  }
-
   @override
   void didUpdateWidget(covariant WebviewXBrowser oldWidget) {
     super.didUpdateWidget(oldWidget);
 
+    // 🔁 reload when refreshTick changes
     if (widget.refreshTick != oldWidget.refreshTick && _ready) {
       _controller!.reload();
     }
 
+    // 🔁 load new URL if initialUrl changes
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
-      // ✅ Fixed for your current webviewx_plus fork
+      // Your FF-managed webviewx_plus fork expects a single String arg here
       _controller!.loadContent(newUrl);
     }
   }
@@ -210,27 +118,12 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
               onWebViewCreated: (ctrl) async {
                 _controller = ctrl;
                 await _refreshNav();
-                try {
-                  await _maybeSwitchTabByUrl(startUrl);
-                } catch (_) {}
               },
               onPageStarted: (url) async => await _refreshNav(),
               onPageFinished: (url) async {
+                // optional: re-enable scrolling if the site disables it
                 await _controller!.evalRawJavascript(_enableScrollJS);
-                await _controller!.evalRawJavascript(_urlWatcherJS);
                 await _refreshNav();
-                try {
-                  await _maybeSwitchTabByUrl(url);
-                } catch (_) {}
-              },
-              dartCallBacks: {
-                DartCallback(
-                  name: 'FF_onUrlChange',
-                  callBack: (dynamic href) async {
-                    final url = href?.toString() ?? '';
-                    await _maybeSwitchTabByUrl(url);
-                  },
-                ),
               },
               webSpecificParams: const WebSpecificParams(
                 webAllowFullscreenContent: true,
@@ -241,6 +134,8 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
               height: widget.height ?? MediaQuery.of(context).size.height,
               width: widget.width ?? MediaQuery.of(context).size.width,
             ),
+
+            // Back button (5Star blue #07BCFD) — checks canGoBack on tap
             if (showBack)
               Positioned(
                 left: 12,
