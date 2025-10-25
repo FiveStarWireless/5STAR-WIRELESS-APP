@@ -127,48 +127,30 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
   }
 
   // ---- Tab classification based on your URLs ----
-  // 0: Home, 1: Store, 2: Services, 3: Cart, 4: Fave, 5: User, -1: unknown
   int _classifyTab(String url) {
     final u = url.toLowerCase();
 
     bool _host(String host) =>
         u.contains('://$host') || u.contains('://www.$host');
 
-    // Home
     if (_host('5star-wireless.com') &&
         (u == 'https://5star-wireless.com/' ||
-            u.startsWith('https://5star-wireless.com/?'))) {
-      return 0;
-    }
+            u.startsWith('https://5star-wireless.com/?'))) return 0;
 
-    // Store (all products, any collections, any products)
     if (_host('5star-wireless.com') &&
         (u.startsWith('https://5star-wireless.com/collections/') ||
             u.contains('/collections/all-products') ||
-            u.contains('/products/'))) {
-      return 1;
-    }
+            u.contains('/products/'))) return 1;
 
-    // Services page
-    if (_host('5star-wireless.com') && u.contains('/pages/our-services')) {
+    if (_host('5star-wireless.com') && u.contains('/pages/our-services'))
       return 2;
-    }
 
-    // Cart
-    if (_host('5star-wireless.com') && u.contains('/cart')) {
-      return 3;
-    }
+    if (_host('5star-wireless.com') && u.contains('/cart')) return 3;
 
-    // Favorites / Wishlist
-    if (_host('5star-wireless.com') && u.contains('/pages/wishlist')) {
-      return 4;
-    }
+    if (_host('5star-wireless.com') && u.contains('/pages/wishlist')) return 4;
 
-    // User (Shopify auth/account)
     if (_host('shopify.com') &&
-        (u.contains('/authentication/') || u.contains('/account'))) {
-      return 5;
-    }
+        (u.contains('/authentication/') || u.contains('/account'))) return 5;
 
     return -1;
   }
@@ -177,11 +159,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     if (url.isEmpty) return;
     final idx = _classifyTab(url);
     if (idx < 0) return;
-
-    // Already on this tab? do nothing
     if (FFAppState().activeTabIndex == idx) return;
-
-    // Debounce duplicate requests
     if (_lastNotifiedIndex == idx) return;
     _lastNotifiedIndex = idx;
 
@@ -194,24 +172,19 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     }
   }
 
-  // React to parameter changes from FF
   @override
   void didUpdateWidget(covariant WebviewXBrowser oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // 1) Hard refresh when the tick changes
     if (widget.refreshTick != oldWidget.refreshTick && _ready) {
       _controller!.reload();
     }
 
-    // 2) If initialUrl changes, load the new URL
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
-      // Your FF-managed fork expects a single argument: WebViewContent
-      _controller!.loadContent(
-        WebViewContent(source: newUrl, sourceType: SourceType.url),
-      );
+      // ✅ Fixed for your current webviewx_plus fork
+      _controller!.loadContent(newUrl);
     }
   }
 
@@ -234,7 +207,6 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
               key: const ValueKey('webviewx_plus'),
               initialContent: startUrl,
               initialSourceType: SourceType.url,
-
               onWebViewCreated: (ctrl) async {
                 _controller = ctrl;
                 await _refreshNav();
@@ -242,13 +214,8 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                   await _maybeSwitchTabByUrl(startUrl);
                 } catch (_) {}
               },
-
-              onPageStarted: (url) async {
-                await _refreshNav();
-              },
-
+              onPageStarted: (url) async => await _refreshNav(),
               onPageFinished: (url) async {
-                // Install URL watcher every time a page completes (covers SPA)
                 await _controller!.evalRawJavascript(_enableScrollJS);
                 await _controller!.evalRawJavascript(_urlWatcherJS);
                 await _refreshNav();
@@ -256,8 +223,6 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                   await _maybeSwitchTabByUrl(url);
                 } catch (_) {}
               },
-
-              // JS → Dart callback for SPA URL changes
               dartCallBacks: {
                 DartCallback(
                   name: 'FF_onUrlChange',
@@ -267,19 +232,15 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                   },
                 ),
               },
-
               webSpecificParams: const WebSpecificParams(
                 webAllowFullscreenContent: true,
               ),
               mobileSpecificParams: const MobileSpecificParams(
                 androidEnableHybridComposition: true,
               ),
-
               height: widget.height ?? MediaQuery.of(context).size.height,
               width: widget.width ?? MediaQuery.of(context).size.width,
             ),
-
-            // Back button (5Star blue #07BCFD) — checks canGoBack at tap-time
             if (showBack)
               Positioned(
                 left: 12,
@@ -292,8 +253,6 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                     if (_ready && await _controller!.canGoBack()) {
                       await _controller!.goBack();
                       await _refreshNav();
-                    } else {
-                      // Optional: no-op or snackbar
                     }
                   },
                   child: const Icon(Icons.arrow_back, color: Colors.white),
