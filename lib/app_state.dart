@@ -34,6 +34,9 @@ class FFAppState extends ChangeNotifier {
       _termsAcceptedv3 =
           prefs.getBool('ff_termsAcceptedv3') ?? _termsAcceptedv3;
     });
+    _safeInit(() {
+      _termsAccepted = prefs.getBool('ff_termsAccepted') ?? _termsAccepted;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -190,6 +193,13 @@ class FFAppState extends ChangeNotifier {
   String get longPressJson => _longPressJson;
   set longPressJson(String value) {
     _longPressJson = value;
+  }
+
+  bool _termsAccepted = false;
+  bool get termsAccepted => _termsAccepted;
+  set termsAccepted(bool value) {
+    _termsAccepted = value;
+    prefs.setBool('ff_termsAccepted', value);
   }
 }
 

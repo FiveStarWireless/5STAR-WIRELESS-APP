@@ -31,8 +31,17 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().termsAcceptedv3) {
-        context.goNamed(HomePageWidget.routeName);
+      if (FFAppState().termsAccepted) {
+        context.goNamed(
+          TabsHostWidget.routeName,
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.fade,
+              duration: Duration(milliseconds: 0),
+            ),
+          },
+        );
       }
     });
 
@@ -505,17 +514,15 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                     ),
                     FFButtonWidget(
                       onPressed: () async {
-                        FFAppState().termsAcceptedv1 = true;
-                        safeSetState(() {});
+                        FFAppState().termsAccepted = true;
 
                         context.goNamed(
                           TabsHostWidget.routeName,
                           extra: <String, dynamic>{
                             kTransitionInfoKey: TransitionInfo(
                               hasTransition: true,
-                              transitionType: PageTransitionType.scale,
-                              alignment: Alignment.bottomCenter,
-                              duration: Duration(milliseconds: 180),
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
                             ),
                           },
                         );
