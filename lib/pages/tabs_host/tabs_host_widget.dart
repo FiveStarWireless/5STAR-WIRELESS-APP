@@ -358,7 +358,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                         HapticFeedback.lightImpact();
                         FFAppState().activeTabIndex = 1;
                         await _model.tabsPagerController?.animateToPage(
-                          FFAppState().activeTabIndex,
+                          1,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
@@ -367,7 +367,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                         HapticFeedback.lightImpact();
                         FFAppState().activeTabIndex = 2;
                         await _model.tabsPagerController?.animateToPage(
-                          FFAppState().activeTabIndex,
+                          2,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
@@ -376,7 +376,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                         HapticFeedback.lightImpact();
                         FFAppState().activeTabIndex = 3;
                         await _model.tabsPagerController?.animateToPage(
-                          FFAppState().activeTabIndex,
+                          3,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
@@ -385,7 +385,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                         HapticFeedback.lightImpact();
                         FFAppState().activeTabIndex = 0;
                         await _model.tabsPagerController?.animateToPage(
-                          FFAppState().activeTabIndex,
+                          0,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
@@ -394,7 +394,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                         HapticFeedback.lightImpact();
                         FFAppState().activeTabIndex = 5;
                         await _model.tabsPagerController?.animateToPage(
-                          FFAppState().activeTabIndex,
+                          5,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
@@ -403,7 +403,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                         HapticFeedback.lightImpact();
                         FFAppState().activeTabIndex = 4;
                         await _model.tabsPagerController?.animateToPage(
-                          FFAppState().activeTabIndex,
+                          4,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
