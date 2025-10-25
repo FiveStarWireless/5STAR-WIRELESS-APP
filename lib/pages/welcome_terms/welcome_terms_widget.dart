@@ -31,7 +31,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().termsAccepted) {
+      if (FFAppState().termsAcceptedv4) {
         context.goNamed(
           TabsHostWidget.routeName,
           extra: <String, dynamic>{
@@ -514,7 +514,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                     ),
                     FFButtonWidget(
                       onPressed: () async {
-                        FFAppState().termsAccepted = true;
+                        FFAppState().termsAcceptedv4 = true;
 
                         context.goNamed(
                           TabsHostWidget.routeName,

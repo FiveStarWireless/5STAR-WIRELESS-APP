@@ -23,6 +23,9 @@ class FFAppState extends ChangeNotifier {
       _clientId = prefs.getString('ff_clientId') ?? _clientId;
     });
     _safeInit(() {
+      _termsAccepted = prefs.getBool('ff_termsAccepted') ?? _termsAccepted;
+    });
+    _safeInit(() {
       _termsAcceptedv1 =
           prefs.getBool('ff_termsAcceptedv1') ?? _termsAcceptedv1;
     });
@@ -35,7 +38,8 @@ class FFAppState extends ChangeNotifier {
           prefs.getBool('ff_termsAcceptedv3') ?? _termsAcceptedv3;
     });
     _safeInit(() {
-      _termsAccepted = prefs.getBool('ff_termsAccepted') ?? _termsAccepted;
+      _termsAcceptedv4 =
+          prefs.getBool('ff_termsAcceptedv4') ?? _termsAcceptedv4;
     });
   }
 
@@ -102,6 +106,13 @@ class FFAppState extends ChangeNotifier {
     _showSettingsTray = value;
   }
 
+  bool _termsAccepted = false;
+  bool get termsAccepted => _termsAccepted;
+  set termsAccepted(bool value) {
+    _termsAccepted = value;
+    prefs.setBool('ff_termsAccepted', value);
+  }
+
   bool _termsAcceptedv1 = false;
   bool get termsAcceptedv1 => _termsAcceptedv1;
   set termsAcceptedv1(bool value) {
@@ -121,6 +132,13 @@ class FFAppState extends ChangeNotifier {
   set termsAcceptedv3(bool value) {
     _termsAcceptedv3 = value;
     prefs.setBool('ff_termsAcceptedv3', value);
+  }
+
+  bool _termsAcceptedv4 = false;
+  bool get termsAcceptedv4 => _termsAcceptedv4;
+  set termsAcceptedv4(bool value) {
+    _termsAcceptedv4 = value;
+    prefs.setBool('ff_termsAcceptedv4', value);
   }
 
   bool _bottomSeen = false;
@@ -193,13 +211,6 @@ class FFAppState extends ChangeNotifier {
   String get longPressJson => _longPressJson;
   set longPressJson(String value) {
     _longPressJson = value;
-  }
-
-  bool _termsAccepted = false;
-  bool get termsAccepted => _termsAccepted;
-  set termsAccepted(bool value) {
-    _termsAccepted = value;
-    prefs.setBool('ff_termsAccepted', value);
   }
 }
 
