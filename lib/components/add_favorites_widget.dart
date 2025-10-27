@@ -123,7 +123,9 @@ class _AddFavoritesWidgetState extends State<AddFavoritesWidget>
                           color: Colors.white,
                           size: 16.0,
                         ),
-                        onPressed: () async {},
+                        onPressed: () {
+                          print('IconButton pressed ...');
+                        },
                       ),
                       FlutterFlowIconButton(
                         borderRadius: 16.0,
@@ -134,7 +136,9 @@ class _AddFavoritesWidgetState extends State<AddFavoritesWidget>
                           color: Colors.white,
                           size: 16.0,
                         ),
-                        onPressed: () async {},
+                        onPressed: () {
+                          print('IconButton pressed ...');
+                        },
                       ),
                     ].divide(SizedBox(width: 6.0)),
                   ),

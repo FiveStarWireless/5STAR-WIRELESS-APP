@@ -91,7 +91,8 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Color(0xFF07BCFD),
+          backgroundColor:
+              FFAppState().isDarkMode ? Color(0xFF0F1115) : Color(0xFF07BCFD),
           automaticallyImplyLeading: false,
           title: Align(
             alignment: AlignmentDirectional(0.0, 0.0),

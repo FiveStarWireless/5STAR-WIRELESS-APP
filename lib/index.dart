@@ -1,13 +1,7 @@
 // Export pages
 export '/welcomepage/welcomepage_widget.dart' show WelcomepageWidget;
-export '/pages/welcome_terms/welcome_terms_widget.dart' show WelcomeTermsWidget;
-export '/policy_refund/policy_refund_widget.dart' show PolicyRefundWidget;
-export '/policy_terms/policy_terms_widget.dart' show PolicyTermsWidget;
-export '/policy_store/policy_store_widget.dart' show PolicyStoreWidget;
-export '/policy_shipping/policy_shipping_widget.dart' show PolicyShippingWidget;
 export '/collection_page/collection_page_widget.dart' show CollectionPageWidget;
 export '/services_page/services_page_widget.dart' show ServicesPageWidget;
 export '/cart_page/cart_page_widget.dart' show CartPageWidget;
-export '/home_page/home_page_widget.dart' show HomePageWidget;
-export '/user_page/user_page_widget.dart' show UserPageWidget;
 export '/pages/tabs_host/tabs_host_widget.dart' show TabsHostWidget;
+export '/pages/welcome_terms/welcome_terms_widget.dart' show WelcomeTermsWidget;

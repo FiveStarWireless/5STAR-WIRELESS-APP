@@ -81,7 +81,8 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(80.0),
           child: AppBar(
-            backgroundColor: Color(0xFF00BDFE),
+            backgroundColor:
+                FFAppState().isDarkMode ? Color(0xFF0F1115) : Color(0xFF07BCFD),
             automaticallyImplyLeading: false,
             title: Align(
               alignment: AlignmentDirectional(0.0, 0.0),

@@ -98,36 +98,6 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_termsAcceptedv4', value);
   }
 
-  bool _bottomSeen = false;
-  bool get bottomSeen => _bottomSeen;
-  set bottomSeen(bool value) {
-    _bottomSeen = value;
-  }
-
-  bool _visitedTerms = false;
-  bool get visitedTerms => _visitedTerms;
-  set visitedTerms(bool value) {
-    _visitedTerms = value;
-  }
-
-  bool _visitedRefund = false;
-  bool get visitedRefund => _visitedRefund;
-  set visitedRefund(bool value) {
-    _visitedRefund = value;
-  }
-
-  bool _visitedStore = false;
-  bool get visitedStore => _visitedStore;
-  set visitedStore(bool value) {
-    _visitedStore = value;
-  }
-
-  bool _visitedShipping = false;
-  bool get visitedShipping => _visitedShipping;
-  set visitedShipping(bool value) {
-    _visitedShipping = value;
-  }
-
   int _homeNonce = 0;
   int get homeNonce => _homeNonce;
   set homeNonce(int value) {

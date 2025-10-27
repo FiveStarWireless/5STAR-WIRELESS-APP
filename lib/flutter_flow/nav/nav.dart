@@ -94,31 +94,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => WelcomepageWidget(),
         ),
         FFRoute(
-          name: WelcomeTermsWidget.routeName,
-          path: WelcomeTermsWidget.routePath,
-          builder: (context, params) => WelcomeTermsWidget(),
-        ),
-        FFRoute(
-          name: PolicyRefundWidget.routeName,
-          path: PolicyRefundWidget.routePath,
-          builder: (context, params) => PolicyRefundWidget(),
-        ),
-        FFRoute(
-          name: PolicyTermsWidget.routeName,
-          path: PolicyTermsWidget.routePath,
-          builder: (context, params) => PolicyTermsWidget(),
-        ),
-        FFRoute(
-          name: PolicyStoreWidget.routeName,
-          path: PolicyStoreWidget.routePath,
-          builder: (context, params) => PolicyStoreWidget(),
-        ),
-        FFRoute(
-          name: PolicyShippingWidget.routeName,
-          path: PolicyShippingWidget.routePath,
-          builder: (context, params) => PolicyShippingWidget(),
-        ),
-        FFRoute(
           name: CollectionPageWidget.routeName,
           path: CollectionPageWidget.routePath,
           builder: (context, params) => CollectionPageWidget(),
@@ -134,19 +109,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CartPageWidget(),
         ),
         FFRoute(
-          name: HomePageWidget.routeName,
-          path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
-        ),
-        FFRoute(
-          name: UserPageWidget.routeName,
-          path: UserPageWidget.routePath,
-          builder: (context, params) => UserPageWidget(),
-        ),
-        FFRoute(
           name: TabsHostWidget.routeName,
           path: TabsHostWidget.routePath,
           builder: (context, params) => TabsHostWidget(),
+        ),
+        FFRoute(
+          name: WelcomeTermsWidget.routeName,
+          path: WelcomeTermsWidget.routePath,
+          builder: (context, params) => WelcomeTermsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
