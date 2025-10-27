@@ -94,21 +94,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => WelcomepageWidget(),
         ),
         FFRoute(
-          name: CollectionPageWidget.routeName,
-          path: CollectionPageWidget.routePath,
-          builder: (context, params) => CollectionPageWidget(),
-        ),
-        FFRoute(
-          name: ServicesPageWidget.routeName,
-          path: ServicesPageWidget.routePath,
-          builder: (context, params) => ServicesPageWidget(),
-        ),
-        FFRoute(
-          name: CartPageWidget.routeName,
-          path: CartPageWidget.routePath,
-          builder: (context, params) => CartPageWidget(),
-        ),
-        FFRoute(
           name: TabsHostWidget.routeName,
           path: TabsHostWidget.routePath,
           builder: (context, params) => TabsHostWidget(),
@@ -117,6 +102,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: WelcomeTermsWidget.routeName,
           path: WelcomeTermsWidget.routePath,
           builder: (context, params) => WelcomeTermsWidget(),
+        ),
+        FFRoute(
+          name: TabsHostCopyWidget.routeName,
+          path: TabsHostCopyWidget.routePath,
+          builder: (context, params) => TabsHostCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
