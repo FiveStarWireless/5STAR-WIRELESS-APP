@@ -104,9 +104,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => WelcomeTermsWidget(),
         ),
         FFRoute(
-          name: TabsHostCopyWidget.routeName,
-          path: TabsHostCopyWidget.routePath,
-          builder: (context, params) => TabsHostCopyWidget(),
+          name: RfreshbuttonWidget.routeName,
+          path: RfreshbuttonWidget.routePath,
+          builder: (context, params) => RfreshbuttonWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

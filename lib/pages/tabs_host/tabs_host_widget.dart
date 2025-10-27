@@ -365,63 +365,6 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                   ),
                 ],
               ),
-              Align(
-                alignment: AlignmentDirectional(1.0, 0.8),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 13.0, 0.0),
-                  child: Container(
-                    width: 50.0,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                    ),
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        HapticFeedback.lightImpact();
-                        if (FFAppState().activeTabIndex == 0) {
-                          FFAppState().homeNonce = FFAppState().homeNonce + 1;
-                        } else if (FFAppState().activeTabIndex == 1) {
-                          FFAppState().storeNonce = FFAppState().storeNonce + 1;
-                        } else if (FFAppState().activeTabIndex == 2) {
-                          FFAppState().servicesNonce =
-                              FFAppState().servicesNonce + 1;
-                        } else if (FFAppState().activeTabIndex == 3) {
-                          FFAppState().cartNonce = FFAppState().cartNonce + 1;
-                        } else if (FFAppState().activeTabIndex == 4) {
-                          FFAppState().faveNonce = FFAppState().faveNonce + 1;
-                        } else if (FFAppState().activeTabIndex == 5) {
-                          FFAppState().usersNonce = FFAppState().usersNonce + 1;
-                        }
-
-                        await Future.delayed(
-                          Duration(
-                            milliseconds: 800,
-                          ),
-                        );
-                        FFAppState().showToast = true;
-                        safeSetState(() {});
-                        await Future.delayed(
-                          Duration(
-                            milliseconds: 1200,
-                          ),
-                        );
-                        FFAppState().showToast = false;
-                        safeSetState(() {});
-                      },
-                      child: Icon(
-                        Icons.replay_circle_filled_rounded,
-                        color: Color(0xFF07BCFD),
-                        size: 40.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
               if (FFAppState().showToast)
                 Align(
                   alignment: AlignmentDirectional(0.0, -1.0),
