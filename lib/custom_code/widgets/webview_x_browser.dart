@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 // Set your widget name, define your parameter, and then add the
 // boilerplate code using the green button on the right!
+import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 
@@ -19,7 +20,7 @@ class WebviewXBrowser extends StatefulWidget {
     Key? key,
     required this.initialUrl,
     this.showBackButton = true,
-    this.refreshTick,
+    this.refreshTick, // when this int changes, reload()
     this.width,
     this.height,
   }) : super(key: key);
@@ -39,12 +40,23 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
   WebViewXController? _controller;
   bool _canGoBack = false;
 
-  // pull-to-refresh state (top-edge only)
+  // Pull-to-refresh state
   bool _isRefreshing = false;
   double _dragStartDy = 0;
   bool _armedForRefresh = false;
 
+  // Top banner state
+  bool _showBanner = false;
+  String _bannerText = '';
+  Timer? _bannerTimer;
+
   bool get _ready => _controller != null;
+
+  @override
+  void dispose() {
+    _bannerTimer?.cancel();
+    super.dispose();
+  }
 
   Future<void> _refreshNav() async {
     if (!_ready) return;
@@ -53,7 +65,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     setState(() => _canGoBack = back);
   }
 
-  // optional scroll re-enabler
+  // Optional: emulate FF "Force Allow Scrolling"
   static const String _enableScrollJS = r"""
 (function(){
   try {
@@ -76,46 +88,76 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     if (_ready && await _controller!.canGoBack()) {
       await _controller!.goBack();
       await _refreshNav();
-      return false;
+      return false; // consume system back
     }
     return true;
   }
 
+  /// Check if the page is scrolled to top
   Future<bool> _atTop() async {
     if (!_ready) return true;
     try {
       final v = await _controller!.evalRawJavascript(
         'window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0',
       );
-      final y = (v is num) ? v.toDouble() : double.tryParse('$v') ?? 0.0;
+      double y;
+      if (v is num) {
+        y = (v as num).toDouble();
+      } else {
+        y = double.tryParse('$v') ?? 0.0;
+      }
       return y <= 0.0;
     } catch (_) {
       return true;
     }
   }
 
+  void _showBannerNow(String text, {Duration? autoHideAfter}) {
+    if (!mounted) return;
+    setState(() {
+      _bannerText = text;
+      _showBanner = true;
+    });
+    _bannerTimer?.cancel();
+    if (autoHideAfter != null) {
+      _bannerTimer = Timer(autoHideAfter, () {
+        if (mounted) setState(() => _showBanner = false);
+      });
+    }
+  }
+
   Future<void> _doRefresh() async {
     if (!_ready || _isRefreshing) return;
+
+    // Immediately show "Refreshing..." banner
+    _showBannerNow('Refreshing...');
     HapticFeedback.mediumImpact();
+
     setState(() => _isRefreshing = true);
+
     try {
       await _controller!.reload();
       await Future.delayed(const Duration(milliseconds: 350));
-    } finally {
-      if (mounted) setState(() => _isRefreshing = false);
-    }
+    } catch (_) {}
+
+    if (!mounted) return;
+    setState(() => _isRefreshing = false);
+
+    // Switch to "Refreshed!" and auto-hide
+    _showBannerNow('Refreshed!',
+        autoHideAfter: const Duration(milliseconds: 1500));
   }
 
   @override
   void didUpdateWidget(covariant WebviewXBrowser oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // external refresh trigger
+    // reload when refreshTick changes
     if (widget.refreshTick != oldWidget.refreshTick && _ready) {
       _doRefresh();
     }
 
-    // change URL
+    // load new URL if initialUrl changes
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
@@ -125,82 +167,68 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
 
   @override
   Widget build(BuildContext context) {
-    final showBack = widget.showBackButton ?? true;
-    final startUrl = (widget.initialUrl == null || widget.initialUrl!.isEmpty)
-        ? 'https://5star-wireless.com'
-        : widget.initialUrl!;
+    final bool showBack = widget.showBackButton ?? true;
+    final String startUrl =
+        (widget.initialUrl == null || widget.initialUrl!.isEmpty)
+            ? 'https://5star-wireless.com'
+            : widget.initialUrl!;
 
-    final w = widget.width ?? double.infinity;
-    final h = widget.height ?? double.infinity;
+    final double w = widget.width ?? double.infinity;
+    final double h = widget.height ?? double.infinity;
 
     return WillPopScope(
       onWillPop: _onWillPop,
       child: SizedBox(
         width: w,
         height: h,
-        child: Stack(
-          children: [
-            // ---- The WebView itself (receives normal scroll gestures) ----
-            WebViewX(
-              key: const ValueKey('webviewx_plus'),
-              initialContent: startUrl,
-              initialSourceType: SourceType.url,
-              onWebViewCreated: (ctrl) async {
-                _controller = ctrl;
-                await _refreshNav();
-              },
-              onPageStarted: (_) async => _refreshNav(),
-              onPageFinished: (_) async {
-                await _controller!.evalRawJavascript(_enableScrollJS);
-                await _refreshNav();
-              },
-              webSpecificParams: const WebSpecificParams(
-                webAllowFullscreenContent: true,
-              ),
-              mobileSpecificParams: const MobileSpecificParams(
-                androidEnableHybridComposition: true,
-              ),
-              width: w,
-              height: h,
-            ),
-
-            // ---- A *thin* top-edge pull zone (doesn't block normal scrolling) ----
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              // 24–32 px feels right; tweak if you want a bigger/smaller target
-              child: GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onVerticalDragStart: (d) async {
-                  // only arm if page is already at the top
-                  if (await _atTop()) {
-                    _dragStartDy = d.globalPosition.dy;
-                    _armedForRefresh = true;
-                  } else {
-                    _armedForRefresh = false;
-                  }
+        // Detect a downward pull from the top → refresh
+        child: GestureDetector(
+          onVerticalDragStart: (d) {
+            _dragStartDy = d.globalPosition.dy;
+            _armedForRefresh = true;
+          },
+          onVerticalDragUpdate: (d) async {
+            if (!_armedForRefresh || _isRefreshing) return;
+            final delta = d.globalPosition.dy - _dragStartDy;
+            if (delta > 80) {
+              final top = await _atTop();
+              if (top) {
+                _armedForRefresh = false;
+                await _doRefresh();
+              }
+            }
+          },
+          onVerticalDragEnd: (_) => _armedForRefresh = false,
+          child: Stack(
+            children: [
+              WebViewX(
+                key: const ValueKey('webviewx_plus'),
+                initialContent: startUrl,
+                initialSourceType: SourceType.url,
+                onWebViewCreated: (ctrl) async {
+                  _controller = ctrl;
+                  await _refreshNav();
                 },
-                onVerticalDragUpdate: (d) async {
-                  if (!_armedForRefresh || _isRefreshing) return;
-                  final delta = d.globalPosition.dy - _dragStartDy;
-                  if (delta > 80) {
-                    _armedForRefresh = false;
-                    await _doRefresh();
-                  }
+                onPageStarted: (url) async => await _refreshNav(),
+                onPageFinished: (url) async {
+                  await _controller!.evalRawJavascript(_enableScrollJS);
+                  await _refreshNav();
                 },
-                onVerticalDragEnd: (_) => _armedForRefresh = false,
-                child: const SizedBox(height: 28),
+                webSpecificParams: const WebSpecificParams(
+                  webAllowFullscreenContent: true,
+                ),
+                mobileSpecificParams: const MobileSpecificParams(
+                  androidEnableHybridComposition: true,
+                ),
+                height: h,
+                width: w,
               ),
-            ),
 
-            // ---- Refresh spinner overlay ----
-            if (_isRefreshing)
-              Positioned(
-                top: MediaQuery.of(context).padding.top + 8,
-                left: 0,
-                right: 0,
-                child: Center(
+              // Small spinner while the refresh is running
+              if (_isRefreshing)
+                Positioned(
+                  top: MediaQuery.of(context).padding.top + 8,
+                  right: 10,
                   child: Container(
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
@@ -214,27 +242,55 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                     ),
                   ),
                 ),
-              ),
 
-            // ---- Back button ----
-            if (showBack)
-              Positioned(
-                left: 12,
-                top: 12,
-                child: FloatingActionButton.small(
-                  heroTag: 'wv_back',
-                  backgroundColor: const Color(0xFF07BCFD),
-                  elevation: 3,
-                  onPressed: () async {
-                    if (_ready && await _controller!.canGoBack()) {
-                      await _controller!.goBack();
-                      await _refreshNav();
-                    }
-                  },
-                  child: const Icon(Icons.arrow_back, color: Colors.white),
+              // Back button (5Star blue #07BCFD)
+              if (showBack)
+                Positioned(
+                  left: 12,
+                  top: MediaQuery.of(context).padding.top + 12,
+                  child: FloatingActionButton.small(
+                    heroTag: 'wv_back',
+                    backgroundColor: const Color(0xFF07BCFD),
+                    elevation: 3,
+                    onPressed: () async {
+                      if (_ready && await _controller!.canGoBack()) {
+                        await _controller!.goBack();
+                        await _refreshNav();
+                      }
+                    },
+                    child: const Icon(Icons.arrow_back, color: Colors.white),
+                  ),
                 ),
-              ),
-          ],
+
+              // Top banner ("Refreshing..." → "Refreshed!")
+              if (_showBanner)
+                Positioned(
+                  top: MediaQuery.of(context).padding.top + 8,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xB107BCFD), // #b107bcfd
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Text(
+                        _bannerText,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
