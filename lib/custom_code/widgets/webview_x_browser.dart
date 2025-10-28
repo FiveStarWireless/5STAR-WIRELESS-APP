@@ -20,7 +20,7 @@ class WebviewXBrowser extends StatefulWidget {
     Key? key,
     required this.initialUrl,
     this.showBackButton = true,
-    this.refreshTick, // when this int changes, reload()
+    this.refreshTick,
     this.width,
     this.height,
   }) : super(key: key);
@@ -40,12 +40,10 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
   WebViewXController? _controller;
   bool _canGoBack = false;
 
-  // Pull-to-refresh state
   bool _isRefreshing = false;
   double _dragStartDy = 0;
   bool _armedForRefresh = false;
 
-  // Top banner state
   bool _showBanner = false;
   String _bannerText = '';
   Timer? _bannerTimer;
@@ -65,7 +63,6 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     setState(() => _canGoBack = back);
   }
 
-  // Optional: emulate FF "Force Allow Scrolling"
   static const String _enableScrollJS = r"""
 (function(){
   try {
@@ -73,13 +70,6 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     document.documentElement.style.overflowY='auto';
     document.body.style.overflowX='auto';
     document.body.style.overflowY='auto';
-    var meta=document.querySelector('meta[name=viewport]');
-    if(!meta){
-      meta=document.createElement('meta');
-      meta.name='viewport';
-      meta.content='width=device-width, initial-scale=1, maximum-scale=1';
-      document.head.appendChild(meta);
-    }
   } catch(e){}
 })();
 """;
@@ -88,12 +78,11 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
     if (_ready && await _controller!.canGoBack()) {
       await _controller!.goBack();
       await _refreshNav();
-      return false; // consume system back
+      return false;
     }
     return true;
   }
 
-  /// Check if the page is scrolled to top
   Future<bool> _atTop() async {
     if (!_ready) return true;
     try {
@@ -102,7 +91,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
       );
       double y;
       if (v is num) {
-        y = (v as num).toDouble();
+        y = v.toDouble();
       } else {
         y = double.tryParse('$v') ?? 0.0;
       }
@@ -129,35 +118,32 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
   Future<void> _doRefresh() async {
     if (!_ready || _isRefreshing) return;
 
-    // Immediately show "Refreshing..." banner
-    _showBannerNow('Refreshing...');
     HapticFeedback.mediumImpact();
-
     setState(() => _isRefreshing = true);
+    _showBannerNow('Refreshing...');
+
+    // 🔁 Add a slight delay before reload (for natural pull feel)
+    await Future.delayed(const Duration(milliseconds: 600));
 
     try {
       await _controller!.reload();
-      await Future.delayed(const Duration(milliseconds: 350));
+      await Future.delayed(const Duration(milliseconds: 400));
     } catch (_) {}
 
     if (!mounted) return;
     setState(() => _isRefreshing = false);
 
-    // Switch to "Refreshed!" and auto-hide
+    // ✅ Show “Refreshed!” for longer (1.8s)
     _showBannerNow('Refreshed!',
-        autoHideAfter: const Duration(milliseconds: 1500));
+        autoHideAfter: const Duration(milliseconds: 1800));
   }
 
   @override
   void didUpdateWidget(covariant WebviewXBrowser oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-    // reload when refreshTick changes
     if (widget.refreshTick != oldWidget.refreshTick && _ready) {
       _doRefresh();
     }
-
-    // load new URL if initialUrl changes
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
@@ -181,115 +167,118 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
       child: SizedBox(
         width: w,
         height: h,
-        // Detect a downward pull from the top → refresh
-        child: GestureDetector(
-          onVerticalDragStart: (d) {
-            _dragStartDy = d.globalPosition.dy;
-            _armedForRefresh = true;
-          },
-          onVerticalDragUpdate: (d) async {
-            if (!_armedForRefresh || _isRefreshing) return;
-            final delta = d.globalPosition.dy - _dragStartDy;
-            if (delta > 80) {
-              final top = await _atTop();
-              if (top) {
-                _armedForRefresh = false;
-                await _doRefresh();
+        child: Listener(
+          onPointerSignal: (_) {}, // keeps vertical scrolling working
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onVerticalDragStart: (d) {
+              _dragStartDy = d.globalPosition.dy;
+              _armedForRefresh = true;
+            },
+            onVerticalDragUpdate: (d) async {
+              if (!_armedForRefresh || _isRefreshing) return;
+              final delta = d.globalPosition.dy - _dragStartDy;
+              if (delta > 80) {
+                final top = await _atTop();
+                if (top) {
+                  _armedForRefresh = false;
+                  await _doRefresh();
+                }
               }
-            }
-          },
-          onVerticalDragEnd: (_) => _armedForRefresh = false,
-          child: Stack(
-            children: [
-              WebViewX(
-                key: const ValueKey('webviewx_plus'),
-                initialContent: startUrl,
-                initialSourceType: SourceType.url,
-                onWebViewCreated: (ctrl) async {
-                  _controller = ctrl;
-                  await _refreshNav();
-                },
-                onPageStarted: (url) async => await _refreshNav(),
-                onPageFinished: (url) async {
-                  await _controller!.evalRawJavascript(_enableScrollJS);
-                  await _refreshNav();
-                },
-                webSpecificParams: const WebSpecificParams(
-                  webAllowFullscreenContent: true,
-                ),
-                mobileSpecificParams: const MobileSpecificParams(
-                  androidEnableHybridComposition: true,
-                ),
-                height: h,
-                width: w,
-              ),
-
-              // Small spinner while the refresh is running
-              if (_isRefreshing)
-                Positioned(
-                  top: MediaQuery.of(context).padding.top + 8,
-                  right: 10,
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.35),
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    child: const SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    ),
+            },
+            onVerticalDragEnd: (_) => _armedForRefresh = false,
+            child: Stack(
+              children: [
+                WebViewX(
+                  key: const ValueKey('webviewx_plus'),
+                  initialContent: startUrl,
+                  initialSourceType: SourceType.url,
+                  onWebViewCreated: (ctrl) async {
+                    _controller = ctrl;
+                    await _refreshNav();
+                  },
+                  onPageStarted: (url) async => await _refreshNav(),
+                  onPageFinished: (url) async {
+                    await _controller!.evalRawJavascript(_enableScrollJS);
+                    await _refreshNav();
+                  },
+                  webSpecificParams: const WebSpecificParams(
+                    webAllowFullscreenContent: true,
                   ),
-                ),
-
-              // Back button (5Star blue #07BCFD)
-              if (showBack)
-                Positioned(
-                  left: 12,
-                  top: MediaQuery.of(context).padding.top + 12,
-                  child: FloatingActionButton.small(
-                    heroTag: 'wv_back',
-                    backgroundColor: const Color(0xFF07BCFD),
-                    elevation: 3,
-                    onPressed: () async {
-                      if (_ready && await _controller!.canGoBack()) {
-                        await _controller!.goBack();
-                        await _refreshNav();
-                      }
-                    },
-                    child: const Icon(Icons.arrow_back, color: Colors.white),
+                  mobileSpecificParams: const MobileSpecificParams(
+                    androidEnableHybridComposition: true,
                   ),
+                  height: h,
+                  width: w,
                 ),
 
-              // Top banner ("Refreshing..." → "Refreshed!")
-              if (_showBanner)
-                Positioned(
-                  top: MediaQuery.of(context).padding.top + 8,
-                  left: 0,
-                  right: 0,
-                  child: Center(
+                // Spinner while refreshing
+                if (_isRefreshing)
+                  Positioned(
+                    top: MediaQuery.of(context).padding.top + 8,
+                    right: 10,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 8,
-                      ),
+                      padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
-                        color: const Color(0xB107BCFD), // #b107bcfd
-                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.black.withOpacity(0.35),
+                        borderRadius: BorderRadius.circular(18),
                       ),
-                      child: Text(
-                        _bannerText,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.5,
+                      child: const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                    ),
+                  ),
+
+                // Back button
+                if (showBack)
+                  Positioned(
+                    left: 12,
+                    top: MediaQuery.of(context).padding.top + 12,
+                    child: FloatingActionButton.small(
+                      heroTag: 'wv_back',
+                      backgroundColor: const Color(0xFF07BCFD),
+                      elevation: 3,
+                      onPressed: () async {
+                        if (_ready && await _controller!.canGoBack()) {
+                          await _controller!.goBack();
+                          await _refreshNav();
+                        }
+                      },
+                      child: const Icon(Icons.arrow_back, color: Colors.white),
+                    ),
+                  ),
+
+                // Top banner ("Refreshing..." or "Refreshed!")
+                if (_showBanner)
+                  Positioned(
+                    top: MediaQuery.of(context).padding.top + 8,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xB107BCFD),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Text(
+                          _bannerText,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.5,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
