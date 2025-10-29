@@ -47,26 +47,33 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
     });
 
     animationsMap.addAll({
-      'containerOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
+      'containerOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
         effectsBuilder: () => [
           MoveEffect(
             curve: Curves.easeIn,
-            delay: 400.0.ms,
-            duration: 200.0.ms,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
             begin: Offset(0.0, -100.0),
             end: Offset(0.0, 0.0),
           ),
           MoveEffect(
-            curve: Curves.easeIn,
-            delay: 2000.0.ms,
-            duration: 200.0.ms,
+            curve: Curves.easeOut,
+            delay: 1500.0.ms,
+            duration: 600.0.ms,
             begin: Offset(0.0, 0.0),
             end: Offset(0.0, -100.0),
           ),
         ],
       ),
     });
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -174,22 +181,27 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                             RefreshIndicator(
                               onRefresh: () async {
                                 FFAppState().isRefreshing = true;
-                                safeSetState(() {});
                                 await Future.delayed(
                                   Duration(
                                     milliseconds: 600,
                                   ),
                                 );
+                                if (animationsMap[
+                                        'containerOnActionTriggerAnimation'] !=
+                                    null) {
+                                  animationsMap[
+                                          'containerOnActionTriggerAnimation']!
+                                      .controller
+                                      .forward(from: 0.0);
+                                }
                                 FFAppState().homeNonce =
                                     FFAppState().homeNonce + 1;
-                                safeSetState(() {});
                                 await Future.delayed(
                                   Duration(
-                                    milliseconds: 400,
+                                    milliseconds: 2000,
                                   ),
                                 );
                                 FFAppState().isRefreshing = false;
-                                safeSetState(() {});
                               },
                               child: SingleChildScrollView(
                                 physics: const AlwaysScrollableScrollPhysics(),
@@ -437,8 +449,9 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                           ),
                         ),
                       ),
-                    ).animateOnPageLoad(
-                        animationsMap['containerOnPageLoadAnimation']!),
+                    ).animateOnActionTrigger(
+                      animationsMap['containerOnActionTriggerAnimation']!,
+                    ),
                   ),
                 ),
             ],

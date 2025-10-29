@@ -18,7 +18,7 @@ class WebviewXBrowser extends StatefulWidget {
     Key? key,
     required this.initialUrl,
     this.showBackButton = true,
-    this.refreshTick, // external refresh trigger (increment the int)
+    this.refreshTick, // bump this int to trigger reload
     this.width,
     this.height,
   }) : super(key: key);
@@ -26,8 +26,6 @@ class WebviewXBrowser extends StatefulWidget {
   final String? initialUrl;
   final bool? showBackButton;
   final int? refreshTick;
-
-  // Auto-passed by FlutterFlow
   final double? width;
   final double? height;
 
@@ -37,59 +35,54 @@ class WebviewXBrowser extends StatefulWidget {
 
 class _WebviewXBrowserState extends State<WebviewXBrowser> {
   WebViewXController? _controller;
-  bool _canGoBack = false;
-
   bool get _ready => _controller != null;
 
-  // Re-enable page scrolling and add a viewport meta if missing.
-  static const String _enableScrollJS = r"""(function(){
+  // Keep vertical scrolling enabled; add viewport meta if missing.
+  static const String _forceScrollJS = r'''
     try {
-      document.documentElement.style.overflowX='auto';
-      document.documentElement.style.overflowY='auto';
-      document.body.style.overflowX='auto';
-      document.body.style.overflowY='auto';
-      var meta=document.querySelector('meta[name=viewport]');
-      if(!meta){
-        meta=document.createElement('meta');
-        meta.name='viewport';
-        meta.content='width=device-width, initial-scale=1, maximum-scale=1';
+      const html = document.documentElement;
+      const body = document.body;
+
+      html.style.overflowY = 'auto';
+      html.style.touchAction = 'manipulation';
+      body.style.overflowY = 'auto';
+      body.style.touchAction = 'manipulation';
+
+      let meta = document.querySelector('meta[name="viewport"]');
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, initial-scale=1, maximum-scale=1';
         document.head.appendChild(meta);
       }
-    } catch(e){}
-  })();""";
+    } catch (e) {}
+  ''';
 
-  Future<void> _updateBackState() async {
-    if (!_ready) return;
-    final canBack = await _controller!.canGoBack();
-    if (mounted) setState(() => _canGoBack = canBack);
+  Future<void> _reloadIfTickChanged(int? oldTick, int? newTick) async {
+    if (_ready && oldTick != newTick) {
+      await _controller!.reload();
+    }
   }
 
   @override
   void didUpdateWidget(covariant WebviewXBrowser oldWidget) {
     super.didUpdateWidget(oldWidget);
+    _reloadIfTickChanged(oldWidget.refreshTick, widget.refreshTick);
 
-    // External refresh trigger
-    if (_ready && widget.refreshTick != oldWidget.refreshTick) {
-      _controller!.reload();
-    }
-
-    // If the URL prop changes, navigate to it
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
-      // FF fork of webviewx_plus expects a single string parameter
       _controller!.loadContent(newUrl);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final String startUrl =
-        (widget.initialUrl == null || widget.initialUrl!.isEmpty)
-            ? 'https://5star-wireless.com'
-            : widget.initialUrl!;
-    final w = widget.width ?? double.infinity;
-    final h = widget.height ?? double.infinity;
+    final startUrl = (widget.initialUrl == null || widget.initialUrl!.isEmpty)
+        ? 'https://5star-wireless.com'
+        : widget.initialUrl!;
+    final w = widget.width ?? MediaQuery.of(context).size.width;
+    final h = widget.height ?? MediaQuery.of(context).size.height;
 
     return SizedBox(
       width: w,
@@ -100,25 +93,25 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
             key: const ValueKey('webviewx_plus'),
             initialContent: startUrl,
             initialSourceType: SourceType.url,
-            onWebViewCreated: (ctrl) async {
-              _controller = ctrl;
-              await _updateBackState();
+            onWebViewCreated: (c) async {
+              _controller = c;
             },
-            onPageStarted: (url) => _updateBackState(),
+            onPageStarted: (url) async {
+              await _controller?.evalRawJavascript(_forceScrollJS);
+            },
             onPageFinished: (url) async {
-              // Ensure the page remains scrollable
-              await _controller!.evalRawJavascript(_enableScrollJS);
-              await _updateBackState();
+              await _controller?.evalRawJavascript(_forceScrollJS);
             },
-            webSpecificParams:
-                const WebSpecificParams(webAllowFullscreenContent: true),
+            webSpecificParams: const WebSpecificParams(
+              webAllowFullscreenContent: true,
+            ),
             mobileSpecificParams: const MobileSpecificParams(
               androidEnableHybridComposition: true,
             ),
             width: w,
             height: h,
           ),
-          if (widget.showBackButton ?? true)
+          if ((widget.showBackButton ?? true))
             Positioned(
               left: 12,
               top: 12,
@@ -129,7 +122,6 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                 onPressed: () async {
                   if (_ready && await _controller!.canGoBack()) {
                     await _controller!.goBack();
-                    await _updateBackState();
                   }
                 },
                 child: const Icon(Icons.arrow_back, color: Colors.white),
