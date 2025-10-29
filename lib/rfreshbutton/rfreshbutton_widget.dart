@@ -1,9 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'rfreshbutton_model.dart';
 export 'rfreshbutton_model.dart';
 
@@ -39,8 +37,6 @@ class _RfreshbuttonWidgetState extends State<RfreshbuttonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -90,47 +86,10 @@ class _RfreshbuttonWidgetState extends State<RfreshbuttonWidget> {
                       color: Colors.transparent,
                     ),
                     alignment: AlignmentDirectional(0.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        HapticFeedback.lightImpact();
-                        if (FFAppState().activeTabIndex == 0) {
-                          FFAppState().homeNonce = FFAppState().homeNonce + 1;
-                        } else if (FFAppState().activeTabIndex == 1) {
-                          FFAppState().storeNonce = FFAppState().storeNonce + 1;
-                        } else if (FFAppState().activeTabIndex == 2) {
-                          FFAppState().servicesNonce =
-                              FFAppState().servicesNonce + 1;
-                        } else if (FFAppState().activeTabIndex == 3) {
-                          FFAppState().cartNonce = FFAppState().cartNonce + 1;
-                        } else if (FFAppState().activeTabIndex == 4) {
-                          FFAppState().faveNonce = FFAppState().faveNonce + 1;
-                        } else if (FFAppState().activeTabIndex == 5) {
-                          FFAppState().usersNonce = FFAppState().usersNonce + 1;
-                        }
-
-                        await Future.delayed(
-                          Duration(
-                            milliseconds: 800,
-                          ),
-                        );
-                        FFAppState().reloadTick = FFAppState().reloadTick + 1;
-                        await Future.delayed(
-                          Duration(
-                            milliseconds: 1200,
-                          ),
-                        );
-                        FFAppState().reloadTick = FFAppState().reloadTick + 1;
-                        safeSetState(() {});
-                      },
-                      child: Icon(
-                        Icons.replay_circle_filled_rounded,
-                        color: Color(0xFF07BCFD),
-                        size: 40.0,
-                      ),
+                    child: Icon(
+                      Icons.replay_circle_filled_rounded,
+                      color: Color(0xFF07BCFD),
+                      size: 40.0,
                     ),
                   ),
                 ),

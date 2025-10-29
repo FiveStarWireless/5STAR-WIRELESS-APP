@@ -197,6 +197,37 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                   refreshTick: FFAppState().homeNonce,
                                   showRefreshButton: true,
                                   onRefreshPressed: () async {
+                                    HapticFeedback.lightImpact();
+                                    if (FFAppState().activeTabIndex == 0) {
+                                      FFAppState().homeNonce =
+                                          FFAppState().homeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        1) {
+                                      FFAppState().storeNonce =
+                                          FFAppState().storeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        2) {
+                                      FFAppState().servicesNonce =
+                                          FFAppState().servicesNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        3) {
+                                      FFAppState().cartNonce =
+                                          FFAppState().cartNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        4) {
+                                      FFAppState().faveNonce =
+                                          FFAppState().faveNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        5) {
+                                      FFAppState().usersNonce =
+                                          FFAppState().usersNonce + 1;
+                                    }
+
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 800,
+                                      ),
+                                    );
                                     FFAppState().showRefreshedText = true;
                                     safeSetState(() {});
                                     if (animationsMap[
@@ -209,11 +240,12 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                     }
                                     await Future.delayed(
                                       Duration(
-                                        milliseconds: 1500,
+                                        milliseconds: 2000,
                                       ),
                                     );
                                     FFAppState().showRefreshedText = false;
                                     safeSetState(() {});
+                                    HapticFeedback.lightImpact();
                                   },
                                 ),
                               ),
