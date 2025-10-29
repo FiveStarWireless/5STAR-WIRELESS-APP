@@ -18,16 +18,30 @@ class WebviewXBrowser extends StatefulWidget {
     Key? key,
     required this.initialUrl,
     this.showBackButton = true,
-    this.refreshTick, // bump this int to trigger reload
+    this.showRefreshButton = true, // NEW
+    this.refreshTick, // optional hard reload trigger
     this.width,
     this.height,
+
+    /// Callback when the Refresh FAB is tapped
+    this.onRefreshPressed, // NEW
+    /// Callback after a programmatic reload (via refreshTick)
+    this.onRefresh, // NEW
   }) : super(key: key);
 
+  // === FF parameters ===
   final String? initialUrl;
   final bool? showBackButton;
+  final bool? showRefreshButton;
   final int? refreshTick;
+
+  // auto-passed by FF
   final double? width;
   final double? height;
+
+  // action callbacks
+  final Future<void> Function()? onRefreshPressed;
+  final Future<void> Function()? onRefresh;
 
   @override
   State<WebviewXBrowser> createState() => _WebviewXBrowserState();
@@ -35,40 +49,49 @@ class WebviewXBrowser extends StatefulWidget {
 
 class _WebviewXBrowserState extends State<WebviewXBrowser> {
   WebViewXController? _controller;
-  bool get _ready => _controller != null;
 
-  // Keep vertical scrolling enabled; add viewport meta if missing.
+  // Re-enable vertical scroll for pages that try to lock it.
   static const String _forceScrollJS = r'''
-    try {
-      const html = document.documentElement;
-      const body = document.body;
-
-      html.style.overflowY = 'auto';
-      html.style.touchAction = 'manipulation';
-      body.style.overflowY = 'auto';
-      body.style.touchAction = 'manipulation';
-
-      let meta = document.querySelector('meta[name="viewport"]');
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, initial-scale=1, maximum-scale=1';
-        document.head.appendChild(meta);
-      }
-    } catch (e) {}
+    (function(){
+      try {
+        var b = document.body, h = document.documentElement;
+        document.documentElement.style.overflowY = 'auto';
+        document.documentElement.style.overscrollBehaviorY = 'auto';
+        b.style.overflowY = 'auto';
+        b.style.overscrollBehaviorY = 'auto';
+        if(!document.querySelector('meta[name="viewport"]')){
+          var m=document.createElement('meta');
+          m.name='viewport';
+          m.content='width=device-width, initial-scale=1, maximum-scale=1';
+          document.head.appendChild(m);
+        }
+      } catch(e){}
+    })();
   ''';
 
-  Future<void> _reloadIfTickChanged(int? oldTick, int? newTick) async {
-    if (_ready && oldTick != newTick) {
-      await _controller!.reload();
-    }
+  bool get _ready => _controller != null;
+
+  Future<void> _refreshNav() async {
+    if (!_ready) return;
+    try {
+      await Future.delayed(const Duration(milliseconds: 50));
+      await _controller!.evalRawJavascript(_forceScrollJS);
+    } catch (_) {}
+    if (mounted) setState(() {});
   }
 
   @override
   void didUpdateWidget(covariant WebviewXBrowser oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _reloadIfTickChanged(oldWidget.refreshTick, widget.refreshTick);
 
+    // programmatic reload when refreshTick changes
+    if (widget.refreshTick != oldWidget.refreshTick && _ready) {
+      _controller!.reload();
+      // let the app know a programmatic reload occurred
+      widget.onRefresh?.call();
+    }
+
+    // if the initialUrl changed, navigate to it
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
@@ -78,39 +101,37 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
 
   @override
   Widget build(BuildContext context) {
-    final startUrl = (widget.initialUrl == null || widget.initialUrl!.isEmpty)
-        ? 'https://5star-wireless.com'
-        : widget.initialUrl!;
-    final w = widget.width ?? MediaQuery.of(context).size.width;
-    final h = widget.height ?? MediaQuery.of(context).size.height;
+    final String startUrl =
+        (widget.initialUrl == null || widget.initialUrl!.isEmpty)
+            ? 'https://5star-wireless.com'
+            : widget.initialUrl!;
 
     return SizedBox(
-      width: w,
-      height: h,
+      width: widget.width ?? double.infinity,
+      height: widget.height ?? double.infinity,
       child: Stack(
         children: [
           WebViewX(
             key: const ValueKey('webviewx_plus'),
             initialContent: startUrl,
             initialSourceType: SourceType.url,
-            onWebViewCreated: (c) async {
-              _controller = c;
+            onWebViewCreated: (ctrl) async {
+              _controller = ctrl;
+              await _refreshNav();
             },
-            onPageStarted: (url) async {
-              await _controller?.evalRawJavascript(_forceScrollJS);
-            },
-            onPageFinished: (url) async {
-              await _controller?.evalRawJavascript(_forceScrollJS);
-            },
+            onPageStarted: (_) async => await _refreshNav(),
+            onPageFinished: (_) async => await _refreshNav(),
             webSpecificParams: const WebSpecificParams(
               webAllowFullscreenContent: true,
             ),
             mobileSpecificParams: const MobileSpecificParams(
               androidEnableHybridComposition: true,
             ),
-            width: w,
-            height: h,
+            width: widget.width ?? MediaQuery.of(context).size.width,
+            height: widget.height ?? MediaQuery.of(context).size.height,
           ),
+
+          // Back FAB (optional)
           if ((widget.showBackButton ?? true))
             Positioned(
               left: 12,
@@ -122,9 +143,33 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                 onPressed: () async {
                   if (_ready && await _controller!.canGoBack()) {
                     await _controller!.goBack();
+                    await _refreshNav();
                   }
                 },
                 child: const Icon(Icons.arrow_back, color: Colors.white),
+              ),
+            ),
+
+          // Refresh FAB (optional)
+          if ((widget.showRefreshButton ?? true))
+            Positioned(
+              right: 12,
+              top: 12,
+              child: FloatingActionButton.small(
+                heroTag: 'wv_refresh',
+                backgroundColor: const Color(0xFF07BCFD),
+                elevation: 3,
+                onPressed: () async {
+                  if (_ready) {
+                    await _controller!.reload();
+                    await _refreshNav();
+                  }
+                  // let the page handle “Refreshed!” text, counters, etc.
+                  if (widget.onRefreshPressed != null) {
+                    await widget.onRefreshPressed!.call();
+                  }
+                },
+                child: const Icon(Icons.refresh, color: Colors.white),
               ),
             ),
         ],

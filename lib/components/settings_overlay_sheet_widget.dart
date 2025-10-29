@@ -76,11 +76,7 @@ class _SettingsOverlaySheetWidgetState
             child: Container(
               width: 50.0,
               height: 150.0,
-              decoration: BoxDecoration(
-                color: FFAppState().showSettingsTray
-                    ? Color(0xFF0F1115)
-                    : Colors.white,
-              ),
+              decoration: BoxDecoration(),
               child: Align(
                 alignment: AlignmentDirectional(1.0, 0.0),
                 child: Column(

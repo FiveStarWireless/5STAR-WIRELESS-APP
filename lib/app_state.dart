@@ -48,29 +48,10 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_isDarkMode', value);
   }
 
-  bool _isRefreshing = false;
-  bool get isRefreshing => _isRefreshing;
-  set isRefreshing(bool value) {
-    _isRefreshing = value;
-  }
-
-  bool _showToast = false;
-  bool get showToast => _showToast;
-  set showToast(bool value) {
-    _showToast = value;
-  }
-
-  String _clientId = '';
-  String get clientId => _clientId;
-  set clientId(String value) {
-    _clientId = value;
-    prefs.setString('ff_clientId', value);
-  }
-
-  String _toastMessage = '';
-  String get toastMessage => _toastMessage;
-  set toastMessage(String value) {
-    _toastMessage = value;
+  bool _showRefreshedText = false;
+  bool get showRefreshedText => _showRefreshedText;
+  set showRefreshedText(bool value) {
+    _showRefreshedText = value;
   }
 
   int _reloadTick = 0;
@@ -79,16 +60,17 @@ class FFAppState extends ChangeNotifier {
     _reloadTick = value;
   }
 
-  bool _toastAfterReload = false;
-  bool get toastAfterReload => _toastAfterReload;
-  set toastAfterReload(bool value) {
-    _toastAfterReload = value;
+  bool _isRefreshing = false;
+  bool get isRefreshing => _isRefreshing;
+  set isRefreshing(bool value) {
+    _isRefreshing = value;
   }
 
-  bool _showSettingsTray = false;
-  bool get showSettingsTray => _showSettingsTray;
-  set showSettingsTray(bool value) {
-    _showSettingsTray = value;
+  String _clientId = '';
+  String get clientId => _clientId;
+  set clientId(String value) {
+    _clientId = value;
+    prefs.setString('ff_clientId', value);
   }
 
   bool _termsAcceptedv4 = false;

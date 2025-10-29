@@ -117,14 +117,13 @@ class _RfreshbuttonWidgetState extends State<RfreshbuttonWidget> {
                             milliseconds: 800,
                           ),
                         );
-                        FFAppState().showToast = true;
-                        safeSetState(() {});
+                        FFAppState().reloadTick = FFAppState().reloadTick + 1;
                         await Future.delayed(
                           Duration(
                             milliseconds: 1200,
                           ),
                         );
-                        FFAppState().showToast = false;
+                        FFAppState().reloadTick = FFAppState().reloadTick + 1;
                         safeSetState(() {});
                       },
                       child: Icon(

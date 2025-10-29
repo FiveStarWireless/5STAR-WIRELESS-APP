@@ -98,8 +98,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor:
-              FFAppState().isDarkMode ? Color(0xFF0F1115) : Color(0xFF07BCFD),
+          backgroundColor: Color(0xFF07BCFD),
           automaticallyImplyLeading: false,
           title: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
@@ -178,56 +177,45 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                           onPageChanged: (_) => safeSetState(() {}),
                           scrollDirection: Axis.horizontal,
                           children: [
-                            RefreshIndicator(
-                              onRefresh: () async {
-                                FFAppState().isRefreshing = true;
-                                await Future.delayed(
-                                  Duration(
-                                    milliseconds: 600,
-                                  ),
-                                );
-                                if (animationsMap[
-                                        'containerOnActionTriggerAnimation'] !=
-                                    null) {
-                                  animationsMap[
-                                          'containerOnActionTriggerAnimation']!
-                                      .controller
-                                      .forward(from: 0.0);
-                                }
-                                FFAppState().homeNonce =
-                                    FFAppState().homeNonce + 1;
-                                await Future.delayed(
-                                  Duration(
-                                    milliseconds: 2000,
-                                  ),
-                                );
-                                FFAppState().isRefreshing = false;
-                              },
-                              child: SingleChildScrollView(
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          1.0,
-                                      height:
-                                          MediaQuery.sizeOf(context).height *
-                                              1.0,
-                                      child: custom_widgets.WebviewXBrowser(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                1.0,
-                                        initialUrl:
-                                            'https://5star-wireless.com/?t=${FFAppState().homeNonce.toString()}',
-                                        showBackButton: true,
-                                        refreshTick: FFAppState().homeNonce,
+                            Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
+                                child: custom_widgets.WebviewXBrowser(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 1.0,
+                                  initialUrl:
+                                      'https://5star-wireless.com/?t=${FFAppState().homeNonce.toString()}',
+                                  showBackButton: true,
+                                  refreshTick: FFAppState().homeNonce,
+                                  showRefreshButton: true,
+                                  onRefreshPressed: () async {
+                                    FFAppState().showRefreshedText = true;
+                                    safeSetState(() {});
+                                    if (animationsMap[
+                                            'containerOnActionTriggerAnimation'] !=
+                                        null) {
+                                      await animationsMap[
+                                              'containerOnActionTriggerAnimation']!
+                                          .controller
+                                          .forward(from: 0.0);
+                                    }
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 1500,
                                       ),
-                                    ),
-                                  ],
+                                    );
+                                    FFAppState().showRefreshedText = false;
+                                    safeSetState(() {});
+                                  },
+                                  onRefresh: () async {},
                                 ),
                               ),
                             ),
@@ -249,6 +237,9 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       'https://5star-wireless.com/collections/all-products?t=${FFAppState().storeNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().storeNonce,
+                                  showRefreshButton: true,
+                                  onRefreshPressed: () async {},
+                                  onRefresh: () async {},
                                 ),
                               ),
                             ),
@@ -270,6 +261,9 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       'https://5star-wireless.com/pages/our-services?t=${FFAppState().servicesNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().servicesNonce,
+                                  showRefreshButton: true,
+                                  onRefreshPressed: () async {},
+                                  onRefresh: () async {},
                                 ),
                               ),
                             ),
@@ -291,6 +285,9 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       'https://5star-wireless.com/cart?t=${FFAppState().cartNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().cartNonce,
+                                  showRefreshButton: true,
+                                  onRefreshPressed: () async {},
+                                  onRefresh: () async {},
                                 ),
                               ),
                             ),
@@ -312,6 +309,9 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       'https://5star-wireless.com/pages/wishlist?t=${FFAppState().faveNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().faveNonce,
+                                  showRefreshButton: true,
+                                  onRefreshPressed: () async {},
+                                  onRefresh: () async {},
                                 ),
                               ),
                             ),
@@ -333,6 +333,9 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                       'https://5star-wireless.com/account/login?t=${FFAppState().usersNonce.toString()}',
                                   showBackButton: true,
                                   refreshTick: FFAppState().usersNonce,
+                                  showRefreshButton: true,
+                                  onRefreshPressed: () async {},
+                                  onRefresh: () async {},
                                 ),
                               ),
                             ),
@@ -404,7 +407,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                   ),
                 ],
               ),
-              if (FFAppState().isRefreshing)
+              if (FFAppState().showRefreshedText)
                 Align(
                   alignment: AlignmentDirectional(0.0, -1.0),
                   child: Padding(
