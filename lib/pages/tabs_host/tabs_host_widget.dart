@@ -60,7 +60,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
           ),
           MoveEffect(
             curve: Curves.easeOut,
-            delay: 1500.0.ms,
+            delay: 2000.0.ms,
             duration: 600.0.ms,
             begin: Offset(0.0, 0.0),
             end: Offset(0.0, -100.0),
@@ -245,7 +245,6 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                     );
                                     FFAppState().showRefreshedText = false;
                                     safeSetState(() {});
-                                    HapticFeedback.lightImpact();
                                   },
                                 ),
                               ),
@@ -269,7 +268,56 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                   showBackButton: true,
                                   refreshTick: FFAppState().storeNonce,
                                   showRefreshButton: true,
-                                  onRefreshPressed: () async {},
+                                  onRefreshPressed: () async {
+                                    HapticFeedback.lightImpact();
+                                    if (FFAppState().activeTabIndex == 0) {
+                                      FFAppState().homeNonce =
+                                          FFAppState().homeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        1) {
+                                      FFAppState().storeNonce =
+                                          FFAppState().storeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        2) {
+                                      FFAppState().servicesNonce =
+                                          FFAppState().servicesNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        3) {
+                                      FFAppState().cartNonce =
+                                          FFAppState().cartNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        4) {
+                                      FFAppState().faveNonce =
+                                          FFAppState().faveNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        5) {
+                                      FFAppState().usersNonce =
+                                          FFAppState().usersNonce + 1;
+                                    }
+
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 800,
+                                      ),
+                                    );
+                                    FFAppState().showRefreshedText = true;
+                                    safeSetState(() {});
+                                    if (animationsMap[
+                                            'containerOnActionTriggerAnimation'] !=
+                                        null) {
+                                      await animationsMap[
+                                              'containerOnActionTriggerAnimation']!
+                                          .controller
+                                          .forward(from: 0.0);
+                                    }
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 2000,
+                                      ),
+                                    );
+                                    FFAppState().showRefreshedText = false;
+                                    safeSetState(() {});
+                                  },
                                 ),
                               ),
                             ),
@@ -292,7 +340,56 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                   showBackButton: true,
                                   refreshTick: FFAppState().servicesNonce,
                                   showRefreshButton: true,
-                                  onRefreshPressed: () async {},
+                                  onRefreshPressed: () async {
+                                    HapticFeedback.lightImpact();
+                                    if (FFAppState().activeTabIndex == 0) {
+                                      FFAppState().homeNonce =
+                                          FFAppState().homeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        1) {
+                                      FFAppState().storeNonce =
+                                          FFAppState().storeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        2) {
+                                      FFAppState().servicesNonce =
+                                          FFAppState().servicesNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        3) {
+                                      FFAppState().cartNonce =
+                                          FFAppState().cartNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        4) {
+                                      FFAppState().faveNonce =
+                                          FFAppState().faveNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        5) {
+                                      FFAppState().usersNonce =
+                                          FFAppState().usersNonce + 1;
+                                    }
+
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 800,
+                                      ),
+                                    );
+                                    FFAppState().showRefreshedText = true;
+                                    safeSetState(() {});
+                                    if (animationsMap[
+                                            'containerOnActionTriggerAnimation'] !=
+                                        null) {
+                                      await animationsMap[
+                                              'containerOnActionTriggerAnimation']!
+                                          .controller
+                                          .forward(from: 0.0);
+                                    }
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 2000,
+                                      ),
+                                    );
+                                    FFAppState().showRefreshedText = false;
+                                    safeSetState(() {});
+                                  },
                                 ),
                               ),
                             ),
@@ -315,7 +412,56 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                   showBackButton: true,
                                   refreshTick: FFAppState().cartNonce,
                                   showRefreshButton: true,
-                                  onRefreshPressed: () async {},
+                                  onRefreshPressed: () async {
+                                    HapticFeedback.lightImpact();
+                                    if (FFAppState().activeTabIndex == 0) {
+                                      FFAppState().homeNonce =
+                                          FFAppState().homeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        1) {
+                                      FFAppState().storeNonce =
+                                          FFAppState().storeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        2) {
+                                      FFAppState().servicesNonce =
+                                          FFAppState().servicesNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        3) {
+                                      FFAppState().cartNonce =
+                                          FFAppState().cartNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        4) {
+                                      FFAppState().faveNonce =
+                                          FFAppState().faveNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        5) {
+                                      FFAppState().usersNonce =
+                                          FFAppState().usersNonce + 1;
+                                    }
+
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 800,
+                                      ),
+                                    );
+                                    FFAppState().showRefreshedText = true;
+                                    safeSetState(() {});
+                                    if (animationsMap[
+                                            'containerOnActionTriggerAnimation'] !=
+                                        null) {
+                                      await animationsMap[
+                                              'containerOnActionTriggerAnimation']!
+                                          .controller
+                                          .forward(from: 0.0);
+                                    }
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 2000,
+                                      ),
+                                    );
+                                    FFAppState().showRefreshedText = false;
+                                    safeSetState(() {});
+                                  },
                                 ),
                               ),
                             ),
@@ -338,7 +484,56 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                   showBackButton: true,
                                   refreshTick: FFAppState().faveNonce,
                                   showRefreshButton: true,
-                                  onRefreshPressed: () async {},
+                                  onRefreshPressed: () async {
+                                    HapticFeedback.lightImpact();
+                                    if (FFAppState().activeTabIndex == 0) {
+                                      FFAppState().homeNonce =
+                                          FFAppState().homeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        1) {
+                                      FFAppState().storeNonce =
+                                          FFAppState().storeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        2) {
+                                      FFAppState().servicesNonce =
+                                          FFAppState().servicesNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        3) {
+                                      FFAppState().cartNonce =
+                                          FFAppState().cartNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        4) {
+                                      FFAppState().faveNonce =
+                                          FFAppState().faveNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        5) {
+                                      FFAppState().usersNonce =
+                                          FFAppState().usersNonce + 1;
+                                    }
+
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 800,
+                                      ),
+                                    );
+                                    FFAppState().showRefreshedText = true;
+                                    safeSetState(() {});
+                                    if (animationsMap[
+                                            'containerOnActionTriggerAnimation'] !=
+                                        null) {
+                                      await animationsMap[
+                                              'containerOnActionTriggerAnimation']!
+                                          .controller
+                                          .forward(from: 0.0);
+                                    }
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 2000,
+                                      ),
+                                    );
+                                    FFAppState().showRefreshedText = false;
+                                    safeSetState(() {});
+                                  },
                                 ),
                               ),
                             ),
@@ -361,7 +556,56 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                                   showBackButton: true,
                                   refreshTick: FFAppState().usersNonce,
                                   showRefreshButton: true,
-                                  onRefreshPressed: () async {},
+                                  onRefreshPressed: () async {
+                                    HapticFeedback.lightImpact();
+                                    if (FFAppState().activeTabIndex == 0) {
+                                      FFAppState().homeNonce =
+                                          FFAppState().homeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        1) {
+                                      FFAppState().storeNonce =
+                                          FFAppState().storeNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        2) {
+                                      FFAppState().servicesNonce =
+                                          FFAppState().servicesNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        3) {
+                                      FFAppState().cartNonce =
+                                          FFAppState().cartNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        4) {
+                                      FFAppState().faveNonce =
+                                          FFAppState().faveNonce + 1;
+                                    } else if (FFAppState().activeTabIndex ==
+                                        5) {
+                                      FFAppState().usersNonce =
+                                          FFAppState().usersNonce + 1;
+                                    }
+
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 800,
+                                      ),
+                                    );
+                                    FFAppState().showRefreshedText = true;
+                                    safeSetState(() {});
+                                    if (animationsMap[
+                                            'containerOnActionTriggerAnimation'] !=
+                                        null) {
+                                      await animationsMap[
+                                              'containerOnActionTriggerAnimation']!
+                                          .controller
+                                          .forward(from: 0.0);
+                                    }
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 2000,
+                                      ),
+                                    );
+                                    FFAppState().showRefreshedText = false;
+                                    safeSetState(() {});
+                                  },
                                 ),
                               ),
                             ),
