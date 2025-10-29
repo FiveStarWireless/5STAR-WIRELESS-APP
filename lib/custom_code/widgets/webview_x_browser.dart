@@ -18,15 +18,11 @@ class WebviewXBrowser extends StatefulWidget {
     Key? key,
     required this.initialUrl,
     this.showBackButton = true,
-    this.showRefreshButton = true, // NEW
-    this.refreshTick, // optional hard reload trigger
+    this.showRefreshButton = true,
+    this.refreshTick,
     this.width,
     this.height,
-
-    /// Callback when the Refresh FAB is tapped
-    this.onRefreshPressed, // NEW
-    /// Callback after a programmatic reload (via refreshTick)
-    this.onRefresh, // NEW
+    this.onRefreshPressed, // nullable
   }) : super(key: key);
 
   // === FF parameters ===
@@ -35,13 +31,12 @@ class WebviewXBrowser extends StatefulWidget {
   final bool? showRefreshButton;
   final int? refreshTick;
 
-  // auto-passed by FF
+  // auto-passed
   final double? width;
   final double? height;
 
-  // action callbacks
+  // action callback for the Refresh FAB
   final Future<void> Function()? onRefreshPressed;
-  final Future<void> Function()? onRefresh;
 
   @override
   State<WebviewXBrowser> createState() => _WebviewXBrowserState();
@@ -54,7 +49,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
   static const String _forceScrollJS = r'''
     (function(){
       try {
-        var b = document.body, h = document.documentElement;
+        var b = document.body;
         document.documentElement.style.overflowY = 'auto';
         document.documentElement.style.overscrollBehaviorY = 'auto';
         b.style.overflowY = 'auto';
@@ -71,7 +66,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
 
   bool get _ready => _controller != null;
 
-  Future<void> _refreshNav() async {
+  Future<void> _nudgeScroll() async {
     if (!_ready) return;
     try {
       await Future.delayed(const Duration(milliseconds: 50));
@@ -84,14 +79,12 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
   void didUpdateWidget(covariant WebviewXBrowser oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // programmatic reload when refreshTick changes
+    // Hard reload when refreshTick changes
     if (widget.refreshTick != oldWidget.refreshTick && _ready) {
       _controller!.reload();
-      // let the app know a programmatic reload occurred
-      widget.onRefresh?.call();
     }
 
-    // if the initialUrl changed, navigate to it
+    // Navigate if the initialUrl changed
     final newUrl = widget.initialUrl ?? '';
     final oldUrl = oldWidget.initialUrl ?? '';
     if (_ready && newUrl.isNotEmpty && newUrl != oldUrl) {
@@ -117,10 +110,10 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
             initialSourceType: SourceType.url,
             onWebViewCreated: (ctrl) async {
               _controller = ctrl;
-              await _refreshNav();
+              await _nudgeScroll();
             },
-            onPageStarted: (_) async => await _refreshNav(),
-            onPageFinished: (_) async => await _refreshNav(),
+            onPageStarted: (_) async => await _nudgeScroll(),
+            onPageFinished: (_) async => await _nudgeScroll(),
             webSpecificParams: const WebSpecificParams(
               webAllowFullscreenContent: true,
             ),
@@ -143,7 +136,7 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                 onPressed: () async {
                   if (_ready && await _controller!.canGoBack()) {
                     await _controller!.goBack();
-                    await _refreshNav();
+                    await _nudgeScroll();
                   }
                 },
                 child: const Icon(Icons.arrow_back, color: Colors.white),
@@ -162,9 +155,8 @@ class _WebviewXBrowserState extends State<WebviewXBrowser> {
                 onPressed: () async {
                   if (_ready) {
                     await _controller!.reload();
-                    await _refreshNav();
+                    await _nudgeScroll();
                   }
-                  // let the page handle “Refreshed!” text, counters, etc.
                   if (widget.onRefreshPressed != null) {
                     await widget.onRefreshPressed!.call();
                   }
