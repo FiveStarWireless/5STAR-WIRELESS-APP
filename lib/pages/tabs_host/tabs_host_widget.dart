@@ -171,24 +171,57 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                           onPageChanged: (_) => safeSetState(() {}),
                           scrollDirection: Axis.horizontal,
                           children: [
-                            Container(
-                              width: double.infinity,
-                              height: double.infinity,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                              ),
-                              child: Container(
-                                width: MediaQuery.sizeOf(context).width * 1.0,
-                                height: MediaQuery.sizeOf(context).height * 1.0,
-                                child: custom_widgets.WebviewXBrowser(
-                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 1.0,
-                                  initialUrl:
-                                      'https://5star-wireless.com/?t=${FFAppState().homeNonce.toString()}',
-                                  showBackButton: true,
-                                  refreshTick: FFAppState().homeNonce,
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 10.0, 0.0, 0.0),
+                              child: RefreshIndicator(
+                                onRefresh: () async {
+                                  FFAppState().isRefreshing = true;
+                                  safeSetState(() {});
+                                  await Future.delayed(
+                                    Duration(
+                                      milliseconds: 600,
+                                    ),
+                                  );
+                                  FFAppState().homeNonce =
+                                      FFAppState().homeNonce + 1;
+                                  safeSetState(() {});
+                                  await Future.delayed(
+                                    Duration(
+                                      milliseconds: 400,
+                                    ),
+                                  );
+                                  FFAppState().isRefreshing = false;
+                                  safeSetState(() {});
+                                },
+                                child: SingleChildScrollView(
+                                  physics:
+                                      const AlwaysScrollableScrollPhysics(),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                1.0,
+                                        height:
+                                            MediaQuery.sizeOf(context).height *
+                                                1.0,
+                                        child: custom_widgets.WebviewXBrowser(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height *
+                                              1.0,
+                                          initialUrl:
+                                              'https://5star-wireless.com/?t=${FFAppState().homeNonce.toString()}',
+                                          showBackButton: true,
+                                          refreshTick: FFAppState().homeNonce,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -365,11 +398,12 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
                   ),
                 ],
               ),
-              if (FFAppState().showToast)
+              if (FFAppState().isRefreshing)
                 Align(
                   alignment: AlignmentDirectional(0.0, -1.0),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Container(
                       width: 120.0,
                       height: 30.0,

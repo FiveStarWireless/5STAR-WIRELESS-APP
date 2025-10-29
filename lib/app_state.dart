@@ -48,10 +48,10 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_isDarkMode', value);
   }
 
-  bool _toastAfterReload = false;
-  bool get toastAfterReload => _toastAfterReload;
-  set toastAfterReload(bool value) {
-    _toastAfterReload = value;
+  bool _isRefreshing = false;
+  bool get isRefreshing => _isRefreshing;
+  set isRefreshing(bool value) {
+    _isRefreshing = value;
   }
 
   bool _showToast = false;
@@ -79,10 +79,10 @@ class FFAppState extends ChangeNotifier {
     _reloadTick = value;
   }
 
-  bool _isRefreshing = false;
-  bool get isRefreshing => _isRefreshing;
-  set isRefreshing(bool value) {
-    _isRefreshing = value;
+  bool _toastAfterReload = false;
+  bool get toastAfterReload => _toastAfterReload;
+  set toastAfterReload(bool value) {
+    _toastAfterReload = value;
   }
 
   bool _showSettingsTray = false;
