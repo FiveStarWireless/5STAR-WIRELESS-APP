@@ -113,6 +113,8 @@ final parametersBuilderMap =
   'TabsHost': ParameterData.none(),
   'WelcomeTerms': ParameterData.none(),
   'Rfreshbutton': ParameterData.none(),
+  'ProductList': ParameterData.none(),
+  'PageNav': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

@@ -121,6 +121,99 @@ class FFAppState extends ChangeNotifier {
   set longPressJson(String value) {
     _longPressJson = value;
   }
+
+  List<String> _favoriteIds = [];
+  List<String> get favoriteIds => _favoriteIds;
+  set favoriteIds(List<String> value) {
+    _favoriteIds = value;
+  }
+
+  void addToFavoriteIds(String value) {
+    favoriteIds.add(value);
+  }
+
+  void removeFromFavoriteIds(String value) {
+    favoriteIds.remove(value);
+  }
+
+  void removeAtIndexFromFavoriteIds(int index) {
+    favoriteIds.removeAt(index);
+  }
+
+  void updateFavoriteIdsAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    favoriteIds[index] = updateFn(_favoriteIds[index]);
+  }
+
+  void insertAtIndexInFavoriteIds(int index, String value) {
+    favoriteIds.insert(index, value);
+  }
+
+  List<String> _cartIds = [];
+  List<String> get cartIds => _cartIds;
+  set cartIds(List<String> value) {
+    _cartIds = value;
+  }
+
+  void addToCartIds(String value) {
+    cartIds.add(value);
+  }
+
+  void removeFromCartIds(String value) {
+    cartIds.remove(value);
+  }
+
+  void removeAtIndexFromCartIds(int index) {
+    cartIds.removeAt(index);
+  }
+
+  void updateCartIdsAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    cartIds[index] = updateFn(_cartIds[index]);
+  }
+
+  void insertAtIndexInCartIds(int index, String value) {
+    cartIds.insert(index, value);
+  }
+
+  int _homeBannerIndex = 0;
+  int get homeBannerIndex => _homeBannerIndex;
+  set homeBannerIndex(int value) {
+    _homeBannerIndex = value;
+  }
+
+  List<String> _bannerImageList = [];
+  List<String> get bannerImageList => _bannerImageList;
+  set bannerImageList(List<String> value) {
+    _bannerImageList = value;
+  }
+
+  void addToBannerImageList(String value) {
+    bannerImageList.add(value);
+  }
+
+  void removeFromBannerImageList(String value) {
+    bannerImageList.remove(value);
+  }
+
+  void removeAtIndexFromBannerImageList(int index) {
+    bannerImageList.removeAt(index);
+  }
+
+  void updateBannerImageListAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    bannerImageList[index] = updateFn(_bannerImageList[index]);
+  }
+
+  void insertAtIndexInBannerImageList(int index, String value) {
+    bannerImageList.insert(index, value);
+  }
 }
 
 void _safeInit(Function() initializeField) {

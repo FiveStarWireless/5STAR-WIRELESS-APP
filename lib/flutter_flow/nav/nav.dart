@@ -79,14 +79,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? TabsHostWidget() : WelcomeTermsWidget(),
+          appStateNotifier.loggedIn ? WelcomepageWidget() : PageNavWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? TabsHostWidget()
-              : WelcomeTermsWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? WelcomepageWidget() : PageNavWidget(),
         ),
         FFRoute(
           name: WelcomepageWidget.routeName,
@@ -107,6 +106,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: RfreshbuttonWidget.routeName,
           path: RfreshbuttonWidget.routePath,
           builder: (context, params) => RfreshbuttonWidget(),
+        ),
+        FFRoute(
+          name: ProductListWidget.routeName,
+          path: ProductListWidget.routePath,
+          builder: (context, params) => ProductListWidget(),
+        ),
+        FFRoute(
+          name: PageNavWidget.routeName,
+          path: PageNavWidget.routePath,
+          builder: (context, params) => PageNavWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -279,7 +288,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/welcomeTerms';
+            return '/pageNav';
           }
           return null;
         },

@@ -50,6 +50,26 @@ class UsersRecord extends FirestoreRecord {
   List<String> get fcmTokens => _fcmTokens ?? const [];
   bool hasFcmTokens() => _fcmTokens != null;
 
+  // "last_login_time" field.
+  DateTime? _lastLoginTime;
+  DateTime? get lastLoginTime => _lastLoginTime;
+  bool hasLastLoginTime() => _lastLoginTime != null;
+
+  // "provider" field.
+  String? _provider;
+  String get provider => _provider ?? '';
+  bool hasProvider() => _provider != null;
+
+  // "wishlistIds" field.
+  List<String>? _wishlistIds;
+  List<String> get wishlistIds => _wishlistIds ?? const [];
+  bool hasWishlistIds() => _wishlistIds != null;
+
+  // "cartIds" field.
+  List<String>? _cartIds;
+  List<String> get cartIds => _cartIds ?? const [];
+  bool hasCartIds() => _cartIds != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -58,6 +78,10 @@ class UsersRecord extends FirestoreRecord {
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
     _fcmTokens = getDataList(snapshotData['fcm_tokens']);
+    _lastLoginTime = snapshotData['last_login_time'] as DateTime?;
+    _provider = snapshotData['provider'] as String?;
+    _wishlistIds = getDataList(snapshotData['wishlistIds']);
+    _cartIds = getDataList(snapshotData['cartIds']);
   }
 
   static CollectionReference get collection =>
@@ -100,6 +124,8 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
+  DateTime? lastLoginTime,
+  String? provider,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -109,6 +135,8 @@ Map<String, dynamic> createUsersRecordData({
       'uid': uid,
       'created_time': createdTime,
       'phone_number': phoneNumber,
+      'last_login_time': lastLoginTime,
+      'provider': provider,
     }.withoutNulls,
   );
 
@@ -127,7 +155,11 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
-        listEquality.equals(e1?.fcmTokens, e2?.fcmTokens);
+        listEquality.equals(e1?.fcmTokens, e2?.fcmTokens) &&
+        e1?.lastLoginTime == e2?.lastLoginTime &&
+        e1?.provider == e2?.provider &&
+        listEquality.equals(e1?.wishlistIds, e2?.wishlistIds) &&
+        listEquality.equals(e1?.cartIds, e2?.cartIds);
   }
 
   @override
@@ -138,7 +170,11 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.uid,
         e?.createdTime,
         e?.phoneNumber,
-        e?.fcmTokens
+        e?.fcmTokens,
+        e?.lastLoginTime,
+        e?.provider,
+        e?.wishlistIds,
+        e?.cartIds
       ]);
 
   @override
