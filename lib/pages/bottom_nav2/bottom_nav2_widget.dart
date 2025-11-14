@@ -420,11 +420,11 @@ class _BottomNav2WidgetState extends State<BottomNav2Widget> {
                                     if (FFAppState().isDarkMode) {
                                       HapticFeedback.lightImpact();
                                       FFAppState().isDarkMode = false;
-                                      safeSetState(() {});
+                                      FFAppState().update(() {});
                                     } else {
                                       HapticFeedback.lightImpact();
                                       FFAppState().isDarkMode = true;
-                                      safeSetState(() {});
+                                      FFAppState().update(() {});
                                     }
                                   },
                                   child: Column(

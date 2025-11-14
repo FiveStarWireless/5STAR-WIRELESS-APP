@@ -1,9 +1,11 @@
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'welcome_terms_model.dart';
@@ -19,10 +21,13 @@ class WelcomeTermsWidget extends StatefulWidget {
   State<WelcomeTermsWidget> createState() => _WelcomeTermsWidgetState();
 }
 
-class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
+class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget>
+    with TickerProviderStateMixin {
   late WelcomeTermsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -54,6 +59,36 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
           },
         );
       }
+    });
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1450.0.ms,
+            begin: Offset(0.0, 100.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'buttonOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          ShakeEffect(
+            curve: Curves.linear,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            hz: 10,
+            offset: Offset(0.0, 0.0),
+            rotation: 0.087,
+          ),
+        ],
+      ),
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -522,7 +557,8 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                             ),
                           ),
                         ),
-                      ),
+                      ).animateOnPageLoad(
+                          animationsMap['containerOnPageLoadAnimation']!),
                     ),
                     FFButtonWidget(
                       onPressed: () async {
@@ -569,7 +605,8 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget> {
                         elevation: 0.0,
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                    ),
+                    ).animateOnPageLoad(
+                        animationsMap['buttonOnPageLoadAnimation']!),
                   ],
                 ),
               ),

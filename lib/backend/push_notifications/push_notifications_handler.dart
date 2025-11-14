@@ -115,6 +115,7 @@ final parametersBuilderMap =
   'Rfreshbutton': ParameterData.none(),
   'ProductList': ParameterData.none(),
   'PageNav': ParameterData.none(),
+  'WelcomepageCopy': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

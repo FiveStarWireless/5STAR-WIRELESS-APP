@@ -30,10 +30,6 @@ class WelcomepageModel extends FlutterFlowModel<WelcomepageWidget> {
   late bool passwordCreateConfirmVisibility;
   String? Function(BuildContext, String?)?
       passwordCreateConfirmTextControllerValidator;
-  // Stores action output result for [Custom Action - getFcmToken] action in Button widget.
-  String? fcmTokenCreateGoogle;
-  // Stores action output result for [Custom Action - getFcmToken] action in Button widget.
-  String? fcmTokenCreateApple;
   // State field(s) for emailAddress widget.
   FocusNode? emailAddressFocusNode;
   TextEditingController? emailAddressTextController;

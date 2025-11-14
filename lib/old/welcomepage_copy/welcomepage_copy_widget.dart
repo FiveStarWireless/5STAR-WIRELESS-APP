@@ -11,22 +11,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'welcomepage_model.dart';
-export 'welcomepage_model.dart';
+import 'welcomepage_copy_model.dart';
+export 'welcomepage_copy_model.dart';
 
-class WelcomepageWidget extends StatefulWidget {
-  const WelcomepageWidget({super.key});
+class WelcomepageCopyWidget extends StatefulWidget {
+  const WelcomepageCopyWidget({super.key});
 
-  static String routeName = 'Welcomepage';
-  static String routePath = '/welcomepage';
+  static String routeName = 'WelcomepageCopy';
+  static String routePath = '/welcomepageCopy';
 
   @override
-  State<WelcomepageWidget> createState() => _WelcomepageWidgetState();
+  State<WelcomepageCopyWidget> createState() => _WelcomepageCopyWidgetState();
 }
 
-class _WelcomepageWidgetState extends State<WelcomepageWidget>
+class _WelcomepageCopyWidgetState extends State<WelcomepageCopyWidget>
     with TickerProviderStateMixin {
-  late WelcomepageModel _model;
+  late WelcomepageCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -35,7 +35,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => WelcomepageModel());
+    _model = createModel(context, () => WelcomepageCopyModel());
 
     _model.tabBarController = TabController(
       vsync: this,
@@ -59,19 +59,6 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
     _model.passwordFocusNode ??= FocusNode();
 
     animationsMap.addAll({
-      'columnOnPageLoadAnimation1': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 1450.0.ms,
-            begin: Offset(0.0, 100.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
       'containerOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
@@ -99,7 +86,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
           ),
         ],
       ),
-      'columnOnPageLoadAnimation2': AnimationInfo(
+      'columnOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 300.ms),
@@ -119,7 +106,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
           ),
         ],
       ),
-      'columnOnPageLoadAnimation3': AnimationInfo(
+      'columnOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 300.ms),
@@ -889,10 +876,405 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
                                                 ),
                                               ),
                                             ),
+                                            Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(16.0, 0.0,
+                                                                16.0, 24.0),
+                                                    child: Text(
+                                                      'Or sign up with',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .override(
+                                                                font:
+                                                                    GoogleFonts
+                                                                        .inter(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMedium
+                                                                    .fontStyle,
+                                                              ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 16.0),
+                                                    child: Wrap(
+                                                      spacing: 16.0,
+                                                      runSpacing: 0.0,
+                                                      alignment:
+                                                          WrapAlignment.center,
+                                                      crossAxisAlignment:
+                                                          WrapCrossAlignment
+                                                              .center,
+                                                      direction:
+                                                          Axis.horizontal,
+                                                      runAlignment:
+                                                          WrapAlignment.center,
+                                                      verticalDirection:
+                                                          VerticalDirection
+                                                              .down,
+                                                      clipBehavior: Clip.none,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      16.0),
+                                                          child: FFButtonWidget(
+                                                            onPressed:
+                                                                () async {
+                                                              GoRouter.of(
+                                                                      context)
+                                                                  .prepareAuthEvent();
+                                                              final user =
+                                                                  await authManager
+                                                                      .signInWithGoogle(
+                                                                          context);
+                                                              if (user ==
+                                                                  null) {
+                                                                return;
+                                                              }
+
+                                                              await currentUserReference!
+                                                                  .update(
+                                                                      createUsersRecordData(
+                                                                email:
+                                                                    currentUserEmail,
+                                                                displayName:
+                                                                    currentUserDisplayName,
+                                                                photoUrl:
+                                                                    currentUserPhoto,
+                                                                uid:
+                                                                    currentUserUid,
+                                                                createdTime:
+                                                                    getCurrentTimestamp,
+                                                                phoneNumber:
+                                                                    currentPhoneNumber,
+                                                                lastLoginTime:
+                                                                    getCurrentTimestamp,
+                                                              ));
+                                                              _model.fcmTokenCreateGoogle =
+                                                                  await actions
+                                                                      .getFcmToken();
+
+                                                              await currentUserReference!
+                                                                  .update({
+                                                                ...mapToFirestore(
+                                                                  {
+                                                                    'fcm_tokens':
+                                                                        FieldValue
+                                                                            .arrayUnion([
+                                                                      _model
+                                                                          .fcmTokenCreateGoogle
+                                                                    ]),
+                                                                  },
+                                                                ),
+                                                              });
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .clearSnackBars();
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'Account created! You’re all set. Notifications enabled.',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                    ),
+                                                                  ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          4000),
+                                                                  backgroundColor:
+                                                                      Color(
+                                                                          0xFF07BCFD),
+                                                                ),
+                                                              );
+
+                                                              context.goNamedAuth(
+                                                                  WelcomeTermsWidget
+                                                                      .routeName,
+                                                                  context
+                                                                      .mounted);
+
+                                                              safeSetState(
+                                                                  () {});
+                                                            },
+                                                            text:
+                                                                'Continue with Google',
+                                                            icon: FaIcon(
+                                                              FontAwesomeIcons
+                                                                  .google,
+                                                              size: 20.0,
+                                                            ),
+                                                            options:
+                                                                FFButtonOptions(
+                                                              width: 230.0,
+                                                              height: 44.0,
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              iconPadding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryBackground,
+                                                              textStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        font: GoogleFonts
+                                                                            .inter(
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .fontStyle,
+                                                                        ),
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        fontStyle: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .fontStyle,
+                                                                      ),
+                                                              elevation: 0.0,
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                                width: 2.0,
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.0),
+                                                              hoverColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryBackground,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        isAndroid
+                                                            ? Container()
+                                                            : Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            16.0),
+                                                                child:
+                                                                    FFButtonWidget(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    GoRouter.of(
+                                                                            context)
+                                                                        .prepareAuthEvent();
+                                                                    final user =
+                                                                        await authManager
+                                                                            .signInWithApple(context);
+                                                                    if (user ==
+                                                                        null) {
+                                                                      return;
+                                                                    }
+
+                                                                    await currentUserReference!
+                                                                        .update(
+                                                                            createUsersRecordData(
+                                                                      email:
+                                                                          currentUserEmail,
+                                                                      displayName:
+                                                                          currentUserDisplayName,
+                                                                      photoUrl:
+                                                                          currentUserPhoto,
+                                                                      uid:
+                                                                          currentUserUid,
+                                                                      createdTime:
+                                                                          getCurrentTimestamp,
+                                                                      phoneNumber:
+                                                                          currentPhoneNumber,
+                                                                      lastLoginTime:
+                                                                          getCurrentTimestamp,
+                                                                    ));
+                                                                    _model.fcmTokenCreateApple =
+                                                                        await actions
+                                                                            .getFcmToken();
+
+                                                                    await currentUserReference!
+                                                                        .update({
+                                                                      ...mapToFirestore(
+                                                                        {
+                                                                          'fcm_tokens':
+                                                                              FieldValue.arrayUnion([
+                                                                            _model.fcmTokenCreateApple
+                                                                          ]),
+                                                                        },
+                                                                      ),
+                                                                    });
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .clearSnackBars();
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'Account created! You’re all set. Notifications enabled.',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            Color(0xFF07BCFD),
+                                                                      ),
+                                                                    );
+
+                                                                    context.goNamedAuth(
+                                                                        WelcomeTermsWidget
+                                                                            .routeName,
+                                                                        context
+                                                                            .mounted);
+
+                                                                    safeSetState(
+                                                                        () {});
+                                                                  },
+                                                                  text:
+                                                                      'Continue with Apple',
+                                                                  icon: FaIcon(
+                                                                    FontAwesomeIcons
+                                                                        .apple,
+                                                                    size: 20.0,
+                                                                  ),
+                                                                  options:
+                                                                      FFButtonOptions(
+                                                                    width:
+                                                                        230.0,
+                                                                    height:
+                                                                        44.0,
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    iconPadding:
+                                                                        EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryBackground,
+                                                                    textStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          font:
+                                                                              GoogleFonts.inter(
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                          ),
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .fontStyle,
+                                                                        ),
+                                                                    elevation:
+                                                                        0.0,
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .alternate,
+                                                                      width:
+                                                                          2.0,
+                                                                    ),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            12.0),
+                                                                    hoverColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .primaryBackground,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ],
                                         ),
                                       ).animateOnPageLoad(animationsMap[
-                                          'columnOnPageLoadAnimation2']!),
+                                          'columnOnPageLoadAnimation1']!),
                                     ),
                                   ),
                                   Align(
@@ -1942,7 +2324,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
                                           ],
                                         ),
                                       ).animateOnPageLoad(animationsMap[
-                                          'columnOnPageLoadAnimation3']!),
+                                          'columnOnPageLoadAnimation2']!),
                                     ),
                                   ),
                                 ],
@@ -2032,7 +2414,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
                 ),
               ),
             ],
-          ).animateOnPageLoad(animationsMap['columnOnPageLoadAnimation1']!),
+          ),
         ),
       ),
     );

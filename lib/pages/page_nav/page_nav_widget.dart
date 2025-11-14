@@ -6,10 +6,11 @@ import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/old/bottom_nav/bottom_nav_widget.dart';
+import '/pages/bottom_nav2/bottom_nav2_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'dart:async';
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -76,7 +77,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
     _model.passwordFocusNode ??= FocusNode();
 
     animationsMap.addAll({
-      'columnOnPageLoadAnimation1': AnimationInfo(
+      'listViewOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 1.ms),
@@ -104,27 +105,15 @@ class _PageNavWidgetState extends State<PageNavWidget>
         ],
       ),
       'imageOnPageLoadAnimation1': AnimationInfo(
+        loop: true,
+        reverse: true,
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 1.ms),
           ShimmerEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 1250.0.ms,
-            color: Color(0x80FFFFFF),
-            angle: 0.524,
-          ),
-          ShimmerEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 1250.0.ms,
-            color: Color(0x80FFFFFF),
-            angle: 0.524,
-          ),
-          ShimmerEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 1250.0.ms,
+            duration: 1400.0.ms,
             color: Color(0x80FFFFFF),
             angle: 0.524,
           ),
@@ -359,7 +348,23 @@ class _PageNavWidgetState extends State<PageNavWidget>
           ),
         ],
       ),
-      'columnOnPageLoadAnimation2': AnimationInfo(
+      'containerOnPageLoadAnimation1': AnimationInfo(
+        loop: true,
+        reverse: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          TintEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1240.0.ms,
+            color: Color(0x7D000000),
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'columnOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 1.ms),
@@ -386,7 +391,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
           ),
         ],
       ),
-      'containerOnPageLoadAnimation1': AnimationInfo(
+      'containerOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 300.ms),
@@ -403,6 +408,53 @@ class _PageNavWidgetState extends State<PageNavWidget>
             duration: 400.0.ms,
             begin: Offset(0.0, 20.0),
             end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'columnOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 300.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 400.0.ms,
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 400.0.ms,
+            begin: Offset(0.0, 80.0),
+            end: Offset(0.0, 0.0),
+          ),
+          ScaleEffect(
+            curve: Curves.easeInOut,
+            delay: 150.0.ms,
+            duration: 400.0.ms,
+            begin: Offset(0.8, 0.8),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -426,54 +478,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
           ),
         ],
       ),
-      'containerOnPageLoadAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 400.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 400.0.ms,
-            begin: Offset(0.0, 80.0),
-            end: Offset(0.0, 0.0),
-          ),
-          ScaleEffect(
-            curve: Curves.easeInOut,
-            delay: 150.0.ms,
-            duration: 400.0.ms,
-            begin: Offset(0.8, 0.8),
-            end: Offset(1.0, 1.0),
-          ),
-        ],
-      ),
       'columnOnPageLoadAnimation4': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 300.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 400.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 400.0.ms,
-            begin: Offset(0.0, 20.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'columnOnPageLoadAnimation5': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 300.ms),
@@ -566,7 +571,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
             width: MediaQuery.sizeOf(context).width * 1.0,
             height: MediaQuery.sizeOf(context).height * 1.0,
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).secondaryBackground,
+              color: FFAppState().isDarkMode
+                  ? Color(0xFF0F1419)
+                  : FlutterFlowTheme.of(context).info,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -574,7 +581,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                 Expanded(
                   child: Container(
                     width: double.infinity,
-                    height: 500.0,
+                    height: MediaQuery.sizeOf(context).height * 1.0,
                     child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
@@ -584,8 +591,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                         onPageChanged: (_) => safeSetState(() {}),
                         scrollDirection: Axis.horizontal,
                         children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
+                          ListView(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
                             children: [
                               Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
@@ -604,11 +613,16 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       'imageOnPageLoadAnimation1']!),
                                 ),
                               ),
+                              Divider(
+                                thickness: 3.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 5.0, 0.0, 0.0),
                                 child: Text(
                                   'Wireless Prepaid',
+                                  textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
                                       .headlineLarge
                                       .override(
@@ -620,6 +634,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           .headlineLarge
                                           .fontStyle,
                                     ),
+                                    color: FFAppState().isDarkMode
+                                        ? FlutterFlowTheme.of(context).info
+                                        : Colors.black,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .headlineLarge
@@ -654,7 +671,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
                                           'assets/images/ATT-NEW-LOGO-01.png',
-                                          width: 135.0,
+                                          width: 120.0,
                                           height: 80.0,
                                           fit: BoxFit.contain,
                                         ),
@@ -665,7 +682,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       borderRadius: BorderRadius.circular(8.0),
                                       child: Image.asset(
                                         'assets/images/Connect-nr-hero-3-18-22-1250x615.png',
-                                        width: 135.0,
+                                        width: 120.0,
                                         height: 80.0,
                                         fit: BoxFit.contain,
                                       ),
@@ -679,7 +696,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
                                           'assets/images/Cricket_Wireless_Logo.png',
-                                          width: 135.0,
+                                          width: 120.0,
                                           height: 80.0,
                                           fit: BoxFit.contain,
                                         ),
@@ -705,7 +722,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
                                           'assets/images/GENMOBILE_LOGO_RGB-72PPI.png',
-                                          width: 135.0,
+                                          width: 120.0,
                                           height: 80.0,
                                           fit: BoxFit.contain,
                                         ),
@@ -716,7 +733,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       borderRadius: BorderRadius.circular(8.0),
                                       child: Image.asset(
                                         'assets/images/H2O_wireless-logo-2019.jpg',
-                                        width: 135.0,
+                                        width: 120.0,
                                         height: 80.0,
                                         fit: BoxFit.contain,
                                       ),
@@ -730,7 +747,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
                                           'assets/images/lycamobile_logo.png',
-                                          width: 135.0,
+                                          width: 120.0,
                                           height: 80.0,
                                           fit: BoxFit.contain,
                                         ),
@@ -756,7 +773,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
                                           'assets/images/Mobile_X_Global___Logo.jpg',
-                                          width: 135.0,
+                                          width: 120.0,
                                           height: 80.0,
                                           fit: BoxFit.contain,
                                         ),
@@ -767,7 +784,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       borderRadius: BorderRadius.circular(8.0),
                                       child: Image.asset(
                                         'assets/images/red_pocket_mobile_logo.jpg',
-                                        width: 135.0,
+                                        width: 120.0,
                                         height: 80.0,
                                         fit: BoxFit.contain,
                                       ),
@@ -781,7 +798,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
                                           'assets/images/simple_mobile-logo_new.png',
-                                          width: 135.0,
+                                          width: 120.0,
                                           height: 80.0,
                                           fit: BoxFit.contain,
                                         ),
@@ -793,7 +810,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 0.0),
+                                    0.0, 5.0, 0.0, 5.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
@@ -807,7 +824,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
                                           'assets/images/T-Mobile_New_Logo_Primary_RGB_M-on-K_Transparent.png',
-                                          width: 135.0,
+                                          width: 120.0,
                                           height: 80.0,
                                           fit: BoxFit.contain,
                                         ),
@@ -818,7 +835,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       borderRadius: BorderRadius.circular(8.0),
                                       child: Image.asset(
                                         'assets/images/Ultra-Mobile-Logo_new.jpg',
-                                        width: 135.0,
+                                        width: 120.0,
                                         height: 80.0,
                                         fit: BoxFit.contain,
                                       ),
@@ -832,7 +849,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                             BorderRadius.circular(8.0),
                                         child: Image.asset(
                                           'assets/images/Verizon-Prepaid-logo-e1678306800738.jpg',
-                                          width: 135.0,
+                                          width: 120.0,
                                           height: 80.0,
                                           fit: BoxFit.contain,
                                         ),
@@ -842,11 +859,16 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                   ],
                                 ),
                               ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 5.0, 0.0, 0.0),
                                 child: Text(
                                   'Find Your Perfect Device',
+                                  textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
                                       .headlineLarge
                                       .override(
@@ -858,6 +880,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           .headlineLarge
                                           .fontStyle,
                                     ),
+                                    color: FFAppState().isDarkMode
+                                        ? FlutterFlowTheme.of(context).info
+                                        : Colors.black,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .headlineLarge
@@ -895,6 +920,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                   .bodyLarge
                                                   .fontStyle,
                                         ),
+                                        color: FFAppState().isDarkMode
+                                            ? FlutterFlowTheme.of(context).info
+                                            : Colors.black,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .bodyLarge
@@ -905,58 +933,164 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       ),
                                 ),
                               ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 5.0, 5.0, 0.0),
-                                    child: Icon(
-                                      Icons.shopping_bag_rounded,
-                                      color: Color(0xFF07BCFD),
-                                      size: 40.0,
-                                    ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/vnimc_1.png',
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: 250.0,
+                                    fit: BoxFit.fill,
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 5.0, 0.0, 0.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        HapticFeedback.lightImpact();
-                                        FFAppState().activeTabIndex = 1;
-                                        await _model.pageViewController
-                                            ?.animateToPage(
-                                          1,
-                                          duration: Duration(milliseconds: 500),
-                                          curve: Curves.ease,
-                                        );
-                                      },
-                                      child: Container(
-                                        width: 100.0,
-                                        height: 40.0,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFF07BCFD),
-                                          borderRadius:
-                                              BorderRadius.circular(14.0),
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/49svh_2.png',
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: 250.0,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/3a9k2_3.png',
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: 250.0,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/fijek_4.png',
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: 250.0,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/2emqy_5.png',
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: 250.0,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/x7hc1_7.png',
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: 250.0,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 5.0, 0.0),
+                                      child: Icon(
+                                        Icons.shopping_bag_rounded,
+                                        color: Color(0xFF07BCFD),
+                                        size: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 0.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          HapticFeedback.lightImpact();
+                                          FFAppState().activeTabIndex = 1;
+                                          await _model.pageViewController
+                                              ?.animateToPage(
+                                            1,
+                                            duration:
+                                                Duration(milliseconds: 500),
+                                            curve: Curves.ease,
+                                          );
+                                        },
+                                        child: Container(
+                                          width: 200.0,
+                                          height: 40.0,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFF07BCFD),
+                                            borderRadius:
+                                                BorderRadius.circular(14.0),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
                                           ),
-                                        ),
-                                        child: Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: Text(
-                                            'Shop Now',
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleLarge
-                                                .override(
-                                                  font: GoogleFonts.interTight(
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
+                                            child: Text(
+                                              'Shop Now',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleLarge
+                                                  .override(
+                                                    font:
+                                                        GoogleFonts.interTight(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleLarge
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleLarge
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .info,
+                                                    letterSpacing: 0.0,
                                                     fontWeight:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -968,40 +1102,26 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                             .titleLarge
                                                             .fontStyle,
                                                   ),
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .alternate,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleLarge
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleLarge
-                                                          .fontStyle,
-                                                ),
-                                            overflow: TextOverflow.ellipsis,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'containerOnPageLoadAnimation1']!),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ],
-                          ).animateOnPageLoad(
-                              animationsMap['columnOnPageLoadAnimation1']!),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 5.0, 0.0, 0.0),
                                 child: Text(
-                                  'Just Landed at 5Star',
+                                  'Frequently Asked Questions',
+                                  textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
                                       .headlineLarge
                                       .override(
@@ -1013,6 +1133,142 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           .headlineLarge
                                           .fontStyle,
                                     ),
+                                    color: FFAppState().isDarkMode
+                                        ? FlutterFlowTheme.of(context).info
+                                        : Colors.black,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .headlineLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .headlineLarge
+                                        .fontStyle,
+                                    shadows: [
+                                      Shadow(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        offset: Offset(2.0, 2.0),
+                                        blurRadius: 2.0,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
+                              FlipCard(
+                                fill: Fill.fillBack,
+                                direction: FlipDirection.HORIZONTAL,
+                                speed: 400,
+                                front: Container(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height: 40.0,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF07BCFD),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Text(
+                                      'Can I return or exchange my phone?',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .override(
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .info,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleLarge
+                                                    .fontStyle,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                back: Container(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height: 100.0,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF07BCFD),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Text(
+                                      'Yes! If the device is malfunctioning, you have 14 days to return it for store credit or an exchange.\nChanged your mind? We accept buyer’s remorse returns within 48 hours, but a 25% restocking fee applies.\n📌 Note: No refunds on prepaid plans, SIM cards, or AS-IS devices.',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .info,
+                                            fontSize: 12.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ).animateOnPageLoad(
+                              animationsMap['listViewOnPageLoadAnimation']!),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 0.0),
+                                child: Text(
+                                  'Just Landed at 5Star',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineLarge
+                                      .override(
+                                    font: GoogleFonts.interTight(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .headlineLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineLarge
+                                          .fontStyle,
+                                    ),
+                                    color: FFAppState().isDarkMode
+                                        ? FlutterFlowTheme.of(context).info
+                                        : Colors.black,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .headlineLarge
@@ -1036,6 +1292,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                     0.0, 5.0, 0.0, 0.0),
                                 child: Text(
                                   'New models, new bundles, same unbeatable service.',
+                                  textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(
@@ -1047,6 +1304,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           .bodyLarge
                                           .fontStyle,
                                     ),
+                                    color: FFAppState().isDarkMode
+                                        ? FlutterFlowTheme.of(context).info
+                                        : Colors.black,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .bodyLarge
@@ -1056,8 +1316,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                         .fontStyle,
                                     shadows: [
                                       Shadow(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
+                                        color: Color(0xFF57636C),
                                         offset: Offset(2.0, 2.0),
                                         blurRadius: 2.0,
                                       )
@@ -1332,9 +1591,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                       ),
                                                     ],
                                                   ).animateOnPageLoad(animationsMap[
-                                                      'columnOnPageLoadAnimation3']!),
+                                                      'columnOnPageLoadAnimation2']!),
                                                 ).animateOnPageLoad(animationsMap[
-                                                    'containerOnPageLoadAnimation1']!);
+                                                    'containerOnPageLoadAnimation2']!);
                                               },
                                             ),
                                           );
@@ -1346,7 +1605,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                               ),
                             ],
                           ).animateOnPageLoad(
-                              animationsMap['columnOnPageLoadAnimation2']!),
+                              animationsMap['columnOnPageLoadAnimation1']!),
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [],
@@ -1460,6 +1719,11 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                             .headlineMedium
                                                                             .fontStyle,
                                                                       ),
+                                                                      color: FFAppState().isDarkMode
+                                                                          ? FlutterFlowTheme.of(context)
+                                                                              .info
+                                                                          : Colors
+                                                                              .black,
                                                                       letterSpacing:
                                                                           0.0,
                                                                       fontWeight: FlutterFlowTheme.of(
@@ -1503,6 +1767,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                               .labelMedium
                                                                               .fontStyle,
                                                                         ),
+                                                                        color: FFAppState().isDarkMode
+                                                                            ? FlutterFlowTheme.of(context).info
+                                                                            : Colors.black,
                                                                         letterSpacing:
                                                                             0.0,
                                                                         fontWeight: FlutterFlowTheme.of(context)
@@ -2046,7 +2313,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                     }
 
                                                                     context.goNamedAuth(
-                                                                        WelcomepageWidget
+                                                                        WelcomeTermsWidget
                                                                             .routeName,
                                                                         context
                                                                             .mounted);
@@ -2085,7 +2352,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                                 FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                           ),
                                                                           color:
-                                                                              Colors.white,
+                                                                              FlutterFlowTheme.of(context).info,
                                                                           letterSpacing:
                                                                               0.0,
                                                                           fontWeight: FlutterFlowTheme.of(context)
@@ -2111,261 +2378,11 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                            Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Align(
-                                                                  alignment:
-                                                                      AlignmentDirectional(
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            16.0,
-                                                                            0.0,
-                                                                            16.0,
-                                                                            24.0),
-                                                                    child: Text(
-                                                                      'Or sign up with',
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .center,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelMedium
-                                                                          .override(
-                                                                            font:
-                                                                                GoogleFonts.inter(
-                                                                              fontWeight: FlutterFlowTheme.of(context).labelMedium.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
-                                                                            ),
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).labelMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).labelMedium.fontStyle,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Align(
-                                                                  alignment:
-                                                                      AlignmentDirectional(
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            16.0),
-                                                                    child: Wrap(
-                                                                      spacing:
-                                                                          16.0,
-                                                                      runSpacing:
-                                                                          0.0,
-                                                                      alignment:
-                                                                          WrapAlignment
-                                                                              .center,
-                                                                      crossAxisAlignment:
-                                                                          WrapCrossAlignment
-                                                                              .center,
-                                                                      direction:
-                                                                          Axis.horizontal,
-                                                                      runAlignment:
-                                                                          WrapAlignment
-                                                                              .center,
-                                                                      verticalDirection:
-                                                                          VerticalDirection
-                                                                              .down,
-                                                                      clipBehavior:
-                                                                          Clip.none,
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0.0,
-                                                                              0.0,
-                                                                              0.0,
-                                                                              16.0),
-                                                                          child:
-                                                                              FFButtonWidget(
-                                                                            onPressed:
-                                                                                () async {
-                                                                              GoRouter.of(context).prepareAuthEvent();
-                                                                              final user = await authManager.signInWithGoogle(context);
-                                                                              if (user == null) {
-                                                                                return;
-                                                                              }
-
-                                                                              await currentUserReference!.update(createUsersRecordData(
-                                                                                email: currentUserEmail,
-                                                                                displayName: currentUserDisplayName,
-                                                                                photoUrl: currentUserPhoto,
-                                                                                uid: currentUserUid,
-                                                                                createdTime: getCurrentTimestamp,
-                                                                                phoneNumber: currentPhoneNumber,
-                                                                                lastLoginTime: getCurrentTimestamp,
-                                                                              ));
-                                                                              _model.fcmTokenCreateGoogle = await actions.getFcmToken();
-
-                                                                              await currentUserReference!.update({
-                                                                                ...mapToFirestore(
-                                                                                  {
-                                                                                    'fcm_tokens': FieldValue.arrayUnion([
-                                                                                      _model.fcmTokenCreateGoogle
-                                                                                    ]),
-                                                                                  },
-                                                                                ),
-                                                                              });
-                                                                              ScaffoldMessenger.of(context).clearSnackBars();
-                                                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                                                SnackBar(
-                                                                                  content: Text(
-                                                                                    'Account created! You’re all set. Notifications enabled.',
-                                                                                    style: TextStyle(
-                                                                                      color: FlutterFlowTheme.of(context).primaryText,
-                                                                                    ),
-                                                                                  ),
-                                                                                  duration: Duration(milliseconds: 4000),
-                                                                                  backgroundColor: Color(0xFF07BCFD),
-                                                                                ),
-                                                                              );
-
-                                                                              context.goNamedAuth(WelcomepageWidget.routeName, context.mounted);
-
-                                                                              safeSetState(() {});
-                                                                            },
-                                                                            text:
-                                                                                'Continue with Google',
-                                                                            icon:
-                                                                                FaIcon(
-                                                                              FontAwesomeIcons.google,
-                                                                              size: 20.0,
-                                                                            ),
-                                                                            options:
-                                                                                FFButtonOptions(
-                                                                              width: 230.0,
-                                                                              height: 44.0,
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                              iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                              color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                              textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    font: GoogleFonts.inter(
-                                                                                      fontWeight: FontWeight.bold,
-                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                    ),
-                                                                                    letterSpacing: 0.0,
-                                                                                    fontWeight: FontWeight.bold,
-                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                  ),
-                                                                              elevation: 0.0,
-                                                                              borderSide: BorderSide(
-                                                                                color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
-                                                                              ),
-                                                                              borderRadius: BorderRadius.circular(12.0),
-                                                                              hoverColor: FlutterFlowTheme.of(context).primaryBackground,
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                        isAndroid
-                                                                            ? Container()
-                                                                            : Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                                                                                child: FFButtonWidget(
-                                                                                  onPressed: () async {
-                                                                                    GoRouter.of(context).prepareAuthEvent();
-                                                                                    final user = await authManager.signInWithApple(context);
-                                                                                    if (user == null) {
-                                                                                      return;
-                                                                                    }
-
-                                                                                    await currentUserReference!.update(createUsersRecordData(
-                                                                                      email: currentUserEmail,
-                                                                                      displayName: currentUserDisplayName,
-                                                                                      photoUrl: currentUserPhoto,
-                                                                                      uid: currentUserUid,
-                                                                                      createdTime: getCurrentTimestamp,
-                                                                                      phoneNumber: currentPhoneNumber,
-                                                                                      lastLoginTime: getCurrentTimestamp,
-                                                                                    ));
-                                                                                    _model.fcmTokenCreateApple = await actions.getFcmToken();
-
-                                                                                    await currentUserReference!.update({
-                                                                                      ...mapToFirestore(
-                                                                                        {
-                                                                                          'fcm_tokens': FieldValue.arrayUnion([
-                                                                                            _model.fcmTokenCreateApple
-                                                                                          ]),
-                                                                                        },
-                                                                                      ),
-                                                                                    });
-                                                                                    ScaffoldMessenger.of(context).clearSnackBars();
-                                                                                    ScaffoldMessenger.of(context).showSnackBar(
-                                                                                      SnackBar(
-                                                                                        content: Text(
-                                                                                          'Account created! You’re all set. Notifications enabled.',
-                                                                                          style: TextStyle(
-                                                                                            color: FlutterFlowTheme.of(context).primaryText,
-                                                                                          ),
-                                                                                        ),
-                                                                                        duration: Duration(milliseconds: 4000),
-                                                                                        backgroundColor: Color(0xFF07BCFD),
-                                                                                      ),
-                                                                                    );
-
-                                                                                    context.goNamedAuth(WelcomepageWidget.routeName, context.mounted);
-
-                                                                                    safeSetState(() {});
-                                                                                  },
-                                                                                  text: 'Continue with Apple',
-                                                                                  icon: FaIcon(
-                                                                                    FontAwesomeIcons.apple,
-                                                                                    size: 20.0,
-                                                                                  ),
-                                                                                  options: FFButtonOptions(
-                                                                                    width: 230.0,
-                                                                                    height: 44.0,
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          font: GoogleFonts.inter(
-                                                                                            fontWeight: FontWeight.bold,
-                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          ),
-                                                                                          letterSpacing: 0.0,
-                                                                                          fontWeight: FontWeight.bold,
-                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                        ),
-                                                                                    elevation: 0.0,
-                                                                                    borderSide: BorderSide(
-                                                                                      color: FlutterFlowTheme.of(context).alternate,
-                                                                                      width: 2.0,
-                                                                                    ),
-                                                                                    borderRadius: BorderRadius.circular(12.0),
-                                                                                    hoverColor: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
                                                           ],
                                                         ),
                                                       ).animateOnPageLoad(
                                                               animationsMap[
-                                                                  'columnOnPageLoadAnimation4']!),
+                                                                  'columnOnPageLoadAnimation3']!),
                                                     ),
                                                   ),
                                                   Align(
@@ -2876,7 +2893,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                     );
 
                                                                     context.goNamedAuth(
-                                                                        WelcomepageWidget
+                                                                        WelcomeTermsWidget
                                                                             .routeName,
                                                                         context
                                                                             .mounted);
@@ -3067,7 +3084,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                         );
 
                                                                         context.goNamedAuth(
-                                                                            WelcomepageWidget.routeName,
+                                                                            WelcomeTermsWidget.routeName,
                                                                             context.mounted);
 
                                                                         safeSetState(
@@ -3173,7 +3190,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                                 ),
                                                                               );
 
-                                                                              context.goNamedAuth(WelcomepageWidget.routeName, context.mounted);
+                                                                              context.goNamedAuth(WelcomeTermsWidget.routeName, context.mounted);
 
                                                                               safeSetState(() {});
                                                                             },
@@ -3365,7 +3382,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                         ),
                                                       ).animateOnPageLoad(
                                                               animationsMap[
-                                                                  'columnOnPageLoadAnimation5']!),
+                                                                  'columnOnPageLoadAnimation4']!),
                                                     ),
                                                   ),
                                                 ],
@@ -3481,7 +3498,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                         ),
                                       ),
                                     ).animateOnPageLoad(animationsMap[
-                                        'containerOnPageLoadAnimation2']!),
+                                        'containerOnPageLoadAnimation3']!),
                                   ),
                                 ),
                               ),
@@ -3493,10 +3510,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                   ),
                 ),
                 wrapWithModel(
-                  model: _model.bottomNavModel,
+                  model: _model.bottomNav2Model,
                   updateCallback: () => safeSetState(() {}),
-                  child: BottomNavWidget(
-                    activeIndex: FFAppState().activeTabIndex,
+                  child: BottomNav2Widget(
                     onStoreTap: () async {
                       HapticFeedback.lightImpact();
                       FFAppState().activeTabIndex = 1;
@@ -3506,8 +3522,24 @@ class _PageNavWidgetState extends State<PageNavWidget>
                         curve: Curves.ease,
                       );
                     },
-                    onServicesTap: () async {},
-                    onCartTap: () async {},
+                    onServicesTap: () async {
+                      HapticFeedback.lightImpact();
+                      FFAppState().activeTabIndex = 2;
+                      await _model.pageViewController?.animateToPage(
+                        2,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.ease,
+                      );
+                    },
+                    onCartTap: () async {
+                      HapticFeedback.lightImpact();
+                      FFAppState().activeTabIndex = 3;
+                      await _model.pageViewController?.animateToPage(
+                        3,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.ease,
+                      );
+                    },
                     onHomeTap: () async {
                       HapticFeedback.lightImpact();
                       FFAppState().activeTabIndex = 0;
@@ -3526,7 +3558,15 @@ class _PageNavWidgetState extends State<PageNavWidget>
                         curve: Curves.ease,
                       );
                     },
-                    onFaveTap: () async {},
+                    onFaveTap: () async {
+                      HapticFeedback.lightImpact();
+                      FFAppState().activeTabIndex = 4;
+                      await _model.pageViewController?.animateToPage(
+                        4,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.ease,
+                      );
+                    },
                   ),
                 ),
               ],

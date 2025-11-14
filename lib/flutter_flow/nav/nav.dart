@@ -79,13 +79,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? WelcomepageWidget() : PageNavWidget(),
+          appStateNotifier.loggedIn ? WelcomeTermsWidget() : PageNavWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? WelcomepageWidget() : PageNavWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? WelcomeTermsWidget()
+              : PageNavWidget(),
         ),
         FFRoute(
           name: WelcomepageWidget.routeName,
@@ -116,6 +117,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: PageNavWidget.routeName,
           path: PageNavWidget.routePath,
           builder: (context, params) => PageNavWidget(),
+        ),
+        FFRoute(
+          name: WelcomepageCopyWidget.routeName,
+          path: WelcomepageCopyWidget.routePath,
+          builder: (context, params) => WelcomepageCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
