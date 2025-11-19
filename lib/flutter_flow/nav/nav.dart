@@ -94,11 +94,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => WelcomepageWidget(),
         ),
         FFRoute(
-          name: TabsHostWidget.routeName,
-          path: TabsHostWidget.routePath,
-          builder: (context, params) => TabsHostWidget(),
-        ),
-        FFRoute(
           name: WelcomeTermsWidget.routeName,
           path: WelcomeTermsWidget.routePath,
           builder: (context, params) => WelcomeTermsWidget(),
@@ -122,6 +117,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: WelcomepageCopyWidget.routeName,
           path: WelcomepageCopyWidget.routePath,
           builder: (context, params) => WelcomepageCopyWidget(),
+        ),
+        FFRoute(
+          name: TabsHostCopyWidget.routeName,
+          path: TabsHostCopyWidget.routePath,
+          builder: (context, params) => TabsHostCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -294,7 +294,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/pageNav';
+            return '/PageNav';
           }
           return null;
         },

@@ -27,7 +27,7 @@ class PageNavWidget extends StatefulWidget {
   const PageNavWidget({super.key});
 
   static String routeName = 'PageNav';
-  static String routePath = '/pageNav';
+  static String routePath = '/PageNav';
 
   @override
   State<PageNavWidget> createState() => _PageNavWidgetState();

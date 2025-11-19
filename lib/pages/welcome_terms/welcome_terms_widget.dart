@@ -38,7 +38,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (FFAppState().termsAcceptedv4) {
         context.goNamed(
-          TabsHostWidget.routeName,
+          PageNavWidget.routeName,
           extra: <String, dynamic>{
             kTransitionInfoKey: TransitionInfo(
               hasTransition: true,
@@ -565,7 +565,7 @@ class _WelcomeTermsWidgetState extends State<WelcomeTermsWidget>
                         FFAppState().termsAcceptedv4 = true;
 
                         context.goNamed(
-                          TabsHostWidget.routeName,
+                          PageNavWidget.routeName,
                           extra: <String, dynamic>{
                             kTransitionInfoKey: TransitionInfo(
                               hasTransition: true,

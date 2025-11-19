@@ -10,22 +10,22 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'tabs_host_model.dart';
-export 'tabs_host_model.dart';
+import 'tabs_host_copy_model.dart';
+export 'tabs_host_copy_model.dart';
 
-class TabsHostWidget extends StatefulWidget {
-  const TabsHostWidget({super.key});
+class TabsHostCopyWidget extends StatefulWidget {
+  const TabsHostCopyWidget({super.key});
 
-  static String routeName = 'TabsHost';
-  static String routePath = '/tabsHost';
+  static String routeName = 'TabsHostCopy';
+  static String routePath = '/tabsHostCopy';
 
   @override
-  State<TabsHostWidget> createState() => _TabsHostWidgetState();
+  State<TabsHostCopyWidget> createState() => _TabsHostCopyWidgetState();
 }
 
-class _TabsHostWidgetState extends State<TabsHostWidget>
+class _TabsHostCopyWidgetState extends State<TabsHostCopyWidget>
     with TickerProviderStateMixin {
-  late TabsHostModel _model;
+  late TabsHostCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -34,7 +34,7 @@ class _TabsHostWidgetState extends State<TabsHostWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TabsHostModel());
+    _model = createModel(context, () => TabsHostCopyModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
