@@ -11,19 +11,15 @@ class BottomNav2Widget extends StatefulWidget {
     int? activeIndex,
     required this.onStoreTap,
     required this.onServicesTap,
-    required this.onCartTap,
     required this.onHomeTap,
     required this.onUserTap,
-    required this.onFaveTap,
   }) : this.activeIndex = activeIndex ?? 0;
 
   final int activeIndex;
   final Future Function()? onStoreTap;
   final Future Function()? onServicesTap;
-  final Future Function()? onCartTap;
   final Future Function()? onHomeTap;
   final Future Function()? onUserTap;
-  final Future Function()? onFaveTap;
 
   @override
   State<BottomNav2Widget> createState() => _BottomNav2WidgetState();
@@ -258,107 +254,6 @@ class _BottomNav2WidgetState extends State<BottomNav2Widget> {
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      await widget.onCartTap?.call();
-                                    },
-                                    child: Icon(
-                                      Icons.shopping_cart_rounded,
-                                      color: Color(0xFF07BCFD),
-                                      size: 30.0,
-                                    ),
-                                  ),
-                                  if (widget.activeIndex == 3)
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 0.0, 0.0),
-                                      child: Container(
-                                        width: 50.0,
-                                        height: 3.0,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFF07BCFD),
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(0.0),
-                                            bottomRight: Radius.circular(0.0),
-                                            topLeft: Radius.circular(2.0),
-                                            topRight: Radius.circular(0.0),
-                                          ),
-                                          border: Border.all(
-                                            color: Color(0xFF07BCFD),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 50.0,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                color: FFAppState().isDarkMode
-                                    ? Color(0xFF0F1115)
-                                    : Colors.white,
-                              ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      await widget.onFaveTap?.call();
-                                    },
-                                    child: Icon(
-                                      Icons.star_rounded,
-                                      color: Color(0xFF07BCFD),
-                                      size: 30.0,
-                                    ),
-                                  ),
-                                  if (widget.activeIndex == 4)
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 0.0, 0.0),
-                                      child: Container(
-                                        width: 50.0,
-                                        height: 3.0,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFF07BCFD),
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(0.0),
-                                            bottomRight: Radius.circular(0.0),
-                                            topLeft: Radius.circular(2.0),
-                                            topRight: Radius.circular(0.0),
-                                          ),
-                                          border: Border.all(
-                                            color: Color(0xFF07BCFD),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 50.0,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                color: FFAppState().isDarkMode
-                                    ? Color(0xFF0F1115)
-                                    : Colors.white,
-                              ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   InkWell(
@@ -375,7 +270,7 @@ class _BottomNav2WidgetState extends State<BottomNav2Widget> {
                                       size: 30.0,
                                     ),
                                   ),
-                                  if (widget.activeIndex == 5)
+                                  if (widget.activeIndex == 3)
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 8.0, 0.0, 0.0),

@@ -214,6 +214,30 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInBannerImageList(int index, String value) {
     bannerImageList.insert(index, value);
   }
+
+  String _storeSearchText = '';
+  String get storeSearchText => _storeSearchText;
+  set storeSearchText(String value) {
+    _storeSearchText = value;
+  }
+
+  int _prepaidSlideIndex = 0;
+  int get prepaidSlideIndex => _prepaidSlideIndex;
+  set prepaidSlideIndex(int value) {
+    _prepaidSlideIndex = value;
+  }
+
+  bool _prepaidSliderOn = true;
+  bool get prepaidSliderOn => _prepaidSliderOn;
+  set prepaidSliderOn(bool value) {
+    _prepaidSliderOn = value;
+  }
+
+  int _imageSlideIndex = 0;
+  int get imageSlideIndex => _imageSlideIndex;
+  set imageSlideIndex(int value) {
+    _imageSlideIndex = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

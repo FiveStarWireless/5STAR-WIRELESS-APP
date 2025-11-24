@@ -20,6 +20,10 @@ class PageNavModel extends FlutterFlowModel<PageNavWidget> {
           pageViewController!.page != null
       ? pageViewController!.page!.round()
       : 0;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController1;
+  String? Function(BuildContext, String?)? textController1Validator;
   Completer<ApiCallResponse>? apiRequestCompleter;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
@@ -73,6 +77,9 @@ class PageNavModel extends FlutterFlowModel<PageNavWidget> {
 
   @override
   void dispose() {
+    textFieldFocusNode?.dispose();
+    textController1?.dispose();
+
     tabBarController?.dispose();
     emailAddressCreateFocusNode?.dispose();
     emailAddressCreateTextController?.dispose();

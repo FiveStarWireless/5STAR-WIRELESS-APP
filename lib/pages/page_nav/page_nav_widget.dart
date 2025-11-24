@@ -3,6 +3,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_static_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -13,6 +14,7 @@ import '/index.dart';
 import 'dart:async';
 import 'package:flip_card/flip_card.dart';
 import 'package:mapbox_search/mapbox_search.dart' as mapbox;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -38,7 +40,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
   late PageNavModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
+  var hasRowTriggered1 = false;
+  var hasRowTriggered2 = false;
+  var hasRowTriggered3 = false;
+  var hasRowTriggered4 = false;
   final animationsMap = <String, AnimationInfo>{};
 
   @override
@@ -55,7 +60,12 @@ class _PageNavWidgetState extends State<PageNavWidget>
       safeSetState(() {});
       FFAppState().cartIds = _model.userRecord!.cartIds.toList().cast<String>();
       safeSetState(() {});
+      FFAppState().prepaidSlideIndex = 0;
+      safeSetState(() {});
     });
+
+    _model.textController1 ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
 
     _model.tabBarController = TabController(
       vsync: this,
@@ -134,6 +144,32 @@ class _PageNavWidgetState extends State<PageNavWidget>
           ),
         ],
       ),
+      'stackOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FlipEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: 1.0,
+            end: 2.0,
+          ),
+        ],
+      ),
+      'rowOnActionTriggerAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: false,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeIn,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(-100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
       'imageOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
@@ -189,6 +225,19 @@ class _PageNavWidgetState extends State<PageNavWidget>
             duration: 600.0.ms,
             begin: 1.0,
             end: 2.0,
+          ),
+        ],
+      ),
+      'rowOnActionTriggerAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: false,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeIn,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(0.0, -100.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -249,6 +298,19 @@ class _PageNavWidgetState extends State<PageNavWidget>
           ),
         ],
       ),
+      'rowOnActionTriggerAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: false,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeIn,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(0.0, 100.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
       'imageOnPageLoadAnimation8': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
@@ -303,6 +365,19 @@ class _PageNavWidgetState extends State<PageNavWidget>
             duration: 600.0.ms,
             begin: 1.0,
             end: 2.0,
+          ),
+        ],
+      ),
+      'rowOnActionTriggerAnimation4': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: false,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeIn,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -396,7 +471,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
           FadeEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 1000.0.ms,
+            duration: 600.0.ms,
             begin: 0.0,
             end: 1.0,
           ),
@@ -461,7 +536,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
           FadeEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 600.0.ms,
+            duration: 1000.0.ms,
             begin: 0.0,
             end: 1.0,
           ),
@@ -469,15 +544,17 @@ class _PageNavWidgetState extends State<PageNavWidget>
       ),
       'iconOnPageLoadAnimation1': AnimationInfo(
         loop: true,
+        reverse: true,
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 1.ms),
-          RotateEffect(
+          ShakeEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 1000.0.ms,
-            begin: 0.0,
-            end: 1.0,
+            hz: 10,
+            offset: Offset(0.0, 0.0),
+            rotation: 0.087,
           ),
         ],
       ),
@@ -926,6 +1003,318 @@ class _PageNavWidgetState extends State<PageNavWidget>
           ),
         ],
       ),
+      'imageOnPageLoadAnimation30': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation31': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation32': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation33': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation13': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(-100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation14': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation15': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation16': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation17': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation18': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation19': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation20': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation21': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation22': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation23': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation24': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation25': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation26': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation27': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation28': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation29': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation30': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation31': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation32': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
       'containerOnPageLoadAnimation3': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
@@ -994,6 +1383,12 @@ class _PageNavWidgetState extends State<PageNavWidget>
         ],
       ),
     });
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -1105,7 +1500,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                         child: Image.asset(
                                           'assets/images/5star_wireless_white12.png',
                                           width: double.infinity,
-                                          height: 100.0,
+                                          height: 77.87,
                                           fit: BoxFit.contain,
                                         ),
                                       ).animateOnPageLoad(animationsMap[
@@ -1126,35 +1521,30 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .headlineLarge
                                           .override(
-                                        font: GoogleFonts.interTight(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontStyle,
-                                        ),
-                                        color: FFAppState().isDarkMode
-                                            ? FlutterFlowTheme.of(context).info
-                                            : Colors.black,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                        shadows: [
-                                          Shadow(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            offset: Offset(2.0, 2.0),
-                                            blurRadius: 2.0,
-                                          )
-                                        ],
-                                      ),
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
                                     ).animateOnPageLoad(animationsMap[
                                         'textOnPageLoadAnimation1']!),
                                   ),
@@ -1165,212 +1555,370 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 5.0, 0.0, 0.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 0.0, 5.0, 0.0),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.asset(
-                                              'assets/images/ATT-NEW-LOGO-01.png',
-                                              width: 120.0,
-                                              height: 80.0,
-                                              fit: BoxFit.contain,
+                                        0.0, 5.0, 0.0, 5.0),
+                                    child: Container(
+                                      width: MediaQuery.sizeOf(context).width *
+                                          1.0,
+                                      height: 200.0,
+                                      decoration: BoxDecoration(
+                                        color: FFAppState().isDarkMode
+                                            ? Colors.black
+                                            : FlutterFlowTheme.of(context).info,
+                                        borderRadius:
+                                            BorderRadius.circular(6.0),
+                                      ),
+                                      child: Stack(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        children: [
+                                          if (FFAppState().prepaidSlideIndex ==
+                                              0)
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 0.0, 5.0, 0.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.asset(
+                                                      'assets/images/att.png',
+                                                      width: 120.0,
+                                                      height: 80.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'imageOnPageLoadAnimation2']!),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.asset(
+                                                    'assets/images/Untitled_design.png',
+                                                    width: 120.0,
+                                                    height: 80.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ).animateOnPageLoad(animationsMap[
+                                                    'imageOnPageLoadAnimation3']!),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 0.0, 5.0, 0.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.asset(
+                                                      'assets/images/Untitled_design_(1).png',
+                                                      width: 120.0,
+                                                      height: 80.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'imageOnPageLoadAnimation4']!),
+                                                ),
+                                              ],
+                                            ).animateOnActionTrigger(
+                                                animationsMap[
+                                                    'rowOnActionTriggerAnimation1']!,
+                                                hasBeenTriggered:
+                                                    hasRowTriggered1),
+                                          if (FFAppState().prepaidSlideIndex ==
+                                              1)
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 0.0, 5.0, 0.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.asset(
+                                                      'assets/images/Untitled_design_(2).png',
+                                                      width: 120.0,
+                                                      height: 80.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'imageOnPageLoadAnimation5']!),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.asset(
+                                                    'assets/images/Untitled_design_(3).png',
+                                                    width: 120.0,
+                                                    height: 80.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ).animateOnPageLoad(animationsMap[
+                                                    'imageOnPageLoadAnimation6']!),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 0.0, 5.0, 0.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.asset(
+                                                      'assets/images/Untitled_design_(4).png',
+                                                      width: 120.0,
+                                                      height: 80.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'imageOnPageLoadAnimation7']!),
+                                                ),
+                                              ],
+                                            ).animateOnActionTrigger(
+                                                animationsMap[
+                                                    'rowOnActionTriggerAnimation2']!,
+                                                hasBeenTriggered:
+                                                    hasRowTriggered2),
+                                          if (FFAppState().prepaidSlideIndex ==
+                                              2)
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 0.0, 5.0, 0.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.asset(
+                                                      'assets/images/Untitled_design_(5).png',
+                                                      width: 120.0,
+                                                      height: 80.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'imageOnPageLoadAnimation8']!),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.asset(
+                                                    'assets/images/Untitled_design_(6).png',
+                                                    width: 120.0,
+                                                    height: 80.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ).animateOnPageLoad(animationsMap[
+                                                    'imageOnPageLoadAnimation9']!),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 0.0, 5.0, 0.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.asset(
+                                                      'assets/images/Untitled_design_(7).png',
+                                                      width: 120.0,
+                                                      height: 80.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'imageOnPageLoadAnimation10']!),
+                                                ),
+                                              ],
+                                            ).animateOnActionTrigger(
+                                                animationsMap[
+                                                    'rowOnActionTriggerAnimation3']!,
+                                                hasBeenTriggered:
+                                                    hasRowTriggered3),
+                                          if (FFAppState().prepaidSlideIndex ==
+                                              3)
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 0.0, 5.0, 0.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.asset(
+                                                      'assets/images/Untitled_design_(8).png',
+                                                      width: 120.0,
+                                                      height: 80.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'imageOnPageLoadAnimation11']!),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.asset(
+                                                    'assets/images/Untitled_design_(9).png',
+                                                    width: 120.0,
+                                                    height: 80.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ).animateOnPageLoad(animationsMap[
+                                                    'imageOnPageLoadAnimation12']!),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 0.0, 5.0, 0.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.asset(
+                                                      'assets/images/Untitled_design_(10).png',
+                                                      width: 120.0,
+                                                      height: 80.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'imageOnPageLoadAnimation13']!),
+                                                ),
+                                              ],
+                                            ).animateOnActionTrigger(
+                                                animationsMap[
+                                                    'rowOnActionTriggerAnimation4']!,
+                                                hasBeenTriggered:
+                                                    hasRowTriggered4),
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 1.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          50.0, 0.0, 0.0, 0.0),
+                                                  child: FlutterFlowIconButton(
+                                                    borderRadius: 8.0,
+                                                    buttonSize: 40.0,
+                                                    fillColor:
+                                                        Color(0xFF07BCFD),
+                                                    icon: Icon(
+                                                      Icons
+                                                          .arrow_back_ios_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .info,
+                                                      size: 24.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      HapticFeedback
+                                                          .lightImpact();
+                                                      if (FFAppState()
+                                                              .prepaidSlideIndex ==
+                                                          3) {
+                                                        FFAppState()
+                                                            .prepaidSlideIndex = 2;
+                                                        safeSetState(() {});
+                                                      } else if (FFAppState()
+                                                              .prepaidSlideIndex ==
+                                                          2) {
+                                                        FFAppState()
+                                                            .prepaidSlideIndex = 1;
+                                                        safeSetState(() {});
+                                                      } else if (FFAppState()
+                                                              .prepaidSlideIndex ==
+                                                          1) {
+                                                        FFAppState()
+                                                            .prepaidSlideIndex = 0;
+                                                        safeSetState(() {});
+                                                      } else {
+                                                        FFAppState()
+                                                            .prepaidSlideIndex = 3;
+                                                        safeSetState(() {});
+                                                      }
+                                                    },
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 50.0, 0.0),
+                                                  child: FlutterFlowIconButton(
+                                                    borderRadius: 8.0,
+                                                    buttonSize: 40.0,
+                                                    fillColor:
+                                                        Color(0xFF07BCFD),
+                                                    icon: Icon(
+                                                      Icons
+                                                          .arrow_forward_ios_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .info,
+                                                      size: 24.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      HapticFeedback
+                                                          .lightImpact();
+                                                      if (FFAppState()
+                                                              .prepaidSlideIndex ==
+                                                          0) {
+                                                        FFAppState()
+                                                            .prepaidSlideIndex = 1;
+                                                        safeSetState(() {});
+                                                      } else if (FFAppState()
+                                                              .prepaidSlideIndex ==
+                                                          1) {
+                                                        FFAppState()
+                                                            .prepaidSlideIndex = 2;
+                                                        safeSetState(() {});
+                                                      } else if (FFAppState()
+                                                              .prepaidSlideIndex ==
+                                                          2) {
+                                                        FFAppState()
+                                                            .prepaidSlideIndex = 3;
+                                                        safeSetState(() {});
+                                                      } else {
+                                                        FFAppState()
+                                                            .prepaidSlideIndex = 0;
+                                                        safeSetState(() {});
+                                                      }
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ).animateOnPageLoad(animationsMap[
-                                              'imageOnPageLoadAnimation2']!),
-                                        ),
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/Connect-nr-hero-3-18-22-1250x615.png',
-                                            width: 120.0,
-                                            height: 80.0,
-                                            fit: BoxFit.contain,
                                           ),
-                                        ).animateOnPageLoad(animationsMap[
-                                            'imageOnPageLoadAnimation3']!),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 0.0, 5.0, 0.0),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.asset(
-                                              'assets/images/Cricket_Wireless_Logo.png',
-                                              width: 120.0,
-                                              height: 80.0,
-                                              fit: BoxFit.contain,
-                                            ),
-                                          ).animateOnPageLoad(animationsMap[
-                                              'imageOnPageLoadAnimation4']!),
-                                        ),
-                                      ],
+                                        ],
+                                      ).animateOnPageLoad(animationsMap[
+                                          'stackOnPageLoadAnimation']!),
                                     ),
                                   ),
                                 ],
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 0.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/GENMOBILE_LOGO_RGB-72PPI.png',
-                                          width: 120.0,
-                                          height: 80.0,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'imageOnPageLoadAnimation5']!),
-                                    ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.asset(
-                                        'assets/images/H2O_wireless-logo-2019.jpg',
-                                        width: 120.0,
-                                        height: 80.0,
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'imageOnPageLoadAnimation6']!),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 0.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/lycamobile_logo.png',
-                                          width: 120.0,
-                                          height: 80.0,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'imageOnPageLoadAnimation7']!),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 0.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/Mobile_X_Global___Logo.jpg',
-                                          width: 120.0,
-                                          height: 80.0,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'imageOnPageLoadAnimation8']!),
-                                    ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.asset(
-                                        'assets/images/red_pocket_mobile_logo.jpg',
-                                        width: 120.0,
-                                        height: 80.0,
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'imageOnPageLoadAnimation9']!),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 0.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/simple_mobile-logo_new.png',
-                                          width: 120.0,
-                                          height: 80.0,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'imageOnPageLoadAnimation10']!),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 5.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 0.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/T-Mobile_New_Logo_Primary_RGB_M-on-K_Transparent.png',
-                                          width: 120.0,
-                                          height: 80.0,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'imageOnPageLoadAnimation11']!),
-                                    ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.asset(
-                                        'assets/images/Ultra-Mobile-Logo_new.jpg',
-                                        width: 120.0,
-                                        height: 80.0,
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'imageOnPageLoadAnimation12']!),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 0.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/Verizon-Prepaid-logo-e1678306800738.jpg',
-                                          width: 120.0,
-                                          height: 80.0,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'imageOnPageLoadAnimation13']!),
-                                    ),
-                                  ],
-                                ),
                               ),
                               Divider(
                                 thickness: 2.0,
@@ -1388,35 +1936,30 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .headlineLarge
                                           .override(
-                                        font: GoogleFonts.interTight(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontStyle,
-                                        ),
-                                        color: FFAppState().isDarkMode
-                                            ? FlutterFlowTheme.of(context).info
-                                            : Colors.black,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                        shadows: [
-                                          Shadow(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            offset: Offset(2.0, 2.0),
-                                            blurRadius: 2.0,
-                                          )
-                                        ],
-                                      ),
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
                                     ).animateOnPageLoad(animationsMap[
                                         'textOnPageLoadAnimation2']!),
                                   ),
@@ -1461,97 +2004,250 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                     color:
                                         FlutterFlowTheme.of(context).alternate,
                                   ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      if (FFAppState().imageSlideIndex == 0)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 5.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/x7hc1_7.png',
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 250.0,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'imageOnPageLoadAnimation14']!),
+                                        ),
+                                      if (FFAppState().imageSlideIndex == 1)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 5.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/2emqy_5.png',
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 250.0,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'imageOnPageLoadAnimation15']!),
+                                        ),
+                                      if (FFAppState().imageSlideIndex == 2)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 5.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/fijek_4.png',
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 250.0,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'imageOnPageLoadAnimation16']!),
+                                        ),
+                                      if (FFAppState().imageSlideIndex == 3)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 5.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/3a9k2_3.png',
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 250.0,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'imageOnPageLoadAnimation17']!),
+                                        ),
+                                      if (FFAppState().imageSlideIndex == 4)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 5.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/49svh_2.png',
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 250.0,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'imageOnPageLoadAnimation18']!),
+                                        ),
+                                      if (FFAppState().imageSlideIndex == 5)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 5.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/vnimc_1.png',
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 250.0,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'imageOnPageLoadAnimation19']!),
+                                        ),
+                                    ],
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0.0, 1.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 5.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    50.0, 0.0, 0.0, 0.0),
+                                            child: FlutterFlowIconButton(
+                                              borderRadius: 8.0,
+                                              buttonSize: 40.0,
+                                              fillColor: Color(0xFF07BCFD),
+                                              icon: Icon(
+                                                Icons.arrow_back_ios_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .info,
+                                                size: 24.0,
+                                              ),
+                                              onPressed: () async {
+                                                HapticFeedback.lightImpact();
+                                                if (FFAppState()
+                                                        .imageSlideIndex ==
+                                                    5) {
+                                                  FFAppState().imageSlideIndex =
+                                                      4;
+                                                  safeSetState(() {});
+                                                } else if (FFAppState()
+                                                        .imageSlideIndex ==
+                                                    4) {
+                                                  FFAppState().imageSlideIndex =
+                                                      3;
+                                                  safeSetState(() {});
+                                                } else if (FFAppState()
+                                                        .imageSlideIndex ==
+                                                    3) {
+                                                  FFAppState().imageSlideIndex =
+                                                      2;
+                                                  safeSetState(() {});
+                                                } else if (FFAppState()
+                                                        .imageSlideIndex ==
+                                                    2) {
+                                                  FFAppState().imageSlideIndex =
+                                                      1;
+                                                  safeSetState(() {});
+                                                } else if (FFAppState()
+                                                        .imageSlideIndex ==
+                                                    1) {
+                                                  FFAppState()
+                                                      .prepaidSlideIndex = 0;
+                                                  safeSetState(() {});
+                                                } else {
+                                                  FFAppState().imageSlideIndex =
+                                                      5;
+                                                  safeSetState(() {});
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 50.0, 0.0),
+                                            child: FlutterFlowIconButton(
+                                              borderRadius: 8.0,
+                                              buttonSize: 40.0,
+                                              fillColor: Color(0xFF07BCFD),
+                                              icon: Icon(
+                                                Icons.arrow_forward_ios_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .info,
+                                                size: 24.0,
+                                              ),
+                                              onPressed: () async {
+                                                HapticFeedback.lightImpact();
+                                                if (FFAppState()
+                                                        .imageSlideIndex ==
+                                                    0) {
+                                                  FFAppState().imageSlideIndex =
+                                                      1;
+                                                  safeSetState(() {});
+                                                } else if (FFAppState()
+                                                        .imageSlideIndex ==
+                                                    1) {
+                                                  FFAppState().imageSlideIndex =
+                                                      2;
+                                                  safeSetState(() {});
+                                                } else if (FFAppState()
+                                                        .imageSlideIndex ==
+                                                    2) {
+                                                  FFAppState().imageSlideIndex =
+                                                      3;
+                                                  safeSetState(() {});
+                                                } else if (FFAppState()
+                                                        .imageSlideIndex ==
+                                                    3) {
+                                                  FFAppState().imageSlideIndex =
+                                                      4;
+                                                  safeSetState(() {});
+                                                } else if (FFAppState()
+                                                        .imageSlideIndex ==
+                                                    4) {
+                                                  FFAppState().imageSlideIndex =
+                                                      5;
+                                                  safeSetState(() {});
+                                                } else {
+                                                  FFAppState().imageSlideIndex =
+                                                      0;
+                                                  safeSetState(() {});
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ],
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 5.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/vnimc_1.png',
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 1.0,
-                                    height: 250.0,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ).animateOnPageLoad(animationsMap[
-                                    'imageOnPageLoadAnimation14']!),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 5.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/49svh_2.png',
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 1.0,
-                                    height: 250.0,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ).animateOnPageLoad(animationsMap[
-                                    'imageOnPageLoadAnimation15']!),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 5.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/3a9k2_3.png',
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 1.0,
-                                    height: 250.0,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ).animateOnPageLoad(animationsMap[
-                                    'imageOnPageLoadAnimation16']!),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 5.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/fijek_4.png',
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 1.0,
-                                    height: 250.0,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ).animateOnPageLoad(animationsMap[
-                                    'imageOnPageLoadAnimation17']!),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 5.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/2emqy_5.png',
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 1.0,
-                                    height: 250.0,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ).animateOnPageLoad(animationsMap[
-                                    'imageOnPageLoadAnimation18']!),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 5.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/x7hc1_7.png',
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 1.0,
-                                    height: 250.0,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ).animateOnPageLoad(animationsMap[
-                                    'imageOnPageLoadAnimation19']!),
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -1665,35 +2361,30 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .headlineLarge
                                           .override(
-                                        font: GoogleFonts.interTight(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontStyle,
-                                        ),
-                                        color: FFAppState().isDarkMode
-                                            ? FlutterFlowTheme.of(context).info
-                                            : Colors.black,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                        shadows: [
-                                          Shadow(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            offset: Offset(2.0, 2.0),
-                                            blurRadius: 2.0,
-                                          )
-                                        ],
-                                      ),
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
                                     ).animateOnPageLoad(animationsMap[
                                         'textOnPageLoadAnimation4']!),
                                   ),
@@ -2557,35 +3248,30 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .headlineLarge
                                           .override(
-                                        font: GoogleFonts.interTight(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontStyle,
-                                        ),
-                                        color: FFAppState().isDarkMode
-                                            ? FlutterFlowTheme.of(context).info
-                                            : Colors.black,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                        shadows: [
-                                          Shadow(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            offset: Offset(2.0, 2.0),
-                                            blurRadius: 2.0,
-                                          )
-                                        ],
-                                      ),
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
                                     ).animateOnPageLoad(animationsMap[
                                         'textOnPageLoadAnimation5']!),
                                   ),
@@ -2597,25 +3283,36 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 5.0, 0.0, 5.0),
-                                    child: FlutterFlowStaticMap(
-                                      location:
-                                          LatLng(30.42778, -84.21377966123221),
-                                      apiKey:
-                                          'pk.eyJ1IjoiZ2VuaWVpc3AiLCJhIjoiY200aTBwbXd3MGN0ajJyb2VidWl2NzVxNyJ9.GYYmxHXteNTX7s4xbaVI4g',
-                                      style: mapbox.MapBoxStyle.Outdoors,
-                                      width: 400.0,
-                                      height: 400.0,
-                                      fit: BoxFit.contain,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(0.0),
-                                        bottomRight: Radius.circular(0.0),
-                                        topLeft: Radius.circular(0.0),
-                                        topRight: Radius.circular(0.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        HapticFeedback.lightImpact();
+                                        await launchURL(
+                                            'https://maps.app.goo.gl/PhhgCD5fKPpHLK3i7');
+                                      },
+                                      child: FlutterFlowStaticMap(
+                                        location: LatLng(
+                                            30.42778, -84.21377966123221),
+                                        apiKey:
+                                            'pk.eyJ1IjoiZ2VuaWVpc3AiLCJhIjoiY200aTBwbXd3MGN0ajJyb2VidWl2NzVxNyJ9.GYYmxHXteNTX7s4xbaVI4g',
+                                        style: mapbox.MapBoxStyle.Outdoors,
+                                        width: 400.0,
+                                        height: 400.0,
+                                        fit: BoxFit.contain,
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(0.0),
+                                          bottomRight: Radius.circular(0.0),
+                                          topLeft: Radius.circular(0.0),
+                                          topRight: Radius.circular(0.0),
+                                        ),
+                                        markerColor: Color(0xFFFF0000),
+                                        zoom: 15,
+                                        tilt: 0,
+                                        rotation: 0,
                                       ),
-                                      markerColor: Color(0xFFFF0000),
-                                      zoom: 15,
-                                      tilt: 0,
-                                      rotation: 0,
                                     ),
                                   ),
                                   Padding(
@@ -2627,36 +3324,31 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .headlineLarge
                                           .override(
-                                        font: GoogleFonts.interTight(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontStyle,
-                                        ),
-                                        color: FFAppState().isDarkMode
-                                            ? FlutterFlowTheme.of(context).info
-                                            : Colors.black,
-                                        fontSize: 25.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                        shadows: [
-                                          Shadow(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            offset: Offset(2.0, 2.0),
-                                            blurRadius: 2.0,
-                                          )
-                                        ],
-                                      ),
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            fontSize: 25.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
                                     ).animateOnPageLoad(animationsMap[
                                         'textOnPageLoadAnimation6']!),
                                   ),
@@ -2664,7 +3356,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 0.0),
                                     child: Text(
-                                      '3539 Apalachee Pkwy Suite 7\nTallahassee, FL 32311\n\nMon–Sat: 11am – 7pm\nSunday: Closed',
+                                      '3539 Apalachee Pkwy Suite 7\nTallahassee, FL 32311\n\nMon–Fri: 11am – 7pm\nSatureday: 11am - 3pm\nSunday: Closed',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
@@ -2852,35 +3544,30 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .headlineLarge
                                           .override(
-                                        font: GoogleFonts.interTight(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontStyle,
-                                        ),
-                                        color: FFAppState().isDarkMode
-                                            ? FlutterFlowTheme.of(context).info
-                                            : Colors.black,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                        shadows: [
-                                          Shadow(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            offset: Offset(2.0, 2.0),
-                                            blurRadius: 2.0,
-                                          )
-                                        ],
-                                      ),
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
                                     ).animateOnPageLoad(animationsMap[
                                         'textOnPageLoadAnimation8']!),
                                   ),
@@ -2897,22 +3584,44 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        FaIcon(
-                                          FontAwesomeIcons.facebook,
-                                          color: FFAppState().isDarkMode
-                                              ? FlutterFlowTheme.of(context)
-                                                  .info
-                                              : Colors.black,
-                                          size: 40.0,
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            HapticFeedback.lightImpact();
+                                            await launchURL(
+                                                'https://www.facebook.com/5StarWirelessStore/');
+                                          },
+                                          child: FaIcon(
+                                            FontAwesomeIcons.facebook,
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            size: 40.0,
+                                          ),
                                         ).animateOnPageLoad(animationsMap[
                                             'iconOnPageLoadAnimation2']!),
-                                        FaIcon(
-                                          FontAwesomeIcons.instagram,
-                                          color: FFAppState().isDarkMode
-                                              ? FlutterFlowTheme.of(context)
-                                                  .info
-                                              : Colors.black,
-                                          size: 40.0,
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            HapticFeedback.lightImpact();
+                                            await launchURL(
+                                                'https://www.instagram.com/5star.wireless/');
+                                          },
+                                          child: FaIcon(
+                                            FontAwesomeIcons.instagram,
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            size: 40.0,
+                                          ),
                                         ).animateOnPageLoad(animationsMap[
                                             'iconOnPageLoadAnimation3']!),
                                         FaIcon(
@@ -2941,36 +3650,31 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .headlineLarge
                                           .override(
-                                        font: GoogleFonts.interTight(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontStyle,
-                                        ),
-                                        color: FFAppState().isDarkMode
-                                            ? FlutterFlowTheme.of(context).info
-                                            : Colors.black,
-                                        fontSize: 25.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                        shadows: [
-                                          Shadow(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            offset: Offset(2.0, 2.0),
-                                            blurRadius: 2.0,
-                                          )
-                                        ],
-                                      ),
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            fontSize: 25.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
                                     ).animateOnPageLoad(animationsMap[
                                         'textOnPageLoadAnimation9']!),
                                   ),
@@ -2983,7 +3687,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 0.0),
                                     child: Text(
-                                      'We’re Here to Help\n\nHave a question about our products, trade-ins, repairs, or your order? Reach out, and our team will get back to you as soon as possible.\n\n📧 Email: contact@5star-wireless.com\n📞 Phone: 850.317.6633\n📍 Visit Us: 3539 Apalachee Pkwy, Ste 7, Tallahassee, FL 32311\n🕒 Business Hours:\nMonday – Friday: 11 AM – 7 PM\nSaturday – Sunday: Closed',
+                                      'We’re Here to Help\n\nHave a question about our products, trade-ins, repairs, or your order? Reach out, and our team will get back to you as soon as possible.\n\n📧 Email: contact@5star-wireless.com\n📞 Phone: 850.317.6633\n📍 Visit Us: 3539 Apalachee Pkwy, Ste 7, Tallahassee, FL 32311\n🕒 Business Hours:\nMon–Fri: 11am – 7pm\nSatureday: 11am - 3pm\nSunday: Closed',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
@@ -3029,33 +3733,31 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                        font: GoogleFonts.interTight(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .fontStyle,
-                                        ),
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontStyle,
-                                        shadows: [
-                                          Shadow(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            offset: Offset(2.0, 2.0),
-                                            blurRadius: 2.0,
-                                          )
-                                        ],
-                                      ),
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontStyle,
+                                            ),
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            fontSize: 12.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
+                                          ),
                                     ).animateOnPageLoad(animationsMap[
                                         'textOnPageLoadAnimation11']!),
                                   ),
@@ -3068,33 +3770,31 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                        font: GoogleFonts.interTight(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .fontStyle,
-                                        ),
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontStyle,
-                                        shadows: [
-                                          Shadow(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            offset: Offset(2.0, 2.0),
-                                            blurRadius: 2.0,
-                                          )
-                                        ],
-                                      ),
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontStyle,
+                                            ),
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            fontSize: 12.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
+                                          ),
                                     ).animateOnPageLoad(animationsMap[
                                         'textOnPageLoadAnimation12']!),
                                   ),
@@ -3111,90 +3811,242 @@ class _PageNavWidgetState extends State<PageNavWidget>
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 0.0),
-                                child: Text(
-                                  'Just Landed at 5Star',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineLarge
-                                      .override(
-                                    font: GoogleFonts.interTight(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontStyle,
-                                    ),
-                                    color: FFAppState().isDarkMode
-                                        ? FlutterFlowTheme.of(context).info
-                                        : Colors.black,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontStyle,
-                                    shadows: [
-                                      Shadow(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        offset: Offset(2.0, 2.0),
-                                        blurRadius: 2.0,
-                                      )
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Expanded(
+                                        child: Align(
+                                          alignment:
+                                              AlignmentDirectional(-1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 5.0, 0.0, 5.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  0.7,
+                                              child: TextFormField(
+                                                controller:
+                                                    _model.textController1,
+                                                focusNode:
+                                                    _model.textFieldFocusNode,
+                                                onChanged: (_) =>
+                                                    EasyDebounce.debounce(
+                                                  '_model.textController1',
+                                                  Duration(milliseconds: 2000),
+                                                  () async {
+                                                    HapticFeedback
+                                                        .lightImpact();
+                                                    FFAppState()
+                                                            .storeSearchText =
+                                                        _model.textController1
+                                                            .text;
+                                                    safeSetState(() {});
+                                                  },
+                                                ),
+                                                autofocus: false,
+                                                enabled: true,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  isDense: true,
+                                                  labelStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
+                                                      ),
+                                                  hintText:
+                                                      'Search products...',
+                                                  hintStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
+                                                      ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  filled: true,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                  prefixIcon: Icon(
+                                                    Icons.search_rounded,
+                                                    color: Color(0xFF07BCFD),
+                                                    size: 30.0,
+                                                  ),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font:
+                                                              GoogleFonts.inter(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                textAlign: TextAlign.start,
+                                                cursorColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                enableInteractiveSelection:
+                                                    true,
+                                                validator: _model
+                                                    .textController1Validator
+                                                    .asValidator(context),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5.0, 0.0, 10.0, 0.0),
+                                        child: Icon(
+                                          Icons.shopping_cart_rounded,
+                                          color: Color(0xFF07BCFD),
+                                          size: 30.0,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5.0, 0.0, 25.0, 0.0),
+                                        child: Icon(
+                                          Icons.star_rounded,
+                                          color: Color(0xFF07BCFD),
+                                          size: 30.0,
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 0.0),
-                                child: Text(
-                                  'New models, new bundles, same unbeatable service.',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .fontStyle,
-                                    ),
-                                    color: FFAppState().isDarkMode
-                                        ? FlutterFlowTheme.of(context).info
-                                        : Colors.black,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .fontStyle,
-                                    shadows: [
-                                      Shadow(
-                                        color: Color(0xFF57636C),
-                                        offset: Offset(2.0, 2.0),
-                                        blurRadius: 2.0,
-                                      )
-                                    ],
-                                  ),
-                                ),
+                                ],
                               ),
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 5.0, 0.0, 0.0),
+                                      10.0, 5.0, 10.0, 0.0),
                                   child: FutureBuilder<ApiCallResponse>(
                                     future: (_model.apiRequestCompleter ??=
                                             Completer<ApiCallResponse>()
-                                              ..complete(ShopifyProductsListCall
-                                                  .call()))
+                                              ..complete(
+                                                  ShopifyProductsListCall.call(
+                                                searchText: FFAppState()
+                                                    .storeSearchText,
+                                              )))
                                         .future,
                                     builder: (context, snapshot) {
                                       // Customize what your widget looks like when it's loading.
@@ -3280,8 +4132,8 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                             itemsItem,
                                                             r'''$.node.featuredImage.url''',
                                                           ).toString(),
-                                                          width: 180.0,
-                                                          height: 180.0,
+                                                          width: 160.0,
+                                                          height: 160.0,
                                                           fit: BoxFit.contain,
                                                         ),
                                                       ),
@@ -3389,36 +4241,6 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                   .spaceEvenly,
                                                           children: [
                                                             if (FFAppState()
-                                                                    .favoriteIds
-                                                                    .contains(
-                                                                        getJsonField(
-                                                                      itemsItem,
-                                                                      r'''$.node.id''',
-                                                                    ).toString()) ==
-                                                                false)
-                                                              Icon(
-                                                                Icons
-                                                                    .star_border_rounded,
-                                                                color: Color(
-                                                                    0xFF07BCFD),
-                                                                size: 25.0,
-                                                              ),
-                                                            if (FFAppState()
-                                                                    .favoriteIds
-                                                                    .contains(
-                                                                        getJsonField(
-                                                                      itemsItem,
-                                                                      r'''$.node.id''',
-                                                                    ).toString()) ==
-                                                                true)
-                                                              Icon(
-                                                                Icons
-                                                                    .star_rate_rounded,
-                                                                color: Color(
-                                                                    0xFF07BCFD),
-                                                                size: 25.0,
-                                                              ),
-                                                            if (FFAppState()
                                                                     .cartIds
                                                                     .contains(
                                                                         getJsonField(
@@ -3448,6 +4270,36 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                     0xFF07BCFD),
                                                                 size: 25.0,
                                                               ),
+                                                            if (FFAppState()
+                                                                    .favoriteIds
+                                                                    .contains(
+                                                                        getJsonField(
+                                                                      itemsItem,
+                                                                      r'''$.node.id''',
+                                                                    ).toString()) ==
+                                                                false)
+                                                              Icon(
+                                                                Icons
+                                                                    .star_border_rounded,
+                                                                color: Color(
+                                                                    0xFF07BCFD),
+                                                                size: 25.0,
+                                                              ),
+                                                            if (FFAppState()
+                                                                    .favoriteIds
+                                                                    .contains(
+                                                                        getJsonField(
+                                                                      itemsItem,
+                                                                      r'''$.node.id''',
+                                                                    ).toString()) ==
+                                                                true)
+                                                              Icon(
+                                                                Icons
+                                                                    .star_rate_rounded,
+                                                                color: Color(
+                                                                    0xFF07BCFD),
+                                                                size: 25.0,
+                                                              ),
                                                           ],
                                                         ),
                                                       ),
@@ -3470,15 +4322,1131 @@ class _PageNavWidgetState extends State<PageNavWidget>
                               animationsMap['columnOnPageLoadAnimation1']!),
                           Column(
                             mainAxisSize: MainAxisSize.max,
-                            children: [],
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [],
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [],
+                            children: [
+                              Stack(
+                                children: [
+                                  if (FFAppState().prepaidSlideIndex == 0)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 5.0),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.asset(
+                                          'assets/images/BANNER_23_17bad905-09fc-4676-a0f2-f9c80dfa69b1.webp',
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height: 250.0,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'imageOnPageLoadAnimation30']!),
+                                    ),
+                                  if (FFAppState().prepaidSlideIndex == 1)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 5.0),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.asset(
+                                          'assets/images/Phone_Repair_Services.png',
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height: 250.0,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'imageOnPageLoadAnimation31']!),
+                                    ),
+                                  if (FFAppState().prepaidSlideIndex == 2)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 5.0),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.asset(
+                                          'assets/images/Lease_to_own.png',
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height: 250.0,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'imageOnPageLoadAnimation32']!),
+                                    ),
+                                  if (FFAppState().prepaidSlideIndex == 3)
+                                    Align(
+                                      alignment: AlignmentDirectional(1.0, 1.0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 5.0, 0.0, 5.0),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/banner.png',
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: 250.0,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ).animateOnPageLoad(animationsMap[
+                                            'imageOnPageLoadAnimation33']!),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 1.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          50.0, 0.0, 0.0, 0.0),
+                                      child: FlutterFlowIconButton(
+                                        borderRadius: 8.0,
+                                        buttonSize: 40.0,
+                                        fillColor: Color(0xFF07BCFD),
+                                        icon: Icon(
+                                          Icons.arrow_back_ios_rounded,
+                                          color:
+                                              FlutterFlowTheme.of(context).info,
+                                          size: 24.0,
+                                        ),
+                                        onPressed: () async {
+                                          HapticFeedback.lightImpact();
+                                          if (FFAppState().prepaidSlideIndex ==
+                                              3) {
+                                            FFAppState().prepaidSlideIndex = 2;
+                                            safeSetState(() {});
+                                          } else if (FFAppState()
+                                                  .prepaidSlideIndex ==
+                                              2) {
+                                            FFAppState().prepaidSlideIndex = 1;
+                                            safeSetState(() {});
+                                          } else if (FFAppState()
+                                                  .prepaidSlideIndex ==
+                                              1) {
+                                            FFAppState().prepaidSlideIndex = 0;
+                                            safeSetState(() {});
+                                          } else {
+                                            FFAppState().prepaidSlideIndex = 3;
+                                            safeSetState(() {});
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 50.0, 0.0),
+                                      child: FlutterFlowIconButton(
+                                        borderRadius: 8.0,
+                                        buttonSize: 40.0,
+                                        fillColor: Color(0xFF07BCFD),
+                                        icon: Icon(
+                                          Icons.arrow_forward_ios_rounded,
+                                          color:
+                                              FlutterFlowTheme.of(context).info,
+                                          size: 24.0,
+                                        ),
+                                        onPressed: () async {
+                                          HapticFeedback.lightImpact();
+                                          if (FFAppState().prepaidSlideIndex ==
+                                              0) {
+                                            FFAppState().prepaidSlideIndex = 1;
+                                            safeSetState(() {});
+                                          } else if (FFAppState()
+                                                  .prepaidSlideIndex ==
+                                              1) {
+                                            FFAppState().prepaidSlideIndex = 2;
+                                            safeSetState(() {});
+                                          } else if (FFAppState()
+                                                  .prepaidSlideIndex ==
+                                              2) {
+                                            FFAppState().prepaidSlideIndex = 3;
+                                            safeSetState(() {});
+                                          } else {
+                                            FFAppState().prepaidSlideIndex = 0;
+                                            safeSetState(() {});
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: Text(
+                                  'All Services – Choose What You Need',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineLarge
+                                      .override(
+                                        font: GoogleFonts.interTight(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .fontStyle,
+                                        ),
+                                        color: FFAppState().isDarkMode
+                                            ? FlutterFlowTheme.of(context).info
+                                            : Colors.black,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .headlineLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineLarge
+                                            .fontStyle,
+                                      ),
+                                ).animateOnPageLoad(animationsMap[
+                                    'textOnPageLoadAnimation13']!),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 0.0, 5.0, 10.0),
+                                child: Text(
+                                  'Whatever your phone needs, we’ve got the service to match — just pick and go!',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        font: GoogleFonts.inter(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .fontStyle,
+                                        ),
+                                        color: FFAppState().isDarkMode
+                                            ? FlutterFlowTheme.of(context).info
+                                            : Colors.black,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontStyle,
+                                      ),
+                                ).animateOnPageLoad(animationsMap[
+                                    'textOnPageLoadAnimation14']!),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 0.0, 10.0, 0.0),
+                                  child: GridView(
+                                    padding: EdgeInsets.zero,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 15.0,
+                                      mainAxisSpacing: 15.0,
+                                      childAspectRatio: 0.75,
+                                    ),
+                                    scrollDirection: Axis.vertical,
+                                    children: [
+                                      Container(
+                                        width: 100.0,
+                                        height: 100.0,
+                                        decoration: BoxDecoration(
+                                          color: FFAppState().isDarkMode
+                                              ? Color(0xFF0F1419)
+                                              : FlutterFlowTheme.of(context)
+                                                  .info,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/images.jpeg',
+                                                width: 120.0,
+                                                height: 120.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                              child: Text(
+                                                'AKKO Protection',
+                                                textAlign: TextAlign.center,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .interTight(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FFAppState()
+                                                                  .isDarkMode
+                                                              ? FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .info
+                                                              : Colors.black,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontStyle,
+                                                        ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'textOnPageLoadAnimation15']!),
+                                            ),
+                                            Text(
+                                              'Protect your phone against accidents, theft, and damage with AKKO.',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: FFAppState()
+                                                                .isDarkMode
+                                                            ? FlutterFlowTheme
+                                                                    .of(context)
+                                                                .info
+                                                            : Colors.black,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontStyle,
+                                                      ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation16']!),
+                                            Text(
+                                              'Sign Up for Protection',
+                                              textAlign: TextAlign.center,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleSmall
+                                                  .override(
+                                                    font:
+                                                        GoogleFonts.interTight(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF07BCFD),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation17']!),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 100.0,
+                                        height: 100.0,
+                                        decoration: BoxDecoration(
+                                          color: FFAppState().isDarkMode
+                                              ? Color(0xFF0F1419)
+                                              : FlutterFlowTheme.of(context)
+                                                  .info,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Untitled.png',
+                                                width: 120.0,
+                                                height: 120.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Phone Repair Services',
+                                                textAlign: TextAlign.center,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .interTight(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FFAppState()
+                                                                  .isDarkMode
+                                                              ? FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .info
+                                                              : Colors.black,
+                                                          fontSize: 17.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontStyle,
+                                                        ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'textOnPageLoadAnimation18']!),
+                                            ),
+                                            Text(
+                                              'Fast, affordable repairs for screens, batteries, charging ports & more.',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: FFAppState()
+                                                                .isDarkMode
+                                                            ? FlutterFlowTheme
+                                                                    .of(context)
+                                                                .info
+                                                            : Colors.black,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontStyle,
+                                                      ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation19']!),
+                                            Text(
+                                              'Book a Repair',
+                                              textAlign: TextAlign.center,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleSmall
+                                                  .override(
+                                                    font:
+                                                        GoogleFonts.interTight(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF07BCFD),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation20']!),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 100.0,
+                                        height: 100.0,
+                                        decoration: BoxDecoration(
+                                          color: FFAppState().isDarkMode
+                                              ? Color(0xFF0F1419)
+                                              : FlutterFlowTheme.of(context)
+                                                  .info,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Untitled222.png',
+                                                width: 120.0,
+                                                height: 120.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Unlocking Services',
+                                                textAlign: TextAlign.center,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .interTight(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FFAppState()
+                                                                  .isDarkMode
+                                                              ? FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .info
+                                                              : Colors.black,
+                                                          fontSize: 17.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontStyle,
+                                                        ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'textOnPageLoadAnimation21']!),
+                                            ),
+                                            Text(
+                                              'Need to unlock your phone? We’ve got you. Reach out to us directly!',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: FFAppState()
+                                                                .isDarkMode
+                                                            ? FlutterFlowTheme
+                                                                    .of(context)
+                                                                .info
+                                                            : Colors.black,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontStyle,
+                                                      ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation22']!),
+                                            Text(
+                                              'Contact Us',
+                                              textAlign: TextAlign.center,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleSmall
+                                                  .override(
+                                                    font:
+                                                        GoogleFonts.interTight(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF07BCFD),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation23']!),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 100.0,
+                                        height: 100.0,
+                                        decoration: BoxDecoration(
+                                          color: FFAppState().isDarkMode
+                                              ? Color(0xFF0F1419)
+                                              : FlutterFlowTheme.of(context)
+                                                  .info,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Untitled33.png',
+                                                width: 120.0,
+                                                height: 120.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Lease-to-Own',
+                                                textAlign: TextAlign.center,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .interTight(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FFAppState()
+                                                                  .isDarkMode
+                                                              ? FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .info
+                                                              : Colors.black,
+                                                          fontSize: 17.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontStyle,
+                                                        ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'textOnPageLoadAnimation24']!),
+                                            ),
+                                            Text(
+                                              'Low down payments. No credit checks. Own your phone your way.',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: FFAppState()
+                                                                .isDarkMode
+                                                            ? FlutterFlowTheme
+                                                                    .of(context)
+                                                                .info
+                                                            : Colors.black,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontStyle,
+                                                      ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation25']!),
+                                            Text(
+                                              'Contact Us',
+                                              textAlign: TextAlign.center,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleSmall
+                                                  .override(
+                                                    font:
+                                                        GoogleFonts.interTight(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF07BCFD),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation26']!),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 100.0,
+                                        height: 100.0,
+                                        decoration: BoxDecoration(
+                                          color: FFAppState().isDarkMode
+                                              ? Color(0xFF0F1419)
+                                              : FlutterFlowTheme.of(context)
+                                                  .info,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Untitled334.png',
+                                                width: 120.0,
+                                                height: 120.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Sell Your Phone Today',
+                                                textAlign: TextAlign.center,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .interTight(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FFAppState()
+                                                                  .isDarkMode
+                                                              ? FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .info
+                                                              : Colors.black,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontStyle,
+                                                        ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'textOnPageLoadAnimation27']!),
+                                            ),
+                                            Text(
+                                              'Turn your old phone into instant cash or credit — fast, friendly, and local.',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: FFAppState()
+                                                                .isDarkMode
+                                                            ? FlutterFlowTheme
+                                                                    .of(context)
+                                                                .info
+                                                            : Colors.black,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontStyle,
+                                                      ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation28']!),
+                                            Text(
+                                              'View details',
+                                              textAlign: TextAlign.center,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleSmall
+                                                  .override(
+                                                    font:
+                                                        GoogleFonts.interTight(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF07BCFD),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation29']!),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 100.0,
+                                        height: 100.0,
+                                        decoration: BoxDecoration(
+                                          color: FFAppState().isDarkMode
+                                              ? Color(0xFF0F1419)
+                                              : FlutterFlowTheme.of(context)
+                                                  .info,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Aldenaire_&_Partners.png',
+                                                width: 120.0,
+                                                height: 120.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                              child: Text(
+                                                'For more info',
+                                                textAlign: TextAlign.center,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .interTight(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FFAppState()
+                                                                  .isDarkMode
+                                                              ? FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .info
+                                                              : Colors.black,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMedium
+                                                                  .fontStyle,
+                                                        ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'textOnPageLoadAnimation30']!),
+                                            ),
+                                            Text(
+                                              'Visit 3539 Apalachee Pkwy Ste 7 Tallahassee FL. or call us at (850) 317-6633',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: FFAppState()
+                                                                .isDarkMode
+                                                            ? FlutterFlowTheme
+                                                                    .of(context)
+                                                                .info
+                                                            : Colors.black,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontStyle,
+                                                      ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation31']!),
+                                            Text(
+                                              'Visit our website',
+                                              textAlign: TextAlign.center,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleSmall
+                                                  .override(
+                                                    font:
+                                                        GoogleFonts.interTight(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF07BCFD),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation32']!),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           Column(
                             mainAxisSize: MainAxisSize.max,
@@ -5375,6 +7343,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                   model: _model.bottomNav2Model,
                   updateCallback: () => safeSetState(() {}),
                   child: BottomNav2Widget(
+                    activeIndex: FFAppState().activeTabIndex,
                     onStoreTap: () async {
                       HapticFeedback.lightImpact();
                       FFAppState().activeTabIndex = 1;
@@ -5393,15 +7362,6 @@ class _PageNavWidgetState extends State<PageNavWidget>
                         curve: Curves.ease,
                       );
                     },
-                    onCartTap: () async {
-                      HapticFeedback.lightImpact();
-                      FFAppState().activeTabIndex = 3;
-                      await _model.pageViewController?.animateToPage(
-                        3,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.ease,
-                      );
-                    },
                     onHomeTap: () async {
                       HapticFeedback.lightImpact();
                       FFAppState().activeTabIndex = 0;
@@ -5413,18 +7373,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                     },
                     onUserTap: () async {
                       HapticFeedback.lightImpact();
-                      FFAppState().activeTabIndex = 5;
+                      FFAppState().activeTabIndex = 3;
                       await _model.pageViewController?.animateToPage(
-                        5,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.ease,
-                      );
-                    },
-                    onFaveTap: () async {
-                      HapticFeedback.lightImpact();
-                      FFAppState().activeTabIndex = 4;
-                      await _model.pageViewController?.animateToPage(
-                        4,
+                        3,
                         duration: Duration(milliseconds: 500),
                         curve: Curves.ease,
                       );

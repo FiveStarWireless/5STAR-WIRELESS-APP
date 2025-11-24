@@ -10,9 +10,16 @@ export 'api_manager.dart' show ApiCallResponse;
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
 class ShopifyProductsListCall {
-  static Future<ApiCallResponse> call() async {
+  static Future<ApiCallResponse> call({
+    String? searchText = '',
+  }) async {
     final ffApiRequestBody = '''
-{ "query": "query { products(first: 200) { edges { node { id title handle description featuredImage { url altText } priceRange { minVariantPrice { amount currencyCode } } } } } }" }''';
+{
+  "query": "query (\$searchText: String) { products(first: 200, query: \$searchText) { edges { node { id title handle description featuredImage { url altText } priceRange { minVariantPrice { amount currencyCode } } } } } }",
+  "variables": {
+    "searchText": "${escapeStringForJson(searchText)}"
+  }
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'ShopifyProductsList',
       apiUrl: 'https://fja21g-xi.myshopify.com/api/2024-10/graphql.json',
