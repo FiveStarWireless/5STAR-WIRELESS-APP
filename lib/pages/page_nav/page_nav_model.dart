@@ -1,9 +1,7 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/bottom_nav2/bottom_nav2_widget.dart';
 import '/index.dart';
-import 'dart:async';
 import 'page_nav_widget.dart' show PageNavWidget;
 import 'package:flutter/material.dart';
 
@@ -24,7 +22,6 @@ class PageNavModel extends FlutterFlowModel<PageNavWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
-  Completer<ApiCallResponse>? apiRequestCompleter;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -97,21 +94,5 @@ class PageNavModel extends FlutterFlowModel<PageNavWidget> {
     passwordTextController?.dispose();
 
     bottomNav2Model.dispose();
-  }
-
-  /// Additional helper methods.
-  Future waitForApiRequestCompleted({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
   }
 }

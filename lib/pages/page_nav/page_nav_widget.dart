@@ -11,7 +11,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/bottom_nav2/bottom_nav2_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
-import 'dart:async';
 import 'package:flip_card/flip_card.dart';
 import 'package:mapbox_search/mapbox_search.dart' as mapbox;
 import 'package:easy_debounce/easy_debounce.dart';
@@ -144,6 +143,142 @@ class _PageNavWidgetState extends State<PageNavWidget>
           ),
         ],
       ),
+      'textOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation4': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation5': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation6': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation7': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation1': AnimationInfo(
+        loop: true,
+        reverse: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          ShakeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            hz: 10,
+            offset: Offset(0.0, 0.0),
+            rotation: 0.087,
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation1': AnimationInfo(
+        loop: true,
+        reverse: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          TintEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1240.0.ms,
+            color: Color(0x7D000000),
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(-100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
       'stackOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
@@ -170,150 +305,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
           ),
         ],
       ),
-      'imageOnPageLoadAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-        ],
-      ),
-      'imageOnPageLoadAnimation3': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-        ],
-      ),
-      'imageOnPageLoadAnimation4': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-        ],
-      ),
-      'rowOnActionTriggerAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onActionTrigger,
-        applyInitialState: false,
-        effectsBuilder: () => [
-          MoveEffect(
-            curve: Curves.easeIn,
-            delay: 0.0.ms,
-            duration: 1000.0.ms,
-            begin: Offset(0.0, -100.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'imageOnPageLoadAnimation5': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-        ],
-      ),
-      'imageOnPageLoadAnimation6': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-        ],
-      ),
-      'imageOnPageLoadAnimation7': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-          FlipEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 1.0,
-            end: 2.0,
-          ),
-        ],
-      ),
-      'rowOnActionTriggerAnimation3': AnimationInfo(
-        trigger: AnimationTrigger.onActionTrigger,
-        applyInitialState: false,
-        effectsBuilder: () => [
-          MoveEffect(
-            curve: Curves.easeIn,
-            delay: 0.0.ms,
-            duration: 1000.0.ms,
-            begin: Offset(0.0, 100.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
       'imageOnPageLoadAnimation8': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
           FlipEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
@@ -368,7 +363,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
           ),
         ],
       ),
-      'rowOnActionTriggerAnimation4': AnimationInfo(
+      'rowOnActionTriggerAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onActionTrigger,
         applyInitialState: false,
         effectsBuilder: () => [
@@ -376,7 +371,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
             curve: Curves.easeIn,
             delay: 0.0.ms,
             duration: 1000.0.ms,
-            begin: Offset(100.0, 0.0),
+            begin: Offset(0.0, -100.0),
             end: Offset(0.0, 0.0),
           ),
         ],
@@ -438,28 +433,15 @@ class _PageNavWidgetState extends State<PageNavWidget>
           ),
         ],
       ),
-      'textOnPageLoadAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
+      'rowOnActionTriggerAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: false,
         effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
           MoveEffect(
-            curve: Curves.easeInOut,
+            curve: Curves.easeIn,
             delay: 0.0.ms,
             duration: 1000.0.ms,
-            begin: Offset(-100.0, 0.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'textOnPageLoadAnimation3': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 1000.0.ms,
-            begin: Offset(100.0, 0.0),
+            begin: Offset(0.0, 100.0),
             end: Offset(0.0, 0.0),
           ),
         ],
@@ -467,110 +449,127 @@ class _PageNavWidgetState extends State<PageNavWidget>
       'imageOnPageLoadAnimation14': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
+          FlipEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
+            begin: 1.0,
+            end: 2.0,
+          ),
+          FlipEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 1.0,
+            end: 2.0,
           ),
         ],
       ),
       'imageOnPageLoadAnimation15': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
+          FlipEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
+            begin: 1.0,
+            end: 2.0,
+          ),
+          FlipEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 1.0,
+            end: 2.0,
           ),
         ],
       ),
       'imageOnPageLoadAnimation16': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
+          FlipEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
+            begin: 1.0,
+            end: 2.0,
+          ),
+          FlipEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 1.0,
+            end: 2.0,
+          ),
+        ],
+      ),
+      'rowOnActionTriggerAnimation4': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: false,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeIn,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(100.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
       'imageOnPageLoadAnimation17': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
+          FlipEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
+            begin: 1.0,
+            end: 2.0,
+          ),
+          FlipEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 1.0,
+            end: 2.0,
           ),
         ],
       ),
       'imageOnPageLoadAnimation18': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
+          FlipEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
+            begin: 1.0,
+            end: 2.0,
+          ),
+          FlipEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 1.0,
+            end: 2.0,
           ),
         ],
       ),
       'imageOnPageLoadAnimation19': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
+          FlipEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 1000.0.ms,
-            begin: 0.0,
-            end: 1.0,
+            duration: 600.0.ms,
+            begin: 1.0,
+            end: 2.0,
           ),
-        ],
-      ),
-      'iconOnPageLoadAnimation1': AnimationInfo(
-        loop: true,
-        reverse: true,
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          ShakeEffect(
+          FlipEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 1000.0.ms,
-            hz: 10,
-            offset: Offset(0.0, 0.0),
-            rotation: 0.087,
-          ),
-        ],
-      ),
-      'containerOnPageLoadAnimation1': AnimationInfo(
-        loop: true,
-        reverse: true,
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          TintEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 1240.0.ms,
-            color: Color(0x7D000000),
-            begin: 0.0,
-            end: 1.0,
+            duration: 600.0.ms,
+            begin: 1.0,
+            end: 2.0,
           ),
         ],
       ),
@@ -1425,11 +1424,11 @@ class _PageNavWidgetState extends State<PageNavWidget>
               } else if (FFAppState().activeTabIndex == 2) {
                 return 'Services';
               } else if (FFAppState().activeTabIndex == 3) {
-                return 'Cart';
-              } else if (FFAppState().activeTabIndex == 4) {
-                return 'Wishlist';
-              } else if (FFAppState().activeTabIndex == 5) {
                 return 'User';
+              } else if (FFAppState().activeTabIndex == 4) {
+                return 'Cart';
+              } else if (FFAppState().activeTabIndex == 5) {
+                return 'Wishlist';
               } else {
                 return '5Star Wireless';
               }
@@ -1500,422 +1499,11 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                         child: Image.asset(
                                           'assets/images/5star_wireless_white12.png',
                                           width: double.infinity,
-                                          height: 77.87,
-                                          fit: BoxFit.contain,
+                                          height: 93.31,
+                                          fit: BoxFit.cover,
                                         ),
                                       ).animateOnPageLoad(animationsMap[
                                           'imageOnPageLoadAnimation1']!),
-                                    ),
-                                  ),
-                                  Divider(
-                                    thickness: 3.0,
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 5.0, 0.0, 5.0),
-                                    child: Text(
-                                      'Wireless Prepaid',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .override(
-                                            font: GoogleFonts.interTight(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineLarge
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineLarge
-                                                      .fontStyle,
-                                            ),
-                                            color: FFAppState().isDarkMode
-                                                ? FlutterFlowTheme.of(context)
-                                                    .info
-                                                : Colors.black,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .headlineLarge
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .headlineLarge
-                                                    .fontStyle,
-                                          ),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'textOnPageLoadAnimation1']!),
-                                  ),
-                                  Divider(
-                                    thickness: 3.0,
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 5.0, 0.0, 5.0),
-                                    child: Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          1.0,
-                                      height: 200.0,
-                                      decoration: BoxDecoration(
-                                        color: FFAppState().isDarkMode
-                                            ? Colors.black
-                                            : FlutterFlowTheme.of(context).info,
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                      ),
-                                      child: Stack(
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        children: [
-                                          if (FFAppState().prepaidSlideIndex ==
-                                              0)
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 5.0, 0.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/att.png',
-                                                      width: 120.0,
-                                                      height: 80.0,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'imageOnPageLoadAnimation2']!),
-                                                ),
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/Untitled_design.png',
-                                                    width: 120.0,
-                                                    height: 80.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ).animateOnPageLoad(animationsMap[
-                                                    'imageOnPageLoadAnimation3']!),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 5.0, 0.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/Untitled_design_(1).png',
-                                                      width: 120.0,
-                                                      height: 80.0,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'imageOnPageLoadAnimation4']!),
-                                                ),
-                                              ],
-                                            ).animateOnActionTrigger(
-                                                animationsMap[
-                                                    'rowOnActionTriggerAnimation1']!,
-                                                hasBeenTriggered:
-                                                    hasRowTriggered1),
-                                          if (FFAppState().prepaidSlideIndex ==
-                                              1)
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 5.0, 0.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/Untitled_design_(2).png',
-                                                      width: 120.0,
-                                                      height: 80.0,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'imageOnPageLoadAnimation5']!),
-                                                ),
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/Untitled_design_(3).png',
-                                                    width: 120.0,
-                                                    height: 80.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ).animateOnPageLoad(animationsMap[
-                                                    'imageOnPageLoadAnimation6']!),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 5.0, 0.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/Untitled_design_(4).png',
-                                                      width: 120.0,
-                                                      height: 80.0,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'imageOnPageLoadAnimation7']!),
-                                                ),
-                                              ],
-                                            ).animateOnActionTrigger(
-                                                animationsMap[
-                                                    'rowOnActionTriggerAnimation2']!,
-                                                hasBeenTriggered:
-                                                    hasRowTriggered2),
-                                          if (FFAppState().prepaidSlideIndex ==
-                                              2)
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 5.0, 0.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/Untitled_design_(5).png',
-                                                      width: 120.0,
-                                                      height: 80.0,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'imageOnPageLoadAnimation8']!),
-                                                ),
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/Untitled_design_(6).png',
-                                                    width: 120.0,
-                                                    height: 80.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ).animateOnPageLoad(animationsMap[
-                                                    'imageOnPageLoadAnimation9']!),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 5.0, 0.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/Untitled_design_(7).png',
-                                                      width: 120.0,
-                                                      height: 80.0,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'imageOnPageLoadAnimation10']!),
-                                                ),
-                                              ],
-                                            ).animateOnActionTrigger(
-                                                animationsMap[
-                                                    'rowOnActionTriggerAnimation3']!,
-                                                hasBeenTriggered:
-                                                    hasRowTriggered3),
-                                          if (FFAppState().prepaidSlideIndex ==
-                                              3)
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 5.0, 0.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/Untitled_design_(8).png',
-                                                      width: 120.0,
-                                                      height: 80.0,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'imageOnPageLoadAnimation11']!),
-                                                ),
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/Untitled_design_(9).png',
-                                                    width: 120.0,
-                                                    height: 80.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ).animateOnPageLoad(animationsMap[
-                                                    'imageOnPageLoadAnimation12']!),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 5.0, 0.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/Untitled_design_(10).png',
-                                                      width: 120.0,
-                                                      height: 80.0,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'imageOnPageLoadAnimation13']!),
-                                                ),
-                                              ],
-                                            ).animateOnActionTrigger(
-                                                animationsMap[
-                                                    'rowOnActionTriggerAnimation4']!,
-                                                hasBeenTriggered:
-                                                    hasRowTriggered4),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 1.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          50.0, 0.0, 0.0, 0.0),
-                                                  child: FlutterFlowIconButton(
-                                                    borderRadius: 8.0,
-                                                    buttonSize: 40.0,
-                                                    fillColor:
-                                                        Color(0xFF07BCFD),
-                                                    icon: Icon(
-                                                      Icons
-                                                          .arrow_back_ios_rounded,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .info,
-                                                      size: 24.0,
-                                                    ),
-                                                    onPressed: () async {
-                                                      HapticFeedback
-                                                          .lightImpact();
-                                                      if (FFAppState()
-                                                              .prepaidSlideIndex ==
-                                                          3) {
-                                                        FFAppState()
-                                                            .prepaidSlideIndex = 2;
-                                                        safeSetState(() {});
-                                                      } else if (FFAppState()
-                                                              .prepaidSlideIndex ==
-                                                          2) {
-                                                        FFAppState()
-                                                            .prepaidSlideIndex = 1;
-                                                        safeSetState(() {});
-                                                      } else if (FFAppState()
-                                                              .prepaidSlideIndex ==
-                                                          1) {
-                                                        FFAppState()
-                                                            .prepaidSlideIndex = 0;
-                                                        safeSetState(() {});
-                                                      } else {
-                                                        FFAppState()
-                                                            .prepaidSlideIndex = 3;
-                                                        safeSetState(() {});
-                                                      }
-                                                    },
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 50.0, 0.0),
-                                                  child: FlutterFlowIconButton(
-                                                    borderRadius: 8.0,
-                                                    buttonSize: 40.0,
-                                                    fillColor:
-                                                        Color(0xFF07BCFD),
-                                                    icon: Icon(
-                                                      Icons
-                                                          .arrow_forward_ios_rounded,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .info,
-                                                      size: 24.0,
-                                                    ),
-                                                    onPressed: () async {
-                                                      HapticFeedback
-                                                          .lightImpact();
-                                                      if (FFAppState()
-                                                              .prepaidSlideIndex ==
-                                                          0) {
-                                                        FFAppState()
-                                                            .prepaidSlideIndex = 1;
-                                                        safeSetState(() {});
-                                                      } else if (FFAppState()
-                                                              .prepaidSlideIndex ==
-                                                          1) {
-                                                        FFAppState()
-                                                            .prepaidSlideIndex = 2;
-                                                        safeSetState(() {});
-                                                      } else if (FFAppState()
-                                                              .prepaidSlideIndex ==
-                                                          2) {
-                                                        FFAppState()
-                                                            .prepaidSlideIndex = 3;
-                                                        safeSetState(() {});
-                                                      } else {
-                                                        FFAppState()
-                                                            .prepaidSlideIndex = 0;
-                                                        safeSetState(() {});
-                                                      }
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ).animateOnPageLoad(animationsMap[
-                                          'stackOnPageLoadAnimation']!),
                                     ),
                                   ),
                                 ],
@@ -1961,7 +1549,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                     .fontStyle,
                                           ),
                                     ).animateOnPageLoad(animationsMap[
-                                        'textOnPageLoadAnimation2']!),
+                                        'textOnPageLoadAnimation1']!),
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -1997,7 +1585,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                     .fontStyle,
                                           ),
                                     ).animateOnPageLoad(animationsMap[
-                                        'textOnPageLoadAnimation3']!),
+                                        'textOnPageLoadAnimation2']!),
                                   ),
                                   Divider(
                                     thickness: 2.0,
@@ -2024,7 +1612,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                               fit: BoxFit.fill,
                                             ),
                                           ).animateOnPageLoad(animationsMap[
-                                              'imageOnPageLoadAnimation14']!),
+                                              'imageOnPageLoadAnimation2']!),
                                         ),
                                       if (FFAppState().imageSlideIndex == 1)
                                         Padding(
@@ -2043,7 +1631,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                               fit: BoxFit.fill,
                                             ),
                                           ).animateOnPageLoad(animationsMap[
-                                              'imageOnPageLoadAnimation15']!),
+                                              'imageOnPageLoadAnimation3']!),
                                         ),
                                       if (FFAppState().imageSlideIndex == 2)
                                         Padding(
@@ -2062,7 +1650,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                               fit: BoxFit.fill,
                                             ),
                                           ).animateOnPageLoad(animationsMap[
-                                              'imageOnPageLoadAnimation16']!),
+                                              'imageOnPageLoadAnimation4']!),
                                         ),
                                       if (FFAppState().imageSlideIndex == 3)
                                         Padding(
@@ -2081,7 +1669,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                               fit: BoxFit.fill,
                                             ),
                                           ).animateOnPageLoad(animationsMap[
-                                              'imageOnPageLoadAnimation17']!),
+                                              'imageOnPageLoadAnimation5']!),
                                         ),
                                       if (FFAppState().imageSlideIndex == 4)
                                         Padding(
@@ -2100,7 +1688,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                               fit: BoxFit.fill,
                                             ),
                                           ).animateOnPageLoad(animationsMap[
-                                              'imageOnPageLoadAnimation18']!),
+                                              'imageOnPageLoadAnimation6']!),
                                         ),
                                       if (FFAppState().imageSlideIndex == 5)
                                         Padding(
@@ -2119,7 +1707,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                               fit: BoxFit.fill,
                                             ),
                                           ).animateOnPageLoad(animationsMap[
-                                              'imageOnPageLoadAnimation19']!),
+                                              'imageOnPageLoadAnimation7']!),
                                         ),
                                     ],
                                   ),
@@ -2182,7 +1770,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                   safeSetState(() {});
                                                 } else {
                                                   FFAppState().imageSlideIndex =
-                                                      5;
+                                                      0;
                                                   safeSetState(() {});
                                                 }
                                               },
@@ -2343,6 +1931,383 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           'containerOnPageLoadAnimation1']!),
                                     ),
                                   ],
+                                ),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Divider(
+                                    thickness: 3.0,
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 5.0, 0.0, 5.0),
+                                    child: Text(
+                                      'Wireless Prepaid',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineLarge
+                                          .override(
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FFAppState().isDarkMode
+                                                ? FlutterFlowTheme.of(context)
+                                                    .info
+                                                : Colors.black,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'textOnPageLoadAnimation3']!),
+                                  ),
+                                  Divider(
+                                    thickness: 3.0,
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 5.0),
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height: 200.0,
+                                  decoration: BoxDecoration(
+                                    color: FFAppState().isDarkMode
+                                        ? Colors.black
+                                        : FlutterFlowTheme.of(context).info,
+                                    borderRadius: BorderRadius.circular(6.0),
+                                  ),
+                                  child: Stack(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    children: [
+                                      if (FFAppState().prepaidSlideIndex == 0)
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/att.png',
+                                                  width: 120.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'imageOnPageLoadAnimation8']!),
+                                            ),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Untitled_design.png',
+                                                width: 120.0,
+                                                height: 80.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'imageOnPageLoadAnimation9']!),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/Untitled_design_(1).png',
+                                                  width: 120.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'imageOnPageLoadAnimation10']!),
+                                            ),
+                                          ],
+                                        ).animateOnActionTrigger(
+                                            animationsMap[
+                                                'rowOnActionTriggerAnimation1']!,
+                                            hasBeenTriggered: hasRowTriggered1),
+                                      if (FFAppState().prepaidSlideIndex == 1)
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/Untitled_design_(2).png',
+                                                  width: 120.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'imageOnPageLoadAnimation11']!),
+                                            ),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Untitled_design_(3).png',
+                                                width: 120.0,
+                                                height: 80.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'imageOnPageLoadAnimation12']!),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/Untitled_design_(4).png',
+                                                  width: 120.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'imageOnPageLoadAnimation13']!),
+                                            ),
+                                          ],
+                                        ).animateOnActionTrigger(
+                                            animationsMap[
+                                                'rowOnActionTriggerAnimation2']!,
+                                            hasBeenTriggered: hasRowTriggered2),
+                                      if (FFAppState().prepaidSlideIndex == 2)
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/Untitled_design_(5).png',
+                                                  width: 120.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'imageOnPageLoadAnimation14']!),
+                                            ),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Untitled_design_(6).png',
+                                                width: 120.0,
+                                                height: 80.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'imageOnPageLoadAnimation15']!),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/Untitled_design_(7).png',
+                                                  width: 120.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'imageOnPageLoadAnimation16']!),
+                                            ),
+                                          ],
+                                        ).animateOnActionTrigger(
+                                            animationsMap[
+                                                'rowOnActionTriggerAnimation3']!,
+                                            hasBeenTriggered: hasRowTriggered3),
+                                      if (FFAppState().prepaidSlideIndex == 3)
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/Untitled_design_(8).png',
+                                                  width: 120.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'imageOnPageLoadAnimation17']!),
+                                            ),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Untitled_design_(9).png',
+                                                width: 120.0,
+                                                height: 80.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'imageOnPageLoadAnimation18']!),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/Untitled_design_(10).png',
+                                                  width: 120.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'imageOnPageLoadAnimation19']!),
+                                            ),
+                                          ],
+                                        ).animateOnActionTrigger(
+                                            animationsMap[
+                                                'rowOnActionTriggerAnimation4']!,
+                                            hasBeenTriggered: hasRowTriggered4),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 1.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      50.0, 0.0, 0.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderRadius: 8.0,
+                                                buttonSize: 40.0,
+                                                fillColor: Color(0xFF07BCFD),
+                                                icon: Icon(
+                                                  Icons.arrow_back_ios_rounded,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .info,
+                                                  size: 24.0,
+                                                ),
+                                                onPressed: () async {
+                                                  HapticFeedback.lightImpact();
+                                                  if (FFAppState()
+                                                          .prepaidSlideIndex ==
+                                                      3) {
+                                                    FFAppState()
+                                                        .prepaidSlideIndex = 2;
+                                                    safeSetState(() {});
+                                                  } else if (FFAppState()
+                                                          .prepaidSlideIndex ==
+                                                      2) {
+                                                    FFAppState()
+                                                        .prepaidSlideIndex = 1;
+                                                    safeSetState(() {});
+                                                  } else if (FFAppState()
+                                                          .prepaidSlideIndex ==
+                                                      1) {
+                                                    FFAppState()
+                                                        .prepaidSlideIndex = 0;
+                                                    safeSetState(() {});
+                                                  } else {
+                                                    FFAppState()
+                                                        .prepaidSlideIndex = 3;
+                                                    safeSetState(() {});
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 50.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderRadius: 8.0,
+                                                buttonSize: 40.0,
+                                                fillColor: Color(0xFF07BCFD),
+                                                icon: Icon(
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .info,
+                                                  size: 24.0,
+                                                ),
+                                                onPressed: () async {
+                                                  HapticFeedback.lightImpact();
+                                                  if (FFAppState()
+                                                          .prepaidSlideIndex ==
+                                                      0) {
+                                                    FFAppState()
+                                                        .prepaidSlideIndex = 1;
+                                                    safeSetState(() {});
+                                                  } else if (FFAppState()
+                                                          .prepaidSlideIndex ==
+                                                      1) {
+                                                    FFAppState()
+                                                        .prepaidSlideIndex = 2;
+                                                    safeSetState(() {});
+                                                  } else if (FFAppState()
+                                                          .prepaidSlideIndex ==
+                                                      2) {
+                                                    FFAppState()
+                                                        .prepaidSlideIndex = 3;
+                                                    safeSetState(() {});
+                                                  } else {
+                                                    FFAppState()
+                                                        .prepaidSlideIndex = 0;
+                                                    safeSetState(() {});
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ).animateOnPageLoad(animationsMap[
+                                      'stackOnPageLoadAnimation']!),
                                 ),
                               ),
                               Divider(
@@ -3356,7 +3321,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 0.0),
                                     child: Text(
-                                      '3539 Apalachee Pkwy Suite 7\nTallahassee, FL 32311\n\nMon–Fri: 11am – 7pm\nSatureday: 11am - 3pm\nSunday: Closed',
+                                      '3539 Apalachee Pkwy Suite 7\nTallahassee, FL 32311',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
@@ -3405,10 +3370,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.asset(
-                                            'assets/images/AXP_BlueBoxLogo_Alternate_REGULARscale_RGB_DIGITAL_700x700.png',
+                                            'assets/images/Untitled_design_(13).png',
                                             width: 72.0,
                                             height: 72.0,
-                                            fit: BoxFit.contain,
+                                            fit: BoxFit.cover,
                                           ),
                                         ).animateOnPageLoad(animationsMap[
                                             'imageOnPageLoadAnimation20']!),
@@ -3416,10 +3381,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.asset(
-                                            'assets/images/621f8e51654abf384c30d635.png',
+                                            'assets/images/Untitled_design_(14).png',
                                             width: 72.0,
                                             height: 72.0,
-                                            fit: BoxFit.contain,
+                                            fit: BoxFit.cover,
                                           ),
                                         ).animateOnPageLoad(animationsMap[
                                             'imageOnPageLoadAnimation21']!),
@@ -3427,10 +3392,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.asset(
-                                            'assets/images/5968288.png',
+                                            'assets/images/Untitled_design_(15).png',
                                             width: 72.0,
                                             height: 72.0,
-                                            fit: BoxFit.contain,
+                                            fit: BoxFit.cover,
                                           ),
                                         ).animateOnPageLoad(animationsMap[
                                             'imageOnPageLoadAnimation22']!),
@@ -3438,10 +3403,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.asset(
-                                            'assets/images/png-clipart-discover-financial-services-discover-card-credit-card-diners-club-international-credit-card-text-rectangle-thumbnail.png',
+                                            'assets/images/Untitled_design_(17).png',
                                             width: 72.0,
                                             height: 72.0,
-                                            fit: BoxFit.contain,
+                                            fit: BoxFit.cover,
                                           ),
                                         ).animateOnPageLoad(animationsMap[
                                             'imageOnPageLoadAnimation23']!),
@@ -3449,10 +3414,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.asset(
-                                            'assets/images/Google_Pay_Logo.svg.png',
+                                            'assets/images/Untitled_design_(18).png',
                                             width: 72.0,
                                             height: 72.0,
-                                            fit: BoxFit.contain,
+                                            fit: BoxFit.cover,
                                           ),
                                         ).animateOnPageLoad(animationsMap[
                                             'imageOnPageLoadAnimation24']!),
@@ -3471,10 +3436,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.asset(
-                                            'assets/images/Mastercard-Logo.png',
+                                            'assets/images/Untitled_design_(19).png',
                                             width: 72.0,
                                             height: 72.0,
-                                            fit: BoxFit.contain,
+                                            fit: BoxFit.cover,
                                           ),
                                         ).animateOnPageLoad(animationsMap[
                                             'imageOnPageLoadAnimation25']!),
@@ -3482,10 +3447,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.asset(
-                                            'assets/images/images.png',
+                                            'assets/images/Untitled_design_(20).png',
                                             width: 72.0,
                                             height: 72.0,
-                                            fit: BoxFit.contain,
+                                            fit: BoxFit.cover,
                                           ),
                                         ).animateOnPageLoad(animationsMap[
                                             'imageOnPageLoadAnimation26']!),
@@ -3493,10 +3458,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.asset(
-                                            'assets/images/ShopPay.png',
+                                            'assets/images/Untitled_design_(21).png',
                                             width: 72.0,
                                             height: 72.0,
-                                            fit: BoxFit.contain,
+                                            fit: BoxFit.cover,
                                           ),
                                         ).animateOnPageLoad(animationsMap[
                                             'imageOnPageLoadAnimation27']!),
@@ -3504,10 +3469,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.asset(
-                                            'assets/images/Venmo_logo.png',
+                                            'assets/images/Untitled_design_(22).png',
                                             width: 72.0,
                                             height: 72.0,
-                                            fit: BoxFit.contain,
+                                            fit: BoxFit.cover,
                                           ),
                                         ).animateOnPageLoad(animationsMap[
                                             'imageOnPageLoadAnimation28']!),
@@ -3515,10 +3480,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.asset(
-                                            'assets/images/VISA-Logo-2006.png',
+                                            'assets/images/Untitled_design_(23).png',
                                             width: 72.0,
                                             height: 72.0,
-                                            fit: BoxFit.contain,
+                                            fit: BoxFit.cover,
                                           ),
                                         ).animateOnPageLoad(animationsMap[
                                             'imageOnPageLoadAnimation29']!),
@@ -3687,7 +3652,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 0.0),
                                     child: Text(
-                                      'We’re Here to Help\n\nHave a question about our products, trade-ins, repairs, or your order? Reach out, and our team will get back to you as soon as possible.\n\n📧 Email: contact@5star-wireless.com\n📞 Phone: 850.317.6633\n📍 Visit Us: 3539 Apalachee Pkwy, Ste 7, Tallahassee, FL 32311\n🕒 Business Hours:\nMon–Fri: 11am – 7pm\nSatureday: 11am - 3pm\nSunday: Closed',
+                                      'We’re Here to Help\n\nHave a question about our products, trade-ins, repairs, or your order? Reach out, and our team will get back to you as soon as possible.\n\n📧 Email: contact@5star-wireless.com\n📞 Phone: 850.317.6633\n📍 Visit Us: 3539 Apalachee Pkwy, Ste 7, Tallahassee, FL 32311\n\n🕒 Business Hours:\nMon–Fri: 11am – 7pm\nSat: 11am – 3pm\nSun: Closed',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
@@ -4040,14 +4005,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 5.0, 10.0, 0.0),
                                   child: FutureBuilder<ApiCallResponse>(
-                                    future: (_model.apiRequestCompleter ??=
-                                            Completer<ApiCallResponse>()
-                                              ..complete(
-                                                  ShopifyProductsListCall.call(
-                                                searchText: FFAppState()
-                                                    .storeSearchText,
-                                              )))
-                                        .future,
+                                    future: ShopifyProductsListCall.call(
+                                      searchText: FFAppState().storeSearchText,
+                                    ),
                                     builder: (context, snapshot) {
                                       // Customize what your widget looks like when it's loading.
                                       if (!snapshot.hasData) {
@@ -4075,76 +4035,115 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                             r'''$.data.products.edges''',
                                           ).toList();
 
-                                          return RefreshIndicator(
-                                            onRefresh: () async {
-                                              safeSetState(() => _model
-                                                  .apiRequestCompleter = null);
-                                              await _model
-                                                  .waitForApiRequestCompleted();
-                                            },
-                                            child: GridView.builder(
-                                              padding: EdgeInsets.zero,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                crossAxisSpacing: 15.0,
-                                                mainAxisSpacing: 15.0,
-                                                childAspectRatio: 0.7,
-                                              ),
-                                              scrollDirection: Axis.vertical,
-                                              itemCount: items.length,
-                                              itemBuilder:
-                                                  (context, itemsIndex) {
-                                                final itemsItem =
-                                                    items[itemsIndex];
-                                                return Container(
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        FFAppState().isDarkMode
-                                                            ? Colors.black
-                                                            : Colors.black,
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        blurRadius: 4.0,
-                                                        color:
-                                                            Color(0x33000000),
-                                                        offset: Offset(
-                                                          0.8,
-                                                          2.0,
-                                                        ),
-                                                      )
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            14.0),
-                                                    shape: BoxShape.rectangle,
-                                                  ),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                        child: Image.network(
-                                                          getJsonField(
-                                                            itemsItem,
-                                                            r'''$.node.featuredImage.url''',
-                                                          ).toString(),
-                                                          width: 160.0,
-                                                          height: 160.0,
-                                                          fit: BoxFit.contain,
-                                                        ),
+                                          return GridView.builder(
+                                            padding: EdgeInsets.zero,
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              crossAxisSpacing: 15.0,
+                                              mainAxisSpacing: 15.0,
+                                              childAspectRatio: 0.7,
+                                            ),
+                                            scrollDirection: Axis.vertical,
+                                            itemCount: items.length,
+                                            itemBuilder: (context, itemsIndex) {
+                                              final itemsItem =
+                                                  items[itemsIndex];
+                                              return Container(
+                                                decoration: BoxDecoration(
+                                                  color: FFAppState().isDarkMode
+                                                      ? Colors.black
+                                                      : Colors.black,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      blurRadius: 4.0,
+                                                      color: Color(0x33000000),
+                                                      offset: Offset(
+                                                        0.8,
+                                                        2.0,
                                                       ),
-                                                      Text(
+                                                    )
+                                                  ],
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          14.0),
+                                                  shape: BoxShape.rectangle,
+                                                ),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: Image.network(
                                                         getJsonField(
                                                           itemsItem,
-                                                          r'''$.node.title''',
+                                                          r'''$.node.featuredImage.url''',
                                                         ).toString(),
+                                                        width: 160.0,
+                                                        height: 160.0,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      getJsonField(
+                                                        itemsItem,
+                                                        r'''$.node.title''',
+                                                      ).toString(),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      maxLines: 1,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font:
+                                                                    GoogleFonts
+                                                                        .inter(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  10.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        '\$${getJsonField(
+                                                          itemsItem,
+                                                          r'''$.node.priceRange.minVariantPrice.amount''',
+                                                        ).toString()}',
                                                         textAlign:
                                                             TextAlign.center,
-                                                        maxLines: 1,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -4162,9 +4161,6 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                         .bodyMedium
                                                                         .fontStyle,
                                                                   ),
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight: FlutterFlowTheme.of(
@@ -4179,137 +4175,91 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                         overflow: TextOverflow
                                                             .ellipsis,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          '\$${getJsonField(
-                                                            itemsItem,
-                                                            r'''$.node.priceRange.minVariantPrice.amount''',
-                                                          ).toString()}',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                font:
-                                                                    GoogleFonts
-                                                                        .inter(
-                                                                  fontWeight: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .fontWeight,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .fontStyle,
-                                                                ),
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontWeight,
-                                                                fontStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                              ),
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  10.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                        children: [
+                                                          if (FFAppState()
+                                                                  .cartIds
+                                                                  .contains(
+                                                                      getJsonField(
+                                                                    itemsItem,
+                                                                    r'''$.node.id''',
+                                                                  ).toString()) ==
+                                                              false)
+                                                            Icon(
+                                                              Icons
+                                                                  .add_shopping_cart_rounded,
+                                                              color: Color(
+                                                                  0xFF07BCFD),
+                                                              size: 25.0,
+                                                            ),
+                                                          if (FFAppState()
+                                                                  .cartIds
+                                                                  .contains(
+                                                                      getJsonField(
+                                                                    itemsItem,
+                                                                    r'''$.node.id''',
+                                                                  ).toString()) ==
+                                                              true)
+                                                            Icon(
+                                                              Icons
+                                                                  .remove_shopping_cart_rounded,
+                                                              color: Color(
+                                                                  0xFF07BCFD),
+                                                              size: 25.0,
+                                                            ),
+                                                          if (FFAppState()
+                                                                  .favoriteIds
+                                                                  .contains(
+                                                                      getJsonField(
+                                                                    itemsItem,
+                                                                    r'''$.node.id''',
+                                                                  ).toString()) ==
+                                                              false)
+                                                            Icon(
+                                                              Icons
+                                                                  .star_border_rounded,
+                                                              color: Color(
+                                                                  0xFF07BCFD),
+                                                              size: 25.0,
+                                                            ),
+                                                          if (FFAppState()
+                                                                  .favoriteIds
+                                                                  .contains(
+                                                                      getJsonField(
+                                                                    itemsItem,
+                                                                    r'''$.node.id''',
+                                                                  ).toString()) ==
+                                                              true)
+                                                            Icon(
+                                                              Icons
+                                                                  .star_rate_rounded,
+                                                              color: Color(
+                                                                  0xFF07BCFD),
+                                                              size: 25.0,
+                                                            ),
+                                                        ],
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            if (FFAppState()
-                                                                    .cartIds
-                                                                    .contains(
-                                                                        getJsonField(
-                                                                      itemsItem,
-                                                                      r'''$.node.id''',
-                                                                    ).toString()) ==
-                                                                false)
-                                                              Icon(
-                                                                Icons
-                                                                    .add_shopping_cart_rounded,
-                                                                color: Color(
-                                                                    0xFF07BCFD),
-                                                                size: 25.0,
-                                                              ),
-                                                            if (FFAppState()
-                                                                    .cartIds
-                                                                    .contains(
-                                                                        getJsonField(
-                                                                      itemsItem,
-                                                                      r'''$.node.id''',
-                                                                    ).toString()) ==
-                                                                true)
-                                                              Icon(
-                                                                Icons
-                                                                    .remove_shopping_cart_rounded,
-                                                                color: Color(
-                                                                    0xFF07BCFD),
-                                                                size: 25.0,
-                                                              ),
-                                                            if (FFAppState()
-                                                                    .favoriteIds
-                                                                    .contains(
-                                                                        getJsonField(
-                                                                      itemsItem,
-                                                                      r'''$.node.id''',
-                                                                    ).toString()) ==
-                                                                false)
-                                                              Icon(
-                                                                Icons
-                                                                    .star_border_rounded,
-                                                                color: Color(
-                                                                    0xFF07BCFD),
-                                                                size: 25.0,
-                                                              ),
-                                                            if (FFAppState()
-                                                                    .favoriteIds
-                                                                    .contains(
-                                                                        getJsonField(
-                                                                      itemsItem,
-                                                                      r'''$.node.id''',
-                                                                    ).toString()) ==
-                                                                true)
-                                                              Icon(
-                                                                Icons
-                                                                    .star_rate_rounded,
-                                                                color: Color(
-                                                                    0xFF07BCFD),
-                                                                size: 25.0,
-                                                              ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'columnOnPageLoadAnimation2']!),
+                                                    ),
+                                                  ],
                                                 ).animateOnPageLoad(animationsMap[
-                                                    'containerOnPageLoadAnimation2']!);
-                                              },
-                                            ),
+                                                    'columnOnPageLoadAnimation2']!),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'containerOnPageLoadAnimation2']!);
+                                            },
                                           );
                                         },
                                       );
