@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'flutter_flow/flutter_flow_util.dart';
+import 'dart:convert';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -25,6 +27,28 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _termsAcceptedv4 =
           prefs.getBool('ff_termsAcceptedv4') ?? _termsAcceptedv4;
+    });
+    _safeInit(() {
+      _cartItems = prefs.getStringList('ff_cartItems')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _cartItems;
+    });
+    _safeInit(() {
+      _wishlistItems = prefs.getStringList('ff_wishlistItems')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _wishlistItems;
     });
   }
 
@@ -237,6 +261,88 @@ class FFAppState extends ChangeNotifier {
   int get imageSlideIndex => _imageSlideIndex;
   set imageSlideIndex(int value) {
     _imageSlideIndex = value;
+  }
+
+  List<dynamic> _cartItems = [];
+  List<dynamic> get cartItems => _cartItems;
+  set cartItems(List<dynamic> value) {
+    _cartItems = value;
+    prefs.setStringList(
+        'ff_cartItems', value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToCartItems(dynamic value) {
+    cartItems.add(value);
+    prefs.setStringList(
+        'ff_cartItems', _cartItems.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromCartItems(dynamic value) {
+    cartItems.remove(value);
+    prefs.setStringList(
+        'ff_cartItems', _cartItems.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromCartItems(int index) {
+    cartItems.removeAt(index);
+    prefs.setStringList(
+        'ff_cartItems', _cartItems.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateCartItemsAtIndex(
+    int index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    cartItems[index] = updateFn(_cartItems[index]);
+    prefs.setStringList(
+        'ff_cartItems', _cartItems.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInCartItems(int index, dynamic value) {
+    cartItems.insert(index, value);
+    prefs.setStringList(
+        'ff_cartItems', _cartItems.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _wishlistItems = [];
+  List<dynamic> get wishlistItems => _wishlistItems;
+  set wishlistItems(List<dynamic> value) {
+    _wishlistItems = value;
+    prefs.setStringList(
+        'ff_wishlistItems', value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToWishlistItems(dynamic value) {
+    wishlistItems.add(value);
+    prefs.setStringList(
+        'ff_wishlistItems', _wishlistItems.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromWishlistItems(dynamic value) {
+    wishlistItems.remove(value);
+    prefs.setStringList(
+        'ff_wishlistItems', _wishlistItems.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromWishlistItems(int index) {
+    wishlistItems.removeAt(index);
+    prefs.setStringList(
+        'ff_wishlistItems', _wishlistItems.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateWishlistItemsAtIndex(
+    int index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    wishlistItems[index] = updateFn(_wishlistItems[index]);
+    prefs.setStringList(
+        'ff_wishlistItems', _wishlistItems.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInWishlistItems(int index, dynamic value) {
+    wishlistItems.insert(index, value);
+    prefs.setStringList(
+        'ff_wishlistItems', _wishlistItems.map((x) => jsonEncode(x)).toList());
   }
 }
 

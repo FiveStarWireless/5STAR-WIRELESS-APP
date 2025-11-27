@@ -122,6 +122,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: TabsHostCopyWidget.routeName,
           path: TabsHostCopyWidget.routePath,
           builder: (context, params) => TabsHostCopyWidget(),
+        ),
+        FFRoute(
+          name: ProductDetailSheetWidget.routeName,
+          path: ProductDetailSheetWidget.routePath,
+          builder: (context, params) => ProductDetailSheetWidget(
+            product: params.getParam(
+              'product',
+              ParamType.JSON,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

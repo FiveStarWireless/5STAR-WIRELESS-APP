@@ -116,6 +116,9 @@ final parametersBuilderMap =
   'PageNav': ParameterData.none(),
   'WelcomepageCopy': ParameterData.none(),
   'TabsHostCopy': ParameterData.none(),
+  'ProductDetailSheet': (data) async => ParameterData(
+        allParams: <String, dynamic>{},
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

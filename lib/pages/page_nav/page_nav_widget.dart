@@ -1381,6 +1381,32 @@ class _PageNavWidgetState extends State<PageNavWidget>
           ),
         ],
       ),
+      'textOnPageLoadAnimation33': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(-100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation34': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(-100.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
     });
     setupAnimations(
       animationsMap.values.where((anim) =>
@@ -1475,9 +1501,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
                       child: PageView(
+                        physics: const NeverScrollableScrollPhysics(),
                         controller: _model.pageViewController ??=
                             PageController(initialPage: 0),
-                        onPageChanged: (_) => safeSetState(() {}),
                         scrollDirection: Axis.horizontal,
                         children: [
                           ListView(
@@ -1765,12 +1791,12 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                 } else if (FFAppState()
                                                         .imageSlideIndex ==
                                                     1) {
-                                                  FFAppState()
-                                                      .prepaidSlideIndex = 0;
+                                                  FFAppState().imageSlideIndex =
+                                                      0;
                                                   safeSetState(() {});
                                                 } else {
                                                   FFAppState().imageSlideIndex =
-                                                      0;
+                                                      5;
                                                   safeSetState(() {});
                                                 }
                                               },
@@ -3791,11 +3817,11 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 5.0, 0.0, 5.0),
+                                                    10.0, 5.0, 0.0, 5.0),
                                             child: Container(
                                               width: MediaQuery.sizeOf(context)
                                                       .width *
-                                                  0.7,
+                                                  0.73,
                                               child: TextFormField(
                                                 controller:
                                                     _model.textController1,
@@ -3981,19 +4007,51 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             5.0, 0.0, 10.0, 0.0),
-                                        child: Icon(
-                                          Icons.shopping_cart_rounded,
-                                          color: Color(0xFF07BCFD),
-                                          size: 30.0,
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            HapticFeedback.lightImpact();
+                                            await _model.pageViewController
+                                                ?.animateToPage(
+                                              4,
+                                              duration:
+                                                  Duration(milliseconds: 500),
+                                              curve: Curves.ease,
+                                            );
+                                          },
+                                          child: Icon(
+                                            Icons.shopping_cart_rounded,
+                                            color: Color(0xFF07BCFD),
+                                            size: 30.0,
+                                          ),
                                         ),
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            5.0, 0.0, 25.0, 0.0),
-                                        child: Icon(
-                                          Icons.star_rounded,
-                                          color: Color(0xFF07BCFD),
-                                          size: 30.0,
+                                            5.0, 0.0, 10.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            HapticFeedback.lightImpact();
+                                            await _model.pageViewController
+                                                ?.animateToPage(
+                                              5,
+                                              duration:
+                                                  Duration(milliseconds: 500),
+                                              curve: Curves.ease,
+                                            );
+                                          },
+                                          child: Icon(
+                                            Icons.star_rounded,
+                                            color: Color(0xFF07BCFD),
+                                            size: 30.0,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -4191,65 +4249,129 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                             MainAxisAlignment
                                                                 .spaceEvenly,
                                                         children: [
-                                                          if (FFAppState()
-                                                                  .cartIds
-                                                                  .contains(
-                                                                      getJsonField(
-                                                                    itemsItem,
-                                                                    r'''$.node.id''',
-                                                                  ).toString()) ==
-                                                              false)
-                                                            Icon(
-                                                              Icons
-                                                                  .add_shopping_cart_rounded,
-                                                              color: Color(
-                                                                  0xFF07BCFD),
-                                                              size: 25.0,
+                                                          if (!FFAppState()
+                                                              .cartItems
+                                                              .containsMap(
+                                                                  itemsItem))
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                HapticFeedback
+                                                                    .lightImpact();
+                                                                FFAppState()
+                                                                    .addToCartItems(
+                                                                        itemsItem);
+                                                                safeSetState(
+                                                                    () {});
+                                                              },
+                                                              child: Icon(
+                                                                Icons
+                                                                    .add_shopping_cart_rounded,
+                                                                color: Color(
+                                                                    0xFF07BCFD),
+                                                                size: 25.0,
+                                                              ),
                                                             ),
                                                           if (FFAppState()
-                                                                  .cartIds
-                                                                  .contains(
-                                                                      getJsonField(
-                                                                    itemsItem,
-                                                                    r'''$.node.id''',
-                                                                  ).toString()) ==
-                                                              true)
-                                                            Icon(
-                                                              Icons
-                                                                  .remove_shopping_cart_rounded,
-                                                              color: Color(
-                                                                  0xFF07BCFD),
-                                                              size: 25.0,
+                                                              .cartItems
+                                                              .containsMap(
+                                                                  itemsItem))
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                HapticFeedback
+                                                                    .lightImpact();
+                                                                FFAppState()
+                                                                    .removeFromCartItems(
+                                                                        itemsItem);
+                                                                safeSetState(
+                                                                    () {});
+                                                              },
+                                                              child: Icon(
+                                                                Icons
+                                                                    .remove_shopping_cart_rounded,
+                                                                color: Color(
+                                                                    0xFF07BCFD),
+                                                                size: 25.0,
+                                                              ),
+                                                            ),
+                                                          if (!FFAppState()
+                                                              .wishlistItems
+                                                              .containsMap(
+                                                                  itemsItem))
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                HapticFeedback
+                                                                    .lightImpact();
+                                                                FFAppState()
+                                                                    .addToWishlistItems(
+                                                                        itemsItem);
+                                                                safeSetState(
+                                                                    () {});
+                                                              },
+                                                              child: Icon(
+                                                                Icons
+                                                                    .star_border_rounded,
+                                                                color: Color(
+                                                                    0xFF07BCFD),
+                                                                size: 25.0,
+                                                              ),
                                                             ),
                                                           if (FFAppState()
-                                                                  .favoriteIds
-                                                                  .contains(
-                                                                      getJsonField(
-                                                                    itemsItem,
-                                                                    r'''$.node.id''',
-                                                                  ).toString()) ==
-                                                              false)
-                                                            Icon(
-                                                              Icons
-                                                                  .star_border_rounded,
-                                                              color: Color(
-                                                                  0xFF07BCFD),
-                                                              size: 25.0,
-                                                            ),
-                                                          if (FFAppState()
-                                                                  .favoriteIds
-                                                                  .contains(
-                                                                      getJsonField(
-                                                                    itemsItem,
-                                                                    r'''$.node.id''',
-                                                                  ).toString()) ==
-                                                              true)
-                                                            Icon(
-                                                              Icons
-                                                                  .star_rate_rounded,
-                                                              color: Color(
-                                                                  0xFF07BCFD),
-                                                              size: 25.0,
+                                                              .wishlistItems
+                                                              .containsMap(
+                                                                  itemsItem))
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                HapticFeedback
+                                                                    .lightImpact();
+                                                                FFAppState()
+                                                                    .removeFromWishlistItems(
+                                                                        itemsItem);
+                                                                safeSetState(
+                                                                    () {});
+                                                              },
+                                                              child: Icon(
+                                                                Icons
+                                                                    .star_rate_rounded,
+                                                                color: Color(
+                                                                    0xFF07BCFD),
+                                                                size: 25.0,
+                                                              ),
                                                             ),
                                                         ],
                                                       ),
@@ -4287,7 +4409,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   1.0,
-                                          height: 250.0,
+                                          height: 197.2,
                                           fit: BoxFit.contain,
                                         ),
                                       ).animateOnPageLoad(animationsMap[
@@ -4305,7 +4427,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   1.0,
-                                          height: 250.0,
+                                          height: 197.2,
                                           fit: BoxFit.contain,
                                         ),
                                       ).animateOnPageLoad(animationsMap[
@@ -4323,7 +4445,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   1.0,
-                                          height: 250.0,
+                                          height: 197.2,
                                           fit: BoxFit.contain,
                                         ),
                                       ).animateOnPageLoad(animationsMap[
@@ -4334,7 +4456,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       alignment: AlignmentDirectional(1.0, 1.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 5.0, 0.0, 5.0),
+                                            5.0, 5.0, 5.0, 5.0),
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(8.0),
@@ -4343,7 +4465,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                             width: MediaQuery.sizeOf(context)
                                                     .width *
                                                 1.0,
-                                            height: 250.0,
+                                            height: 197.19,
                                             fit: BoxFit.contain,
                                           ),
                                         ).animateOnPageLoad(animationsMap[
@@ -4440,7 +4562,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 5.0),
+                                    0.0, 0.0, 0.0, 5.0),
                                 child: Text(
                                   'All Services – Choose What You Need',
                                   textAlign: TextAlign.center,
@@ -4473,7 +4595,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    5.0, 0.0, 5.0, 10.0),
+                                    5.0, 0.0, 5.0, 5.0),
                                 child: Text(
                                   'Whatever your phone needs, we’ve got the service to match — just pick and go!',
                                   textAlign: TextAlign.center,
@@ -6223,6 +6345,11 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                             .headlineMedium
                                                                             .fontStyle,
                                                                       ),
+                                                                      color: FFAppState().isDarkMode
+                                                                          ? FlutterFlowTheme.of(context)
+                                                                              .info
+                                                                          : Colors
+                                                                              .black,
                                                                       letterSpacing:
                                                                           0.0,
                                                                       fontWeight: FlutterFlowTheme.of(
@@ -6266,6 +6393,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                               .labelMedium
                                                                               .fontStyle,
                                                                         ),
+                                                                        color: FFAppState().isDarkMode
+                                                                            ? FlutterFlowTheme.of(context).info
+                                                                            : Colors.black,
                                                                         letterSpacing:
                                                                             0.0,
                                                                         fontWeight: FlutterFlowTheme.of(context)
@@ -7279,6 +7409,399 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       ),
                                     ).animateOnPageLoad(animationsMap[
                                         'containerOnPageLoadAnimation3']!),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 5.0, 0.0, 0.0),
+                                  child: Text(
+                                    'Cart',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineLarge
+                                        .override(
+                                          font: GoogleFonts.interTight(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
+                                          color: FFAppState().isDarkMode
+                                              ? FlutterFlowTheme.of(context)
+                                                  .info
+                                              : Colors.black,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .fontStyle,
+                                        ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ).animateOnPageLoad(animationsMap[
+                                      'textOnPageLoadAnimation33']!),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: FFAppState().isDarkMode
+                                      ? Colors.black
+                                      : Colors.black,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 0.0, 10.0, 0.0),
+                                  child: Builder(
+                                    builder: (context) {
+                                      final cartItems =
+                                          FFAppState().cartItems.toList();
+
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: cartItems.length,
+                                        itemBuilder: (context, cartItemsIndex) {
+                                          final cartItemsItem =
+                                              cartItems[cartItemsIndex];
+                                          return Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 5.0, 0.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.network(
+                                                    getJsonField(
+                                                      cartItemsItem,
+                                                      r'''$.node.featuredImage.url''',
+                                                    ).toString(),
+                                                    width: 80.0,
+                                                    height: 80.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        5.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  getJsonField(
+                                                    cartItemsItem,
+                                                    r'''$.node.title''',
+                                                  ).toString(),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .titleLarge
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .interTight(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleLarge
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleLarge
+                                                                .fontStyle,
+                                                      ),
+                                                ),
+                                              ),
+                                              Text(
+                                                '\$${getJsonField(
+                                                  cartItemsItem,
+                                                  r'''$.node.priceRange.minVariantPrice.amount''',
+                                                ).toString()}',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleLarge
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .interTight(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLarge
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLarge
+                                                                    .fontStyle,
+                                                          ),
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontStyle,
+                                                        ),
+                                              ),
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  HapticFeedback.lightImpact();
+                                                  FFAppState()
+                                                      .removeFromCartItems(
+                                                          cartItemsItem);
+                                                  safeSetState(() {});
+                                                },
+                                                child: Icon(
+                                                  Icons
+                                                      .remove_circle_outline_rounded,
+                                                  color: Color(0xFF07BCFD),
+                                                  size: 30.0,
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 1.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 5.0, 0.0, 0.0),
+                                  child: Text(
+                                    'Wishlist',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineLarge
+                                        .override(
+                                          font: GoogleFonts.interTight(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
+                                          color: FFAppState().isDarkMode
+                                              ? FlutterFlowTheme.of(context)
+                                                  .info
+                                              : Colors.black,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .fontStyle,
+                                        ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ).animateOnPageLoad(animationsMap[
+                                      'textOnPageLoadAnimation34']!),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: FFAppState().isDarkMode
+                                      ? Colors.black
+                                      : Colors.black,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 0.0, 10.0, 0.0),
+                                  child: Builder(
+                                    builder: (context) {
+                                      final wishItemsList =
+                                          FFAppState().wishlistItems.toList();
+
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: wishItemsList.length,
+                                        itemBuilder:
+                                            (context, wishItemsListIndex) {
+                                          final wishItemsListItem =
+                                              wishItemsList[wishItemsListIndex];
+                                          return Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 5.0, 0.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.network(
+                                                    getJsonField(
+                                                      wishItemsListItem,
+                                                      r'''$.node.featuredImage.url''',
+                                                    ).toString(),
+                                                    width: 80.0,
+                                                    height: 80.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        5.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  getJsonField(
+                                                    wishItemsListItem,
+                                                    r'''$.node.title''',
+                                                  ).toString(),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .titleLarge
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .interTight(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleLarge
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleLarge
+                                                                .fontStyle,
+                                                      ),
+                                                ),
+                                              ),
+                                              Text(
+                                                '\$${getJsonField(
+                                                  wishItemsListItem,
+                                                  r'''$.node.priceRange.minVariantPrice.amount''',
+                                                ).toString()}',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleLarge
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .interTight(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLarge
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLarge
+                                                                    .fontStyle,
+                                                          ),
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontStyle,
+                                                        ),
+                                              ),
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  HapticFeedback.lightImpact();
+                                                  FFAppState()
+                                                      .removeFromWishlistItems(
+                                                          wishItemsListItem);
+                                                  safeSetState(() {});
+                                                },
+                                                child: Icon(
+                                                  Icons
+                                                      .remove_circle_outline_rounded,
+                                                  color: Color(0xFF07BCFD),
+                                                  size: 30.0,
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
                                   ),
                                 ),
                               ),

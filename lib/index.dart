@@ -7,3 +7,5 @@ export '/pages/page_nav/page_nav_widget.dart' show PageNavWidget;
 export '/old/welcomepage_copy/welcomepage_copy_widget.dart'
     show WelcomepageCopyWidget;
 export '/old/tabs_host_copy/tabs_host_copy_widget.dart' show TabsHostCopyWidget;
+export '/pages/product_detail_sheet/product_detail_sheet_widget.dart'
+    show ProductDetailSheetWidget;
