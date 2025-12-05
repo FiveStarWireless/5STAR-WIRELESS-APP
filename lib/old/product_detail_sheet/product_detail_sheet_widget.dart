@@ -127,28 +127,14 @@ class _ProductDetailSheetWidgetState extends State<ProductDetailSheetWidget>
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
-                      child: Text(
-                        'Specification',
-                        textAlign: TextAlign.center,
-                        style:
-                            FlutterFlowTheme.of(context).headlineLarge.override(
-                                  font: GoogleFonts.interTight(
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontStyle,
-                                  ),
-                                  color: FFAppState().isDarkMode
-                                      ? FlutterFlowTheme.of(context).info
-                                      : Colors.black,
-                                  letterSpacing: 0.0,
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                    child: Text(
+                      'Specification',
+                      textAlign: TextAlign.center,
+                      style:
+                          FlutterFlowTheme.of(context).headlineLarge.override(
+                                font: GoogleFonts.interTight(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .headlineLarge
                                       .fontWeight,
@@ -156,10 +142,19 @@ class _ProductDetailSheetWidgetState extends State<ProductDetailSheetWidget>
                                       .headlineLarge
                                       .fontStyle,
                                 ),
-                        overflow: TextOverflow.ellipsis,
-                      ).animateOnPageLoad(
-                          animationsMap['textOnPageLoadAnimation']!),
-                    ),
+                                color: FFAppState().isDarkMode
+                                    ? FlutterFlowTheme.of(context).info
+                                    : Colors.black,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .headlineLarge
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .headlineLarge
+                                    .fontStyle,
+                              ),
+                    ).animateOnPageLoad(
+                        animationsMap['textOnPageLoadAnimation']!),
                   ),
                 ],
               ),

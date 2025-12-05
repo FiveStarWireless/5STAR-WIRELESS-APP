@@ -344,6 +344,141 @@ class FFAppState extends ChangeNotifier {
     prefs.setStringList(
         'ff_wishlistItems', _wishlistItems.map((x) => jsonEncode(x)).toList());
   }
+
+  dynamic _selectedProduct;
+  dynamic get selectedProduct => _selectedProduct;
+  set selectedProduct(dynamic value) {
+    _selectedProduct = value;
+  }
+
+  dynamic _selectedColorVariant;
+  dynamic get selectedColorVariant => _selectedColorVariant;
+  set selectedColorVariant(dynamic value) {
+    _selectedColorVariant = value;
+  }
+
+  dynamic _selectedStorageVariant;
+  dynamic get selectedStorageVariant => _selectedStorageVariant;
+  set selectedStorageVariant(dynamic value) {
+    _selectedStorageVariant = value;
+  }
+
+  List<String> _colorOptions = [];
+  List<String> get colorOptions => _colorOptions;
+  set colorOptions(List<String> value) {
+    _colorOptions = value;
+  }
+
+  void addToColorOptions(String value) {
+    colorOptions.add(value);
+  }
+
+  void removeFromColorOptions(String value) {
+    colorOptions.remove(value);
+  }
+
+  void removeAtIndexFromColorOptions(int index) {
+    colorOptions.removeAt(index);
+  }
+
+  void updateColorOptionsAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    colorOptions[index] = updateFn(_colorOptions[index]);
+  }
+
+  void insertAtIndexInColorOptions(int index, String value) {
+    colorOptions.insert(index, value);
+  }
+
+  List<String> _storageOptions = [];
+  List<String> get storageOptions => _storageOptions;
+  set storageOptions(List<String> value) {
+    _storageOptions = value;
+  }
+
+  void addToStorageOptions(String value) {
+    storageOptions.add(value);
+  }
+
+  void removeFromStorageOptions(String value) {
+    storageOptions.remove(value);
+  }
+
+  void removeAtIndexFromStorageOptions(int index) {
+    storageOptions.removeAt(index);
+  }
+
+  void updateStorageOptionsAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    storageOptions[index] = updateFn(_storageOptions[index]);
+  }
+
+  void insertAtIndexInStorageOptions(int index, String value) {
+    storageOptions.insert(index, value);
+  }
+
+  String _selectedColor = '';
+  String get selectedColor => _selectedColor;
+  set selectedColor(String value) {
+    _selectedColor = value;
+  }
+
+  String _selectedStorage = '';
+  String get selectedStorage => _selectedStorage;
+  set selectedStorage(String value) {
+    _selectedStorage = value;
+  }
+
+  String _selectedPrice = '';
+  String get selectedPrice => _selectedPrice;
+  set selectedPrice(String value) {
+    _selectedPrice = value;
+  }
+
+  List<String> _selectedCartIds = [];
+  List<String> get selectedCartIds => _selectedCartIds;
+  set selectedCartIds(List<String> value) {
+    _selectedCartIds = value;
+  }
+
+  void addToSelectedCartIds(String value) {
+    selectedCartIds.add(value);
+  }
+
+  void removeFromSelectedCartIds(String value) {
+    selectedCartIds.remove(value);
+  }
+
+  void removeAtIndexFromSelectedCartIds(int index) {
+    selectedCartIds.removeAt(index);
+  }
+
+  void updateSelectedCartIdsAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    selectedCartIds[index] = updateFn(_selectedCartIds[index]);
+  }
+
+  void insertAtIndexInSelectedCartIds(int index, String value) {
+    selectedCartIds.insert(index, value);
+  }
+
+  double _selectedCartTotal = 0.0;
+  double get selectedCartTotal => _selectedCartTotal;
+  set selectedCartTotal(double value) {
+    _selectedCartTotal = value;
+  }
+
+  dynamic _currentCartItem;
+  dynamic get currentCartItem => _currentCartItem;
+  set currentCartItem(dynamic value) {
+    _currentCartItem = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

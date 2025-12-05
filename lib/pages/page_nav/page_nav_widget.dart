@@ -9,7 +9,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/bottom_nav2/bottom_nav2_widget.dart';
+import '/pages/specifications/specifications_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:mapbox_search/mapbox_search.dart' as mapbox;
@@ -1891,6 +1893,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                         onTap: () async {
                                           HapticFeedback.lightImpact();
                                           FFAppState().activeTabIndex = 1;
+                                          safeSetState(() {});
                                           await _model.pageViewController
                                               ?.animateToPage(
                                             1,
@@ -4131,36 +4134,191 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                      child: Image.network(
-                                                        getJsonField(
-                                                          itemsItem,
-                                                          r'''$.node.featuredImage.url''',
-                                                        ).toString(),
-                                                        width: 160.0,
-                                                        height: 160.0,
-                                                        fit: BoxFit.contain,
+                                                    InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        HapticFeedback
+                                                            .lightImpact();
+                                                        FFAppState()
+                                                                .selectedProduct =
+                                                            itemsItem;
+                                                        safeSetState(() {});
+                                                        FFAppState()
+                                                                .selectedColorVariant =
+                                                            null;
+                                                        FFAppState()
+                                                                .selectedStorageVariant =
+                                                            null;
+                                                        FFAppState()
+                                                            .selectedColor = '';
+                                                        FFAppState()
+                                                            .selectedStorage = '';
+                                                        FFAppState()
+                                                            .selectedPrice = '';
+                                                        safeSetState(() {});
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              FFAppState()
+                                                                      .isDarkMode
+                                                                  ? Colors.black
+                                                                  : Colors
+                                                                      .black,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return GestureDetector(
+                                                              onTap: () {
+                                                                FocusScope.of(
+                                                                        context)
+                                                                    .unfocus();
+                                                                FocusManager
+                                                                    .instance
+                                                                    .primaryFocus
+                                                                    ?.unfocus();
+                                                              },
+                                                              child: Padding(
+                                                                padding: MediaQuery
+                                                                    .viewInsetsOf(
+                                                                        context),
+                                                                child:
+                                                                    Container(
+                                                                  height: MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .height *
+                                                                      0.8,
+                                                                  child:
+                                                                      SpecificationsWidget(),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
+                                                      },
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                        child: Image.network(
+                                                          getJsonField(
+                                                            itemsItem,
+                                                            r'''$.node.featuredImage.url''',
+                                                          ).toString(),
+                                                          width: 160.0,
+                                                          height: 190.0,
+                                                          fit: BoxFit.contain,
+                                                        ),
                                                       ),
                                                     ),
-                                                    Text(
-                                                      getJsonField(
-                                                        itemsItem,
-                                                        r'''$.node.title''',
-                                                      ).toString(),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      maxLines: 1,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                font:
-                                                                    GoogleFonts
-                                                                        .inter(
+                                                    InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        HapticFeedback
+                                                            .lightImpact();
+                                                        FFAppState()
+                                                                .selectedProduct =
+                                                            itemsItem;
+                                                        safeSetState(() {});
+                                                        FFAppState()
+                                                                .selectedColorVariant =
+                                                            null;
+                                                        FFAppState()
+                                                                .selectedStorageVariant =
+                                                            null;
+                                                        FFAppState()
+                                                            .selectedColor = '';
+                                                        FFAppState()
+                                                            .selectedStorage = '';
+                                                        FFAppState()
+                                                            .selectedPrice = '';
+                                                        safeSetState(() {});
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              FFAppState()
+                                                                      .isDarkMode
+                                                                  ? Colors.black
+                                                                  : Colors
+                                                                      .black,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return GestureDetector(
+                                                              onTap: () {
+                                                                FocusScope.of(
+                                                                        context)
+                                                                    .unfocus();
+                                                                FocusManager
+                                                                    .instance
+                                                                    .primaryFocus
+                                                                    ?.unfocus();
+                                                              },
+                                                              child: Padding(
+                                                                padding: MediaQuery
+                                                                    .viewInsetsOf(
+                                                                        context),
+                                                                child:
+                                                                    Container(
+                                                                  height: MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .height *
+                                                                      0.8,
+                                                                  child:
+                                                                      SpecificationsWidget(),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
+                                                      },
+                                                      child: Text(
+                                                        getJsonField(
+                                                          itemsItem,
+                                                          r'''$.node.title''',
+                                                        ).toString(),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        maxLines: 1,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font:
+                                                                      GoogleFonts
+                                                                          .inter(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                   fontWeight: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium
@@ -4170,22 +4328,9 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                       .bodyMedium
                                                                       .fontStyle,
                                                                 ),
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontWeight,
-                                                                fontStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                              ),
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
                                                     ),
                                                     Padding(
                                                       padding:
@@ -4234,148 +4379,6 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                             .ellipsis,
                                                       ),
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  10.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          if (!FFAppState()
-                                                              .cartItems
-                                                              .containsMap(
-                                                                  itemsItem))
-                                                            InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                HapticFeedback
-                                                                    .lightImpact();
-                                                                FFAppState()
-                                                                    .addToCartItems(
-                                                                        itemsItem);
-                                                                safeSetState(
-                                                                    () {});
-                                                              },
-                                                              child: Icon(
-                                                                Icons
-                                                                    .add_shopping_cart_rounded,
-                                                                color: Color(
-                                                                    0xFF07BCFD),
-                                                                size: 25.0,
-                                                              ),
-                                                            ),
-                                                          if (FFAppState()
-                                                              .cartItems
-                                                              .containsMap(
-                                                                  itemsItem))
-                                                            InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                HapticFeedback
-                                                                    .lightImpact();
-                                                                FFAppState()
-                                                                    .removeFromCartItems(
-                                                                        itemsItem);
-                                                                safeSetState(
-                                                                    () {});
-                                                              },
-                                                              child: Icon(
-                                                                Icons
-                                                                    .remove_shopping_cart_rounded,
-                                                                color: Color(
-                                                                    0xFF07BCFD),
-                                                                size: 25.0,
-                                                              ),
-                                                            ),
-                                                          if (!FFAppState()
-                                                              .wishlistItems
-                                                              .containsMap(
-                                                                  itemsItem))
-                                                            InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                HapticFeedback
-                                                                    .lightImpact();
-                                                                FFAppState()
-                                                                    .addToWishlistItems(
-                                                                        itemsItem);
-                                                                safeSetState(
-                                                                    () {});
-                                                              },
-                                                              child: Icon(
-                                                                Icons
-                                                                    .star_border_rounded,
-                                                                color: Color(
-                                                                    0xFF07BCFD),
-                                                                size: 25.0,
-                                                              ),
-                                                            ),
-                                                          if (FFAppState()
-                                                              .wishlistItems
-                                                              .containsMap(
-                                                                  itemsItem))
-                                                            InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                HapticFeedback
-                                                                    .lightImpact();
-                                                                FFAppState()
-                                                                    .removeFromWishlistItems(
-                                                                        itemsItem);
-                                                                safeSetState(
-                                                                    () {});
-                                                              },
-                                                              child: Icon(
-                                                                Icons
-                                                                    .star_rate_rounded,
-                                                                color: Color(
-                                                                    0xFF07BCFD),
-                                                                size: 25.0,
-                                                              ),
-                                                            ),
-                                                        ],
-                                                      ),
-                                                    ),
                                                   ],
                                                 ).animateOnPageLoad(animationsMap[
                                                     'columnOnPageLoadAnimation2']!),
@@ -4395,83 +4398,96 @@ class _PageNavWidgetState extends State<PageNavWidget>
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Stack(
+                              ListView(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
                                 children: [
-                                  if (FFAppState().prepaidSlideIndex == 0)
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 0.0, 5.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/BANNER_23_17bad905-09fc-4676-a0f2-f9c80dfa69b1.webp',
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
+                                  Stack(
+                                    children: [
+                                      if (FFAppState().prepaidSlideIndex == 0)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 5.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/BANNER_23_17bad905-09fc-4676-a0f2-f9c80dfa69b1.webp',
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
                                                   1.0,
-                                          height: 197.2,
-                                          fit: BoxFit.contain,
+                                              height: 197.2,
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'imageOnPageLoadAnimation30']!),
                                         ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'imageOnPageLoadAnimation30']!),
-                                    ),
-                                  if (FFAppState().prepaidSlideIndex == 1)
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 0.0, 5.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/Phone_Repair_Services.png',
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
+                                      if (FFAppState().prepaidSlideIndex == 1)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 5.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/Phone_Repair_Services.png',
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
                                                   1.0,
-                                          height: 197.2,
-                                          fit: BoxFit.contain,
+                                              height: 197.2,
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'imageOnPageLoadAnimation31']!),
                                         ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'imageOnPageLoadAnimation31']!),
-                                    ),
-                                  if (FFAppState().prepaidSlideIndex == 2)
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 0.0, 5.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/Lease_to_own.png',
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
+                                      if (FFAppState().prepaidSlideIndex == 2)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 5.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/Lease_to_own.png',
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
                                                   1.0,
-                                          height: 197.2,
-                                          fit: BoxFit.contain,
+                                              height: 197.2,
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'imageOnPageLoadAnimation32']!),
                                         ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'imageOnPageLoadAnimation32']!),
-                                    ),
-                                  if (FFAppState().prepaidSlideIndex == 3)
-                                    Align(
-                                      alignment: AlignmentDirectional(1.0, 1.0),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            5.0, 5.0, 5.0, 5.0),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/banner.png',
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                1.0,
-                                            height: 197.19,
-                                            fit: BoxFit.contain,
+                                      if (FFAppState().prepaidSlideIndex == 3)
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(1.0, 1.0),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5.0, 5.0, 5.0, 5.0),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/banner.png',
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1.0,
+                                                height: 197.2,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'imageOnPageLoadAnimation33']!),
                                           ),
-                                        ).animateOnPageLoad(animationsMap[
-                                            'imageOnPageLoadAnimation33']!),
-                                      ),
-                                    ),
+                                        ),
+                                    ],
+                                  ),
                                 ],
                               ),
                               Align(
@@ -4564,7 +4580,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 5.0),
                                 child: Text(
-                                  'All Services – Choose What You Need',
+                                  'All Services',
                                   textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
                                       .headlineLarge
@@ -4639,6 +4655,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       mainAxisSpacing: 15.0,
                                       childAspectRatio: 0.75,
                                     ),
+                                    primary: false,
                                     scrollDirection: Axis.vertical,
                                     children: [
                                       Container(
@@ -5476,39 +5493,52 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                       ),
                                             ).animateOnPageLoad(animationsMap[
                                                 'textOnPageLoadAnimation31']!),
-                                            Text(
-                                              'Visit our website',
-                                              textAlign: TextAlign.center,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .titleSmall
-                                                  .override(
-                                                    font:
-                                                        GoogleFonts.interTight(
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .fontWeight,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .fontStyle,
-                                                    ),
-                                                    color: Color(0xFF07BCFD),
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .titleSmall
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .titleSmall
-                                                            .fontStyle,
-                                                  ),
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                HapticFeedback.lightImpact();
+                                                await launchURL(
+                                                    'https://5star-wireless.com/');
+                                              },
+                                              child: Text(
+                                                'Visit our website',
+                                                textAlign: TextAlign.center,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .interTight(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontStyle,
+                                                          ),
+                                                          color:
+                                                              Color(0xFF07BCFD),
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
+                                                        ),
+                                              ),
                                             ).animateOnPageLoad(animationsMap[
                                                 'textOnPageLoadAnimation32']!),
                                           ],
@@ -7460,6 +7490,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                 ),
                               ),
                               Container(
+                                width: MediaQuery.sizeOf(context).width * 1.0,
                                 decoration: BoxDecoration(
                                   color: FFAppState().isDarkMode
                                       ? Colors.black
@@ -7473,11 +7504,13 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                       final cartItems =
                                           FFAppState().cartItems.toList();
 
-                                      return ListView.builder(
+                                      return ListView.separated(
                                         padding: EdgeInsets.zero,
                                         shrinkWrap: true,
                                         scrollDirection: Axis.vertical,
                                         itemCount: cartItems.length,
+                                        separatorBuilder: (_, __) =>
+                                            SizedBox(height: 10.0),
                                         itemBuilder: (context, cartItemsIndex) {
                                           final cartItemsItem =
                                               cartItems[cartItemsIndex];
@@ -7497,10 +7530,10 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                   child: Image.network(
                                                     getJsonField(
                                                       cartItemsItem,
-                                                      r'''$.node.featuredImage.url''',
+                                                      r'''$.image.url''',
                                                     ).toString(),
-                                                    width: 80.0,
-                                                    height: 80.0,
+                                                    width: 100.0,
+                                                    height: 100.0,
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
@@ -7508,47 +7541,153 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        5.0, 0.0, 0.0, 0.0),
-                                                child: Text(
-                                                  getJsonField(
-                                                    cartItemsItem,
-                                                    r'''$.node.title''',
-                                                  ).toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .titleLarge
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .interTight(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleLarge
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleLarge
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleLarge
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleLarge
-                                                                .fontStyle,
+                                                        5.0, 0.0, 5.0, 0.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      getJsonField(
+                                                        cartItemsItem,
+                                                        r'''$.node.title''',
+                                                      ).toString(),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleLarge
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .interTight(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleLarge
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleLarge
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: FFAppState()
+                                                                        .isDarkMode
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .info
+                                                                    : Colors
+                                                                        .black,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLarge
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLarge
+                                                                    .fontStyle,
+                                                              ),
+                                                    ),
+                                                    Container(
+                                                      width: 15.0,
+                                                      height: 15.0,
+                                                      decoration: BoxDecoration(
+                                                        color: functions
+                                                            .variantColorFromName(
+                                                                getJsonField(
+                                                          cartItemsItem,
+                                                          r'''$.selectedOptions[0].value''',
+                                                        ).toString()),
+                                                        shape: BoxShape.circle,
                                                       ),
+                                                    ),
+                                                    Text(
+                                                      getJsonField(
+                                                        cartItemsItem,
+                                                        r'''$.selectedOptions[0].value''',
+                                                      ).toString(),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            font: GoogleFonts
+                                                                .inter(
+                                                              fontWeight:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                            ),
+                                                            color: FFAppState()
+                                                                    .isDarkMode
+                                                                ? FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .info
+                                                                : Colors.black,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                    ),
+                                                    Text(
+                                                      getJsonField(
+                                                        cartItemsItem,
+                                                        r'''$.selectedOptions[1].value''',
+                                                      ).toString(),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            font: GoogleFonts
+                                                                .inter(
+                                                              fontWeight:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                            ),
+                                                            color: FFAppState()
+                                                                    .isDarkMode
+                                                                ? FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .info
+                                                                : Colors.black,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                               Text(
                                                 '\$${getJsonField(
                                                   cartItemsItem,
-                                                  r'''$.node.priceRange.minVariantPrice.amount''',
+                                                  r'''$.price.amount''',
                                                 ).toString()}',
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -7567,6 +7706,12 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                     .titleLarge
                                                                     .fontStyle,
                                                           ),
+                                                          color: FFAppState()
+                                                                  .isDarkMode
+                                                              ? FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .info
+                                                              : Colors.black,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FlutterFlowTheme.of(
@@ -7580,24 +7725,33 @@ class _PageNavWidgetState extends State<PageNavWidget>
                                                                   .fontStyle,
                                                         ),
                                               ),
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  HapticFeedback.lightImpact();
-                                                  FFAppState()
-                                                      .removeFromCartItems(
-                                                          cartItemsItem);
-                                                  safeSetState(() {});
-                                                },
-                                                child: Icon(
-                                                  Icons
-                                                      .remove_circle_outline_rounded,
-                                                  color: Color(0xFF07BCFD),
-                                                  size: 30.0,
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        5.0, 0.0, 0.0, 0.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    HapticFeedback
+                                                        .lightImpact();
+                                                    FFAppState()
+                                                        .removeFromCartItems(
+                                                            cartItemsItem);
+                                                    safeSetState(() {});
+                                                  },
+                                                  child: Icon(
+                                                    Icons
+                                                        .remove_circle_outline_rounded,
+                                                    color: Color(0xFF07BCFD),
+                                                    size: 30.0,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -7820,6 +7974,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                     onStoreTap: () async {
                       HapticFeedback.lightImpact();
                       FFAppState().activeTabIndex = 1;
+                      safeSetState(() {});
                       await _model.pageViewController?.animateToPage(
                         1,
                         duration: Duration(milliseconds: 500),
@@ -7829,6 +7984,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                     onServicesTap: () async {
                       HapticFeedback.lightImpact();
                       FFAppState().activeTabIndex = 2;
+                      safeSetState(() {});
                       await _model.pageViewController?.animateToPage(
                         2,
                         duration: Duration(milliseconds: 500),
@@ -7838,6 +7994,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                     onHomeTap: () async {
                       HapticFeedback.lightImpact();
                       FFAppState().activeTabIndex = 0;
+                      safeSetState(() {});
                       await _model.pageViewController?.animateToPage(
                         0,
                         duration: Duration(milliseconds: 500),
@@ -7847,6 +8004,7 @@ class _PageNavWidgetState extends State<PageNavWidget>
                     onUserTap: () async {
                       HapticFeedback.lightImpact();
                       FFAppState().activeTabIndex = 3;
+                      safeSetState(() {});
                       await _model.pageViewController?.animateToPage(
                         3,
                         duration: Duration(milliseconds: 500),

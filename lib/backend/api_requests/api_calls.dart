@@ -15,11 +15,12 @@ class ShopifyProductsListCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "query": "query (\$searchText: String) { products(first: 200, query: \$searchText) { edges { node { id title handle description featuredImage { url altText } priceRange { minVariantPrice { amount currencyCode } } } } } }",
+  "query": "query (\$searchText: String) { products(first: 200, query: \$searchText) { edges { node { id title handle description featuredImage { url altText } priceRange { minVariantPrice { amount currencyCode } } techSpecs: metafield(namespace: \\"custom\\", key: \\"description_specs\\") { value } variants(first: 50) { edges { node { id title image { url altText } price { amount currencyCode } selectedOptions { name value } } } } } } } }",
   "variables": {
     "searchText": "${escapeStringForJson(searchText)}"
   }
-}''';
+}
+''';
     return ApiManager.instance.makeApiCall(
       callName: 'ShopifyProductsList',
       apiUrl: 'https://fja21g-xi.myshopify.com/api/2024-10/graphql.json',
@@ -99,6 +100,11 @@ class ShopifyProductsListCall {
           .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
+  static List? variants(dynamic response) => getJsonField(
+        response,
+        r'''$.data.products.edges[*].node.variants.edges''',
+        true,
+      ) as List?;
 }
 
 class ApiPagingParams {
